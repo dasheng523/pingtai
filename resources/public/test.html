@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link href="css/animate.css" rel="stylesheet">
+    <style>
+        .cen{width: 100px;height: 100px; margin: 0 auto; background: red;}
+    </style>
+</head>
+<body>
+    <div class="cen animated swing" id="test">
+        <h1>测试</h1>
+    </div>
+
+    <script type="javascript">
+        function hasClass(obj, cls) {
+            return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+        }
+
+        function addClass(obj, cls) {
+            if (!this.hasClass(obj, cls)) obj.className += " " + cls;
+        }
+
+        function removeClass(obj, cls) {
+            if (hasClass(obj, cls)) {
+                var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+                obj.className = obj.className.replace(reg, ' ');
+            }
+        }
+
+        function toggleClass(obj,cls){
+            if(hasClass(obj,cls)){
+                removeClass(obj, cls);
+            }else{
+                addClass(obj, cls);
+            }
+        }
+
+        function toggleClassTest(){
+            var obj = document. getElementById('test');
+            toggleClass(obj,"testClass");
+        }
+
+    </script>
+</body>
+</html>
