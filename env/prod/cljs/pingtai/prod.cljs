@@ -4,5 +4,8 @@
 ;;ignore println statements in prod
 (set! *print-fn* (fn [& _]))
 
+(defn ^:export init []
+  (core/init!))
 
-(core/init!)
+(defn ^:export init-manager []
+  (core/shopmanager!))

@@ -103,6 +103,7 @@
     <orderEntry type="library" name="Leiningen: joda-time:2.8.2" level="project" />
     <orderEntry type="library" name="Leiningen: json-html:0.3.5" level="project" />
     <orderEntry type="library" name="Leiningen: lein-figwheel:0.4.1" level="project" />
+    <orderEntry type="library" name="Leiningen: log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Leiningen: markdown-clj:0.9.77" level="project" />
     <orderEntry type="library" name="Leiningen: medley:0.6.0" level="project" />
     <orderEntry type="library" name="Leiningen: metosin/compojure-api:0.23.1" level="project" />
@@ -207,7 +208,8 @@
     <orderEntry type="library" name="Leiningen: org.seleniumhq.selenium/selenium-safari-driver:2.39.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.seleniumhq.selenium/selenium-server:2.39.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.seleniumhq.selenium/selenium-support:2.39.0" level="project" />
-    <orderEntry type="library" name="Leiningen: org.slf4j/slf4j-api:1.7.12" level="project" />
+    <orderEntry type="library" name="Leiningen: org.slf4j/slf4j-api:1.6.6" level="project" />
+    <orderEntry type="library" name="Leiningen: org.slf4j/slf4j-log4j12:1.6.6" level="project" />
     <orderEntry type="library" name="Leiningen: org.sonatype.aether/aether-api:1.13.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.sonatype.aether/aether-connector-file:1.13.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.sonatype.aether/aether-connector-wagon:1.13.1" level="project" />

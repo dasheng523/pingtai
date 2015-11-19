@@ -36,9 +36,9 @@
                  [cljs-ajax "0.5.1"]
                  [metosin/compojure-api "0.23.1"]
                  [metosin/ring-swagger-ui "2.1.3"]
+                 [org.slf4j/slf4j-log4j12 "1.6.6"]
                  [cc.qbits/jet "0.6.6"]
                  [cljsjs/fastclick "1.0.6-0"]]
-
 
   :min-lein-version "2.0.0"
   :uberjar-name "pingtai.jar"
@@ -67,8 +67,17 @@
      :compiler
      {:output-to "resources/public/js/app.js"
       :output-dir "resources/public/js/out"
-      :externs ["react/externs/react.js"]
-      :pretty-print true}}}}
+      :externs ["react/externs/react.js" "resources/externs.js"]
+      :pretty-print true}}
+    :release
+    {:source-paths ["env/prod/cljs"]
+     :compiler
+                   {:output-to "target/cljsbuild/public/js/app.js"
+                    :optimizations :advanced
+                    :pretty-print false
+                    :output-wrapper false
+                    :externs ["react/externs/react.js" "resources/externs.js"]
+                    :closure-warnings {:non-standard-jsdoc :off}}}}}
 
   :profiles
   {:uberjar {:omit-source true
@@ -79,7 +88,6 @@
                {:app
                 {:source-paths ["env/prod/cljs"]
                  :compiler {:optimizations :advanced :pretty-print false}}}}
-
              :aot :all}
    :dev           [:project/dev :profiles/dev]
    :test          [:project/test :profiles/test]
@@ -97,7 +105,6 @@
                    {:builds
                     {:app
                      {:source-paths ["env/dev/cljs"] :compiler {:source-map true}}}}
-
                   :figwheel
                   {:http-server-root "public"
                    :server-port 3449
@@ -109,7 +116,6 @@
                   :repl-options {:init-ns pingtai.core}
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]
-                  ;;when :nrepl-port is set the application starts the nREPL server on load
                   :env {:dev        true
                         :port       3000
                         :nrepl-port 7000}}

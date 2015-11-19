@@ -14,7 +14,7 @@
 
 (defn nav []
   [:div.yscontainer.navbarr.red
-   [:a {:href "javascript:" :class "navbarr-back" :on-click #(.back js/history)}
+   [:a {:href "javascript:" :class "navbarr-back"}
     [:i {:class "icon-chevron-left"}]]
    [:span {:class "navbarr-title"} "我的主页"]
    [:a {:href "#/customer/search" :class "navbarr-more"}
@@ -29,14 +29,19 @@
     [:span {:class "glyphicon glyphicon-chevron-right"}]]])
 
 (defn footer []
-  [:div.footer.flex-box
-   [:div.flex-row
-    [:a {:href "#/customer/index" :class "flex-item footer-item current"}
-     [:i {:class "icon-money"}] [:br] "特价"]
-    [:a {:href "#/customer/shoplist" :class "flex-item footer-item"}
-     [:i {:class "icon-gift"}] [:br] "商家"]
-    [:a {:href "#/customer/usercenter" :class "flex-item footer-item"}
-     [:i {:class "icon-user"}] [:br] "我的"]]])
+  (let [items [{:url "#/goods" :name "特价" :icon "icon-money" :key "goods"}
+               {:url "#/shop" :name "商家" :icon "icon-gift" :key "shop"}
+               {:url "#/user" :name "我的" :icon "icon-user" :key "user"}]
+        currentpage (session/get :page)
+        currenttag (some #(if (>= (.indexOf currentpage (% :key)) 0) (% :key) nil) items)]
+    (if currenttag
+      [:div.footer.flex-box
+       [:div.flex-row
+        (for [item items]
+          ^{:key (item :name)}
+          [:a {:href (item :url)
+               :class (str "flex-item footer-item " (if (= currenttag (item :key)) "current"))}
+           [:i {:class (item :icon)}] [:br] (item :name)])]])))
 
 (def pages
   {:shop-index #'shopmanager/indexpage
@@ -47,21 +52,24 @@
    :goodsinfo #'shopmanager/goodsinfo
    :topshop #'shopmanager/topshop
 
-   :goods #'customerview/goods
-   :goodslist #'customerview/goodslist
-   :commentlist #'customerview/commentlist
-   :index #'customerview/index
-   :shoplist #'customerview/shoplist
-   :shopinfo #'customerview/shopinfo
-   :usercenter #'customerview/usercenter
-   :userlikeshoplist #'customerview/userlikeshoplist
-   :userlikegoodslist #'customerview/userlikegoodslist
-   :search #'customerview/search})
+   "goods" #'customerview/index
+   "goods-info" #'customerview/goods
+   "goods-list" #'customerview/goodslist
+   "goods-commentlist" #'customerview/commentlist
+
+   "shop" #'customerview/shoplist
+   "shop-info" #'customerview/shopinfo
+
+   "user" #'customerview/usercenter
+   "user-likeshoplist" #'customerview/userlikeshoplist
+   "user-likegoodslist" #'customerview/userlikegoodslist
+
+   "search" #'customerview/search})
 
 (defn page []
   [:div
    [nav]
-   [(pages (session/get :page))]
+   [(get pages (session/get :page))]
    [footer]])
 
 (defn page-shop []
@@ -75,37 +83,39 @@
 
 (secretary/defroute
   "/" []
-  (session/put! :page :index))
+  (session/put! :page "goods"))
 (secretary/defroute
-  "/customer/goods" []
-  (session/put! :page :goods))
+  "/goods" []
+  (session/put! :page "goods"))
 (secretary/defroute
-  "/customer/goodslist" []
-  (session/put! :page :goodslist))
+  "/goods/info" []
+  (session/put! :page "goods-info"))
 (secretary/defroute
-  "/customer/commentlist" []
-  (session/put! :page :commentlist))
+  "/goods/list" []
+  (session/put! :page "goods-list"))
 (secretary/defroute
-  "/customer/index" []
-  (session/put! :page :index))
+  "/goods/commentlist" []
+  (session/put! :page "goods-commentlist"))
+
 (secretary/defroute
-  "/customer/shoplist" []
-  (session/put! :page :shoplist))
+  "/shop" []
+  (session/put! :page "shop"))
 (secretary/defroute
-  "/customer/shopinfo" []
-  (session/put! :page :shopinfo))
+  "/shop/info" []
+  (session/put! :page "shop-info"))
+
 (secretary/defroute
-  "/customer/usercenter" []
-  (session/put! :page :usercenter))
+  "/user" []
+  (session/put! :page "user"))
 (secretary/defroute
-  "/customer/userlikeshoplist" []
-  (session/put! :page :userlikeshoplist))
+  "/user/likeshoplist" []
+  (session/put! :page "user-likeshoplist"))
 (secretary/defroute
-  "/customer/userlikegoodslist" []
-  (session/put! :page :userlikegoodslist))
+  "/user/likegoodslist" []
+  (session/put! :page ("user-likegoodslist")))
 (secretary/defroute
-  "/customer/search" []
-  (session/put! :page :search))
+  "/search" []
+  (session/put! :page "search"))
 
 (secretary/defroute
   "/shop/index" []
@@ -139,7 +149,6 @@
           (fn [event]
               (secretary/dispatch! (.-token event))))
         (.setEnabled true)))
-
 ;; Initialize app
 (defn mount-components []
   (reagent/render [#'page] (.getElementById js/document "app")))

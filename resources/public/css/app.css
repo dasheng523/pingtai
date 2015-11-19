@@ -59,11 +59,13 @@ a:hover, a:focus { background:rgba(0,0,0,0.1);background:#000\9;filter:alpha(opa
 
 
 /*              Famousshop            */
-.famousshop{width: 100%;}
-.famousshop-item{padding: 15px 0; text-align: center; font-size: 12px; line-height: 20px; border-left: 1px solid #eee;}
+.famousshop{width: 100%; overflow: hidden;}
+.famousshop-item{display:inline-block;padding: 15px 0 15px 30px; border-left: solid 1px #ccc; text-align: center; font-size: 12px; line-height: 20px;}
 .famousshop-img{max-height: 70px;}
-.famousshop-ctrl{position: absolute; font-size: 10px; text-align: center; width: 100%; color: red; margin-top: -13px;}
-
+.famousshop-ctrl{ font-size: 10px; text-align: center; width: 100%; color: red; margin-top: -15px;}
+.swiper-wrapper{white-space:nowrap;width: 100%;}
+.swiper-pagination-bullet{display: inline-block; width: 10px; height: 10px; border-radius: 10px; border: solid 1px red; margin-left: 5px;}
+.swiper-pagination-bullet.swiper-pagination-bullet-active{background: red;}
 
 /*              list            */
 .list{}

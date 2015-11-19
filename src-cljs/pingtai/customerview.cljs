@@ -11,20 +11,31 @@
     [:a {:href "javascript:" :class "flex-item fastmenu-item"} [:i {:class "icon-music"}] [:br] "娱乐"]
     [:a {:href "javascript:" :class "flex-item fastmenu-item"} [:i {:class "icon-reorder"}] [:br] "更多"]]])
 
-(defn famous-shop []
+(defn famous-shop-render []
   [:div {:class "panel margin-top"}
    [:div {:class "panel-title"}
     "北流名店"
     [:a {:class "panel-title-more" :href "javascript:"} "更多" [:i.icon-chevron-right]]]
-   [:div.famousshop.flex-box
-    [:div.flex-row
-     [:a.flex-item.famousshop-item {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.flex-item.famousshop-item {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.flex-item.famousshop-item {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
-    [:div {:class "famousshop-ctrl"}
-     [:i {:class "icon-circle"}]
-     [:i {:class "icon-circle-blank"}]
-     [:i {:class "icon-circle-blank"}]]]])
+   [:div.famousshop.swiper-container
+    [:div.swiper-wrapper
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
+    [:div {:class "famousshop-ctrl swiper-pagination"}]]])
+(defn- swiper-did-mount []
+  (js/Swiper. ".swiper-container" (clj->js
+                                    {:pagination ".swiper-pagination"
+                                     :slidesPerView "auto"
+                                     :paginationClickable true
+                                     :spaceBetween 30})))
+(defn famous-shop []
+  (reagent/create-class {:reagent-render famous-shop-render
+                         :component-did-mount swiper-did-mount}))
 
 (defn goodslist-index []
   [:div {:class "panel margin-top"}
@@ -35,7 +46,7 @@
     [:a {:class "list-item" :href "#/customer/goods"}
      [:img {:src "images/1.png" :class "list-item-img"}]
      [:div {:class "list-item-infobox"}
-      [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
+      [:h5.title "螺公堂螺狮粉555" [:span.local "<500m"]]
       [:p.desc "原味螺狮粉1份，免费WIFI，免预约WIFI，免预约WIFI，免预约"]
       [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]
     [:a {:class "list-item" :href "javascript:"}
@@ -65,7 +76,7 @@
     [:a {:class "flex-item categorybox-item" :href "javascript:"} "智能排序 " [:i.icon-sort-down]]]])
 
 (defn categorydetailbox []
-  (if true
+  (if false
     [:div.categorydetailbox.yscontainer
      [:div.categorydetailbox-left
       [:a {:class "categorydetailbox-item" :href "javascript:"} [:i.icon-map-marker] " 电影" [:i.icon-angle-right.pull-right]]
