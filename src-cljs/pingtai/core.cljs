@@ -44,27 +44,27 @@
            [:i {:class (item :icon)}] [:br] (item :name)])]])))
 
 (def pages
-  {:shop-index #'shopmanager/indexpage
-   :yingxiangli #'shopmanager/yingxiangli
-   :shopbargain #'shopmanager/shop-bargain
-   :shop-shopinfo #'shopmanager/shopinfo
-   :helpinfo #'shopmanager/helpinfo
-   :goodsinfo #'shopmanager/goodsinfo
-   :topshop #'shopmanager/topshop
+  {:shop-index [#'shopmanager/indexpage []]
+   :yingxiangli [#'shopmanager/yingxiangli []]
+   :shopbargain [#'shopmanager/shop-bargain []]
+   :shop-shopinfo [#'shopmanager/shopinfo []]
+   :helpinfo [#'shopmanager/helpinfo []]
+   :goodsinfo [#'shopmanager/goodsinfo []]
+   :topshop [#'shopmanager/topshop []]
 
-   "goods" #'customerview/index
-   "goods-info" #'customerview/goods
-   "goods-list" #'customerview/goodslist
-   "goods-commentlist" #'customerview/commentlist
+   "goods" [#'customerview/index []]
+   "goods-info" [#'customerview/goods []]
+   "goods-list" [#'customerview/goodslist []]
+   "goods-commentlist" [#'customerview/commentlist []]
 
-   "shop" #'customerview/shoplist
-   "shop-info" #'customerview/shopinfo
+   "shop" [#'customerview/shoplist []]
+   "shop-info" [#'customerview/shopinfo []]
 
-   "user" #'customerview/usercenter
-   "user-likeshoplist" #'customerview/userlikeshoplist
-   "user-likegoodslist" #'customerview/userlikegoodslist
+   "user" [#'customerview/usercenter []]
+   "user-likeshoplist" [#'customerview/userlikeshoplist []]
+   "user-likegoodslist" [#'customerview/userlikegoodslist []]
 
-   "search" #'customerview/search})
+   "search" [#'customerview/search []]})
 
 (defn- page-render []
   [:div
@@ -72,8 +72,8 @@
    [:div.scroll-wrapper
     [:div.scroller
      [(do
-        (js/setTimeout #(if (session/get :scroll) (.refresh (session/get :scroll))) 100)
-        (get pages (session/get :page)))]]]
+        #_(js/setTimeout #(if (session/get :scroll) (.refresh (session/get :scroll))) 100)
+        (get-in pages [(session/get :page) 0]))]]]
    [footer]])
 
 (defn page-shop []
