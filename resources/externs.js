@@ -1,1 +1,1 @@
-var Swiper = function(a,b){};
+var IScroll = function(a,b){};

@@ -66,16 +66,36 @@
 
    "search" #'customerview/search})
 
-(defn page []
+(defn- page-render []
   [:div
    [nav]
-   [(get pages (session/get :page))]
+   [:div.scroll-wrapper
+    [:div.scroller
+     [(do
+        (js/setTimeout #(if (session/get :scroll) (.refresh (session/get :scroll))) 100)
+        (get pages (session/get :page)))]]]
    [footer]])
 
 (defn page-shop []
   [:div
    [nav-shop]
    [(pages (session/get :page))]])
+
+(defn- page-did-amount []
+  (.log js/console "page amount")
+  #_(let [iscroll (js/IScroll.
+                  ".scroll-wrapper")]
+    (.on iscroll "scrollEnd"
+         (fn []
+           (let [y (- (.-y iscroll))
+                 ymax (- (.-maxScrollY iscroll))]
+             (cond
+               (<= y 5) (.log js/console "top")
+               (>= y (- ymax 5)) (.log js/console "bottom")))))
+    (session/put! :scroll iscroll)))
+(defn page []
+  (reagent/create-class {:reagent-render page-render
+                         :component-did-mount page-did-amount}))
 
 ;; -------------------------
 ;; Routes

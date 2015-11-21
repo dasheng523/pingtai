@@ -1,10 +1,11 @@
 (ns pingtai.customerview
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as reagent :refer [atom]]
+            [reagent.session :as session]))
 
 
 
 (defn fastmenu []
-  [:div {:class "panel flex-box fastmenu margin-header"}
+  [:div {:class "panel flex-box fastmenu"}
    [:div {:class "flex-row"}
     [:a {:href "javascript:" :class "flex-item fastmenu-item"} [:i {:class "icon-food"}] [:br] "饮食"]
     [:a {:href "javascript:" :class "flex-item fastmenu-item"} [:i {:class "icon-github-alt"}] [:br] "服装"]
@@ -16,23 +17,22 @@
    [:div {:class "panel-title"}
     "北流名店"
     [:a {:class "panel-title-more" :href "javascript:"} "更多" [:i.icon-chevron-right]]]
-   [:div.famousshop.swiper-container
-    [:div.swiper-wrapper
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.swiper-slide {:href "javascript:"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
+   [:div.famousshop.swiper-container.flex-box
+    [:div.swiper-wrapper.flex-row
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
+    [:div.swiper-wrapper.flex-row
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
+    [:div.swiper-wrapper.flex-row
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
+     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
     [:div {:class "famousshop-ctrl swiper-pagination"}]]])
 (defn- swiper-did-mount []
-  (js/Swiper. ".swiper-container" (clj->js
-                                    {:pagination ".swiper-pagination"
-                                     :slidesPerView "auto"
-                                     :paginationClickable true
-                                     :spaceBetween 30})))
+  (.log js/console "swiper"))
 (defn famous-shop []
   (reagent/create-class {:reagent-render famous-shop-render
                          :component-did-mount swiper-did-mount}))
@@ -66,17 +66,53 @@
      [:div {:class "list-item-infobox"}
       [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
       [:p.desc "原味螺狮粉1份，免费WIFI，免预约"]
+      [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]
+    [:a {:class "list-item" :href "javascript:"}
+     [:img {:src "images/1.png" :class "list-item-img"}]
+     [:div {:class "list-item-infobox"}
+      [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
+      [:p.desc "原味螺狮粉1份，免费WIFI，免预约"]
+      [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]
+    [:a {:class "list-item" :href "javascript:"}
+     [:img {:src "images/1.png" :class "list-item-img"}]
+     [:div {:class "list-item-infobox"}
+      [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
+      [:p.desc "原味螺狮粉1份，免费WIFI，免预约"]
+      [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]
+    [:a {:class "list-item" :href "javascript:"}
+     [:img {:src "images/1.png" :class "list-item-img"}]
+     [:div {:class "list-item-infobox"}
+      [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
+      [:p.desc "原味螺狮粉1份，免费WIFI，免预约"]
+      [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]
+    [:a {:class "list-item" :href "javascript:"}
+     [:img {:src "images/1.png" :class "list-item-img"}]
+     [:div {:class "list-item-infobox"}
+      [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
+      [:p.desc "原味螺狮粉1份，免费WIFI，免预约"]
+      [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]
+    [:a {:class "list-item" :href "javascript:"}
+     [:img {:src "images/1.png" :class "list-item-img"}]
+     [:div {:class "list-item-infobox"}
+      [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
+      [:p.desc "原味螺狮粉1份，免费WIFI，免预约"]
+      [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]
+    [:a {:class "list-item" :href "javascript:"}
+     [:img {:src "images/1.png" :class "list-item-img"}]
+     [:div {:class "list-item-infobox"}
+      [:h5.title "螺公堂螺狮粉" [:span.local "<500m"]]
+      [:p.desc "原味螺狮粉1份，免费WIFI，免预约"]
       [:p.morebox [:span.price "￥" "9.8"] [:span.oldprice "￥" "18"] [:span.likenum.pull-right "1088人喜欢"]]]]]])
+
 
 (defn categorybox []
   [:div.panel.flex-box.categorybox
    [:div.flex-row
-    [:a {:class "flex-item categorybox-item current" :href "javascript:"} "全部分类 " [:i.icon-sort-down]]
-    [:a {:class "flex-item categorybox-item" :href "javascript:"} "全城范围 " [:i.icon-sort-down]]
-    [:a {:class "flex-item categorybox-item" :href "javascript:"} "智能排序 " [:i.icon-sort-down]]]])
+    [:a {:class "flex-item categorybox-item current" :href "javascript:" :on-click #(session/put! "view-state-showcategory" true)} "全部分类 " [:i.icon-sort-down]]
+    [:a {:class "flex-item categorybox-item" :href "javascript:"} "全城范围 " [:i.icon-sort-down]]]])
 
 (defn categorydetailbox []
-  (if false
+  (if (session/get "view-state-showcategory")
     [:div.categorydetailbox.yscontainer
      [:div.categorydetailbox-left
       [:a {:class "categorydetailbox-item" :href "javascript:"} [:i.icon-map-marker] " 电影" [:i.icon-angle-right.pull-right]]
@@ -88,7 +124,7 @@
       [:a {:class "categorydetailbox-item" :href "javascript:"}  " 电影" ]
       [:a {:class "categorydetailbox-item" :href "javascript:"}  " 电影" ]
       [:a {:class "categorydetailbox-item" :href "javascript:"}  " 电影" ]]
-     [:div.mask]]))
+     [:div.mask {:on-click #(session/put! "view-state-showcategory" false)}]]))
 
 (defn shoplist-box []
   [:div.panel
@@ -188,14 +224,12 @@
 
 (defn goods []
   [:div {:class "animated bounceInRight"}
-   [:div.margin-header]
    [goods-swiper]
-   [goods-info]
-   [:div.margin-footer]])
+   [goods-info]])
 
 (defn usercenter-banner []
   [:div.usercenter-banner
-   [:p.usercenter-userinfo
+   [:div.usercenter-userinfo
     [:img {:src "images/head.png"}] [:br]
     [:span {:class "usercenter-uname"} "夜声"]]])
 
@@ -268,7 +302,6 @@
 
 (defn search []
   [:div {:class "animated bounceInRight"}
-   [:div.margin-header]
    [:div.search-field
     [:input {:type "text" :class "search-input" :placeholder "输入商家、分类或商品"}]
     [:span {:class "input-group-btn"} [:button {:class "search-btn"} "搜索"]]]
@@ -288,54 +321,42 @@
      [:a.list-item.default-msg {:href "#"} [:i.icon-hand-right] " 牛奶"]
      [:a.list-item.default-msg {:href "#"} [:i.icon-hand-right] " 牛奶"]
      [:a.list-item.default-msg {:href "#"} [:i.icon-hand-right] " 牛奶"]
-     [:a.list-item.default-msg.text-center {:href "#"} "清除搜索历史"]]]
-   [:div.margin-footer]])
+     [:a.list-item.default-msg.text-center {:href "#"} "清除搜索历史"]]]])
 
 (defn userlikegoodslist []
   [:div {:class "animated bounceInRight"}
-   [:div.margin-header]
-   [userlikegoodslist-list]
-   [:div.margin-footer]])
+   [userlikegoodslist-list]])
 
 (defn userlikeshoplist []
   [:div {:class "animated bounceInRight"}
-   [:div.margin-header]
-   [userlikeshoplist-list]
-   [:div.margin-footer]])
+   [userlikeshoplist-list]])
 
 (defn usercenter []
   [:div {:class "animated bounceInRight"}
-   [:div.margin-header]
    [usercenter-banner]
-   [usercenter-blocks]
-   [:div.margin-footer]])
+   [usercenter-blocks]])
 
 (defn shopinfo []
   [:div {:class "animated bounceInRight"}
-   [:div.margin-header]
    [shopbanner]
    [shopinfo-infobox]
-   [shopinfo-goods]
-   [:div.margin-footer]])
+   [shopinfo-goods]])
 
 (defn index []
   [:div {:class "animated bounceInRight"}
    [fastmenu]
    [famous-shop]
-   [goodslist-index]
-   [:div.margin-footer]])
+   [goodslist-index]])
 
 (defn shoplist []
   [:div {:class "animated bounceInRight"}
-   [:div.margin-header]
    [categorybox]
    [categorydetailbox]
-   [shoplist-box]
-   [:div.margin-footer]])
+   [shoplist-box]])
 
 (defn goodslist []
   [:div {:class "animated bounceInRight"}
-   [:div.container.margin-header
+   [:div.container
     [:div.list
      [:a {:class "thumbnail gooditem" :href "#"}
       [:img {:src "images/1.png"}]
@@ -356,11 +377,10 @@
       [:img {:src "images/1.png"}]
       [:div.caption
        [:h6 "水果拼盘水果拼盘水果拼盘水果拼盘水果拼盘水果拼盘水果拼盘水果拼盘"]
-       [:p "￥5" [:small "5人喜欢"]]]]]]
-   [:div.margin-footer]])
+       [:p "￥5" [:small "5人喜欢"]]]]]]])
 
 (defn commentlist []
-  [:div.margin-header
+  [:div
    [:div.container
     [:a {:class "pinglun-goods-detail list-group-item"}
      [:img {:src "images/1.png" :class "img-rounded pull-left"}]
