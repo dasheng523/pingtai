@@ -12,29 +12,30 @@
     [:a {:href "javascript:" :class "flex-item fastmenu-item"} [:i {:class "icon-music"}] [:br] "娱乐"]
     [:a {:href "javascript:" :class "flex-item fastmenu-item"} [:i {:class "icon-reorder"}] [:br] "更多"]]])
 
-(defn famous-shop-render []
-  [:div {:class "panel margin-top"}
-   [:div {:class "panel-title"}
-    "北流名店"
-    [:a {:class "panel-title-more" :href "javascript:"} "更多" [:i.icon-chevron-right]]]
-   [:div.famousshop.swiper-container.flex-box
-    [:div.swiper-wrapper.flex-row
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
-    [:div.swiper-wrapper.flex-row
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
-    [:div.swiper-wrapper.flex-row
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉1"]
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]
-     [:a.famousshop-item.flex-item {:href "#/shop/info"} [:img {:src "images/head.png" :class "famousshop-img"}] [:br] "天天螺狮粉"]]
-    [:div {:class "famousshop-ctrl swiper-pagination"}]]])
+(defn famous-shop-render [entity]
+  (fn []
+    [:div {:class "panel margin-top"}
+     [:div {:class "panel-title"}
+      "北流名店"
+      [:a {:class "panel-title-more" :href "javascript:"} "更多" [:i.icon-chevron-right]]]
+     [:div.famousshop.swiper-container.flex-box
+      [:div.swiper-wrapper.flex-row
+       (for [i (range 3)]
+         ^{:key i}
+         [:a.famousshop-item.flex-item {:href (str "#/shop/info?id=" (get (get entity i) "id"))} [:img {:src (get (get entity i) "img-url") :class "famousshop-img"}] [:br] (get (get entity i) "name")])]
+      [:div.swiper-wrapper.flex-row
+       (for [i (range 3 6)]
+         ^{:key i}
+         [:a.famousshop-item.flex-item {:href (str "#/shop/info?id=" (get (get entity i) "id"))} [:img {:src (get (get entity i) "img-url") :class "famousshop-img"}] [:br] (get (get entity i) "name")])]
+      [:div.swiper-wrapper.flex-row
+       (for [i (range 6 9)]
+         ^{:key i}
+         [:a.famousshop-item.flex-item {:href (str "#/shop/info?id=" (get (get entity i) "id"))} [:img {:src (get (get entity i) "img-url") :class "famousshop-img"}] [:br] (get (get entity i) "name")])]
+      [:div {:class "famousshop-ctrl swiper-pagination"}]]]))
 (defn- swiper-did-mount []
   (.log js/console "swiper"))
-(defn famous-shop []
-  (reagent/create-class {:reagent-render famous-shop-render
+(defn famous-shop [entity]
+  (reagent/create-class {:reagent-render (famous-shop-render entity)
                          :component-did-mount swiper-did-mount}))
 
 (defn goodslist-index []
@@ -154,9 +155,9 @@
    [:img {:src "images/1.png"}]
    [:span {:class "piccount"} "20张"]])
 
-(defn shopinfo-infobox []
+(defn shopinfo-infobox [entity]
   [:div {:class "panel shopinfobox"}
-   [:div {:class "panel-title text-center"} "螺公堂" [:br]
+   [:div {:class "panel-title text-center"} (get entity "name") [:br]
     [:span.panel-title-other "影响力：" [:strong "5000"]]]
    [:div {:class "list"}
     [:a {:class "list-item infobox-item"} [:i.icon-phone {:style {:color "red" :margin-right "10px"}}] "0775-6234488" [:i.icon-angle-right.pull-right]]
@@ -336,16 +337,16 @@
    [usercenter-banner]
    [usercenter-blocks]])
 
-(defn shopinfo []
+(defn shopinfo [params]
   [:div {:class "animated bounceInRight"}
    [shopbanner]
-   [shopinfo-infobox]
+   [shopinfo-infobox (get params :shopinfo)]
    [shopinfo-goods]])
 
-(defn index []
+(defn index [pagedata]
   [:div {:class "animated bounceInRight"}
    [fastmenu]
-   [famous-shop]
+   [(famous-shop (pagedata :topshop-entity))]
    [goodslist-index]])
 
 (defn shoplist []

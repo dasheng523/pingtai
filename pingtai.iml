@@ -25,6 +25,7 @@
     <orderEntry type="library" name="Leiningen: buddy/buddy-hashers:0.7.0" level="project" />
     <orderEntry type="library" name="Leiningen: buddy/buddy-sign:0.7.1" level="project" />
     <orderEntry type="library" name="Leiningen: buddy:0.7.2" level="project" />
+    <orderEntry type="library" name="Leiningen: c3p0:0.9.1.2" level="project" />
     <orderEntry type="library" name="Leiningen: camel-snake-kebab:0.3.2" level="project" />
     <orderEntry type="library" name="Leiningen: cc.qbits/jet:0.6.6" level="project" />
     <orderEntry type="library" name="Leiningen: cglib/cglib-nodep:2.1_3" level="project" />
@@ -32,7 +33,7 @@
     <orderEntry type="library" name="Leiningen: clj-dbcp:0.8.1" level="project" />
     <orderEntry type="library" name="Leiningen: clj-http:0.3.0" level="project" />
     <orderEntry type="library" name="Leiningen: clj-stacktrace:0.2.8" level="project" />
-    <orderEntry type="library" name="Leiningen: clj-time:0.9.0" level="project" />
+    <orderEntry type="library" name="Leiningen: clj-time:0.11.0" level="project" />
     <orderEntry type="library" name="Leiningen: clj-tuple:0.2.2" level="project" />
     <orderEntry type="library" name="Leiningen: clj-webdriver:0.6.1" level="project" />
     <orderEntry type="library" name="Leiningen: clj-yaml:0.4.0" level="project" />
@@ -84,6 +85,7 @@
     <orderEntry type="library" name="Leiningen: conman:0.2.3" level="project" />
     <orderEntry type="library" name="Leiningen: crypto-equality:1.0.0" level="project" />
     <orderEntry type="library" name="Leiningen: crypto-random:1.2.0" level="project" />
+    <orderEntry type="library" name="Leiningen: danlentz/clj-uuid:0.1.6" level="project" />
     <orderEntry type="library" name="Leiningen: de.kotka/lazymap:3.1.0" level="project" />
     <orderEntry type="library" name="Leiningen: digest:1.4.4" level="project" />
     <orderEntry type="library" name="Leiningen: environ:1.0.1" level="project" />
@@ -103,6 +105,7 @@
     <orderEntry type="library" name="Leiningen: javax.servlet/servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Leiningen: joda-time:2.8.2" level="project" />
     <orderEntry type="library" name="Leiningen: json-html:0.3.5" level="project" />
+    <orderEntry type="library" name="Leiningen: korma:0.4.2" level="project" />
     <orderEntry type="library" name="Leiningen: lein-figwheel:0.4.1" level="project" />
     <orderEntry type="library" name="Leiningen: log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Leiningen: markdown-clj:0.9.77" level="project" />
@@ -232,6 +235,7 @@
     <orderEntry type="library" name="Leiningen: org.yaml/snakeyaml:1.5" level="project" />
     <orderEntry type="library" name="Leiningen: pjstadig/humane-test-output:0.7.0" level="project" />
     <orderEntry type="library" name="Leiningen: potemkin:0.4.1" level="project" />
+    <orderEntry type="library" name="Leiningen: primitive-math:0.1.4" level="project" />
     <orderEntry type="library" name="Leiningen: prismatic/plumbing:0.4.4" level="project" />
     <orderEntry type="library" name="Leiningen: prismatic/schema:0.4.4" level="project" />
     <orderEntry type="library" name="Leiningen: prone:0.8.2" level="project" />

@@ -38,7 +38,10 @@
                  [metosin/ring-swagger-ui "2.1.3"]
                  [org.slf4j/slf4j-log4j12 "1.6.6"]
                  [cc.qbits/jet "0.6.6"]
-                 [cljsjs/fastclick "1.0.6-0"]]
+                 [cljsjs/fastclick "1.0.6-0"]
+                 [danlentz/clj-uuid "0.1.6"]
+                 [korma "0.4.2"]
+                 [clj-time "0.11.0"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "pingtai.jar"

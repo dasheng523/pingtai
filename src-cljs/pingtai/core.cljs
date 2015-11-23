@@ -7,7 +7,8 @@
             [markdown.core :refer [md->html]]
             [ajax.core :refer [GET POST]]
             [pingtai.shopmanager :as shopmanager]
-            [pingtai.customerview :as customerview])
+            [pingtai.customerview :as customerview]
+            [pingtai.pagedata :as pagedata])
   (:import goog.History))
 
 (enable-console-print!)
@@ -52,13 +53,13 @@
    :goodsinfo [#'shopmanager/goodsinfo []]
    :topshop [#'shopmanager/topshop []]
 
-   "goods" [#'customerview/index []]
+   "goods" [#'customerview/index [pagedata/top-shop-entity]]
    "goods-info" [#'customerview/goods []]
    "goods-list" [#'customerview/goodslist []]
    "goods-commentlist" [#'customerview/commentlist []]
 
    "shop" [#'customerview/shoplist []]
-   "shop-info" [#'customerview/shopinfo []]
+   "shop-info" [#'customerview/shopinfo [pagedata/shopinfo]]
 
    "user" [#'customerview/usercenter []]
    "user-likeshoplist" [#'customerview/userlikeshoplist []]
@@ -71,28 +72,24 @@
    [nav]
    [:div.scroll-wrapper
     [:div.scroller
-     [(do
-        #_(js/setTimeout #(if (session/get :scroll) (.refresh (session/get :scroll))) 100)
-        (get-in pages [(session/get :page) 0]))]]]
+     (let [view (get-in pages [(session/get :page) 0])
+           page-entitys (get-in pages [(session/get :page) 1])
+           query (session/get :params)
+           params (pagedata/get-page-params page-entitys query)]
+       [view params])]]
    [footer]])
 
 (defn page-shop []
   [:div
    [nav-shop]
-   [(pages (session/get :page))]])
+   (let [view (get-in pages [(session/get :page) 0])
+         page-entitys (get-in pages [(session/get :page) 1])
+         query (session/get :params)
+         params (pagedata/get-page-params page-entitys query)]
+     [view params])])
 
 (defn- page-did-amount []
-  (.log js/console "page amount")
-  #_(let [iscroll (js/IScroll.
-                  ".scroll-wrapper")]
-    (.on iscroll "scrollEnd"
-         (fn []
-           (let [y (- (.-y iscroll))
-                 ymax (- (.-maxScrollY iscroll))]
-             (cond
-               (<= y 5) (.log js/console "top")
-               (>= y (- ymax 5)) (.log js/console "bottom")))))
-    (session/put! :scroll iscroll)))
+  (.log js/console "page amount"))
 (defn page []
   (reagent/create-class {:reagent-render page-render
                          :component-did-mount page-did-amount}))
@@ -121,8 +118,9 @@
   "/shop" []
   (session/put! :page "shop"))
 (secretary/defroute
-  "/shop/info" []
-  (session/put! :page "shop-info"))
+  "/shop/info" [query-params]
+  (session/put! :page "shop-info")
+  (session/put! :params query-params))
 
 (secretary/defroute
   "/user" []
