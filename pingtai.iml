@@ -69,8 +69,9 @@
     <orderEntry type="library" name="Leiningen: com.googlecode.json-simple/json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.ibm.icu/icu4j:54.1.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.lambdaworks/scrypt:1.4.0" level="project" />
+    <orderEntry type="library" name="Leiningen: com.taoensso/carmine:2.12.0" level="project" />
     <orderEntry type="library" name="Leiningen: com.taoensso/encore:2.18.0" level="project" />
-    <orderEntry type="library" name="Leiningen: com.taoensso/nippy:2.9.1" level="project" />
+    <orderEntry type="library" name="Leiningen: com.taoensso/nippy:2.10.0" level="project" />
     <orderEntry type="library" name="Leiningen: com.taoensso/timbre:4.1.4" level="project" />
     <orderEntry type="library" name="Leiningen: com.taoensso/tower:3.0.2" level="project" />
     <orderEntry type="library" name="Leiningen: com.zaxxer/HikariCP:2.4.1" level="project" />
@@ -135,6 +136,7 @@
     <orderEntry type="library" name="Leiningen: org.apache.commons/commons-compress:1.9" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.commons/commons-exec:1.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.commons/commons-lang3:3.4" level="project" />
+    <orderEntry type="library" name="Leiningen: org.apache.commons/commons-pool2:2.4.2" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.directory.studio/org.apache.commons.codec:1.8" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.httpcomponents/httpasyncclient:4.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.httpcomponents/httpclient:4.4.1" level="project" />
@@ -188,7 +190,7 @@
     <orderEntry type="library" name="Leiningen: org.eclipse.jetty/jetty-websocket:8.1.12.v20130726" level="project" />
     <orderEntry type="library" name="Leiningen: org.flatland/ordered:1.5.3" level="project" />
     <orderEntry type="library" name="Leiningen: org.flatland/useful:0.9.0" level="project" />
-    <orderEntry type="library" name="Leiningen: org.iq80.snappy/snappy:0.3" level="project" />
+    <orderEntry type="library" name="Leiningen: org.iq80.snappy/snappy:0.4" level="project" />
     <orderEntry type="library" name="Leiningen: org.javassist/javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" name="Leiningen: org.json/json:20080701" level="project" />
     <orderEntry type="library" name="Leiningen: org.jsoup/jsoup:1.6.1" level="project" />

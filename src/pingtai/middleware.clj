@@ -15,7 +15,8 @@
             [buddy.auth.backends.session :refer [session-backend]]
             [buddy.auth.accessrules :refer [restrict]]
             [buddy.auth :refer [authenticated?]]
-            [pingtai.layout :refer [*identity*]])
+            [pingtai.layout :refer [*identity*]]
+            [pingtai.business.authentication :as auth])
   (:import [javax.servlet ServletContext]))
 
 (defn wrap-context [handler]
@@ -80,6 +81,17 @@
   (-> handler
       wrap-identity
       (wrap-authentication (session-backend))))
+
+(defn wrap-ystoken [handler]
+  "验证ystoken"
+  (fn [{:keys [params] :as request}]
+    (let [ystoken (:ystoken params)]
+      (if (and ystoken
+               (auth/get-user-id ystoken))
+        (handler request)
+        {:status 403
+         :body {:code 100
+                :mess "ystoken invalid"}}))))
 
 (defn wrap-base [handler]
   (-> handler

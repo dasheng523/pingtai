@@ -41,7 +41,8 @@
                  [cljsjs/fastclick "1.0.6-0"]
                  [danlentz/clj-uuid "0.1.6"]
                  [korma "0.4.2"]
-                 [clj-time "0.11.0"]]
+                 [clj-time "0.11.0"]
+                 [com.taoensso/carmine "2.12.0"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "pingtai.jar"

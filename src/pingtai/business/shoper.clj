@@ -2,15 +2,17 @@
   (:require
     [pingtai.db.entities :as entities]
     [pingtai.business.common :as bcommon]
+    [pingtai.business.authentication :as auth]
     [clj-time.coerce :as coerce]
     [clj-time.core :as ctime])
   (:use
     [korma.core :rename {update korma-update}]))
 
 
-(defn get-shop-index [user-id]
+(defn get-shop-index [ystoken]
   "获取首页的数据"
-  (let [shop-info (-> (select* entities/shops)
+  (let [user-id (auth/get-user-id ystoken)
+        shop-info (-> (select* entities/shops)
                       (where {:ower_id user-id})
                       (select)
                       (nth 0 nil))

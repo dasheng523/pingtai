@@ -4,7 +4,8 @@
     [pingtai.db.entities :as entities]
     [clj-time.coerce :as coerce]
     [clj-time.core :as ctime]
-    [pingtai.business.common :as bcommon])
+    [pingtai.business.common :as bcommon]
+    [pingtai.business.authentication :as auth])
   (:use
     [korma.core :rename {update korma-update}]))
 
@@ -59,9 +60,10 @@
       (where {:shop_id shopid})
       (select)))
 
-(defn get-shop-info [shop-id user-id]
+(defn get-shop-info [shop-id ystoken]
   "获取店铺具体信息"
-  (let [shopinfo (bcommon/get-by-id entities/shops shop-id)
+  (let [user-id (auth/get-user-id ystoken)
+        shopinfo (bcommon/get-by-id entities/shops shop-id)
         users-like (bcommon/get-by entities/users_like_shops {:shop_id shop-id :user_id user-id})]
     (assoc
       shopinfo
@@ -71,9 +73,10 @@
       (get-goods-by-shopid shop-id)
       :liked (not-empty users-like))))
 
-(defn get-goods-info [goods-id user-id]
+(defn get-goods-info [goods-id ystoken]
   "获得商品具体信息"
-  (let [goodsinfo (bcommon/get-by-id entities/goods goods-id)
+  (let [user-id (auth/get-user-id ystoken)
+        goodsinfo (bcommon/get-by-id entities/goods goods-id)
         users-like (bcommon/get-by entities/users_like_goods {:goods_id goods-id :user_id user-id})
         shopinfo (bcommon/get-by-id entities/shops (:shop_id goodsinfo))]
     (assoc
@@ -82,31 +85,35 @@
       :imgs (bcommon/get-medias-by-obj goods-id)
       :liked (not-empty users-like))))
 
-(defn like-goods! [goods-id user-id relation_type]
+(defn like-goods! [goods-id ystoken relation_type]
   "用户与商品关系"
-  (let [id (.toString (uuid/v4))]
+  (let [user-id (auth/get-user-id ystoken)
+        id (.toString (uuid/v4))]
     (->
       (insert* entities/users_like_goods)
       (values {:id id :goods_id goods-id :user_id user-id :ctime (coerce/to-sql-time (ctime/now)) :relation_type relation_type})
       (insert))
     id))
 
-(defn like-shop! [shop-id user-id relation_type]
+(defn like-shop! [shop-id ystoken relation_type]
   "用户与店铺关系"
-  (let [id (.toString (uuid/v4))]
+  (let [user-id (auth/get-user-id ystoken)
+        id (.toString (uuid/v4))]
     (->
       (insert* entities/users_like_shops)
       (values {:id id :shop_id shop-id :user_id user-id :ctime (coerce/to-sql-time (ctime/now)) :relation_type relation_type})
       (insert))
     id))
 
-(defn get-user-info [user-id]
+(defn get-user-info [ystoken]
   "获取用户信息"
-  (bcommon/get-by-id entities/users user-id))
+  (let [user-id (auth/get-user-id ystoken)]
+    (bcommon/get-by-id entities/users user-id)))
 
-(defn get-user-task [user-id]
+(defn get-user-task [ystoken]
   "获取用户任务信息"
-  (let [tasklist (-> (select* entities/tasks)
+  (let [user-id (auth/get-user-id ystoken)
+        tasklist (-> (select* entities/tasks)
                      (where (and (>= (coerce/to-sql-time (ctime/now)) :stime)
                                  (<= (coerce/to-sql-time (ctime/now)) :etime)
                                  (= :task_role 1)))

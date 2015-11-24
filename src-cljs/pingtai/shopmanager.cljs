@@ -1,5 +1,6 @@
 (ns pingtai.shopmanager
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as reagent :refer [atom]]
+            [reagent.session :as session]))
 
 ;Index Page
 (defn indexbanner []
@@ -61,6 +62,7 @@
       [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]])
 
 (defn indexpage []
+  (session/put! "title" "店铺管理中心")
   [:div
    [indexbanner]
    [index-container]

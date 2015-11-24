@@ -25,7 +25,7 @@
   [:header
    [:a {:href "javascript:" :class "back-btn pull-left" :on-click #(.back js/history)}
     [:span {:class "glyphicon glyphicon-chevron-left"}]]
-   [:h3 {:class "page-title"} "个人中心"]
+   [:h3 {:class "page-title"} (session/get "title")]
    [:a {:href "javascript:" :class "right-btn pull-right" :on-click #(.back js/history)}
     [:span {:class "glyphicon glyphicon-chevron-right"}]]])
 
