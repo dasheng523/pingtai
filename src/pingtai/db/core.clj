@@ -2,7 +2,7 @@
   (:require
     [clojure.java.jdbc :as jdbc]
     [conman.core :as conman]
-    [environ.core :refer [env]])
+    [pingtai.db.common :refer [database-url]])
   (:import [java.sql
             BatchUpdateException
             PreparedStatement]))
@@ -18,12 +18,14 @@
    :max-idle   4
    :max-active 32})
 
+
+
 (defn connect! []
   (conman/connect!
     *conn*
    (assoc
      pool-spec
-     :jdbc-url (env :database-url))))
+     :jdbc-url database-url)))
 
 (defn disconnect! []
   (conman/disconnect! *conn*))

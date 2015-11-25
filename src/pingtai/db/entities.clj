@@ -4,19 +4,20 @@
     [korma.core :as korma]
     [korma.db :refer [defdb]]))
 
-(defn- mysql
+(defn- mysql [db-user db-password db-subname]
   "改编自korma，添加了utf-8的支持"
-  [{:keys [host port db make-pool?]
-    :or {host "localhost", port 3306, db "", make-pool? true}
-    :as opts}]
-  (merge {:classname "com.mysql.jdbc.Driver"
-          :subprotocol "mysql"
-          :subname (str "//" host ":" port "/" db "?useUnicode=true&characterEncoding=utf-8")
-          :delimiters "`"
-          :make-pool? make-pool?}
-         opts))
+  {:user db-user
+   :password db-password
+   :classname "com.mysql.jdbc.Driver"
+   :subprotocol "mysql"
+   :subname db-subname
+   :useUnicode "yes"
+   :characterEncoding "UTF-8"
+   :delimiters "`"})
 
-(defdb db (env :database-config))
+(defdb db (mysql (env :db-user)
+                 (env :db-password)
+                 (env :db-subname)))
 
 (declare categorys goods medias objs_medias shops shops_categorys tasks users users_like_goods users_like_shops users_tasks users_wechats wechats helpers)
 

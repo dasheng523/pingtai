@@ -1,15 +1,15 @@
 (ns pingtai.db.migrations
   (:require
     [migratus.core :as migratus]
-    [environ.core :refer [env]]
-    [to-jdbc-uri.core :refer [to-jdbc-uri]]))
+    [to-jdbc-uri.core :refer [to-jdbc-uri]]
+    [pingtai.db.common :refer [database-url]]))
 
 (defn parse-ids [args]
   (map #(Long/parseLong %) (rest args)))
 
 (defn migrate [args]
   (let [config {:store :database
-                :db {:connection-uri (to-jdbc-uri (:database-url env))}}]
+                :db {:connection-uri (to-jdbc-uri database-url)}}]
     (case (first args)
       "migrate"
       (if (> (count args) 1)

@@ -6,7 +6,8 @@
             [pingtai.business.shoper :as shoper]
             [pingtai.business.common :as common]
             [pingtai.business.authentication :as auth]
-            [pingtai.middleware :as middleware]))
+            [pingtai.middleware :as middleware]
+            [pingtai.business.wechat-api :as wechat]))
 
 
 
@@ -30,6 +31,12 @@
         (swagger-docs
           {:info {:title "店多多接口API" :description "店多多各类接口说明书"}})
 
+        (context* "/wechat" []
+                  :tags ["微信接口"]
+                  (GET* "/api" []
+                        :query-params [signature :- String, timestamp :- String, nonce :- String, echostr :- String]
+                        :summary "微信入口"
+                        (ok (wechat/checkSignature signature timestamp nonce echostr))))
 
         (context* "/common" []
                   :tags ["通用接口"]

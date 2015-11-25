@@ -17,7 +17,6 @@
    an app server such as Tomcat
    put any initialization code here"
   []
-
   (timbre/merge-config!
     {:level     (if (env :dev) :trace :info)
      :appenders {:rotor (rotor/rotor-appender

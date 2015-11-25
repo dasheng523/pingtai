@@ -2,11 +2,12 @@
   (:require [taoensso.carmine :as car :refer (wcar)]
             [environ.core :refer [env]]
             [clj-uuid :as uuid]
-            [pingtai.db.entities :as entities])
+            [pingtai.db.entities :as entities]
+            [pingtai.db.common :refer [redis-config]])
   (:use
     [korma.core :rename {update korma-update}]))
 
-(def server1-conn {:pool {} :spec (env :redis-config)})
+(def server1-conn {:pool {} :spec redis-config})
 (defmacro wcar* [& body] `(car/wcar server1-conn ~@body))
 
 (defn create-ystoken [user-id]
