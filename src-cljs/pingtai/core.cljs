@@ -26,7 +26,7 @@
    [:a {:href "javascript:" :class "back-btn pull-left" :on-click #(.back js/history)}
     [:span {:class "glyphicon glyphicon-chevron-left"}]]
    [:h3 {:class "page-title"} (session/get "title")]
-   [:a {:href "javascript:" :class "right-btn pull-right" :on-click #(.back js/history)}
+   #_[:a {:href "javascript:" :class "right-btn pull-right" :on-click #(.back js/history)}
     [:span {:class "glyphicon glyphicon-chevron-right"}]]])
 
 (defn footer []
@@ -45,21 +45,21 @@
            [:i {:class (item :icon)}] [:br] (item :name)])]])))
 
 (def pages
-  {:shop-index [#'shopmanager/indexpage []]
-   :yingxiangli [#'shopmanager/yingxiangli []]
-   :shopbargain [#'shopmanager/shop-bargain []]
-   :shop-shopinfo [#'shopmanager/shopinfo []]
-   :helpinfo [#'shopmanager/helpinfo []]
-   :goodsinfo [#'shopmanager/goodsinfo []]
-   :topshop [#'shopmanager/topshop []]
+  {"shopmanager" [shopmanager/indexpage [pagedata/manager-shopinfo]]
+   "shopmanager-yingxiangli" [#'shopmanager/yingxiangli [pagedata/manager-scoredetail pagedata/manager-shopertask]]
+   "shopmanager-shopbargain" [#'shopmanager/shop-bargain [pagedata/manager-goods]]
+   "shopmanager-shopinfo" [#'shopmanager/shopinfo []]
+   "shopmanager-helpinfo" [#'shopmanager/helpinfo [pagedata/manager-helpdata]]
+   "shopmanager-goodsinfo" [#'shopmanager/goodsinfo [pagedata/manager-goods-info]]
+   "shopmanager-topshop" [#'shopmanager/topshop []]
 
-   "goods" [#'customerview/index [pagedata/top-shop-entity]]
+   "goods" [#'customerview/index []]
    "goods-info" [#'customerview/goods []]
    "goods-list" [#'customerview/goodslist []]
    "goods-commentlist" [#'customerview/commentlist []]
 
    "shop" [#'customerview/shoplist []]
-   "shop-info" [#'customerview/shopinfo [pagedata/shopinfo]]
+   "shop-info" [#'customerview/shopinfo []]
 
    "user" [#'customerview/usercenter []]
    "user-likeshoplist" [#'customerview/userlikeshoplist []]
@@ -74,9 +74,9 @@
     [:div.scroller
      (let [view (get-in pages [(session/get :page) 0])
            page-entitys (get-in pages [(session/get :page) 1])
-           query (session/get :params)
-           params (pagedata/get-page-params page-entitys query)]
-       [view params])]]
+           datas (pagedata/get-entitydata page-entitys)]
+       (pagedata/reflesh! page-entitys)
+       [view datas])]]
    [footer]])
 
 (defn page-shop []
@@ -84,9 +84,9 @@
    [nav-shop]
    (let [view (get-in pages [(session/get :page) 0])
          page-entitys (get-in pages [(session/get :page) 1])
-         query (session/get :params)
-         params (pagedata/get-page-params page-entitys query)]
-     [view params])])
+         datas (pagedata/get-entitydata page-entitys)]
+     (pagedata/reflesh! page-entitys)
+     [view datas])])
 
 (defn- page-did-amount []
   (.log js/console "page amount"))
@@ -100,7 +100,11 @@
 
 (secretary/defroute
   "/" []
-  (session/put! :page "goods"))
+  (session/put!
+    :page
+    (if (= (.-pathname js/window.location) "/shopmanager")
+      "shopmanager"
+      "goods")))
 (secretary/defroute
   "/goods" []
   (session/put! :page "goods"))
@@ -119,8 +123,7 @@
   (session/put! :page "shop"))
 (secretary/defroute
   "/shop/info" [query-params]
-  (session/put! :page "shop-info")
-  (session/put! :params query-params))
+  (session/put! :page "shop-info"))
 
 (secretary/defroute
   "/user" []
@@ -137,25 +140,26 @@
 
 (secretary/defroute
   "/shop/index" []
-  (session/put! :page :shop-index))
+  (session/put! :page "shopmanager"))
 (secretary/defroute
   "/shop/yingxiangli" []
-  (session/put! :page :yingxiangli))
+  (session/put! :page "shopmanager-yingxiangli"))
 (secretary/defroute
   "/shop/shopbargain" []
-  (session/put! :page :shopbargain))
+  (session/put! :page "shopmanager-shopbargain"))
 (secretary/defroute
   "/shop/shopinfo" []
-  (session/put! :page :shop-shopinfo))
+  (session/put! :page "shopmanager-shopinfo"))
 (secretary/defroute
   "/shop/helpinfo" []
-  (session/put! :page :helpinfo))
+  (session/put! :page "shopmanager-helpinfo"))
 (secretary/defroute
-  "/shop/goodsinfo" []
-  (session/put! :page :goodsinfo))
+  "/shop/goodsinfo-:id" [id]
+  (session/put! :params id)
+  (session/put! :page "shopmanager-goodsinfo"))
 (secretary/defroute
   "/shop/topshop" []
-  (session/put! :page :topshop))
+  (session/put! :page "shopmanager-topshop"))
 
 ;; -------------------------
 ;; History
@@ -167,16 +171,14 @@
           (fn [event]
               (secretary/dispatch! (.-token event))))
         (.setEnabled true)))
-;; Initialize app
-(defn mount-components []
-  (reagent/render [#'page] (.getElementById js/document "app")))
-(defn mount-components-shop []
-  (reagent/render [#'page-shop] (.getElementById js/document "app")))
+
+
+
 
 (defn init! []
   (hook-browser-navigation!)
-  (mount-components))
+  (reagent/render [#'page] (.getElementById js/document "app")))
 
 (defn shopmanager! []
   (hook-browser-navigation!)
-  (mount-components-shop))
+  (reagent/render [#'page-shop] (.getElementById js/document "app")))

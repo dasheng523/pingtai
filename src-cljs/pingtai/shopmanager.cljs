@@ -1,14 +1,15 @@
 (ns pingtai.shopmanager
   (:require [reagent.core :as reagent :refer [atom]]
-            [reagent.session :as session]))
+            [reagent.session :as session]
+            [pingtai.pagedata :as pagedata]))
 
 ;Index Page
-(defn indexbanner []
-  [:div {:class "banner"}
+(defn indexbanner [data]
+  [:div {:class "banner" :style {:background (str "url(" (get-in data ["banner_media" "media_url"]) ")")}}
    [:div {:class "head-info"}
-    [:img {:class "banner-head img-circle" :src "images/head.png"}]
-    [:span {:class "banner-text"} "业翔美食店"]]
-   [:a {:class "other-info" :href "#"}
+    [:img {:class "banner-head img-circle" :src (get data "head_url")}]
+    [:span {:class "banner-text"} (get data "name")]]
+   #_[:a {:class "other-info" :href "#"}
     "今日访客:"
     [:strong 3600]
     [:br]
@@ -23,12 +24,12 @@
     [:a {:href "#" :class "btn btn-default"}
      "发促销广告"]]])
 
-(defn index-container []
+(defn index-container [data]
   [:div {:class "container"}
    [:div {:class "panel panel-default"}
     [:div {:class "panel-body"}
      [:h3 "北流影响力："
-      [:strong {:style {:color "red"}} 3600]]]
+      [:strong {:style {:color "red"}} (get data "score")]]]
     [:div {:class "list-group"}
      [:a {:href "#/shop/yingxiangli"
           :class "list-group-item"}
@@ -61,27 +62,27 @@
       "帮助说明"
       [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]])
 
-(defn indexpage []
+(defn indexpage [data]
   (session/put! "title" "店铺管理中心")
   [:div
-   [indexbanner]
-   [index-container]
+   [indexbanner (:manager-shopinfo data)]
+   [index-container (:manager-shopinfo data)]
    [:div {:class "margin-footer"}]
    [common-footer]])
 
 
-
 ;yingxiangli page
-(defn yingxiangli []
+(defn yingxiangli [data]
+  (session/put! "title" "店铺管理中心")
   [:div {:class "animated bounceInRight"}
    [:div {:class "yingxiangli-banner"}
-    [:div {:class "yingxiangli-score"} "3600"
+    [:div {:class "yingxiangli-score"} (get-in data [:manager-scoredetail "score"])
      [:span {:class "yingxiangli-fen"} "分"]]
     [:div {:class "yingxiangli-desc"}
-     [:p {:class "yingxiangli-up"} "您今天提高了"
-      [:strong 50]
-      "点影响力"]
-     [:p {:class "yingxiangli-beat"}
+     [:p {:class "yingxiangli-beat"} "您今天提高了 "
+      [:strong (+ (get-in data [:manager-scoredetail "todayscore"]) 0)]
+      " 点影响力"]
+     #_[:p {:class "yingxiangli-beat"}
       "您在北流的排名是第 "
       [:strong 80]
       " 位"]]]
@@ -89,22 +90,12 @@
     [:div {:class "panel panel-default margin-top"}
      [:div.panel-heading "以下办法可提高影响力："]
      [:div {:class "list-group"}
-      [:a {:href "#" :class "list-group-item"}
-       "访客浏览店铺"
-       [:small "（可得10分）"]
-       [:span.pull-right "1/10"]]
-      [:a {:href "#" :class "list-group-item"}
-       "访客浏览商品"
-       [:small "（可得50分）"]
-       [:span.pull-right "1/50"]]
-      [:a {:href "#" :class "list-group-item list-group-item-success"}
-       "分享到朋友圈"
-       [:small "（可得50分）"]
-       [:span.pull-right "完成"]]
-      [:a {:href "#" :class "list-group-item list-group-item-success"}
-       "访客点赞"
-       [:small "（可得50分）"]
-       [:span.pull-right "完成"]]]]
+      (for [info (get-in data [:manager-shopertask])]
+        ^{:key (get info "id")}
+        [:a {:href "javascript:" :class "list-group-item"}
+         (get info "title")
+         [:small (str "（可得" (get info "score") "分）")]
+         [:span.pull-right (str (get info "ready-done") "/" (get info "limit_amout"))]])]]
     [:div {:class "panel panel-default margin-top"}
      [:div.list-group
       [:a.list-group-item {:href "#/shop/topshop"}
@@ -121,33 +112,22 @@
        [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]]])
 
 ;优惠商品
-(defn shop-bargain []
+(defn shop-bargain [data]
+  (session/put! "title" "我的优惠商品")
+  (println data)
   [:div.container.margin-header {:class "animated bounceInRight"}
    [:div.list-group
-    [:a {:href "#/shop/goodsinfo" :class "list-group-item shop-goods-item"}
-     [:img {:src "images/1.png" :class "shop-goods-img"}]
-     [:div.shop-goods-info
-      [:p.title "业翔砂锅粉业翔砂锅粉"]
-      [:p.info "10000元/碗"]
-      [:p.visitestate "今天没有人浏览"]]
-     [:span.shop-goods-score "500分"]]
-
-    [:a {:href "/index.html#/goodsinfo" :class "list-group-item shop-goods-item"}
-     [:img {:src "images/1.png" :class "shop-goods-img"}]
-     [:div.shop-goods-info
-      [:p.title "业翔砂锅粉业翔砂锅粉"]
-      [:p.info "10000元/碗"]
-      [:p.visitestate "今天有 " [:strong {:class "text-danger"} "4"] " 人访问"]]
-     [:span.shop-goods-score "500分"]]
-
-    [:a {:href "/index.html#/customer/goods" :class "list-group-item shop-goods-item"}
-     [:img {:src "images/1.png" :class "shop-goods-img"}]
-     [:div.shop-goods-info
-      [:p.title "业翔砂锅粉业翔砂锅粉"]
-      [:p.info "10000元/碗"]
-      [:p.visitestate "今天有 " [:strong {:class "text-danger"} "4"] " 人访问"]]
-     [:span.shop-goods-score "500分"]]
-    ]])
+    (for [info (get-in data [:manager-goods])]
+      ^{:key (get info "id")}
+      [:a {:href (str "#/shop/goodsinfo-" (get info "id")) :class "list-group-item shop-goods-item"}
+       [:img {:src (get info "img_url") :class "shop-goods-img"}]
+       [:div.shop-goods-info
+        [:p.title (get info "goods_name")]
+        [:p.info (str (get info "new_price") "元")]
+        [:p.visitestate (if (get info "visit_count")
+                          (str "今天有 " (get info "visit_count") " 人访问")
+                          "今天没有人浏览")]]
+       [:span.shop-goods-score (str (+ (get info "score") 0) "分")]])]])
 
 (defn topshop []
   [:div.container.margin-header
@@ -186,7 +166,9 @@
      [:span.yingxiang "影响力：12313"]]
     ]])
 
-(defn goodsinfo []
+(defn goodsinfo [data]
+  (session/put! "title" "商品名称")
+  (println data)
   [:div.container.margin-header {:class "animated bounceInRight"}
    [:div {:class "editform list-group"}
     [:a {:class "edit-item list-group-item" :href "javascript:"}
@@ -274,9 +256,10 @@
        [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]]]]])
 
 ;帮助信息
-(defn helpinfo []
+(defn helpinfo [data]
+  (session/put! "title" "帮助信息")
   [:div.container.margin-header {:class "animated bounceInRight"}
    [:div {:class "panel panel-default"}
-    [:div.panel-heading "以下办法可提高影响力："]
-    [:div.panel-body "123456"]]])
+    [:div.panel-heading (get-in data [:manager-helpdata "title"])]
+    [:div.panel-body (get-in data [:manager-helpdata "hcontent"])]]])
 

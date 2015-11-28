@@ -43,7 +43,8 @@
                  [korma "0.4.2"]
                  [clj-time "0.11.0"]
                  [com.taoensso/carmine "2.12.0"]
-                 [pandect "0.5.4"]]
+                 [pandect "0.5.4"]
+                 [clj-http "2.0.0"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "pingtai.jar"

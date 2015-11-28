@@ -40,10 +40,9 @@
 
         (context* "/common" []
                   :tags ["通用接口"]
-                  (POST* "/ttt"
-                         {body :body-params}
+                  (POST* "/ttt" []
                          :summary "ces"
-                         (ok body))
+                         (ok (wechat/get-access-token)))
                   (POST* "/create-ystoken" []
                          :summary "测试创建"
                          :body-params [id :- String]
@@ -52,10 +51,14 @@
                          :summary "测试获取"
                          :body-params [ystoken :- String]
                          (ok (auth/get-user-id ystoken)))
+                  (POST* "/verify-token" []
+                         :summary "验证token是否有效"
+                         :body-params [ystoken :- String]
+                         (ok (auth/verifite-ystoken ystoken)))
                   (POST* "/create-ystoken-by-code" []
                          :summary "根据微信授权CODE获得ystoken"
                          :body-params [code :- String]
-                         (ok (auth/create-ystoken code)))
+                         (ok (auth/create-ystoken-by-code code)))
                   (POST* "/get-help" []
                          :summary "获得帮助说明"
                          :body-params [id :- String]
@@ -71,16 +74,20 @@
                            (ok (shoper/update-shop-info udata shop_id)))
                     (POST* "/get-shoper-task" []
                            :summary     "获取店员任务"
-                           :body-params [ystoken :- String shoper_id :- String]
-                           (ok (shoper/get-shoper-task shoper_id)))
+                           :body-params [ystoken :- String]
+                           (ok (shoper/get-shoper-task ystoken)))
                     (POST* "/score-detail" []
                            :summary     "获得积分详情"
-                           :body-params [ystoken :- String shop_id :- String]
-                           (ok (shoper/score-detail shop_id)))
-                    (POST* "/get-goods-by-shop-id" []
+                           :body-params [ystoken :- String]
+                           (ok (shoper/score-detail ystoken)))
+                    (POST* "/get-goods-list" []
+                           :summary     "获取店铺的商品列表"
+                           :body-params [ystoken :- String]
+                           (ok (shoper/get-goods-list ystoken)))
+                    (POST* "/get-goods-info" []
                            :summary     "获取店铺的商品详情"
-                           :body-params [ystoken :- String shop_id :- String]
-                           (ok (shoper/get-goods-by-shop-id shop_id)))
+                           :body-params [ystoken :- String goodsid :- String]
+                           (ok (shoper/get-goods-info goodsid)))
                     (POST* "/get-shop-index" []
                            :summary     "获取店员首页数据"
                            :body-params [ystoken :- String]

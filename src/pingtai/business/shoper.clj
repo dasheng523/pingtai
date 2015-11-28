@@ -33,19 +33,30 @@
       :banner_media banner_media
       :blicence_media blicence_media)))
 
-(defn get-goods-by-shop-id [shoper-id]
+(defn get-goods-list [ystoken]
   "获取商品列表数据"
-  (let [goodslist (-> (select* entities/goods)
-                      (where {:shop_id shoper-id})
+  (let [user-id (auth/get-user-id ystoken)
+        shop-info (bcommon/get-by entities/shops {:ower_id user-id})
+        goodslist (-> (select* entities/goods)
+                      (where {:shop_id (:id (nth shop-info 0 nil))})
                       (select))]
     (map (fn [info]
-           (assoc info :img_url (bcommon/get-media-url-by-obj (:id info))))
+           (assoc info
+             :img_url (bcommon/get-media-url-by-obj (:id info))
+             :medialist (bcommon/get-medias-by-obj (:id info))))
          goodslist)))
 
-(defn score-detail [shoper-id]
+(defn get-goods-info [goods-id]
+  "获取商品详情"
+  (let [goodsinfo (bcommon/get-by-id entities/goods goods-id)]
+    (assoc goodsinfo
+      :medialist (bcommon/get-medias-by-obj goods-id))))
+
+(defn score-detail [ystoken]
   "获取积分详情"
-  (let [score (-> (bcommon/get-by-id entities/shops shoper-id)
-                  (:score))
+  (let [user-id (auth/get-user-id ystoken)
+        shop-info (bcommon/get-by entities/shops {:ower_id user-id})
+        score (:score (nth shop-info 0 nil))
         today-score (-> (select* entities/users_tasks)
                         (fields [(sqlfn sum :tasks.score) :total-score])
                         (join entities/tasks (= :tasks.id :users_tasks.task_id))
@@ -58,11 +69,12 @@
                         (nth 0 nil)
                         (:total-score))]                    ;TODO 排名没有做
     {:score score
-     :totalscore today-score}))
+     :todayscore today-score}))
 
-(defn get-shoper-task [shoper-id]
+(defn get-shoper-task [ystoken]
   "获取店员任务信息"
-  (let [tasklist (-> (select* entities/tasks)
+  (let [shoper-id (auth/get-user-id ystoken)
+        tasklist (-> (select* entities/tasks)
                      (where (and (>= (coerce/to-sql-time (ctime/now)) :stime)
                                  (<= (coerce/to-sql-time (ctime/now)) :etime)
                                  (= :task_role 2)))

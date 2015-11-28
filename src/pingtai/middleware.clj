@@ -34,6 +34,13 @@
                 (:app-context env))]
       (handler request))))
 
+(defn wrap-ystoken-session [handler]
+  "设置默认的ystoken"
+  (fn [req]
+    (if-not (get-in req [:session :ystoken])
+      (handler (assoc-in req [:session :ystoken] (auth/create-ystoken "1")))
+      (handler req))))
+
 (defn wrap-internal-error [handler]
   (fn [req]
     (try
@@ -47,6 +54,7 @@
 (defn wrap-dev [handler]
   (if (env :dev)
     (-> handler
+        wrap-ystoken-session
         reload/wrap-reload
         wrap-error-page
         wrap-exceptions)

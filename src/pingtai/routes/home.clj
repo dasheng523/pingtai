@@ -1,31 +1,52 @@
 (ns pingtai.routes.home
   (:require [pingtai.layout :as layout]
             [compojure.core :refer [defroutes GET POST]]
-            [ring.util.http-response :refer [ok]]
+            [ring.util.http-response :refer [ok found]]
+            [ring.util.response :refer [response]]
             [clojure.java.io :as io]
-            [pingtai.business.customer :as shop]))
+            [pingtai.business.customer :as shop]
+            [pingtai.business.authentication :as auth]
+            [pingtai.business.wechat-api :as wechat]))
 
-(defn home-page []
-  (layout/render "home.html"))
+(def redirect-url "http://api.yunbzw.com")
+
+(defn render-index [{:keys [session]} page]
+  (if-let [ystoken (:ystoken session)]
+    (layout/render page {:ystoken ystoken})
+    (found (wechat/get-access-url redirect-url))))
+
+(defn home-page [{:keys [params] :as req}]
+  "顾客端首页"
+  (if-let [myreq (if-let [code (get params "code")]
+                   (if-let [ystoken (:ystoken (auth/create-ystoken-by-code code))]
+                     (assoc-in req [:session :ystoken] ystoken)))]
+    (render-index myreq "index.html")
+    (render-index req "index.html")))
+
+(defn shop-page [{:keys [params] :as req}]
+  "店员端首页"
+  (if-let [myreq (if-let [code (get params "code")]
+                   (if-let [ystoken (:ystoken (auth/create-ystoken-by-code code))]
+                     (assoc-in req [:session :ystoken] ystoken)))]
+    (render-index myreq "shop.html")
+    (render-index req "shop.html")))
 
 (defn welcome []
   (layout/render "welcome.html"))
 
+
+
+(defn test-setsession [{:keys [session]}]
+  (-> (response "set!")
+      (assoc-in [:session :ystoken] "44")))
+
 (defroutes home-routes
-           (GET "/" [] (home-page))
+           (GET "/" [:as req] (home-page req))
+           (GET "/shopmanager" [:as req] (shop-page req))
+
+
            (GET "/docs" [] (ok (-> "docs/docs.md" io/resource slurp)))
            (GET "/welcome" [] (welcome))
-           (GET "/getshop" [] {:body [{:id 4 :name "qqq" :img-url "http://localhost:3000/images/1.png"}
-                                      {:id 5 :name "222" :img-url "http://localhost:3000/images/2.png"}
-                                      {:id 6 :name "5556" :img-url "http://localhost:3000/images/3.png"}
-                                      {:id 7 :name "8988" :img-url "http://localhost:3000/images/4.png"}
-                                      {:id 8 :name "8988" :img-url "http://localhost:3000/images/4.png"}
-                                      {:id 9 :name "8988" :img-url "http://localhost:3000/images/4.png"}
-                                      {:id 1 :name "8988" :img-url "http://localhost:3000/images/4.png"}
-                                      {:id 2 :name "8988" :img-url "http://localhost:3000/images/4.png"}
-                                      {:id 3 :name "8988" :img-url "http://localhost:3000/images/4.png"}
-                                      {:id 6 :name "8988" :img-url "http://localhost:3000/images/4.png"}]})
-           (GET "/shopinfo" [id] {:body {:id id
-                                             :name "5234"}})
-           (GET "/test" [] {:body (shop/get-all-categorys)}))
+           (GET "/shopinfo" [id] {:body {:id id :name "5234"}})
+           (GET "/test" [:as req] (test-setsession req)))
 

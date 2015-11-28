@@ -1,5 +1,6 @@
 (ns pingtai.db.common
-  (:require [environ.core :refer [env]]))
+  (:require [environ.core :refer [env]]
+            [taoensso.carmine :as car]))
 
 
 
@@ -8,3 +9,5 @@
 (def redis-config {:host "localhost"
                    :port 6379
                    :timeout-ms 6000})
+(def server1-conn {:pool {} :spec redis-config})
+(defmacro wcar* [& body] `(car/wcar server1-conn ~@body))

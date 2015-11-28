@@ -41,8 +41,8 @@
 
 (def app-routes
   (routes
-    (var service-routes)
     (wrap-routes #'home-routes middleware/wrap-csrf)
+    (var service-routes)
     (route/not-found
       (:body
         (error-page {:status 404
