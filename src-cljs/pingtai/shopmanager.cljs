@@ -1,20 +1,23 @@
 (ns pingtai.shopmanager
   (:require [reagent.core :as reagent :refer [atom]]
             [reagent.session :as session]
-            [pingtai.pagedata :as pagedata]))
+            [pingtai.pagedata :as pagedata]
+            [ajax.core :refer [GET POST]]
+            [pingtai.common :as common]))
 
 ;Index Page
-(defn indexbanner [data]
-  [:div {:class "banner" :style {:background (str "url(" (get-in data ["banner_media" "media_url"]) ")")}}
-   [:div {:class "head-info"}
-    [:img {:class "banner-head img-circle" :src (get data "head_url")}]
-    [:span {:class "banner-text"} (get data "name")]]
-   #_[:a {:class "other-info" :href "#"}
-    "今日访客:"
-    [:strong 3600]
-    [:br]
-    "粉丝数量:"
-    [:strong 3600]]])
+(defn indexbanner [api]
+  (let [data (pagedata/get-api-data api)]
+    [:div {:class "banner" :style {:background (str "url(" (get-in data ["banner_media" "media_url"]) ")")}}
+     [:div {:class "head-info"}
+      [:img {:class "banner-head img-circle" :src (get data "head_url")}]
+      [:span {:class "banner-text"} (get data "name")]]
+     #_[:a {:class "other-info" :href "#"}
+        "今日访客:"
+        [:strong 3600]
+        [:br]
+        "粉丝数量:"
+        [:strong 3600]]]))
 
 (defn common-footer []
   [:div {:class "footer"}
@@ -24,110 +27,142 @@
     [:a {:href "#" :class "btn btn-default"}
      "发促销广告"]]])
 
-(defn index-container [data]
-  [:div {:class "container"}
-   [:div {:class "panel panel-default"}
-    [:div {:class "panel-body"}
-     [:h3 "北流影响力："
-      [:strong {:style {:color "red"}} (get data "score")]]]
-    [:div {:class "list-group"}
-     [:a {:href "#/shop/yingxiangli"
-          :class "list-group-item"}
-      "查看详情"
-      [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]
-   [:div {:class "panel panel-default"}
-    [:div {:class "list-group"}
-     [:a {:href "#/shop/shopbargain"
-          :class "list-group-item"}
-      [:span {:class "pull-left glyphicon glyphicon-hand-right"
-              :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
-      "我的商品"
-      [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
-     [:a {:href "#"
-          :class "list-group-item"}
-      [:span {:class "pull-left glyphicon glyphicon-hand-right"
-              :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
-      "促销广告"
-      [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
-     [:a {:href "#/shop/shopinfo"
-          :class "list-group-item"}
-      [:span {:class "pull-left glyphicon glyphicon-hand-right"
-              :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
-      "店铺信息"
-      [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
-     [:a {:href "#/shop/helpinfo"
-          :class "list-group-item"}
-      [:span {:class "pull-left glyphicon glyphicon-hand-right"
-              :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
-      "帮助说明"
-      [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]])
+(defn index-container [api]
+  (let [data (pagedata/get-api-data api)]
+    [:div {:class "container"}
+     [:div {:class "panel panel-default"}
+      [:div {:class "panel-body"}
+       [:h3 "北流影响力："
+        [:strong {:style {:color "red"}} (get data "score")]]]
+      [:div {:class "list-group"}
+       [:a {:href "#/shop/yingxiangli"
+            :class "list-group-item"}
+        "查看详情"
+        [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]
+     [:div {:class "panel panel-default"}
+      [:div {:class "list-group"}
+       [:a {:href "#/shop/shopbargain"
+            :class "list-group-item"}
+        [:span {:class "pull-left glyphicon glyphicon-hand-right"
+                :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
+        "我的商品"
+        [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
+       [:a {:href "#"
+            :class "list-group-item"}
+        [:span {:class "pull-left glyphicon glyphicon-hand-right"
+                :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
+        "促销广告"
+        [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
+       [:a {:href "#/shop/shopinfo"
+            :class "list-group-item"}
+        [:span {:class "pull-left glyphicon glyphicon-hand-right"
+                :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
+        "店铺信息"
+        [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
+       [:a {:href "#/shop/helpinfo"
+            :class "list-group-item"}
+        [:span {:class "pull-left glyphicon glyphicon-hand-right"
+                :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
+        "帮助说明"
+        [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]]))
 
-(defn indexpage [data]
+(defn indexpage [apis]
   (session/put! "title" "店铺管理中心")
   [:div
-   [indexbanner (:manager-shopinfo data)]
-   [index-container (:manager-shopinfo data)]
+   [indexbanner (first apis)]
+   [index-container (first apis)]
    [:div {:class "margin-footer"}]
    [common-footer]])
 
 
 ;yingxiangli page
-(defn yingxiangli [data]
+(defn yingxiangli [apis]
   (session/put! "title" "店铺管理中心")
-  [:div {:class "animated bounceInRight"}
-   [:div {:class "yingxiangli-banner"}
-    [:div {:class "yingxiangli-score"} (get-in data [:manager-scoredetail "score"])
-     [:span {:class "yingxiangli-fen"} "分"]]
-    [:div {:class "yingxiangli-desc"}
-     [:p {:class "yingxiangli-beat"} "您今天提高了 "
-      [:strong (+ (get-in data [:manager-scoredetail "todayscore"]) 0)]
-      " 点影响力"]
-     #_[:p {:class "yingxiangli-beat"}
-      "您在北流的排名是第 "
-      [:strong 80]
-      " 位"]]]
-   [:div {:class "container"}
-    [:div {:class "panel panel-default margin-top"}
-     [:div.panel-heading "以下办法可提高影响力："]
-     [:div {:class "list-group"}
-      (for [info (get-in data [:manager-shopertask])]
-        ^{:key (get info "id")}
-        [:a {:href "javascript:" :class "list-group-item"}
-         (get info "title")
-         [:small (str "（可得" (get info "score") "分）")]
-         [:span.pull-right (str (get info "ready-done") "/" (get info "limit_amout"))]])]]
-    [:div {:class "panel panel-default margin-top"}
-     [:div.list-group
-      [:a.list-group-item {:href "#/shop/topshop"}
-       [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
-       "影响力排行榜"
-       [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
-      [:a.list-group-item {:href "/index.html#/customer/shoplist"}
-       [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
-       "查看附近商家"
-       [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
-      [:a.list-group-item {:href "#/customer/shoplist"}
-       [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
-       "帮助说明"
-       [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]]])
+  (let [data (pagedata/get-api-data (first apis))
+        task-data (pagedata/get-api-data (last apis))]
+    [:div {:class "animated bounceInRight"}
+     [:div {:class "yingxiangli-banner"}
+      [:div {:class "yingxiangli-score"} (get-in data ["score"])
+       [:span {:class "yingxiangli-fen"} "分"]]
+      [:div {:class "yingxiangli-desc"}
+       [:p {:class "yingxiangli-beat"} "您今天提高了 "
+        [:strong (+ (get-in data ["todayscore"]) 0)]
+        " 点影响力"]
+       #_[:p {:class "yingxiangli-beat"}
+          "您在北流的排名是第 "
+          [:strong 80]
+          " 位"]]]
+     [:div {:class "container"}
+      [:div {:class "panel panel-default margin-top"}
+       [:div.panel-heading "以下办法可提高影响力："]
+       [:div {:class "list-group"}
+        (for [info task-data]
+          ^{:key (get info "id")}
+          [:a {:href "javascript:" :class "list-group-item"}
+           (get info "title")
+           [:small (str "（可得" (get info "score") "分）")]
+           [:span.pull-right (str (get info "ready-done") "/" (get info "limit_amout"))]])]]
+      [:div {:class "panel panel-default margin-top"}
+       [:div.list-group
+        [:a.list-group-item {:href "#/shop/topshop"}
+         [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
+         "影响力排行榜"
+         [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
+        [:a.list-group-item {:href "/index.html#/customer/shoplist"}
+         [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
+         "查看附近商家"
+         [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
+        [:a.list-group-item {:href "#/customer/shoplist"}
+         [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
+         "帮助说明"
+         [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]]]))
 
 ;优惠商品
-(defn shop-bargain [data]
+(defn shop-bargain [apis]
   (session/put! "title" "我的优惠商品")
-  (println data)
-  [:div.container.margin-header {:class "animated bounceInRight"}
-   [:div.list-group
-    (for [info (get-in data [:manager-goods])]
-      ^{:key (get info "id")}
-      [:a {:href (str "#/shop/goodsinfo-" (get info "id")) :class "list-group-item shop-goods-item"}
-       [:img {:src (get info "img_url") :class "shop-goods-img"}]
-       [:div.shop-goods-info
-        [:p.title (get info "goods_name")]
-        [:p.info (str (get info "new_price") "元")]
-        [:p.visitestate (if (get info "visit_count")
-                          (str "今天有 " (get info "visit_count") " 人访问")
-                          "今天没有人浏览")]]
-       [:span.shop-goods-score (str (+ (get info "score") 0) "分")]])]])
+  (let [data (pagedata/get-api-data (first apis))]
+    [:div.container.margin-header {:class "animated bounceInRight"}
+     [:div.list-group
+      (for [info data]
+        ^{:key (get info "id")}
+        [:a {:href (str "#/shop/goodsinfo-" (get info "id")) :class "list-group-item shop-goods-item"}
+         [:img {:src (get info "img_url") :class "shop-goods-img"}]
+         [:div.shop-goods-info
+          [:p.title (get info "goods_name")]
+          [:p.info (str (get info "new_price") "元")]
+          [:p.visitestate (if (get info "visit_count")
+                            (str "今天有 " (get info "visit_count") " 人访问")
+                            "今天没有人浏览")]]
+         [:span.shop-goods-score (str (+ (get info "score") 0) "分")]])]]))
+
+(defn editbox [{:keys [title api field]}]
+  "编辑框"
+  (session/put! "title" title)
+  (let [entity (pagedata/get-api-data api)]
+    [:div.container.margin-header {:class "animated bounceInRight"}
+     [:textarea {:class "editbox-textarea" :id "edit-box" :defaultValue (get entity field)}]
+     [:button {:class "btn btn-danger btn-block"
+               :on-click (fn []
+                           (let [v (.-value (.getElementById js/document "edit-box"))
+                                 new-entity (assoc entity field v)
+                                 udata {:goods_name (get new-entity "goods_name")
+                                        :origin_price (str (get new-entity "origin_price"))
+                                        :new_price (str (get new-entity "new_price"))
+                                        :describe (get new-entity "describe")
+                                        :shop_notice (get new-entity "shop_notice")}]
+                             (pagedata/set-api-data! api (assoc new-entity field v))
+                             (POST
+                               "http://localhost:3000/shoper/update-goods-info"
+                               {:params {:ystoken (common/get-ystoken)
+                                         :udata udata
+                                         :goods_id (get new-entity "id")}
+                                :handler #(if %
+                                           (common/shop-tip "保存成功")
+                                           (common/shop-tip "出现了一些小问题"))
+                                :format :json
+                                :response-format :json})
+                             (.back js/history)))}
+      "保存"]]))
 
 (defn topshop []
   [:div.container.margin-header
@@ -166,55 +201,65 @@
      [:span.yingxiang "影响力：12313"]]
     ]])
 
-(defn goodsinfo [data]
-  (session/put! "title" "商品名称")
-  (println data)
-  [:div.container.margin-header {:class "animated bounceInRight"}
-   [:div {:class "editform list-group"}
-    [:a {:class "edit-item list-group-item" :href "javascript:"}
-     [:span.edit-key "商品名称："]
-     [:div.edit-value
-      "业翔云吞面"]]
-    [:a {:class "edit-item list-group-item" :href "javascript:"}
-     [:span.edit-key "原价："]
-     [:div.edit-value
-      "15" "元"]]
-    [:a {:class "edit-item list-group-item" :href "javascript:"}
-     [:span.edit-key "优惠价："]
-     [:div.edit-value
-      "10" "元"]]
-    [:a {:class "edit-item list-group-item" :href "javascript:"}
-     [:span.edit-key "说明："]
-     [:div.edit-desc
-      "北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场"]]
-    [:a {:class "edit-item list-group-item" :href "javascript:"}
-     [:span.edit-key "购买须知："]
-     [:div.edit-desc
-      "北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场北流市铜州市场"]]
-    [:div {:class "edit-item list-group-item" :href "javascript:"}
-     [:span.edit-key "商品图片"]
-     [:div.edit-value
-      "已上传"]
-     [:div
-      [:a.edit-uploadimg-del {:href "javascript:"} [:span.glyphicon.glyphicon-remove "删除"]]
-      [:a.edit-uploadimgbox {:href "javascript:"}
-       [:img {:src "images/1.png" :class "edit-uploadimg"}]
-       [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]
+(defn goodsinfo [apis]
+  (session/put! "title" "商品管理")
+  (let [data (pagedata/get-api-data (first apis))]
+    [:div.container.margin-header {:class "animated bounceInRight"}
+     [:div {:class "editform list-group"}
+      [:a {:class "edit-item list-group-item" :href "#/input"
+           :on-click #(do
+                       (session/put! "mainpage-params" {:title "商品名称" :api (first apis) :field "goods_name"})
+                       (session/put! "mainpage" editbox))}
+       [:span.edit-key "商品名称："]
+       [:div.edit-value
+        (get-in data ["goods_name"])]]
+      [:a {:class "edit-item list-group-item" :href "#/input"
+           :on-click #(do
+                       (session/put! "mainpage-params" {:title "原价" :api (first apis) :field "origin_price"})
+                       (session/put! "mainpage" editbox))}
+       [:span.edit-key "原价："]
+       [:div.edit-value
+        (get-in data ["origin_price"]) "元"]]
+      [:a {:class "edit-item list-group-item" :href "#/input"
+           :on-click #(do
+                       (session/put! "mainpage-params" {:title "优惠价" :api (first apis) :field "new_price"})
+                       (session/put! "mainpage" editbox))}
+       [:span.edit-key "优惠价："]
+       [:div.edit-value
+        (get-in data ["new_price"]) "元"]]
+      [:a {:class "edit-item list-group-item" :href "#/input"
+           :on-click #(do
+                       (session/put! "mainpage-params" {:title "说明" :api (first apis) :field "describe"})
+                       (session/put! "mainpage" editbox))}
+       [:span.edit-key "说明："]
+       [:div.edit-desc
+        (get-in data ["describe"])]]
+      [:a {:class "edit-item list-group-item" :href "#/input"
+           :on-click #(do
+                       (session/put! "mainpage-params" {:title "购买须知" :api (first apis) :field "shop_notice"})
+                       (session/put! "mainpage" editbox))}
+       [:span.edit-key "购买须知："]
+       [:div.edit-desc
+        (get-in data ["shop_notice"])]]
+      (let [medialist (get-in data ["medialist"])]
+        [:div {:class "edit-item list-group-item" :href "javascript:"}
+         [:span.edit-key "商品图片"]
+         [:div.edit-value
+          (if (nil? medialist) "未上传" "已上传")]
+         [:div
+          (for [media medialist]
+            ^{:key (get media "id")}
+            [:div
+             [:a.edit-uploadimg-del {:href "javascript:"} [:span.glyphicon.glyphicon-remove "删除"]]
+             [:a.edit-uploadimgbox
+              [:img {:src (get media "media_url") :class "edit-uploadimg"}]
+              [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]])
+          (if (<= (count medialist) 5)
+            [:a.edit-uploadimgbox {:href "javascript:"}
+             [:div { :class "edit-uploaddiv"}]
+             [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击上传"]])]])]]))
 
-      [:a.edit-uploadimg-del {:href "javascript:"} [:span.glyphicon.glyphicon-remove "删除"]]
-      [:a.edit-uploadimgbox
-       [:img {:src "images/2.png" :class "edit-uploadimg"}]
-       [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]
 
-      [:a.edit-uploadimg-del {:href "javascript:"} [:span.glyphicon.glyphicon-remove "删除"]]
-      [:a.edit-uploadimgbox
-       [:img {:src "images/3.png" :class "edit-uploadimg"}]
-       [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]
-
-      [:a.edit-uploadimg-del {:href "javascript:"} [:span.glyphicon.glyphicon-remove "删除"]]
-      [:a.edit-uploadimgbox
-       [:img {:src "images/4.png" :class "edit-uploadimg"}]
-       [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]]]]])
 
 ;店铺信息
 (defn shopinfo []
@@ -263,3 +308,8 @@
     [:div.panel-heading (get-in data [:manager-helpdata "title"])]
     [:div.panel-body (get-in data [:manager-helpdata "hcontent"])]]])
 
+(defn error-page [data]
+  (session/put! "title" "出错了")
+  [:div.container.margin-header {:class "animated bounceInRight"}
+   [:div {:class "panel panel-default"}
+    [:div.panel-body data]]])

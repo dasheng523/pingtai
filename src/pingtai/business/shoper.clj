@@ -105,3 +105,9 @@
       (set-fields udata)
       (where {:id shop-id})
       (korma-update)))
+
+(defn update-goods-info [udata good-id]
+  (-> (update* entities/goods)
+      (set-fields udata)
+      (where {:id good-id})
+      (korma-update)))

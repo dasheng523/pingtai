@@ -10,3 +10,4 @@ pom.xml
 *.log
 resources/public/js
 /.idea
+/.repl

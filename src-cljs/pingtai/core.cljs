@@ -8,7 +8,8 @@
             [ajax.core :refer [GET POST]]
             [pingtai.shopmanager :as shopmanager]
             [pingtai.customerview :as customerview]
-            [pingtai.pagedata :as pagedata])
+            [pingtai.pagedata :as pagedata]
+            [pingtai.common :as common])
   (:import goog.History))
 
 (enable-console-print!)
@@ -26,8 +27,9 @@
    [:a {:href "javascript:" :class "back-btn pull-left" :on-click #(.back js/history)}
     [:span {:class "glyphicon glyphicon-chevron-left"}]]
    [:h3 {:class "page-title"} (session/get "title")]
-   #_[:a {:href "javascript:" :class "right-btn pull-right" :on-click #(.back js/history)}
-    [:span {:class "glyphicon glyphicon-chevron-right"}]]])
+   (if-let [nar-btn (session/get "narbtn")]
+     [:a {:href "javascript:" :class "right-btn pull-right" :on-click (:click nar-btn)}
+      [:span {:class (str "glyphicon " (:icon nar-btn))}]])])
 
 (defn footer []
   (let [items [{:url "#/goods" :name "特价" :icon "icon-money" :key "goods"}
@@ -52,6 +54,7 @@
    "shopmanager-helpinfo" [#'shopmanager/helpinfo [pagedata/manager-helpdata]]
    "shopmanager-goodsinfo" [#'shopmanager/goodsinfo [pagedata/manager-goods-info]]
    "shopmanager-topshop" [#'shopmanager/topshop []]
+   "shopmanager-editbox" [#'shopmanager/editbox []]
 
    "goods" [#'customerview/index []]
    "goods-info" [#'customerview/goods []]
@@ -67,7 +70,14 @@
 
    "search" [#'customerview/search []]})
 
-(defn- page-render []
+
+(defn page-shop []
+  [:div
+   [nav-shop]
+   (session/get "tip")
+   [(session/get "mainpage") (session/get "mainpage-params")]])
+
+(defn page []
   [:div
    [nav]
    [:div.scroll-wrapper
@@ -79,21 +89,11 @@
        [view datas])]]
    [footer]])
 
-(defn page-shop []
-  [:div
-   [nav-shop]
-   (let [view (get-in pages [(session/get :page) 0])
-         page-entitys (get-in pages [(session/get :page) 1])
-         datas (pagedata/get-entitydata page-entitys)]
-     (pagedata/reflesh! page-entitys)
-     [view datas])])
-
-(defn- page-did-amount []
-  (.log js/console "page amount"))
-(defn page []
-  (reagent/create-class {:reagent-render page-render
-                         :component-did-mount page-did-amount}))
-
+(defn pageload [view & api-entities]
+  (doseq [api-entity api-entities]
+    (pagedata/auto-fill-data! api-entity))
+  (session/put! "mainpage" view)
+  (session/put! "mainpage-params" api-entities))
 ;; -------------------------
 ;; Routes
 (secretary/set-config! :prefix "#")
@@ -106,6 +106,7 @@
       "shopmanager"
       "goods")))
 (secretary/defroute
+
   "/goods" []
   (session/put! :page "goods"))
 (secretary/defroute
@@ -138,28 +139,43 @@
   "/search" []
   (session/put! :page "search"))
 
+
+
 (secretary/defroute
   "/shop/index" []
-  (session/put! :page "shopmanager"))
+  (let [api {:api-url "http://localhost:3000/shoper/get-shop-index"
+             :api-params {:ystoken (common/get-ystoken)}}]
+    (pageload shopmanager/indexpage api)))
 (secretary/defroute
   "/shop/yingxiangli" []
-  (session/put! :page "shopmanager-yingxiangli"))
+  (let [api {:api-url "http://localhost:3000/shoper/score-detail"
+             :api-params {:ystoken (common/get-ystoken)}}
+        task-api {:api-url "http://localhost:3000/shoper/get-shoper-task"
+                  :api-params {:ystoken (common/get-ystoken)}}]
+    (pageload shopmanager/yingxiangli api task-api)))
 (secretary/defroute
   "/shop/shopbargain" []
-  (session/put! :page "shopmanager-shopbargain"))
+  (let [api {:api-url "http://localhost:3000/shoper/get-goods-list"
+             :api-params {:ystoken (common/get-ystoken)}}]
+    (pageload shopmanager/shop-bargain api)))
 (secretary/defroute
   "/shop/shopinfo" []
-  (session/put! :page "shopmanager-shopinfo"))
+  (pageload "shopmanager-shopinfo"))
 (secretary/defroute
   "/shop/helpinfo" []
-  (session/put! :page "shopmanager-helpinfo"))
+  (pageload "shopmanager-helpinfo"))
 (secretary/defroute
   "/shop/goodsinfo-:id" [id]
-  (session/put! :params id)
-  (session/put! :page "shopmanager-goodsinfo"))
+  (let [api {:api-url "http://localhost:3000/shoper/get-goods-info"
+             :api-params {:ystoken (common/get-ystoken)
+                          :goodsid id}}]
+    (pageload shopmanager/goodsinfo api)))
 (secretary/defroute
   "/shop/topshop" []
-  (session/put! :page "shopmanager-topshop"))
+  (pageload "shopmanager-topshop"))
+(secretary/defroute
+  "/shop/editbox" []
+  (pageload "shopmanager-editbox"))
 
 ;; -------------------------
 ;; History

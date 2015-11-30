@@ -24,6 +24,11 @@
                        :address String
                        :banner_media String
                        :blicence_media String})
+(s/defschema GoodsEdit {:goods_name String
+                       :origin_price String
+                       :new_price String
+                       :describe String
+                       :shop_notice String})
 
 (defapi service-routes
         (ring.swagger.ui/swagger-ui
@@ -72,6 +77,10 @@
                            :summary     "更新店铺信息"
                            :body-params [ystoken :- String udata :- ShopEdit shop_id :- String]
                            (ok (shoper/update-shop-info udata shop_id)))
+                    (POST* "/update-goods-info" []
+                           :summary     "更新商品数据"
+                           :body-params [ystoken :- String udata :- GoodsEdit goods_id :- String]
+                           (ok (shoper/update-goods-info udata goods_id)))
                     (POST* "/get-shoper-task" []
                            :summary     "获取店员任务"
                            :body-params [ystoken :- String]
