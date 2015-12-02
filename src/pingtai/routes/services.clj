@@ -81,6 +81,10 @@
                            :summary     "更新商品数据"
                            :body-params [ystoken :- String udata :- GoodsEdit goods_id :- String]
                            (ok (shoper/update-goods-info udata goods_id)))
+                    (POST* "/insert-goods-info" []
+                           :summary     "添加商品数据"
+                           :body-params [ystoken :- String udata :- GoodsEdit shop_id :- String]
+                           (ok (shoper/inser-goods-info udata shop_id)))
                     (POST* "/get-shoper-task" []
                            :summary     "获取店员任务"
                            :body-params [ystoken :- String]
@@ -97,10 +101,18 @@
                            :summary     "获取店铺的商品详情"
                            :body-params [ystoken :- String goodsid :- String]
                            (ok (shoper/get-goods-info goodsid)))
+                    (POST* "/get-shop-info" []
+                           :summary     "获取店铺详情信息"
+                           :body-params [ystoken :- String]
+                           (ok (shoper/get-shop-info ystoken)))
                     (POST* "/get-shop-index" []
                            :summary     "获取店员首页数据"
                            :body-params [ystoken :- String]
-                           (ok (shoper/get-shop-index ystoken)))))
+                           (ok (shoper/get-shop-index ystoken)))
+                    (POST* "/get-shop-top" []
+                           :summary     "获取排前的店铺"
+                           :body-params [ystoken :- String]
+                           (ok (shoper/get-shop-top ystoken)))))
 
 
 

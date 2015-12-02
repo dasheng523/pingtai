@@ -4,7 +4,8 @@
     [pingtai.business.common :as bcommon]
     [pingtai.business.authentication :as auth]
     [clj-time.coerce :as coerce]
-    [clj-time.core :as ctime])
+    [clj-time.core :as ctime]
+    [clj-uuid :as uuid])
   (:use
     [korma.core :rename {update korma-update}]))
 
@@ -52,6 +53,13 @@
     (assoc goodsinfo
       :medialist (bcommon/get-medias-by-obj goods-id))))
 
+(defn get-shop-info [ystoken]
+  "获取店铺详情"
+  (let [user-id (auth/get-user-id ystoken)
+        shop-info (first (bcommon/get-by entities/shops {:ower_id user-id}))]
+    (assoc shop-info :banner_url (bcommon/get-media-url-by-obj (:banner_media shop-info))
+                     :blicence_url (bcommon/get-media-url-by-obj (:blicence_media shop-info)))))
+
 (defn score-detail [ystoken]
   "获取积分详情"
   (let [user-id (auth/get-user-id ystoken)
@@ -70,6 +78,24 @@
                         (:total-score))]                    ;TODO 排名没有做
     {:score score
      :todayscore today-score}))
+
+(defn get-shop-category [shop-id]
+  "获取店铺的分类信息"
+  (-> (select* entities/categorys)
+      (where {:id [in (subselect
+                        entities/shops_categorys
+                        (fields :category_id)
+                        (where {:shop_id shop-id}))]})
+      (select)))
+
+(defn get-shop-top [ystoken]
+  (let [shoplist (-> (select* entities/shops)
+                     (limit 10)
+                     (fields :id :score :name)
+                     (order :score :desc)
+                     (select))]
+    (map (fn [info] (assoc info :categorys (map #(:title %) (get-shop-category (:id info)))))
+         shoplist)))
 
 (defn get-shoper-task [ystoken]
   "获取店员任务信息"
@@ -111,3 +137,17 @@
       (set-fields udata)
       (where {:id good-id})
       (korma-update)))
+
+(defn inser-goods-info [udata shop-id]
+  (let [id (.toString (uuid/v4))
+        nowtime (coerce/to-sql-time (ctime/now))]
+    (-> (insert* entities/goods)
+        (values (assoc udata
+                  :id id
+                  :ctime nowtime
+                  :mtime nowtime
+                  :score 0
+                  :visit_count 0
+                  :shop_id shop-id))
+        (insert))
+    id))

@@ -8,6 +8,7 @@
             [ajax.core :refer [GET POST]]
             [pingtai.shopmanager :as shopmanager]
             [pingtai.customerview :as customerview]
+            [pingtai.messqueue]
             [pingtai.pagedata :as pagedata]
             [pingtai.common :as common])
   (:import goog.History))
@@ -29,7 +30,7 @@
    [:h3 {:class "page-title"} (session/get "title")]
    (if-let [nar-btn (session/get "narbtn")]
      [:a {:href "javascript:" :class "right-btn pull-right" :on-click (:click nar-btn)}
-      [:span {:class (str "glyphicon " (:icon nar-btn))}]])])
+      [:span (:text nar-btn)]])])
 
 (defn footer []
   (let [items [{:url "#/goods" :name "特价" :icon "icon-money" :key "goods"}
@@ -46,31 +47,6 @@
                :class (str "flex-item footer-item " (if (= currenttag (item :key)) "current"))}
            [:i {:class (item :icon)}] [:br] (item :name)])]])))
 
-(def pages
-  {"shopmanager" [shopmanager/indexpage [pagedata/manager-shopinfo]]
-   "shopmanager-yingxiangli" [#'shopmanager/yingxiangli [pagedata/manager-scoredetail pagedata/manager-shopertask]]
-   "shopmanager-shopbargain" [#'shopmanager/shop-bargain [pagedata/manager-goods]]
-   "shopmanager-shopinfo" [#'shopmanager/shopinfo []]
-   "shopmanager-helpinfo" [#'shopmanager/helpinfo [pagedata/manager-helpdata]]
-   "shopmanager-goodsinfo" [#'shopmanager/goodsinfo [pagedata/manager-goods-info]]
-   "shopmanager-topshop" [#'shopmanager/topshop []]
-   "shopmanager-editbox" [#'shopmanager/editbox []]
-
-   "goods" [#'customerview/index []]
-   "goods-info" [#'customerview/goods []]
-   "goods-list" [#'customerview/goodslist []]
-   "goods-commentlist" [#'customerview/commentlist []]
-
-   "shop" [#'customerview/shoplist []]
-   "shop-info" [#'customerview/shopinfo []]
-
-   "user" [#'customerview/usercenter []]
-   "user-likeshoplist" [#'customerview/userlikeshoplist []]
-   "user-likegoodslist" [#'customerview/userlikegoodslist []]
-
-   "search" [#'customerview/search []]})
-
-
 (defn page-shop []
   [:div
    [nav-shop]
@@ -82,14 +58,11 @@
    [nav]
    [:div.scroll-wrapper
     [:div.scroller
-     (let [view (get-in pages [(session/get :page) 0])
-           page-entitys (get-in pages [(session/get :page) 1])
-           datas (pagedata/get-entitydata page-entitys)]
-       (pagedata/reflesh! page-entitys)
-       [view datas])]]
+     [(session/get "mainpage") (session/get "mainpage-params")]]]
    [footer]])
 
 (defn pageload [view & api-entities]
+  (session/remove! "narbtn")
   (doseq [api-entity api-entities]
     (pagedata/auto-fill-data! api-entity))
   (session/put! "mainpage" view)
@@ -100,13 +73,10 @@
 
 (secretary/defroute
   "/" []
-  (session/put!
-    :page
-    (if (= (.-pathname js/window.location) "/shopmanager")
-      "shopmanager"
-      "goods")))
+  (if (= (.-pathname js/window.location) "/shopmanager")
+    (set! js/window.location.href "#/shop/index")
+    "goods"))
 (secretary/defroute
-
   "/goods" []
   (session/put! :page "goods"))
 (secretary/defroute
@@ -123,7 +93,7 @@
   "/shop" []
   (session/put! :page "shop"))
 (secretary/defroute
-  "/shop/info" [query-params]
+  "/shop/info" []
   (session/put! :page "shop-info"))
 
 (secretary/defroute
@@ -160,10 +130,14 @@
     (pageload shopmanager/shop-bargain api)))
 (secretary/defroute
   "/shop/shopinfo" []
-  (pageload "shopmanager-shopinfo"))
+  (let [api {:api-url "http://localhost:3000/shoper/get-shop-info"
+             :api-params {:ystoken (common/get-ystoken)}}]
+    (pageload shopmanager/shopinfo api)))
 (secretary/defroute
-  "/shop/helpinfo" []
-  (pageload "shopmanager-helpinfo"))
+  "/shop/helpinfo-:id" [id]
+  (let [api {:api-url "http://localhost:3000/common/get-help"
+             :api-params {:id id}}]
+    (pageload shopmanager/helpinfo api)))
 (secretary/defroute
   "/shop/goodsinfo-:id" [id]
   (let [api {:api-url "http://localhost:3000/shoper/get-goods-info"
@@ -172,10 +146,15 @@
     (pageload shopmanager/goodsinfo api)))
 (secretary/defroute
   "/shop/topshop" []
-  (pageload "shopmanager-topshop"))
+  (let [api {:api-url "http://localhost:3000/shoper/get-shop-top"
+             :api-params {:ystoken (common/get-ystoken)}}]
+    (pageload shopmanager/topshop api)))
 (secretary/defroute
   "/shop/editbox" []
   (pageload "shopmanager-editbox"))
+(secretary/defroute
+  "/shop/addgoods" []
+  (common/setpage shopmanager/goodsinfo [{:id :goodsinfo}]))
 
 ;; -------------------------
 ;; History
@@ -187,8 +166,6 @@
           (fn [event]
               (secretary/dispatch! (.-token event))))
         (.setEnabled true)))
-
-
 
 
 (defn init! []
