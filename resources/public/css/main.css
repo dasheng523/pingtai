@@ -2,8 +2,11 @@
 body{background: #eee}
 .margin-top{margin-top: 10px;}
 .margin-left{margin-left: 10px;}
-.margin-header{margin-top: 50px;}
-.margin-footer{margin-bottom: 50px;}
+
+
+/*              scroll-wrapper           */
+.scroll-wrapper{position: absolute; width: 100%;overflow: hidden;height: 100%;}
+.scroller{position: absolute;width: 100%;-webkit-transform:translate3d(0,0,0);padding: 50px 0 30px 0;}
 
 /***************  layout  *******************/
 .flex-container{
@@ -57,12 +60,7 @@ header a {
     -webkit-filter:blur(50px);
     z-index: -1;
 }
-/***************  footer  *******************/
-.footer{
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
+
 
 
 /***************  banner  *******************/
@@ -298,7 +296,7 @@ header a {
     color: #555;
 }
 .edit-desc{
-    margin-left: 60px;
+    width: 100%;
 }
 .edit-uploadimgbox{
     display: block;
@@ -328,9 +326,11 @@ header a {
     background:rgba(0,0,0,.3);background:#000\9;filter:alpha(opacity=20)\9;
     padding: 10px;
 }
+.edit-key{
+    float: left;
+}
 .edit-value{
-    text-align: right;
-    margin-left: 40px;
+    width: 100%;
 }
 .edit-value img{
     width: 30px;
@@ -339,9 +339,6 @@ header a {
 .edit-value.textbox{
     line-height: 20px;
     font-size: 12px;
-}
-.edit-key{
-    float: left;
 }
 
 .shop-goods-item{
@@ -368,9 +365,24 @@ header a {
 .shop-goods-info .title{
     font-weight: bolder;
 }
-.shop-goods-info .visitestate{
-    font-size: 12px;
+
+.shop-goods-info .info{
+    margin: 0;
+}
+.visitestate{
     margin-top: 25px;
+}
+.goods-del{
+    position: absolute;
+    right: 0;
+    margin-top: 50px;
+    background:rgba(255,0,0,0.8);background:#000\9;filter:alpha(opacity=20)\9;
+    padding: 15px;
+    color: #fff;
+    z-index: 5;
+}
+.goods-score{
+    color: red;
 }
 .topshop-item{
     height: 80px;
@@ -483,4 +495,18 @@ header a {
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
+}
+
+.errorbox{
+    margin-top: 80px;
+    text-align: center;
+}
+.error-code{
+    font-size: 40px;
+    color:red;
+}
+.error-text{
+    width: 100%;
+    margin-top: 10px;
+
 }

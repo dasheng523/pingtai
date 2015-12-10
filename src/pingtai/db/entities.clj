@@ -19,7 +19,7 @@
                  (env :db-password)
                  (env :db-subname)))
 
-(declare categorys goods medias objs_medias shops shops_categorys tasks users users_like_goods users_like_shops users_tasks users_wechats wechats helpers)
+(declare categorys goods medias objs_medias shops shops_categorys tasks users users_like_goods users_like_shops users_tasks users_wechats wechats helpers report_errors)
 
 (korma/defentity categorys)
 (korma/defentity goods)
@@ -35,5 +35,6 @@
 (korma/defentity users_wechats)
 (korma/defentity wechats)
 (korma/defentity helpers)
+(korma/defentity report_errors)
 
 

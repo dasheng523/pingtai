@@ -1,6 +1,9 @@
 (ns pingtai.business.common
   (:require
-    [pingtai.db.entities :as entities])
+    [pingtai.db.entities :as entities]
+    [clj-time.core :as ctime]
+    [clj-time.coerce :as coerce]
+    [pingtai.business.authentication :as auth])
   (:use
     [korma.core :rename {update korma-update}]))
 
@@ -43,4 +46,13 @@
   "获得帮助说明"
   (get-by-id entities/helpers id))
 
-
+(defn report-error [ystoken error]
+  "报告错误"
+  (let [user-id "1"
+        id (auth/get-user-id ystoken)]
+    (-> (insert* entities/report_errors)
+        (values {:id    id
+                 :error error
+                 :ctime (coerce/to-sql-time (ctime/now))
+                 :user_id user-id})
+        (insert))))

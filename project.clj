@@ -1,7 +1,7 @@
 (defproject pingtai "0.1.0-SNAPSHOT"
 
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "北流店多多商业平台"
+  :url "http://www.dianduoduo.top/"
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [selmer "0.9.3"]
@@ -31,7 +31,6 @@
                  [reagent "0.5.1"]
                  [reagent-forms "0.5.13"]
                  [reagent-utils "0.1.5"]
-                 [secretary "1.2.3"]
                  [org.clojure/core.async "0.2.371"]
                  [cljs-ajax "0.5.1"]
                  [metosin/compojure-api "0.23.1"]

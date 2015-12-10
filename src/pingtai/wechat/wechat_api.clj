@@ -1,6 +1,7 @@
-(ns pingtai.business.wechat-api
+(ns pingtai.wechat.wechat-api)
+
+(ns pingtai.wechat.wechat-api
   (:require [pingtai.db.entities :as entities]
-            [pingtai.business.common :as bcommon]
             [pandect.algo.sha1 :refer [sha1]]
             [clj-http.client :as client]
             [taoensso.carmine :as car :refer (wcar)]
@@ -49,8 +50,8 @@
   "微信接入校验"
   (let [token (:token @wechat-info)
         mysign (->> [token timestamp nonce]
-                   sort
-                   (apply str)
+                    sort
+                    (apply str)
                     sha1)]
     (if (= mysign signature)
       echostr

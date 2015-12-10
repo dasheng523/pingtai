@@ -40,6 +40,7 @@
         shop-info (bcommon/get-by entities/shops {:ower_id user-id})
         goodslist (-> (select* entities/goods)
                       (where {:shop_id (:id (nth shop-info 0 nil))})
+                      (order :mtime :desc)
                       (select))]
     (map (fn [info]
            (assoc info
@@ -138,8 +139,15 @@
       (where {:id good-id})
       (korma-update)))
 
-(defn inser-goods-info [udata shop-id]
+(defn delete-goods-info [goods-id]
+  (-> (delete* entities/goods)
+      (where {:id goods-id})
+      (delete)))
+
+(defn inser-goods-info [udata ystoken]
   (let [id (.toString (uuid/v4))
+        shoper-id (auth/get-user-id ystoken)
+        shop-id (:id (first (bcommon/get-by entities/shops {:ower_id shoper-id})))
         nowtime (coerce/to-sql-time (ctime/now))]
     (-> (insert* entities/goods)
         (values (assoc udata
@@ -150,4 +158,4 @@
                   :visit_count 0
                   :shop_id shop-id))
         (insert))
-    id))
+    {:id id}))

@@ -6,7 +6,7 @@
             [clojure.java.io :as io]
             [pingtai.business.customer :as shop]
             [pingtai.business.authentication :as auth]
-            [pingtai.business.wechat-api :as wechat]))
+            [pingtai.wechat.wechat-api :as wechat]))
 
 (def redirect-url "http://api.yunbzw.com")
 

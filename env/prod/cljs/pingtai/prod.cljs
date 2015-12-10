@@ -7,5 +7,3 @@
 (defn ^:export init []
   (core/init!))
 
-(defn ^:export init-manager []
-  (core/shopmanager!))

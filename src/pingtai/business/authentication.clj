@@ -4,7 +4,7 @@
             [clj-uuid :as uuid]
             [pingtai.db.entities :as entities]
             [pingtai.db.common :refer [wcar*]]
-            [pingtai.business.wechat-api :as wechat])
+            [pingtai.wechat.wechat-api :as wechat])
   (:use
     [korma.core :rename {update korma-update}]))
 

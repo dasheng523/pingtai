@@ -7,7 +7,7 @@
             [pingtai.business.common :as common]
             [pingtai.business.authentication :as auth]
             [pingtai.middleware :as middleware]
-            [pingtai.business.wechat-api :as wechat]))
+            [pingtai.wechat.wechat-api :as wechat]))
 
 
 
@@ -64,6 +64,10 @@
                          :summary "根据微信授权CODE获得ystoken"
                          :body-params [code :- String]
                          (ok (auth/create-ystoken-by-code code)))
+                  (POST* "/report-error" []
+                         :summary "报告错误"
+                         :body-params [ystoken :- String errortext :- String ]
+                         (ok (common/report-error ystoken errortext)))
                   (POST* "/get-help" []
                          :summary "获得帮助说明"
                          :body-params [id :- String]
@@ -81,10 +85,14 @@
                            :summary     "更新商品数据"
                            :body-params [ystoken :- String udata :- GoodsEdit goods_id :- String]
                            (ok (shoper/update-goods-info udata goods_id)))
+                    (POST* "/delete-goods-info" []
+                           :summary     "删除商品数据"
+                           :body-params [ystoken :- String goods_id :- String]
+                           (ok (shoper/delete-goods-info goods_id)))
                     (POST* "/insert-goods-info" []
                            :summary     "添加商品数据"
-                           :body-params [ystoken :- String udata :- GoodsEdit shop_id :- String]
-                           (ok (shoper/inser-goods-info udata shop_id)))
+                           :body-params [ystoken :- String udata :- GoodsEdit]
+                           (ok (shoper/inser-goods-info udata ystoken)))
                     (POST* "/get-shoper-task" []
                            :summary     "获取店员任务"
                            :body-params [ystoken :- String]
