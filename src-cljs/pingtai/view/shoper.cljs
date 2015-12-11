@@ -191,16 +191,22 @@
        [page-fn])]]])
 
 (defn page-did-mount [myscroll]
-  (fn []
-    (reset! myscroll (js/IScroll. ".scroll-wrapper" (clj->js
-                                                      {:useTransform false
-                                                       :click true})))
-    (js/setTimeout #(.refresh @myscroll) 300)
-    (.addEventListener js/document "touchmove" #(.preventDefault %) false)))
+  (let [todo (atom nil)]
+    (fn []
+      (reset! myscroll
+              (this-as this
+                (js/IScroll.
+                  ".scroll-wrapper"
+                  (clj->js
+                    {:useTransform false
+                     :click true}))))
+      (.on @myscroll "scrollEnd" #(when (= (.-y @myscroll) 0) (queue/put-mess! {:url "reflesh-datasource"})))
+      (js/setTimeout #(.refresh @myscroll) 300)
+      (.addEventListener js/document "touchmove" #(.preventDefault %) false))))
 
 (defn page-did-update [myscroll]
   (fn []
-    (js/setTimeout #(.refresh @myscroll) 300)))
+    (js/setTimeout  #(.refresh @myscroll) 300)))
 
 (defn page []
   (let [myscroll (atom nil)]

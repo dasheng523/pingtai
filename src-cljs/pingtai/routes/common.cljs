@@ -49,3 +49,23 @@
   (fn [state mess]
     (-> state
         (assoc-in (:ks mess) (:value mess)))))
+
+(defroute
+  "reflesh-datasource"
+  (fn [state _]
+    (doseq [datasource (:datasource state)]
+      (let [{:keys [url params]} (val datasource)
+            source-id (key datasource)]
+        (utils/YSPOST url params
+                      #(queue/put-mess!
+                        {:url "/save-remote-data"
+                         :data %
+                         :source-id source-id})
+                      #(do
+                        (queue/put-mess!
+                          {:url "/remove-error-datasource"
+                           :source-id source-id})
+                        (queue/put-mess!
+                          {:url "/export-error"
+                           :source-id source-id})))))
+    state))
