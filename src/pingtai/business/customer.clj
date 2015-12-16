@@ -110,6 +110,7 @@
   (let [user-id (auth/get-user-id ystoken)]
     (bcommon/get-by-id entities/users user-id)))
 
+
 (defn get-user-task [ystoken]
   "获取用户任务信息"
   (let [user-id (auth/get-user-id ystoken)
@@ -138,6 +139,7 @@
                                       (nth 0 nil)
                                       (:cnt))))
       tasklist)))
+
 
 (defn search [k]
   "用户搜索内容：具体的商品，分类，店铺"

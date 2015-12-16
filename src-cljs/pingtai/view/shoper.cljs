@@ -50,7 +50,7 @@
                 :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
         "店铺信息"
         [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
-       [:a {:href "#/shop/helpinfo-1"
+       [:a {:href "#/shop/helpinfo?id=1"
             :class "list-group-item"}
         [:span {:class "pull-left glyphicon glyphicon-hand-right"
                 :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
@@ -108,10 +108,22 @@
          [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
          "影响力排行榜"
          [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]
-        [:a.list-group-item {:href "#/shop/helpinfo-2"}
+        [:a.list-group-item {:href "#/shop/helpinfo?id=2"}
          [:span {:class "glyphicon glyphicon-list" :dangerouslySetInnerHTML {:__html "&nbsp;"}}]
          "帮助说明"
          [:span {:class "pull-right glyphicon glyphicon-chevron-right"}]]]]]]))
+
+(defn topshop [apis]
+  (let [data (bufferdata/get-in-buffer [:remote :topshop :data])]
+    [:div.container.margin-header
+     [:div.list-group
+      (for [i (range (count data))
+            :let [info (nth data i nil)]]
+        ^{:key (get info "id")}
+        [:a {:href "javascript:" :class "list-group-item topshop-item"}
+         [:span.topnum (if (<= i 2) {:class "first"})  (+ i 1)]
+         [:h4.title (get info "name") [:br] [:span.other-msg (clojure.string/join "," (get info "categorys"))]]
+         [:span.yingxiang (str "影响力：" (get info "score"))]])]]))
 
 (defn goodslist []
   (let [data (bufferdata/get-in-buffer [:remote :goodslist :data])]
@@ -181,6 +193,65 @@
             [:a.edit-uploadimgbox {:href "javascript:"}
              [:div { :class "edit-uploaddiv"}]
              [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击上传"]])]])]]))
+
+(defn shopinfo []
+  (let [data (bufferdata/get-in-buffer [:remote :shopinfo :data])]
+    [:div.container.margin-header {:class "animated bounceInRight"}
+     [:div {:class "editform list-group"}
+      [:div {:class "edit-item list-group-item" :href "#/temp"}
+       [:span.edit-key "店名"]
+       [:input.edit-value
+        {:type "text" :placeholder "未输入"
+         :value (get data "name")
+         :on-change #(queue/put-mess! {:url "/save-field" :ks [:remote :shopinfo :data "name"] :value (-> % .-target .-value)})}]]
+      [:div {:class "edit-item list-group-item" :href "#/temp"}
+       [:span.edit-key "电话"]
+       [:input.edit-value
+        {:type "text" :placeholder "未输入"
+         :value (get data "mobile")
+         :on-change #(queue/put-mess! {:url "/save-field" :ks [:remote :shopinfo :data "mobile"] :value (-> % .-target .-value)})}]]
+      [:div {:class "edit-item list-group-item" :href "#/temp"}
+       [:span.edit-key "地址"]
+       [:input.edit-value
+        {:type "text" :placeholder "未输入"
+         :value (get data "address")
+         :on-change #(queue/put-mess! {:url "/save-field" :ks [:remote :shopinfo :data "address"] :value (-> % .-target .-value)})}]]
+      (let [banner (get data "banner_url")]
+        [:div {:class "edit-item list-group-item" :href "#/temp"}
+         [:span.edit-key "店面相片"]
+         [:div.edit-value
+          (if banner "已上传" "未上传")]
+         (if banner
+           [:div
+            [:a.edit-uploadimg-del {:href "javascript:"} [:span.glyphicon.glyphicon-remove "删除"]]
+            [:a.edit-uploadimgbox {:href "javascript:"}
+             [:img {:src banner :class "edit-uploadimg"}]
+             [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]]
+           [:a.edit-uploadimgbox {:href "javascript:"}
+            [:div { :class "edit-uploaddiv"}]
+            [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击上传"]])])
+      (let [blicence-url (get data "blicence_url")]
+        [:div {:class "edit-item list-group-item" :href "javascript:"}
+         [:span.edit-key "营业执照"]
+         [:div.edit-value
+          (if blicence-url "已上传" "未上传")]
+         (if blicence-url
+           [:div
+            [:a.edit-uploadimg-del {:href "javascript:"} [:span.glyphicon.glyphicon-remove "删除"]]
+            [:a.edit-uploadimgbox {:href "javascript:"}
+             [:img {:src blicence-url :class "edit-uploadimg"}]
+             [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击更改"]]]
+           [:a.edit-uploadimgbox {:href "javascript:"}
+            [:div { :class "edit-uploaddiv"}]
+            [:span.glyphicon.glyphicon-cloud-upload.edit-icon "点击上传"]])])]]))
+
+(defn helpinfo []
+  (let [data (bufferdata/get-in-buffer [:remote :helpinfo :data])]
+    [:div.container.margin-header {:class "animated bounceInRight"}
+     [:div {:class "panel panel-default"}
+      [:div.panel-heading (get-in data ["title"])]
+      [:div.panel-body (get-in data ["hcontent"])]]]))
+
 
 (defn page-render []
   [:div

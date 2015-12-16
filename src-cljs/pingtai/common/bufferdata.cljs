@@ -10,6 +10,11 @@
                              :common {:show-back true}
                              "/" {:show-back nil
                                   :title "店铺管理中心"}
+                             "/shop/helpinfo" {:title "帮助"}
+                             "/shop/shopinfo" {:title "店铺信息"}
+                             "/shop/goodslist" {:title "商品列表"}
+                             "/shop/goodsinfo" {:title "商品信息"}
+                             "/shop/topshop" {:title "店铺排名"}
                              }
                   }]
     (reset! buffer initdata)))

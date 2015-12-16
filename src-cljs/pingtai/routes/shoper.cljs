@@ -131,6 +131,55 @@
                  (fn [list]
                    (remove #(= (get % "id") id) list))))))
 
+
+(defroute
+  "/shop/shopinfo"
+  (fn [state _]
+    (let [shopinfo-datasource {:url "/shoper/get-shop-info"
+                               :params {:ystoken (common-utils/get-ystoken)}}]
+      (-> state
+          (assoc-in [:cpage] shoper/shopinfo)
+          (assoc-in [:datasource :shopinfo] shopinfo-datasource)
+          (assoc-in [:pagedata "/shop/shopinfo" :narbtn]
+                    {:text "保存"
+                     :href "#/shop/save-shop-info"})))))
+
+(defroute
+  "/shop/save-shop-info"
+  (fn [state mess]
+    (let [shopinfo (get-in state [:remote :shopinfo :data])
+          post-data {:ystoken (common-utils/get-ystoken)
+                     :shop_id (get shopinfo "id")
+                     :udata {:name (get shopinfo "name")
+                             :mobile (get shopinfo "mobile")
+                             :address (get shopinfo "address")
+                             :banner_media (get shopinfo "banner_media")
+                             :blicence_media (get shopinfo "blicence_media")}}]
+      (route-common/send-data
+        "/shoper/update-shop-info"
+        post-data
+        nil
+        nil)
+      (assoc state :redirect :back))))
+
+(defroute
+  "/shop/helpinfo"
+  (fn [state mess]
+    (-> state
+        (assoc-in [:cpage] shoper/helpinfo)
+        (assoc-in [:datasource :helpinfo]
+                  {:url "/common/get-help"
+                   :params {:id (str (get-in mess [:params "id"]))}}))))
+
+(defroute
+  "/shop/topshop"
+  (fn [state mess]
+    (-> state
+        (assoc-in [:cpage] shoper/topshop)
+        (assoc-in [:datasource :topshop]
+                  {:url "/shoper/get-shop-top"
+                   :params {:ystoken (common-utils/get-ystoken)}}))))
+
 (defroute
   "/error"
   (fn [state mess]

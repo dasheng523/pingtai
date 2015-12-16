@@ -37,3 +37,6 @@
 (defn page []
   [:div
    "customer"])
+
+(defn open-shoper []
+  [])
