@@ -5,11 +5,11 @@
             [pingtai.common.messqueue :as messqueue]
             [pingtai.common.routeframe :as routes]
             [pingtai.common.bufferdata :as bufferdata]
-            [pingtai.view.common :as view-common]
+            [pingtai.view000widget.common :as view-common]
             [pingtai.common.utils :as utils]
-            [pingtai.routes.common]
-            [pingtai.routes.customer :as customer]
-            [pingtai.routes.shoper :as shoper])
+            [pingtai.routes000view_widget.common]
+            [pingtai.routes000view_widget.customer :as customer]
+            [pingtai.routes000view_widget.shoper :as shoper])
   (:import goog.History))
 
 (enable-console-print!)
@@ -29,11 +29,11 @@
 
 (defn hook-browser-navigation! []
   (doto (History.)
-        (events/listen
-          EventType/NAVIGATE
-          (fn [event]
-            (routes/dispatch! (.-token event))))
-        (.setEnabled true)))
+    (events/listen
+      EventType/NAVIGATE
+      (fn [event]
+        (routes/dispatch! (.-token event))))
+    (.setEnabled true)))
 
 (defn mount-components []
   (reagent/render [#'view-common/main-page] (.getElementById js/document "app")))

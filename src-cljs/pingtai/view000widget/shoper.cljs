@@ -1,8 +1,8 @@
-(ns pingtai.view.shoper
+(ns pingtai.view000widget.shoper
   (:require [pingtai.common.bufferdata :as bufferdata]
             [pingtai.common.utils :as utils]
             [pingtai.common.messqueue :as queue]
-            [pingtai.view.utils :as view-utils]
+            [pingtai.view000widget.utils :as view-utils]
             [reagent.core :as reagent]))
 
 (defn nav-shop []

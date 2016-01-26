@@ -1,10 +1,10 @@
-(ns pingtai.routes.shoper
-  (:require [pingtai.view.common :as view-common]
-            [pingtai.common.routeframe :refer [defroute]]
-            [pingtai.view.shoper :as shoper]
+(ns pingtai.routes000view_widget.shoper
+  (:require [pingtai.common.routeframe :refer [defroute]]
+            [pingtai.view000widget.shoper :as shoper]
             [pingtai.common.utils :as common-utils]
-            [pingtai.routes.common :as route-common]
-            [pingtai.common.messqueue :as queue]))
+            [pingtai.routes000view_widget.common :as route-common]
+            [pingtai.common.messqueue :as queue]
+            [pingtai.common.cview :as view-common]))
 
 (defn index [state _]
   "店铺首页"

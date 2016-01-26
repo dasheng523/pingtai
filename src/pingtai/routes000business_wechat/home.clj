@@ -1,12 +1,12 @@
-(ns pingtai.routes.home
+(ns pingtai.routes000business_wechat.home
   (:require [pingtai.layout :as layout]
             [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :refer [ok found]]
             [ring.util.response :refer [response]]
             [clojure.java.io :as io]
-            [pingtai.business.customer :as shop]
-            [pingtai.business.authentication :as auth]
-            [pingtai.wechat.wechat-api :as wechat]))
+            [pingtai.business000db_wechat.customer :as shop]
+            [pingtai.business000db_wechat.authentication :as auth]
+            [pingtai.wechat000db.wechat-api :as wechat]))
 
 (def redirect-url "http://api.yunbzw.com")
 
@@ -43,8 +43,6 @@
 (defroutes home-routes
            (GET "/" [:as req] (home-page req))
            (GET "/shopmanager" [:as req] (shop-page req))
-
-
            (GET "/docs" [] (ok (-> "docs/docs.md" io/resource slurp)))
            (GET "/welcome" [] (welcome))
            (GET "/shopinfo" [id] {:body {:id id :name "5234"}})

@@ -426,7 +426,7 @@ return null;
 });
 /**
  * Return a pair of [regex params]. regex is a compiled regular
- *   expression for matching routes. params is a list of route param
+ *   expression for matching routes000view_widget. params is a list of route param
  *   names (:*, :id, etc.). 
  */
 secretary.core.lex_route = (function secretary$core$lex_route(s,clauses){

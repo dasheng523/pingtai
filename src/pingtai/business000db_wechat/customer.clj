@@ -1,11 +1,11 @@
-(ns pingtai.business.customer
+(ns pingtai.business000db_wechat.customer
   (:require
     [clj-uuid :as uuid]
     [pingtai.db.entities :as entities]
     [clj-time.coerce :as coerce]
     [clj-time.core :as ctime]
-    [pingtai.business.common :as bcommon]
-    [pingtai.business.authentication :as auth])
+    [pingtai.business000db_wechat.common :as bcommon]
+    [pingtai.business000db_wechat.authentication :as auth])
   (:use
     [korma.core :rename {update korma-update}]))
 

@@ -1,11 +1,9 @@
-(ns pingtai.wechat.wechat-api)
-
-(ns pingtai.wechat.wechat-api
-  (:require [pingtai.db.entities :as entities]
-            [pandect.algo.sha1 :refer [sha1]]
+(ns pingtai.wechat000db.wechat-api
+  (:require [pandect.algo.sha1 :refer [sha1]]
             [clj-http.client :as client]
             [taoensso.carmine :as car :refer (wcar)]
-            [pingtai.db.common :refer [wcar*]])
+            [pingtai.db.common :refer [wcar*]]
+            [pingtai.db.entities :as entities])
   (:use
     [korma.core :rename {update korma-update}]))
 

@@ -1,10 +1,10 @@
-(ns pingtai.business.authentication
+(ns pingtai.business000db_wechat.authentication
   (:require [taoensso.carmine :as car :refer (wcar)]
             [environ.core :refer [env]]
             [clj-uuid :as uuid]
             [pingtai.db.entities :as entities]
             [pingtai.db.common :refer [wcar*]]
-            [pingtai.wechat.wechat-api :as wechat])
+            [pingtai.wechat000db.wechat-api :as wechat])
   (:use
     [korma.core :rename {update korma-update}]))
 

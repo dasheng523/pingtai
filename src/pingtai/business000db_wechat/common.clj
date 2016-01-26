@@ -1,9 +1,9 @@
-(ns pingtai.business.common
+(ns pingtai.business000db_wechat.common
   (:require
     [pingtai.db.entities :as entities]
     [clj-time.core :as ctime]
     [clj-time.coerce :as coerce]
-    [pingtai.business.authentication :as auth])
+    [pingtai.business000db_wechat.authentication :as auth])
   (:use
     [korma.core :rename {update korma-update}]))
 

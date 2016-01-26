@@ -1,7 +1,7 @@
-(ns pingtai.routes.common
+(ns pingtai.routes000view_widget.common
   (:require
     [pingtai.common.routeframe :refer [defroute]]
-    [pingtai.view.common :as view-common]
+    [pingtai.common.cview :as view-common]
     [pingtai.common.utils :as utils]
     [pingtai.common.messqueue :as queue]))
 

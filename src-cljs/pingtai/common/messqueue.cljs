@@ -1,7 +1,8 @@
 (ns pingtai.common.messqueue
   [:require [cljs.core.async :as async]
             [pingtai.common.bufferdata :as bufferdata]
-            [pingtai.common.utils :as utils]]
+            [pingtai.common.utils :as utils]
+            [pingtai.common.cview :as cview]]
   (:require-macros [cljs.core.async.macros :refer [go go-loop]]))
 
 ;要做的是建设类似ring的机制。所有消息都经过一个个handler进行处理，而后经过route进行转发等等。
@@ -74,13 +75,15 @@
           :forward (.forward js/history)
           (set! js/window.location.href redict))))))
 
+
+
 (defn wrap-exception [handler]
   "异常处理器"
   (fn [store mess]
     (try
       (handler store mess)
       (catch js/Error e
-        (bufferdata/set-buffer :cpage pingtai.view.common/error-page)
+        (bufferdata/set-buffer :cpage cview/error-page)
         (bufferdata/set-buffer :error {:code 500 :msg (.-message e)})))))
 
 

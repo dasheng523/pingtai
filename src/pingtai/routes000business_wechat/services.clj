@@ -1,13 +1,13 @@
-(ns pingtai.routes.services
+(ns pingtai.routes000business_wechat.services
   (:require [ring.util.http-response :refer :all]
             [compojure.api.sweet :refer :all]
             [schema.core :as s]
-            [pingtai.business.customer :as customer]
-            [pingtai.business.shoper :as shoper]
-            [pingtai.business.common :as common]
-            [pingtai.business.authentication :as auth]
+            [pingtai.business000db_wechat.customer :as customer]
+            [pingtai.business000db_wechat.shoper :as shoper]
+            [pingtai.business000db_wechat.common :as common]
+            [pingtai.business000db_wechat.authentication :as auth]
             [pingtai.middleware :as middleware]
-            [pingtai.wechat.wechat-api :as wechat]))
+            [pingtai.wechat000db.wechat-api :as wechat]))
 
 
 
@@ -36,7 +36,7 @@
         (swagger-docs
           {:info {:title "店多多接口API" :description "店多多各类接口说明书"}})
 
-        (context* "/wechat" []
+        (context* "/wechat000db" []
                   :tags ["微信接口"]
                   (GET* "/api" []
                         :query-params [signature :- String, timestamp :- String, nonce :- String, echostr :- String]

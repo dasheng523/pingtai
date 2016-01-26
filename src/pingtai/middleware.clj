@@ -16,7 +16,7 @@
             [buddy.auth.accessrules :refer [restrict]]
             [buddy.auth :refer [authenticated?]]
             [pingtai.layout :refer [*identity*]]
-            [pingtai.business.authentication :as auth])
+            [pingtai.business000db_wechat.authentication :as auth])
   (:import [javax.servlet ServletContext]))
 
 (defn wrap-context [handler]

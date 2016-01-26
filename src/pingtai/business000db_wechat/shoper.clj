@@ -1,8 +1,8 @@
-(ns pingtai.business.shoper
+(ns pingtai.business000db_wechat.shoper
   (:require
     [pingtai.db.entities :as entities]
-    [pingtai.business.common :as bcommon]
-    [pingtai.business.authentication :as auth]
+    [pingtai.business000db_wechat.common :as bcommon]
+    [pingtai.business000db_wechat.authentication :as auth]
     [clj-time.coerce :as coerce]
     [clj-time.core :as ctime]
     [clj-uuid :as uuid])

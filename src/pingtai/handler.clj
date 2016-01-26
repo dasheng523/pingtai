@@ -1,8 +1,8 @@
 (ns pingtai.handler
   (:require [compojure.core :refer [defroutes routes wrap-routes]]
             [pingtai.layout :refer [error-page]]
-            [pingtai.routes.home :refer [home-routes]]
-            [pingtai.routes.services :refer [service-routes]]
+            [pingtai.routes000business_wechat.home :refer [home-routes]]
+            [pingtai.routes000business_wechat.services :refer [service-routes]]
             [pingtai.middleware :as middleware]
             [pingtai.db.core :as db]
             [compojure.route :as route]
