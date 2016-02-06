@@ -1,0 +1,8 @@
+#svgContainer {
+    width:800px;
+    height:600px;
+    background-color:#EEEEEE;
+}
+
+#sourceDiv { float: left; border: 2px solid blue}
+#targetDiv { float: right;border: 2px solid red}

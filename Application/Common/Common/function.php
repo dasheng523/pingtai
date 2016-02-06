@@ -1,5 +1,10 @@
 <?php
 
+function UC($path){
+    return __ROOT__ . U($path);
+}
+
+
 function wechatInstance(){
     return \Wechat\Common\WechatWrap::getInstance();
 }
