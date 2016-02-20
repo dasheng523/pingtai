@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>北流商业平台</title>
     <link href="http://192.168.23.105/pingtai/Public/css/normalize.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
     <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css">
     
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
@@ -17,14 +18,14 @@
 
 <body>
     
-    <div class="topnavbar">
+    <div class="topnavbar flex flex-align-center">
         <a href="javascript:" class="backbtn" onclick="window.history.back();">
             <i class="iconfont">&#xe612;</i>
         </a>
+        <div class="pagetitle flex-1">商品详情</div>
         <a href="#" class="rightbtn">
             <i class="iconfont">&#xe619;</i>
         </a>
-        <div class="pagetitle">商品详情</div>
     </div>
 
 
@@ -55,8 +56,8 @@
         <div class="margin-top"></div>
         <div class="box panel">
             <h3 class="title">商家信息</h3>
-            <a class="goodsdetail-shop" href="#">
-                <div class="goodsdetail-shopdetail">
+            <a class="goodsdetail-shop flex" href="<?php echo UC('Index/shopdetail');?>">
+                <div class="goodsdetail-shopdetail flex-1">
                     <h3>相聚时光（北流店）</h3>
                     <p>北流市凯达商厦4楼</p>
                     <p>
@@ -104,10 +105,12 @@
     </div>
 
     <div class="footer goodsfooter">
-        <div class="goodsfooter-owner">联系人:<br><strong>黄先生</strong></div>
-        <a href="#" class="goodsfooter-item"><i class="iconfont">&#xe621;</i><br>电话</a>
-        <a href="#" class="goodsfooter-item"><i class="iconfont">&#xe620;</i><br>地图</a>
-        <a href="#" class="goodsfooter-item"><i class="iconfont">&#xe61c;</i><br>点评</a>
+        <div>
+            <div class="goodsfooter-owner">联系人:<br><strong>黄先生</strong></div>
+            <a href="#" class="goodsfooter-item"><i class="iconfont">&#xe621;</i><br>电话</a>
+            <a href="#" class="goodsfooter-item"><i class="iconfont">&#xe620;</i><br>地图</a>
+            <a href="javascript:" class="goodsfooter-item" id="commentbtn"><i class="iconfont">&#xe61c;</i><br>点评</a>
+        </div>
     </div>
 
 
@@ -121,6 +124,10 @@
         var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
             autoplay: 2500
+        });
+
+        $('#commentbtn').click(function(){
+            alert("456");
         });
 
     </script>

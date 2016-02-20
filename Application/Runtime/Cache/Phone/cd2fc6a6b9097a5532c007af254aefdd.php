@@ -102,33 +102,33 @@
         <div class="panel box">
             <h3 class="title">包含商品</h3>
             <div class="list">
-                <a class="item default-item" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
-                    <div class="item-info">
+                    <div class="item-info flex-1">
                         <h3>新春大红包</h3>
                         <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
                         <p class="desc">地址：广西北流市城北路花果山0241号</p>
                     </div>
                 </a>
-                <a class="item default-item" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
-                    <div class="item-info">
+                    <div class="item-info flex-1">
                         <h3>新春大红包</h3>
                         <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
                         <p class="desc">地址：广西北流市城北路花果山0241号</p>
                     </div>
                 </a>
-                <a class="item default-item" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
-                    <div class="item-info">
+                    <div class="item-info flex-1">
                         <h3>新春大红包</h3>
                         <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
                         <p class="desc">地址：广西北流市城北路花果山0241号</p>
                     </div>
                 </a>
-                <a class="item default-item" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
-                    <div class="item-info">
+                    <div class="item-info flex-1">
                         <h3>新春大红包</h3>
                         <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
                         <p class="desc">地址：广西北流市城北路花果山0241号</p>
@@ -140,7 +140,7 @@
 
         <div class="footer detail-pricebox">
             <span class="group-good-price">总价：<strong>￥50元</strong></span>
-            <button class="btn-inline-block">找人帮买</button>
+            <button class="btn-inline-block">联系制单人</button>
         </div>
     </div>
 

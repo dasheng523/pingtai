@@ -1,0 +1,72 @@
+<extend name="template/main" />
+
+<block name="css">
+    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
+    <style>
+        .swiper-pagination-bullet-active{background: red;}
+    </style>
+</block>
+
+<block name="script">
+    <script src="__PUBLIC__/js/swiper.min.js"></script>
+    <script>
+        $('#showdetail').click(function(){
+            $('.groupshowbox').removeClass('hide');
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+        });
+
+        $('.groupshow-close').click(function(){
+            $('.groupshowbox').addClass('hide');
+        });
+
+    </script>
+</block>
+
+<block name="content">
+    <div class="topnavbar flex flex-align-center">
+        <a href="javascript:" class="backbtn" onclick="window.history.back();">
+            <i class="iconfont">&#xe612;</i>
+        </a>
+        <div class="pagetitle flex-1"><input type="text" class="searchtextbox" placeholder="搜索商品，找单，店铺"></div>
+        <a href="#" class="rightbtn">
+            搜索
+        </a>
+    </div>
+
+    <div class="main-container">
+        <div class="hotsearchbox box">
+            <h3 class="title">热门搜索</h3>
+            <div class="hotsearchlist">
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+                <a href="#" class="hotsearchitem">烤鱼</a>
+
+
+            </div>
+        </div>
+
+        <div class="margin-top"></div>
+        <!-- 搜索记录 start -->
+        <div class="panel box">
+            <h3 class="title">搜索记录</h3>
+            <div class="list commonlist">
+                <a class="item" href="#">推拿</a>
+                <a class="item" href="#">推拿</a>
+                <a class="item" href="#">推拿</a>
+                <a class="item" href="#">推拿</a>
+                <a class="item" href="#">推拿</a>
+            </div>
+        </div>
+        <!-- 搜索记录 end -->
+
+    </div>
+</block>
