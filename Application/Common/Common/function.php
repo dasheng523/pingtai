@@ -1,7 +1,8 @@
 <?php
 
 function UC($path){
-    return __ROOT__ . U($path);
+    //return __ROOT__ . U($path);
+    return U($path);
 }
 
 

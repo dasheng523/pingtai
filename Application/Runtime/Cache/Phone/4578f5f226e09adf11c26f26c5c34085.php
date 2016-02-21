@@ -7,7 +7,7 @@
     <title>北流商业平台</title>
     <link href="http://192.168.23.105/pingtai/Public/css/normalize.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
-    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css">
+    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css?v=15">
     
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
     <style>
@@ -167,7 +167,7 @@
             <a class="footer-menu-item hover" href="#"><i class="iconfont">&#xe609;</i><br>首页</a>
             <a class="footer-menu-item" href="#"><i class="iconfont">&#xe611;</i><br>排行榜</a>
             <a class="footer-menu-item" href="#"><i class="iconfont">&#xe600;</i><br>发布</a>
-            <a class="footer-menu-item" href="#"><i class="iconfont">&#xe60e;</i><br>个人中心</a>
+            <a class="footer-menu-item" href="<?php echo UC('User/index');?>"><i class="iconfont">&#xe60e;</i><br>个人中心</a>
         </div>
         <!-- footer end -->
 
@@ -176,8 +176,6 @@
         <!-- demo end -->
 
     </div>
-
-
 
 
 

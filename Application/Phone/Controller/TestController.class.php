@@ -10,7 +10,11 @@ class TestController extends OauthController {
 
     //测试滤镜
     public function test(){
-        $this->display();
+        $this->error('失败');
+    }
+
+    public function test2(){
+        $this->success('修改成功',UC('Index/index'));
     }
 
 }

@@ -7,7 +7,7 @@
     <title>北流商业平台</title>
     <link href="http://192.168.23.105/pingtai/Public/css/normalize.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
-    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css">
+    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css?v=15">
     
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
     <style>
@@ -28,6 +28,10 @@
         </a>
     </div>
 
+    <div class="hide flex topare" id="dds">
+        <input type="text" value="" id="commentboxinput" class="commentboxinput flex-1" placeholder="请输入评论信息" />
+        <button class="weui_btn weui_btn_mini weui_btn_primary" style="padding: 8px 10px;">提交</button>
+    </div>
 
     <div class="main-container">
         <div class="bannerbox swiper-container">
@@ -114,8 +118,6 @@
     </div>
 
 
-
-
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     
     <script src="http://192.168.23.105/pingtai/Public/js/swiper.min.js"></script>
@@ -127,7 +129,8 @@
         });
 
         $('#commentbtn').click(function(){
-            alert("456");
+            $('#dds').removeClass('hide');
+            $('#commentboxinput').focus();
         });
 
     </script>

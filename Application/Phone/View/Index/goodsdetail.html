@@ -17,7 +17,8 @@
         });
 
         $('#commentbtn').click(function(){
-            alert("456");
+            $('#dds').removeClass('hide');
+            $('#commentboxinput').focus();
         });
 
     </script>
@@ -34,6 +35,10 @@
         </a>
     </div>
 
+    <div class="hide flex topare" id="dds">
+        <input type="text" value="" id="commentboxinput" class="commentboxinput flex-1" placeholder="请输入评论信息" />
+        <button class="weui_btn weui_btn_mini weui_btn_primary" style="padding: 8px 10px;">提交</button>
+    </div>
 
     <div class="main-container">
         <div class="bannerbox swiper-container">

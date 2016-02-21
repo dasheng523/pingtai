@@ -7,7 +7,7 @@
     <title>北流商业平台</title>
     <link href="http://192.168.23.105/pingtai/Public/css/normalize.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
-    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css">
+    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css?v=15">
     
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
     <style>
@@ -31,38 +31,32 @@
     <div class="main-container">
         <div class="userinfobox">
             <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="userinfobox-img">
-            <div class="userinfobox-scorebox ">
-                <small>影响力:55664分</small>
+            <div class="userinfobox-scorebox">
+                <strong>yesheng</strong>
+                <h3>影响力:55664分</h3>
             </div>
-            <div class="userinfobox-btns flex">
-                <a href="#" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe61b;</i>50<br>我的收藏</a>
-                <a href="#" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe61c;</i>500<br>我的粉丝</a>
-                <a href="#" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe625;</i>65<br>我的评价</a>
+            <a href="#" class="shortbox default-text"><i class="iconfont">&#xe625;</i> 关注ta</a>
+        </div>
+
+        <div class="margin-top"></div>
+        <div class="boxcontent">
+            <button class="weui_btn weui_btn_plain_primary">联系ta</button>
+        </div>
+
+        <div class="margin-top"></div>
+        <div class="panel box">
+            <h3 class="title">个人说明</h3>
+            <div class="foldbox list">
+                <p class="item">123415465456新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包</p>
+                <a class="foldbox-morebtn" href="#"><i class="iconfont">&#xe61e;</i></a>
             </div>
         </div>
 
         <div class="margin-top"></div>
         <div class="panel box">
-            <h3 class="title">每日影响</h3>
-            <div class="list task-list">
-                <a class="item flex" href="#">
-                    <span class="text-score">+10</span>
-                    <span class="task-content flex-1">每天访问 1/5</span>
-                    <span class="text-status">未完成</span>
-                </a>
-                <a class="item flex" href="#">
-                    <span class="text-score">+10</span>
-                    <span class="task-content flex-1">每天访问 1/5</span>
-                    <span class="text-status disable">已完成</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="margin-top"></div>
-        <div class="panel box">
-            <h3 class="title">我的制作组单</h3>
+            <h3 class="title">ta的制作组单</h3>
             <div class="list">
-                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/groupinfo');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
                     <div class="item-info flex-1">
                         <h3>新春大红包</h3>
@@ -70,7 +64,7 @@
                         <p class="desc">喜欢：50 | 人气度：40</p>
                     </div>
                 </a>
-                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/groupinfo');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
                     <div class="item-info flex-1">
                         <h3>新春大红包</h3>
@@ -78,7 +72,7 @@
                         <p class="desc">地址：广西北流市城北路花果山0241号</p>
                     </div>
                 </a>
-                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/groupinfo');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
                     <div class="item-info flex-1">
                         <h3>新春大红包</h3>
@@ -86,7 +80,7 @@
                         <p class="desc">地址：广西北流市城北路花果山0241号</p>
                     </div>
                 </a>
-                <a class="item flex flex-align-center" href="<?php echo UC('Index/goodsdetail');?>">
+                <a class="item flex flex-align-center" href="<?php echo UC('Index/groupinfo');?>">
                     <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="item-img">
                     <div class="item-info flex-1">
                         <h3>新春大红包</h3>
@@ -99,8 +93,6 @@
 
 
     </div>
-
-
 
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     
