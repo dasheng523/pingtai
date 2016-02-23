@@ -11,7 +11,7 @@
     
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
     <style>
-        .swiper-pagination-bullet-active{background: red;}
+        .swiper-pagination-bullet-active{background: #04be02;}
     </style>
 
 </head>

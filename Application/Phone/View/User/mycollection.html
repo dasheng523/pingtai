@@ -1,0 +1,70 @@
+<extend name="template/main" />
+
+<block name="css">
+    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
+    <style>
+        .swiper-pagination-bullet-active{background: red;}
+    </style>
+</block>
+
+<block name="script">
+    <script src="__PUBLIC__/js/swiper.min.js"></script>
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="topnavbar flex flex-align-center">
+        <a href="javascript:" class="backbtn" onclick="window.history.back();">
+            <i class="iconfont">&#xe612;</i>
+        </a>
+        <div class="pagetitle flex-1">我的收藏</div>
+        <a href="#" class="rightbtn">
+            <i class="iconfont">&#xe619;</i>
+        </a>
+    </div>
+
+    <div class="main-container">
+
+        <div class="panel box">
+            <div class="list">
+                <span class="nocontent">您还没有收藏，请<a href="#">点击这里</a>试试吧</span>
+
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">已经有<strong>10人</strong>联系卖家了</p>
+                        <p class="desc">收藏时间：2016-01-01</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">已经有<strong>10人</strong>联系卖家了</p>
+                        <p class="desc">收藏时间：2016-01-01</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">已经有<strong>10人</strong>联系卖家了</p>
+                        <p class="desc">收藏时间：2016-01-01</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">已经有<strong>10人</strong>联系卖家了</p>
+                        <p class="desc">收藏时间：2016-01-01</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</block>
