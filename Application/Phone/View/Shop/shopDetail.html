@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的店铺</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css">
+
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <div class="content">
+            <div class="weui_cells weui_cells_access">
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                    </div>
+                </a>
+            </div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd"><label class="weui_label">店铺</label></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入您的店名">
+                    </div>
+                </div>
+
+
+                <div class="weui_cell">
+                    <div class="weui_cell_hd"><label class="weui_label">定位</label></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <button class="weui_btn weui_btn_mini weui_btn_default">定位店铺</button>
+                    </div>
+                    <div class="weui_cells_tips">最好在店铺里定位</div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div class="weui_uploader">
+                            <div class="weui_uploader_hd weui_cell">
+                                <div class="weui_cell_bd weui_cell_primary">店铺地址</div>
+                            </div>
+                            <textarea class="weui_textarea" placeholder="请输入店铺地址" rows="3"></textarea>
+                            <div class="weui_textarea_counter"><span>0</span>/200</div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="weui_cell weui_cell_select">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" name="select1">
+                            <option selected="" value="1">经营范围</option>
+                            <option value="2">QQ号</option>
+                            <option value="3">Email</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div class="weui_uploader">
+                            <div class="weui_uploader_hd weui_cell">
+                                <div class="weui_cell_bd weui_cell_primary">店铺图片</div>
+                                <div class="weui_cell_ft">0/5</div>
+                            </div>
+                            <div class="weui_uploader_bd">
+                                <ul class="weui_uploader_files">
+                                    <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+                                    <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+                                    <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+                                    <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
+                                        <div class="weui_uploader_status_content">
+                                            <i class="weui_icon_warn"></i>
+                                        </div>
+                                    </li>
+                                    <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
+                                        <div class="weui_uploader_status_content">50%</div>
+                                    </li>
+                                </ul>
+                                <div class="weui_uploader_input_wrp">
+                                    <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="weui_btn_area">
+                <a class="weui_btn weui_btn_primary" href="javascript:" id="showTooltips">保存</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+
+<script>$.init()</script>
+</body>
+</html>
