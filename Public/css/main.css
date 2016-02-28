@@ -22,5 +22,13 @@
     url('//at.alicdn.com/t/font_1456377813_5531275.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
     url('//at.alicdn.com/t/font_1456377813_5531275.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
+.green-text{color: #3cc51f;}
 
+
+.margin-top{margin-top: 30px;}
 .iconfont{font-family:"iconfont"; font-size:28px;font-style:normal;}
+.block{display: block;}
+.fl{float: left;}
+.fr{float: right;}
+.tip{color: #888888;display: block;text-align: center;font-size: 12px;}
+.extra_button{position: fixed;background: #3cc51f;font-size: 30px;width:50px;height:50px;border-radius: 50px;text-align: center;line-height: 50px;color: #fff;right: 30px;bottom: 50px;}
