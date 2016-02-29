@@ -17,10 +17,10 @@
 </head>
 <body>
 <div class="page-group">
-    <div class="page page-current">
-        <div class="content margin-top">
+    <div class="page page-current" id="goodslist">
+        <div class="content">
             <span class="tip">您还没有发布商品呢</span>
-            <div class="card">
+            <a class="card block" href="{:UC('Shop/goodsEdit')}">
                 <div class="card-content">
                     <div class="list-block media-list">
                         <ul>
@@ -42,8 +42,8 @@
                     <span>2015/01/15</span>
                     <span>5评论 | 10收藏</span>
                 </div>
-            </div>
-            <div class="card">
+            </a>
+            <a class="card block" href="{:UC('Shop/goodsEdit')}">
                 <div class="card-content">
                     <div class="list-block media-list">
                         <ul>
@@ -65,7 +65,7 @@
                     <span>2015/01/15</span>
                     <span>5评论 | 10收藏</span>
                 </div>
-            </div>
+            </a>
             <a href="javascript:;" class="extra_button" id="showActionBtn">+</a>
 
         </div>
@@ -75,9 +75,7 @@
 <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
 
-<script>
-
-    $.init()</script>
 </body>
 </html>
