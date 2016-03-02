@@ -47,8 +47,8 @@ function createShowActionHandler(buttons){
 function createPageHandler(handleObj){
     var pageId = handleObj.pageId;
     var tmphandle = function(e, pageId, $page) {
-        if(handleObj.buttons){
-            var showActionHandler = createShowActionHandler(handleObj.buttons);
+        if(handleObj.menu){
+            var showActionHandler = createShowActionHandler(handleObj.menu);
             $(document).on('click','#'+pageId+ ' '+'#showActionBtn', showActionHandler);
         }
         if(handleObj.handler){
@@ -65,7 +65,7 @@ function createPageHandler(handleObj){
 //商品管理处理器
 var goods = {
     pageId:"#goodslist",
-    buttons:[
+    menu:[
         {
             text: '添加商品',
             onClick: function() {
@@ -87,7 +87,7 @@ var goods = {
 //集合管理处理器
 var collection = {
     pageId:"#collection-page",
-    buttons:[
+    menu:[
         {
             text: '新增妙集',
             onClick: function() {
@@ -109,7 +109,7 @@ var collection = {
 //集合详情
 var collectionInfo = {
     pageId:"#collection-info",
-    buttons:[
+    menu:[
         {
             text: '删除商品',
             color: 'danger',
@@ -121,6 +121,7 @@ var collectionInfo = {
 
     }
 };
+
 
 createPageHandler(goods);
 createPageHandler(collection);

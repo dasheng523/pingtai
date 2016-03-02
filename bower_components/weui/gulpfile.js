@@ -62,7 +62,7 @@ gulp.task('build:example:style', function (){
 });
 
 gulp.task('build:example:html', function (){
-    gulp.src('src/example/index.html', option)
+    gulp.src('src/example/index_old.html', option)
         .pipe(tap(function (file){
             var dir = path.dirname(file.path);
             var contents = file.contents.toString();

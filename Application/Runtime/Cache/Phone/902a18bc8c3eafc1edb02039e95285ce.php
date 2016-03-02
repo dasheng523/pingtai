@@ -7,7 +7,7 @@
     <title>北流商业平台</title>
     <link href="http://192.168.23.105/pingtai/Public/css/normalize.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
-    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css">
+    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css?v=15">
     
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
     <style>
@@ -61,8 +61,6 @@
         <!-- 搜索记录 end -->
 
     </div>
-
-
 
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     

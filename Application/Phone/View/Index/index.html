@@ -1,186 +1,197 @@
-<extend name="template/main" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<block name="css">
-    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
-    <style>
-        .swiper-pagination-bullet-active{background: #04be02;}
-    </style>
-</block>
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=13">
 
-<block name="script">
-    <script src="__PUBLIC__/js/swiper.min.js"></script>
-    <script>
-        var ad = new Swiper('#adbox', {
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-            autoplay: 2500
-        });
-        var cate = new Swiper('#cate', {
-            pagination: '.swiper-pagination',
-            paginationClickable: true
-        });
-    </script>
-</block>
-
-<block name="content">
-    <div class="topnavbar flex flex-align-center">
-        <a href="javascript:" class="backbtn" onclick="window.history.back();">
-            北流
-        </a>
-        <div class="pagetitle flex-1"><a class="searchbtn" href="{:UC('Index/search')}"><i class="iconfont">&#xe601;</i>搜索商品，找单，店铺</a></div>
-        <a href="#" class="rightbtn">
-            <i class="iconfont">&#xe619;</i>
-        </a>
-    </div>
-
-    <div class="main-container">
-        <!-- 首页广告 start -->
-        <div class="adbox swiper-container" id="adbox">
-            <div class="swiper-wrapper">
-                <a href="#" class="adbox-item swiper-slide"><img src="__PUBLIC__/images/banner.jpg"/></a>
-                <a href="#" class="adbox-item swiper-slide"><img src="__PUBLIC__/images/banner.jpg"/></a>
-            </div>
-        </div>
-        <!-- 首页广告 end -->
-
-        <!-- 首页分类 start -->
-        <div class="index-cate panel swiper-container" id="cate">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide index-cate-page">
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                </div>
-                <div class="swiper-slide index-cate-page">
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
-                    <a class="index-cate-item" href="#">
-                        <i class="iconfont">&#xe601;</i><br>
-                        逛街
-                    </a>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current" id="collection-info">
+        <div class="content">
+            <div class="bar">
+                <div class="searchbar">
+                    <a class="searchbar-cancel">取消</a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id="search" placeholder="输入关键字...">
+                    </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <!-- 首页分类 end -->
+            <div class="swiper-container adbox" data-space-between='10'>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="__PUBLIC__/images/banner.jpg" alt="" style='width: 100%'></div>
+                    <div class="swiper-slide"><img src="__PUBLIC__/images/banner.jpg" alt="" style='width: 100%'></div>
+                    <div class="swiper-slide"><img src="__PUBLIC__/images/banner.jpg" alt="" style='width: 100%'></div>
+                </div>
+            </div>
+            <div class="buttons-tab fixed-tab" data-offset="0">
+                <a href="#tab1" class="tab-link active button">热门商品</a>
+                <a href="#tab2" class="tab-link button">人气妙集</a>
+            </div>
+            <div class="tabs">
+                <div id="tab1" class="tab active">
+                    <div class="list-block media-list" style="margin-top: 0;">
+                        <ul>
+                            <li>
+                                <a href="{:UC('Index/goodsdetail')}" class="item-link item-content">
+                                    <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
+                                    <div class="item-inner">
+                                        <div class="item-text index-item-primary">到新天地看完电影，怎么能不吃一碗热呼呼的砂锅粉的砂锅粉的砂锅粉的砂锅粉。</div>
+                                        <div class="item-subtitle"><span class="index-item-grey">by 邹式砂锅粉店</span></div>
+                                        <div class="item-subtitle">
+                                            <span class="green-text fr" style="font-size: 16px;vertical-align: bottom;">$10</span>
+                                            <span class="index-item-grey">浏览：500 | 收藏：50 </span></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
+                                    <div class="item-inner">
+                                        <div class="item-text index-item-primary">到新天地看完电影，怎么能不吃一碗热呼呼的砂锅粉的砂锅粉的砂锅粉的砂锅粉。</div>
+                                        <div class="item-subtitle"><span class="index-item-grey">by 邹式砂锅粉店</span></div>
+                                        <div class="item-subtitle">
+                                            <span class="green-text fr" style="font-size: 16px;vertical-align: bottom;">$10</span>
+                                            <span class="index-item-grey">浏览：500 | 收藏：50 </span></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
+                                    <div class="item-inner">
+                                        <div class="item-text index-item-primary">到新天地看完电影，怎么能不吃一碗热呼呼的砂锅粉的砂锅粉的砂锅粉的砂锅粉。</div>
+                                        <div class="item-subtitle"><span class="index-item-grey">by 邹式砂锅粉店</span></div>
+                                        <div class="item-subtitle">
+                                            <span class="green-text fr" style="font-size: 16px;vertical-align: bottom;">$10</span>
+                                            <span class="index-item-grey">浏览：500 | 收藏：50 </span></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
+                                    <div class="item-inner">
+                                        <div class="item-text index-item-primary">到新天地看完电影，怎么能不吃一碗热呼呼的砂锅粉的砂锅粉的砂锅粉的砂锅粉。</div>
+                                        <div class="item-subtitle"><span class="index-item-grey">by 邹式砂锅粉店</span></div>
+                                        <div class="item-subtitle">
+                                            <span class="green-text fr" style="font-size: 16px;vertical-align: bottom;">$10</span>
+                                            <span class="index-item-grey">浏览：500 | 收藏：50 </span></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
+                                    <div class="item-inner">
+                                        <div class="item-text index-item-primary">到新天地看完电影，怎么能不吃一碗热呼呼的砂锅粉的砂锅粉的砂锅粉的砂锅粉。</div>
+                                        <div class="item-subtitle"><span class="index-item-grey">by 邹式砂锅粉店</span></div>
+                                        <div class="item-subtitle">
+                                            <span class="green-text fr" style="font-size: 16px;vertical-align: bottom;">$10</span>
+                                            <span class="index-item-grey">浏览：500 | 收藏：50 </span></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
+                                    <div class="item-inner">
+                                        <div class="item-text index-item-primary">到新天地看完电影，怎么能不吃一碗热呼呼的砂锅粉的砂锅粉的砂锅粉的砂锅粉。</div>
+                                        <div class="item-subtitle"><span class="index-item-grey">by 邹式砂锅粉店</span></div>
+                                        <div class="item-subtitle">
+                                            <span class="green-text fr" style="font-size: 16px;vertical-align: bottom;">$10</span>
+                                            <span class="index-item-grey">浏览：500 | 收藏：50 </span></div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-        <div class="margin-top"></div>
-        <!-- 推荐列表 start -->
-        <div class="box panel">
-            <h3><i class="iconfont">&#xe617;</i>推荐找单<a href="#" class="morebtn">更多</a></h3>
-            <div class="list">
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="desc">新年快到了，你的红包准备好了吗？送长辈送好友送孩子，每种红包都是不一样的，点击了解详情吧。</p>
+
+                <div id="tab2" class="tab">
+                    <div class="card facebook-card">
+                        <div class="card-header no-border">
+                            <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+                            <div class="facebook-name">美女大集合</div>
+                            <div class="facebook-date">by 夜萧 <span class="fr red-text" style="font-size: 0.5rem;">热门度 80%</span></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-text">
+                                我们对页面的基本结构是有要求的，否则可能会出现样式错误或者无法正确加载页面等问题我们对页面的基本结构是有要求的，否则可能会出现样式错误或者无法正确加载页面等问题
+                            </div>
+                            <div class="card-pic">
+                                <div class="row no-gutter">
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer no-border">
+                            <a href="#" class="link">赞一个</a>
+                            <a href="#" class="link">分享</a>
+                        </div>
                     </div>
-                </a>
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="desc">新年快到了，你的红包准备好了吗？送长辈送好友送孩子，每种红包都是不一样的，点击了解详情吧。</p>
+
+                    <div class="card facebook-card">
+                        <div class="card-header no-border">
+                            <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+                            <div class="facebook-name">美女大集合</div>
+                            <div class="facebook-date">by 夜萧 <span class="fr red-text" style="font-size: 0.5rem;">热门度 80%</span></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-text">
+                                我们对页面的基本结构是有要求的，否则可能会出现样式错误或者无法正确加载页面等问题我们对页面的基本结构是有要求的，否则可能会出现样式错误或者无法正确加载页面等问题
+                            </div>
+                            <div class="card-pic">
+                                <div class="row no-gutter">
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                    <div class="col-25"><img src="__PUBLIC__/images/head.jpg"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer no-border">
+                            <a href="#" class="link">赞一个</a>
+                            <a href="#" class="link">分享</a>
+                        </div>
                     </div>
-                </a>
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="desc">新年快到了，你的红包准备好了吗？送长辈送好友送孩子，每种红包都是不一样的，点击了解详情吧。</p>
-                    </div>
-                </a>
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="desc">新年快到了，你的红包准备好了吗？送长辈送好友送孩子，每种红包都是不一样的，点击了解详情吧。</p>
-                    </div>
-                </a>
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="desc">新年快到了，你的红包准备好了吗？送长辈送好友送孩子，每种红包都是不一样的，点击了解详情吧。</p>
-                    </div>
-                </a>
+
+                </div>
+
+                <!-- footer start -->
+
+                <!-- footer end -->
 
             </div>
-
         </div>
-
-        <!-- 推荐列表 end -->
-
-
-        <!-- footer start -->
         <div class="footer footer-menu">
-            <a class="footer-menu-item hover" href="#"><i class="iconfont">&#xe609;</i><br>首页</a>
-            <a class="footer-menu-item" href="#"><i class="iconfont">&#xe611;</i><br>排行榜</a>
-            <a class="footer-menu-item" href="#"><i class="iconfont">&#xe600;</i><br>发布</a>
-            <a class="footer-menu-item" href="{:UC('User/index')}"><i class="iconfont">&#xe60e;</i><br>个人中心</a>
+            <a class="footer-menu-item hover" href="#"><i class="iconfont">&#xe602;</i><br>首页</a>
+            <a class="footer-menu-item" href="#"><i class="iconfont">&#xe605;</i><br>排行榜</a>
+            <a class="footer-menu-item" href="#"><i class="iconfont">&#xe604;</i><br>发布</a>
+            <a class="footer-menu-item" href="{:UC('User/index')}"><i class="iconfont">&#xe603;</i><br>个人中心</a>
         </div>
-        <!-- footer end -->
-
-
-        <!-- demo start -->
-        <!-- demo end -->
-
     </div>
+</div>
 
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
 
-</block>
+</body>
+</html>

@@ -2,25 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9871529-962f-45de-9b42-e0c088e05976" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/collection.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/collectionDel.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/collectionEdit.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/collectionInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/effect.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/fans.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/fansCollect.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/fansComment.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/fanslist.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/goodsDel.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Public/js/main.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail_old.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Application/Phone/View/Index/index.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Index/index_old.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Public/message.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Public/message.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Shop/goods.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/goods.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Shop/goodsEdit.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/goodsEdit.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Index/index.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Index/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Shop/index.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Runtime/Cache/Phone/4578f5f226e09adf11c26f26c5c34085.php" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Phone/4578f5f226e09adf11c26f26c5c34085.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Runtime/Cache/Phone/902a18bc8c3eafc1edb02039e95285ce.php" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Phone/902a18bc8c3eafc1edb02039e95285ce.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Runtime/Cache/Phone/c888ffb9921b6bffafd4b12bb308ca00.php" afterPath="$PROJECT_DIR$/Application/Runtime/Cache/Phone/c888ffb9921b6bffafd4b12bb308ca00.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Doc/思考.md" afterPath="$PROJECT_DIR$/Doc/思考.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Public/css/main.css" afterPath="$PROJECT_DIR$/Public/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Public/js/main.js" afterPath="$PROJECT_DIR$/Public/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ThinkPHP/Library/Think/Build.class.php" afterPath="$PROJECT_DIR$/ThinkPHP/Library/Think/Build.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ThinkPHP/Library/Think/Template/TagLib/Html.class.php" afterPath="$PROJECT_DIR$/ThinkPHP/Library/Think/Template/TagLib/Html.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ThinkPHP/Library/Vendor/EaseTemplate/template.core.php" afterPath="$PROJECT_DIR$/ThinkPHP/Library/Vendor/EaseTemplate/template.core.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ThinkPHP/Library/Vendor/Smarty/plugins/shared.mb_unicode.php" afterPath="$PROJECT_DIR$/ThinkPHP/Library/Vendor/Smarty/plugins/shared.mb_unicode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower_components/weui/gulpfile.js" afterPath="$PROJECT_DIR$/bower_components/weui/gulpfile.js" />
     </list>
     <ignored path="pingtai.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,51 +42,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="思考.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="思考.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Doc/思考.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4483146">
-              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fansComment.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fansComment.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.1">
-              <caret line="23" column="59" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="59" />
+            <state vertical-scroll-proportion="-7.451613">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/index.html">
+        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.7">
-              <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-              <folding />
+            <state vertical-scroll-proportion="4.9">
+              <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#5;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="effect.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effect.html">
+      <file leaf-file-name="goodsdetail.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.2">
-              <caret line="34" column="75" selection-start-line="34" selection-start-column="75" selection-end-line="34" selection-end-column="75" />
-              <folding />
+            <state vertical-scroll-proportion="0.95286196">
+              <caret line="123" column="25" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="25" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#0;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#1;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#2;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#3;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#4;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="effectTopbar.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html">
+      <file leaf-file-name="openShop.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/openShop.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-17.1">
+              <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="60" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -95,18 +105,18 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Public/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.3">
-              <caret line="43" column="71" selection-start-line="43" selection-start-column="71" selection-end-line="43" selection-end-column="71" />
+            <state vertical-scroll-proportion="-14.0">
+              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collectionInfo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/collectionInfo.html">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Public/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.9">
-              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="118" column="11" selection-start-line="118" selection-start-column="11" selection-end-line="118" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -121,7 +131,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/collectionInfo.html" />
-        <option value="$PROJECT_DIR$/Public/js/main.js" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/collectionDel.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/collectionEdit.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/goods.html" />
@@ -132,11 +141,16 @@
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/fans.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/fansCollect.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/fanslist.html" />
-        <option value="$PROJECT_DIR$/Public/css/main.css" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/fansComment.html" />
-        <option value="$PROJECT_DIR$/Application/Phone/View/Shop/index.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/effect.html" />
+        <option value="$PROJECT_DIR$/Application/Phone/View/Shop/index.html" />
+        <option value="$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html" />
+        <option value="$PROJECT_DIR$/Public/css/app.css" />
         <option value="$PROJECT_DIR$/Doc/思考.md" />
+        <option value="$PROJECT_DIR$/Public/js/main.js" />
+        <option value="$PROJECT_DIR$/Public/css/main.css" />
+        <option value="$PROJECT_DIR$/Application/Phone/View/Index/index.html" />
+        <option value="$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail.html" />
       </list>
     </option>
   </component>
@@ -180,7 +194,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -383,12 +396,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Public" />
+              <option name="myItemId" value="Index" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -443,7 +457,7 @@
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2565097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2698061" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -457,7 +471,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -481,6 +495,166 @@
     <entry file="file://$PROJECT_DIR$/Doc/思考.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="135" column="46" selection-start-line="135" selection-start-column="35" selection-end-line="135" selection-end-column="46" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#5;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/index_old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="169" column="8" selection-start-line="169" selection-start-column="8" selection-end-line="176" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="111" column="8" selection-start-line="111" selection-start-column="8" selection-end-line="111" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Doc/思考.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="71" selection-start-line="43" selection-start-column="71" selection-end-line="43" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/collectionInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Doc/思考.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fansComment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="72" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="71" selection-start-line="43" selection-start-column="71" selection-end-line="43" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/collectionInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Doc/思考.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
           <folding />
         </state>
@@ -498,7 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -506,7 +679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -514,7 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -538,22 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Public/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6397307">
-          <caret line="60" column="18" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Public/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -561,7 +716,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.733333">
           <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -569,7 +723,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.2">
           <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -577,7 +730,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.0">
           <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -585,7 +737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.1">
           <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -593,6 +744,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.8">
           <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Public/message.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76430976">
+          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fanslist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-28.3">
+          <caret line="53" column="22" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fansCollect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9057239">
+          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fans.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.9">
+          <caret line="55" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="73" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fansComment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/collectionInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.6">
+          <caret line="26" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32996634">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6599327">
+          <caret line="182" column="31" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/index_old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45791245">
+          <caret line="169" column="8" selection-start-line="169" selection-start-column="8" selection-end-line="176" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Doc/思考.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.451613">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -605,107 +836,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/openShop.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/collection.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07070707">
+        <state vertical-scroll-proportion="0.54208755">
           <caret line="23" column="59" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Public/message.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.76430976">
-          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fanslist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.3">
-          <caret line="53" column="22" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fansCollect.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9057239">
-          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fans.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.9">
-          <caret line="55" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="73" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/collectionInfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.9">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/fansComment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.1">
-          <caret line="23" column="59" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Public/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.3">
-          <caret line="43" column="71" selection-start-line="43" selection-start-column="71" selection-end-line="43" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effectTopbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/effect.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.2">
-          <caret line="34" column="75" selection-start-line="34" selection-start-column="75" selection-end-line="34" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.7070707">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Doc/思考.md">
+    <entry file="file://$PROJECT_DIR$/Public/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4483146">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="118" column="11" selection-start-line="118" selection-start-column="11" selection-end-line="118" selection-end-column="11" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Public/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.0">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.9">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#1;n#a#0;n#li#5;n#ul#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#1;n#div#1;n#div#3;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/openShop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.1">
+          <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="60" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.95286196">
+          <caret line="123" column="25" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#0;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#1;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#2;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#3;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#a#0;n#li#4;n#ul#0;n#div#4;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
