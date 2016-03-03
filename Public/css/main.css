@@ -29,7 +29,7 @@
 .index-item-primary{color: #000 !important;}
 .index-item-grey{color: #888888 !important;font-size: 12px;}
 
-.content{margin-bottom: 50px;}
+.content{}
 
 .margin-top{margin-top: 30px;}
 .iconfont{font-family:"iconfont"; font-size:14px;font-style:normal;}
@@ -76,11 +76,6 @@
 .footer-menu .footer-menu-item{display: block;width: 25%;float: left;text-align: center;color: #666666;padding: 5px 0;font-size: 12px;}
 .footer-menu .footer-menu-item.hover{color:#04be02;}
 
-.buttons-tab .button.active {
-    color: #3cc51f;
-    border-color: #3cc51f;
-    z-index: 100;
-}
 
 .flex{
     /* 设置弹性布局 */

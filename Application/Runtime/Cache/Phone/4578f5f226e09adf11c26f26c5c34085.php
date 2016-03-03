@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/SUI-Mobile/dist/css/sm.min.css">
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/main.css?v=13">
@@ -18,16 +18,16 @@
 <body>
 <div class="page-group">
     <div class="page page-current" id="collection-info">
-        <div class="content">
-            <div class="bar">
-                <div class="searchbar">
-                    <a class="searchbar-cancel">取消</a>
-                    <div class="search-input">
-                        <label class="icon icon-search" for="search"></label>
-                        <input type="search" id="search" placeholder="输入关键字...">
-                    </div>
+        <div class="bar">
+            <div class="searchbar">
+                <a class="searchbar-cancel">取消</a>
+                <div class="search-input">
+                    <label class="icon icon-search" for="search"></label>
+                    <input type="search" id="search" placeholder="输入关键字...">
                 </div>
             </div>
+        </div>
+        <div class="content native-scroll">
             <div class="swiper-container adbox" data-space-between='10'>
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img src="http://192.168.23.105/pingtai/Public/images/banner.jpg" alt="" style='width: 100%'></div>
@@ -179,6 +179,25 @@
 
             </div>
         </div>
+        <nav class="bar bar-tab">
+            <a class="tab-item external active" href="#">
+                <span class="icon"><i class="iconfont">&#xe602;</i></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="icon icon-me"></span>
+                <span class="tab-label">Label</span>
+                <span class="badge">2</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="icon icon-star"></span>
+                <span class="tab-label">Label</span>
+            </a>
+            <a class="tab-item external" href="#">
+                <span class="icon icon-cart"></span>
+                <span class="tab-label">Label</span>
+            </a>
+        </nav>
         <div class="footer footer-menu">
             <a class="footer-menu-item hover" href="#"><i class="iconfont">&#xe602;</i><br>首页</a>
             <a class="footer-menu-item" href="#"><i class="iconfont">&#xe605;</i><br>排行榜</a>
