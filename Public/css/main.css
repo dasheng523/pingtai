@@ -22,9 +22,16 @@
     url('//at.alicdn.com/t/font_1456921973_1640234.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
 
+.iconfont{font-family:"iconfont";font-style:normal;}
+
 .green-text{color: #3cc51f !important;}
 .red-text{color: red !important;}
 .gray-text{color: #A1A1A1;}
+
+.center-text{text-align: center;}
+
+.big-text{font-size: 20px;}
+.small-text{font-size: 12px;}
 
 .index-item-primary{color: #000 !important;}
 .index-item-grey{color: #888888 !important;font-size: 12px;}
@@ -32,7 +39,6 @@
 .content{}
 
 .margin-top{margin-top: 30px;}
-.iconfont{font-family:"iconfont"; font-size:14px;font-style:normal;}
 .block{display: block;color: inherit;}
 .fl{float: left;}
 .fr{float: right;}
