@@ -77,6 +77,14 @@
 .banner-header .pricebox{width: 100px;text-align: center;}
 
 
+.userinfobox{background:#04be02;padding: 15px;}
+.userinfobox-img{margin: 0 auto;display: block;width: 80px;height: 80px;border-radius: 40px;}
+.userinfobox-scorebox{padding: 0 10px;color: #eee;margin-top: 5px;text-align: center;}
+.userinfobox-btns{background:rgba(0,0,0,0.4);background:#000\9;margin-top: 10px;}
+.userinfobox-btnitem{color: #eee;text-align: center;display: block;padding: 5px 0;font-size: 12px;border-right: solid 1px #aaa;}
+.userinfobox-btnitem:last-child{border-right: none;}
+
+
 .footer{position: fixed;bottom: 0;left: 0;width: 100%;border-top: solid 1px #ccc;z-index: 5;}
 .footer-menu{background: #fff;}
 .footer-menu .footer-menu-item{display: block;width: 25%;float: left;text-align: center;color: #666666;padding: 5px 0;font-size: 12px;}

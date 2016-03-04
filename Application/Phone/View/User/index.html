@@ -1,110 +1,130 @@
-<extend name="template/main" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<block name="css">
-    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
-    <style>
-        .swiper-pagination-bullet-active{background: red;}
-    </style>
-</block>
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=12">
 
-<block name="script">
-    <script src="__PUBLIC__/js/swiper.min.js"></script>
-    <script>
-        $('#showdetail').click(function(){
-            $('.groupshowbox').removeClass('hide');
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                paginationClickable: true
-            });
-        });
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current" id="collection-info">
+        <div class="content">
+            <div class="userinfobox">
+                <img src="__PUBLIC__/images/head.jpg" class="userinfobox-img">
+                <div class="userinfobox-scorebox ">
+                    <h3>影响力:55664分</h3>
+                </div>
+            </div>
 
-        $('.groupshow-close').click(function(){
-            $('.groupshowbox').addClass('hide');
-        });
+            <div class="content-block-title">每日影响力</div>
+            <div class="list-block inset" style="margin-bottom: 10px;">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-media red-text">+  10</div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                每天访问 1/5
+                            </div>
+                            <span class="small-text green-text">未完成</span>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-media red-text">+20</div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                每天访问 1/5
+                            </div>
+                            <span class="small-text green-text">未完成</span>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-media red-text">+15</div>
+                        <div class="item-inner">
+                            <div class="item-title">
+                                每天访问 1/5
+                            </div>
+                            <span class="small-text green-text">未完成</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
-    </script>
-</block>
+            <div class="card">
+                <div class="card-content">
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">影响力排行榜</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-<block name="content">
-    <div class="topnavbar flex flex-align-center">
-        <a href="javascript:" class="backbtn" onclick="window.history.back();">
-            <i class="iconfont">&#xe612;</i>
-        </a>
-        <div class="pagetitle flex-1">个人中心</div>
-        <a href="#" class="rightbtn">
-            <i class="iconfont">&#xe619;</i>
-        </a>
+            <div class="card">
+                <div class="card-content">
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <a href="{:UC('User/mycollection')}" class="item-link item-content">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">我的妙集</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{:UC('User/mylike')}" class="item-link item-content">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">喜欢的商品</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{:UC('User/mycomment')}" class="item-link item-content">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">我的评论</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{:UC('User/myinfo')}" class="item-link item-content">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">我的资料</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>
 
-    <div class="main-container">
-        <div class="userinfobox">
-            <img src="__PUBLIC__/images/head.jpg" class="userinfobox-img">
-            <div class="userinfobox-scorebox ">
-                <h3>影响力:55664分</h3>
-            </div>
-            <div class="userinfobox-btns flex">
-                <a href="{:UC('User/mycollection')}" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe61b;</i>50<br>我的收藏</a>
-                <a href="#" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe61c;</i>500<br>我的粉丝</a>
-                <a href="#" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe625;</i>65<br>我的评价</a>
-            </div>
-        </div>
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
 
-        <div class="margin-top"></div>
-        <div class="panel box">
-            <h3 class="title">每日影响</h3>
-            <div class="list task-list">
-                <a class="item flex" href="#">
-                    <span class="text-score">+10</span>
-                    <div class="task-content flex-1">每天访问 1/5</div>
-                    <span class="text-status">未完成</span>
-                </a>
-                <a class="item flex" href="#">
-                    <span class="text-score">+10</span>
-                    <div class="task-content flex-1">每天访问 1/5</div>
-                    <span class="text-status disable">已完成</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="margin-top"></div>
-        <div class="panel box">
-            <h3 class="title">我的制作组单</h3>
-            <div class="list">
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
-                        <p class="desc">喜欢：50 | 人气度：40</p>
-                    </div>
-                </a>
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
-                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
-                    </div>
-                </a>
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
-                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
-                    </div>
-                </a>
-                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
-                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
-                    <div class="item-info flex-1">
-                        <h3>新春大红包</h3>
-                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
-                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-
-    </div>
-</block>
+</body>
+</html>

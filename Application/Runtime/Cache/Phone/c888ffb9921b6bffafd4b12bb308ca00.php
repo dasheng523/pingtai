@@ -58,7 +58,6 @@
                                     <small class="gray-text small-text fr">500人收藏 | 40人想买</small>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>

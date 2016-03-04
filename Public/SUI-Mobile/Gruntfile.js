@@ -239,7 +239,7 @@ module.exports = function(grunt) {
             options: {
                 inject: 'js/tests/unit/phantom.js'
             },
-            files: 'js/tests/index.html'
+            files: 'js/tests/index-old.html'
         },
 
         watch: {

@@ -1,0 +1,110 @@
+<extend name="template/main" />
+
+<block name="css">
+    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
+    <style>
+        .swiper-pagination-bullet-active{background: red;}
+    </style>
+</block>
+
+<block name="script">
+    <script src="__PUBLIC__/js/swiper.min.js"></script>
+    <script>
+        $('#showdetail').click(function(){
+            $('.groupshowbox').removeClass('hide');
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+        });
+
+        $('.groupshow-close').click(function(){
+            $('.groupshowbox').addClass('hide');
+        });
+
+    </script>
+</block>
+
+<block name="content">
+    <div class="topnavbar flex flex-align-center">
+        <a href="javascript:" class="backbtn" onclick="window.history.back();">
+            <i class="iconfont">&#xe612;</i>
+        </a>
+        <div class="pagetitle flex-1">个人中心</div>
+        <a href="#" class="rightbtn">
+            <i class="iconfont">&#xe619;</i>
+        </a>
+    </div>
+
+    <div class="main-container">
+        <div class="userinfobox">
+            <img src="__PUBLIC__/images/head.jpg" class="userinfobox-img">
+            <div class="userinfobox-scorebox ">
+                <h3>影响力:55664分</h3>
+            </div>
+            <div class="userinfobox-btns flex">
+                <a href="{:UC('User/mycollection')}" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe61b;</i>50<br>我的收藏</a>
+                <a href="#" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe61c;</i>500<br>我的粉丝</a>
+                <a href="#" class="userinfobox-btnitem flex-1"><i class="iconfont">&#xe625;</i>65<br>我的评价</a>
+            </div>
+        </div>
+
+        <div class="margin-top"></div>
+        <div class="panel box">
+            <h3 class="title">每日影响</h3>
+            <div class="list task-list">
+                <a class="item flex" href="#">
+                    <span class="text-score">+10</span>
+                    <div class="task-content flex-1">每天访问 1/5</div>
+                    <span class="text-status">未完成</span>
+                </a>
+                <a class="item flex" href="#">
+                    <span class="text-score">+10</span>
+                    <div class="task-content flex-1">每天访问 1/5</div>
+                    <span class="text-status disable">已完成</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="margin-top"></div>
+        <div class="panel box">
+            <h3 class="title">我的妙集</h3>
+            <div class="list">
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">喜欢：50 | 人气度：40</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</block>
