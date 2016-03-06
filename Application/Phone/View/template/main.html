@@ -1,19 +1,53 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>北流商业平台</title>
-    <link href="__PUBLIC__/css/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/app.css?v=15">
-    <block name="css"></block>
-</head>
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+    <link rel="stylesheet" href="__PUBLIC__/SUI-Mobile/dist/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=19">
+
+    <block name="head"></block>
+
+</head>
 <body>
-    <block name="content"></block>
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
-    <block name="script"></block>
+<div class="page-group">
+    <div class="page page-current" id="collection-info">
+        <block name="content"></block>
+
+        <nav class="bar bar-tab">
+            <a class="tab-item external active" href="{:UC('Index/index')}">
+                <span class="icon"><i class="iconfont">&#xe602;</i></span>
+                <span class="tab-label">首页</span>
+            </a>
+            <a class="tab-item external" href="{:UC('Index/publishNeed')}">
+                <span class="icon"><i class="iconfont">&#xe604;</i></span>
+                <span class="tab-label">发布</span>
+            </a>
+            <a class="tab-item external" href="{:UC('Index/topbar')}">
+                <span class="icon"><i class="iconfont">&#xe605;</i></span>
+                <span class="tab-label">排行榜</span>
+            </a>
+            <a class="tab-item external" href="{:UC('User/index')}">
+                <span class="icon"><i class="iconfont">&#xe603;</i></span>
+                <span class="tab-label">个人中心</span>
+                <span class="badge">2</span>
+            </a>
+        </nav>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
+<block name="footer"></block>
 </body>
 </html>

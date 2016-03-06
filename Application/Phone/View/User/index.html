@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<extend name="template/main" />
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=12">
+<block name="css">
+    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
+    <style>
+        .swiper-pagination-bullet-active{background: red;}
+    </style>
+</block>
 
-</head>
-<body>
-<div class="page-group">
-    <div class="page page-current" id="collection-info">
+<block name="content">
         <div class="content">
             <div class="userinfobox">
                 <img src="__PUBLIC__/images/head.jpg" class="userinfobox-img">
@@ -64,7 +54,7 @@
                     <div class="list-block">
                         <ul>
                             <li>
-                                <a href="#" class="item-link item-content">
+                                <a href="{:UC('Index/topbar')}" class="item-link item-content">
                                     <div class="item-media"><i class="icon icon-f7"></i></div>
                                     <div class="item-inner">
                                         <div class="item-title">影响力排行榜</div>
@@ -112,19 +102,24 @@
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{:UC('Public/message')}" class="item-link item-content">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">攻略帮助</div>
+                                    </div>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
 
+            <div class="bg-tip-text">
+                本公众号由北流市业翔技术开发部提供<br>
+                <a href="#">商务合作</a> | <a href="#">意见反馈</a>
+            </div>
+
+            <div style="height: 70px;width: 100%;"></div>
         </div>
-    </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
-
-</body>
-</html>
+</block>

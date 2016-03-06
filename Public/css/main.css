@@ -15,11 +15,11 @@
 }
 @font-face {
     font-family: 'iconfont';
-    src: url('//at.alicdn.com/t/font_1456921973_1640234.eot'); /* IE9*/
-    src: url('//at.alicdn.com/t/font_1456921973_1640234.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('//at.alicdn.com/t/font_1456921973_1640234.woff') format('woff'), /* chrome、firefox */
-    url('//at.alicdn.com/t/font_1456921973_1640234.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url('//at.alicdn.com/t/font_1456921973_1640234.svg#iconfont') format('svg'); /* iOS 4.1- */
+    src: url('//at.alicdn.com/t/font_1457261953_9633522.eot'); /* IE9*/
+    src: url('//at.alicdn.com/t/font_1457261953_9633522.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//at.alicdn.com/t/font_1457261953_9633522.woff') format('woff'), /* chrome、firefox */
+    url('//at.alicdn.com/t/font_1457261953_9633522.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('//at.alicdn.com/t/font_1457261953_9633522.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont{font-family:"iconfont";font-style:normal;}
@@ -33,10 +33,19 @@
 .big-text{font-size: 20px;}
 .small-text{font-size: 12px;}
 
+.bg-tip-text{text-align: center;display: block;color: #A1A1A1;font-size: 12px;}
+
+.graybg{background: #EEEEEE;}
+
 .index-item-primary{color: #000 !important;}
 .index-item-grey{color: #888888 !important;font-size: 12px;}
 
+.fix-bottom{position: fixed;left: 0;bottom: 0;width: 100%;}
+.bottom-menu{background: #fff;border-top: solid 1px #eee;width: 100%;}
+
 .content{}
+.text-line3{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;}
+.text-line2{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 2;}
 
 .margin-top{margin-top: 30px;}
 .block{display: block;color: inherit;}
@@ -72,10 +81,12 @@
 .banner-header-imgbox{width: 100px;margin-right: 10px;}
 .banner-header-imgbox img{width: 100px;height: 100px;}
 .banner-header-infobox{color: #fff;}
-.banner-header-infobox .info-title{}
-.banner-header-infobox .info{margin: 0;font-size: 12px;overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;line-height: 0.85rem;}
+.banner-header-infobox .info-title{line-height: 1.2rem;font-size: 16px;height: 2.4rem;}
+.banner-header-infobox .info{margin: 4px 0;overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;line-height: 0.85rem;}
 .banner-header .pricebox{width: 100px;text-align: center;}
 
+.card-morebox{background: #eee;width: 100%;padding: 5px;}
+.text-right{text-align: right;}
 
 .userinfobox{background:#04be02;padding: 15px;}
 .userinfobox-img{margin: 0 auto;display: block;width: 80px;height: 80px;border-radius: 40px;}
@@ -83,6 +94,17 @@
 .userinfobox-btns{background:rgba(0,0,0,0.4);background:#000\9;margin-top: 10px;}
 .userinfobox-btnitem{color: #eee;text-align: center;display: block;padding: 5px 0;font-size: 12px;border-right: solid 1px #aaa;}
 .userinfobox-btnitem:last-child{border-right: none;}
+
+.mainmenu{margin: 5px auto;text-align: center;font-size: 0;}
+.mainmenu .item-menu{text-align: center;display: inline-block;width: 30%;border:solid 1px #0894ec;color: #0894ec;background: #fff;font-size: 16px;padding: 5px;margin-left: -1px;}
+.mainmenu .item-menu.current{color: #fff;background:#0894ec; }
+
+.comment-box{display: block; background: #fff;padding: 5px;}
+.comment-box-head{width: 30px;height: 30px;border-radius: 15px;margin-right: 10px;}
+.comment-box-name{font-size: 14px;font-weight: lighter;}
+.comment-box-replybtn{float: right;}
+.comment-box-time{color: #888888;font-size: 12px;}
+
 
 
 .footer{position: fixed;bottom: 0;left: 0;width: 100%;border-top: solid 1px #ccc;z-index: 5;}
