@@ -1,10 +1,9 @@
 <?php
 
-function UC($path){
+function UC($url='',$vars=''){
     //return __ROOT__ . U($path);
-    return U($path);
+    return U($url='',$vars='',true,true);
 }
-
 
 function wechatInstance(){
     return \Wechat\Common\WechatWrap::getInstance();
@@ -25,7 +24,7 @@ function domainurl(){
 
 //获取数据库中sysconfig的配置值
 function getSysConfig($key){
-    return \Common\Logic\SysconfigLogic::getConfig($key);
+    return \Wechat\Logic\SysconfigLogic::getConfig($key);
 }
 
 

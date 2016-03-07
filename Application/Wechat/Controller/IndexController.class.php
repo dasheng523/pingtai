@@ -11,10 +11,10 @@ class IndexController extends Controller {
         }
 
         if(IS_POST){
-            $type = $weObj->getRev()->getRevType();
+            $type = $weobj->getRev()->getRevType();
             switch($type) {
                 case Wechat::MSGTYPE_TEXT:
-                    $weObj->text(getSysConfig('wechat_welcome'))->reply();
+                    $weobj->text(getSysConfig('wechat_welcome'))->reply();
                     exit;
                     break;
                 case Wechat::MSGTYPE_EVENT:
@@ -22,7 +22,7 @@ class IndexController extends Controller {
                 case Wechat::MSGTYPE_IMAGE:
                     break;
                 default:
-                    $weObj->text("help info")->reply();
+                    $weobj->text("help info")->reply();
             }
         }
     }

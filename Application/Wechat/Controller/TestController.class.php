@@ -11,4 +11,27 @@ class TestController extends Controller {
         $info = \Wechat\Logic\WechatLogic::initWechatById(2);
         print_r($info);
     }
+
+
+    public function testsession_id(){
+        print_r(session_id());
+    }
+
+    public function testsUc(){
+        print_r(UC('Test/info'));
+        print_r($_SERVER);
+    }
+
+    public function testWechatInsert(){
+        $info['name'] = '一妙集';
+        $info['token'] = '1907424487';
+        $info['appid'] = 'wx0da9a07ff65da935';
+        $info['app_secret'] = '9d514058e2abf4ac81a43f120f3e8205';
+        $info['encodingaeskey'] = 'M93SYG9v0uWMOyW94ocHLakTXkSF5P0i72mSvUa0C6y';
+        $info['originid'] = '';
+        $info['mchid'] = '';
+        $info['paykey'] = '';
+        $info['ctime'] = time();
+        echo \Wechat\Logic\WechatLogic::createWechat($info);
+    }
 }

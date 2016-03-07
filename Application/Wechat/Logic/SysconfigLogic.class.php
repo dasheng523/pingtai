@@ -1,5 +1,5 @@
 <?php
-namespace Common\Logic; 
+namespace Wechat\Logic;
 
 class SysconfigLogic{
 
