@@ -49,3 +49,11 @@ function messPop($key){
     S('array_'.$key,null);
     return $v;
 }
+
+//判断是否是微信请求
+function isWeixin(){
+    if ( strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
+        return true;
+    }
+    return false;
+}

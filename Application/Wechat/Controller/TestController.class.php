@@ -34,4 +34,15 @@ class TestController extends Controller {
         $info['ctime'] = time();
         echo \Wechat\Logic\WechatLogic::createWechat($info);
     }
+
+    public function testcreateUser(){
+        $info['openid'] = '5566';
+        $info['nickname'] = '5566';
+        $info['sex'] = 1;
+        $info['province'] = '5566';
+        $info['city'] = '5566';
+        $info['country'] = '5566';
+        $info['headimgurl'] = '5566';
+        echo \Wechat\Logic\WechatUserLogic::createWechatUser($info);
+    }
 }

@@ -1,50 +1,104 @@
 <?php
 namespace Wechat\Logic;
-use Common\Lib\Wechat;
 
+/**
+ * Class UserLogic
+ * @package Wechat\Logic
+ * 用户体系模块
+ */
 class UserLogic{
 
-    //获得UserId
-    public static function getUserId(){
-        $sid = session_id();
-        $userId = S('userId'.$sid);
-        return $userId;
-    }
-
-    //用户权限标识
-    //主要是为了防止userid暴露出去，权限标识有有效期。每调用此函数都会重置code
-    public static function getUserCode(){
-        $userId = 0;
-        if($userId){
-            $code = ysuuid();
-            S('userCode'.$code,$userId,C('UserCodeExpires'));
-            return $code;
-        }
-        E("无法生成UserCode,userId为空");
-        return 0;
-    }
-
-    //转化userCode为userId
-    public static function toUserId($userCode){
-        if(!$userCode){
-            E("userCode为空");
-        }
-        return S('userCode'.$userCode);
-    }
-
-    //获取用户基本信息
+    /**
+     * @param $userId
+     * @return mixed
+     * 获取用户基本信息
+     */
     public static function getUserInfo($userId){
         if(!$userId){
             E("userId为空");
         }
-        return M('UserInfo')->where(array('user_id'=>$userId))->find();
+        return D('UserInfo')->where(array('user_id'=>$userId))->find();
     }
 
-    //创建一个用户
+    /**
+     * @return mixed
+     * 创建一个普通用户,返回uid
+     */
     public static function createUser(){
         $data['ctime'] = time();
-        return M('User')->add($data);
+        $uid = D('User')->data($data)->add();
+        self::joinToRole($uid,C('CommonCustomer'));
+
+        return $uid;
     }
+
+
+    /**
+     * @param $uid
+     * @return bool
+     * 判断是否存在用户
+     */
+    public static function existUser($uid){
+        $id = D('User')->where(array('id'=>$uid))->getField('id');
+        if($id){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param $uid
+     * @return bool
+     * 判断是否存在用户详细信息
+     */
+    public static function existUserInfo($uid){
+        $id = D('UserInfo')->where(array('user_id'=>$uid))->getField('id');
+        if($id){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param $userInfo
+     * 保存用户信息，如果已经存在就更新，如果不存在就新增
+     */
+    public static function saveUserInfo($userInfo){
+        $uid = $userInfo['user_id'];
+        $isExist = self::existUserInfo($uid);
+
+        if($isExist){
+            D('UserInfo')->where(array('user_id'=>$uid))->data($userInfo)->save($userInfo);
+        }
+        else{
+            D('UserInfo')->data($userInfo)->add();
+        }
+    }
+
+    /**
+     * @param $roleName
+     * @return mixed
+     * 创建一个角色，返回角色ID
+     */
+    public static function createRole($roleName){
+        $data['name'] = $roleName;
+        $data['ctime'] = time();
+        return D('Role')->data($data)->add();
+    }
+
+
+    /**
+     * @param $uid
+     * @param $roleId
+     * 将一个uid加入到一个角色里
+     */
+    public static function joinToRole($uid, $roleId){
+        $data['user_id'] = $uid;
+        $data['role_id'] = $roleId;
+        $data['ctime'] = time();
+        D('UserRole')->data($data)->add();
+    }
+
 
 
 }

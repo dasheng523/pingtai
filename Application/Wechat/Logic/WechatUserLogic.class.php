@@ -27,18 +27,21 @@ class WechatUserLogic{
      * 返回 用户ID
      */
     public static function createWechatUser($info){
+        //创建一个用户
         $uid = logic\UserLogic::createUser();
 
+        //保持用户信息
+        $info['user_id'] = $uid;
+        logic\UserLogic::saveUserInfo($info);
+
+
+        //创建微信资料
+        $weUser = $info;
         $weUser['wechat_id'] = C('DefaultWechatID');
         $weUser['user_id'] = $uid;
         $weUser['open_id'] = $info['openid'];
-        $weUser['subscribe'] = $info['subscribe'];
-        $weUser['subscribe_time'] = $info['subscribe_time'];
-        $weUser['unionid'] = $info['unionid'];
-        $weUser['remark'] = $info['remark'];
-        $weUser['groupid'] = $info['groupid'];
+        D('WechatUser')->add($weUser);
 
-        M('WechatUser')->add($weUser);
         return $uid;
     }
 
@@ -48,7 +51,7 @@ class WechatUserLogic{
      * 是否已经存在了某个openid
      */
     public static function isExistOpenId($openid){
-        $info = M('WechatUser')->where(array('open_id'=>$openid))->find();
+        $info = D('WechatUser')->where(array('open_id'=>$openid))->find();
         if($info){
             return true;
         }

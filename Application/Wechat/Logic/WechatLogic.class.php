@@ -12,7 +12,7 @@ class WechatLogic{
 
     //获取默认微信的配置
     public static function defaultWechatConfig(){
-        $info = M('wechat')->where(array('id'=>C('DefaultWechatID')))->find();
+        $info = D('wechat')->where(array('id'=>C('DefaultWechatID')))->find();
         return $info;
     }
 
@@ -24,7 +24,7 @@ class WechatLogic{
 
     //初始化微信操作类
     public static function initWechatById($id){
-        $info = M('wechat')->where(array('id'=>$id))->find();
+        $info = D('wechat')->where(array('id'=>$id))->find();
 
         if($info){
             $weObj = new Wechat($info);
@@ -35,7 +35,7 @@ class WechatLogic{
     }
 
     public static function createWechat($info){
-        return M('Wechat')->add($info);
+        return D('Wechat')->data($info)->add();
     }
 
 

@@ -42,6 +42,7 @@ class OauthController extends Controller {
 
         $uid = 0;
         $isExist = logic\WechatUserLogic::isExistOpenId($tokenInfo['openid']);  //判断是否存在openId
+
         //snsapi授权
         if($tokenInfo['scope'] == 'snsapi_userinfo'){
             $wechatUserInfo = $weObj->getOauthUserinfo($tokenInfo['access_token'],$tokenInfo['openid']);    //获得微信用户的资料
