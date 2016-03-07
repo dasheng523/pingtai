@@ -52,7 +52,7 @@
 .fl{float: left;}
 .fr{float: right;}
 .tip{color: #888888;display: block;text-align: center;font-size: 12px;padding: 10px 10px;}
-.extra_button{position: fixed;z-index: 5;background: #3cc51f;width:50px;height:50px;border-radius: 50px;text-align: center;line-height: 50px;color: #fff;right: 30px;bottom: 50px;}
+.extra_button{position: fixed;z-index: 5;background: #3cc51f;width:50px;height:50px;border-radius: 50px;text-align: center;line-height: 50px;color: #fff;right: 30px;bottom: 70px;}
 .extra_button .text{font-size: 16px;}
 .collection-header{width: 100%;height: 10rem;background: #333;color: #fff;padding: 20px;}
 .collection-header-img{width: 80px;margin-right: 10px;}
@@ -105,7 +105,8 @@
 .comment-box-replybtn{float: right;}
 .comment-box-time{color: #888888;font-size: 12px;}
 
-
+.zqoneimgbox{flex-wrap: wrap;}
+.zqoneimgbox > .imgitem{min-width: 25%;}
 
 .footer{position: fixed;bottom: 0;left: 0;width: 100%;border-top: solid 1px #ccc;z-index: 5;}
 .footer-menu{background: #fff;}
