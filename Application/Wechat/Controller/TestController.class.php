@@ -22,6 +22,13 @@ class TestController extends Controller {
         print_r($_SERVER);
     }
 
+    public function testCreateConfig(){
+        $info['ckey'] = "Text_VerifyCodeError";
+        $info['cvalue'] = "您的验证码错误";
+        $info['intro'] = "验证码错误提示语";
+        echo \Wechat\Logic\SysconfigLogic::createConfig($info);
+    }
+
     public function testWechatInsert(){
         $info['name'] = '一妙集';
         $info['token'] = '1907424487';
@@ -44,5 +51,13 @@ class TestController extends Controller {
         $info['country'] = '5566';
         $info['headimgurl'] = '5566';
         echo \Wechat\Logic\WechatUserLogic::createWechatUser($info);
+    }
+
+    public function testConfig(){
+        echo C('CommonCustomer');
+    }
+
+    public function test(){
+        print_r(CONTROLLER_NAME);
     }
 }

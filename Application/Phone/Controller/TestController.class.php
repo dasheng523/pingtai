@@ -6,7 +6,8 @@
  * Time: 18:10
  */
 namespace Phone\Controller;
-class TestController extends OauthController {
+use Think\Controller;
+class TestController extends Controller {
 
     //测试滤镜
     public function test(){

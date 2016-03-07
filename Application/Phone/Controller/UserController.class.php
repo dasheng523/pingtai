@@ -7,7 +7,8 @@
  */
 
 namespace Phone\Controller;
-class UserController extends OauthController {
+use Think\Controller;
+class UserController extends Controller {
     //首页
     public function index(){
         $this->display();

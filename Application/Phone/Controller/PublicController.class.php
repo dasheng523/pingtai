@@ -7,7 +7,8 @@
  */
 
 namespace Phone\Controller;
-class PublicController extends OauthController {
+use Think\Controller;
+class PublicController extends Controller {
 
 
 }

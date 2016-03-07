@@ -27,6 +27,8 @@ class UserLogic{
     public static function createUser(){
         $data['ctime'] = time();
         $uid = D('User')->data($data)->add();
+        echo "tsss";
+        echo C('CommonCustomer');
         self::joinToRole($uid,C('CommonCustomer'));
 
         return $uid;
@@ -99,6 +101,15 @@ class UserLogic{
         D('UserRole')->data($data)->add();
     }
 
+    /**
+     * @param $uid
+     * @return mixed
+     * 获取用户昵称
+     */
+    public static function getNickName($uid)
+    {
+        return D('UserInfo')->where(array('user_id',$uid))->getField('nickname');
+    }
 
 
 }

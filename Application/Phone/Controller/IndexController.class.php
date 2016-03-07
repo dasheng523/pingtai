@@ -1,6 +1,8 @@
 <?php
 namespace Phone\Controller;
-class IndexController extends OauthController {
+use Think\Controller;
+
+class IndexController extends Controller {
     //首页
     public function index(){
         $this->display();

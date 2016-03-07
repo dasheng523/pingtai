@@ -2,15 +2,20 @@
 
 function UC($url='',$vars=''){
     //return __ROOT__ . U($path);
-    return U($url='',$vars='',true,true);
+    return U($url,$vars,true,true);
 }
 
 function wechatInstance(){
-    return \Wechat\Common\WechatWrap::getInstance();
+    return \Wechat\Logic\WechatLogic::initDefaultWechat();
+}
+
+function getUserId(){
+    return \Wechat\Logic\RequestLogic::getUserId();
 }
 
 //获得当前URL
 function currentUrl(){
+    $query = "";
     if($_SERVER['QUERY_STRING']){
         $query = '?'.$_SERVER['QUERY_STRING'];
     }
@@ -56,4 +61,9 @@ function isWeixin(){
         return true;
     }
     return false;
+}
+
+//生成唯一标识
+function ysuuid(){
+    return md5(uniqid(rand(),true));
 }
