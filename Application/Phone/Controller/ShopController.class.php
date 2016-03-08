@@ -10,7 +10,9 @@ use \Wechat\Logic as logic;
 use Think\Controller;
 
 class ShopController extends Controller {
-    //开店
+    /**
+     * 开店
+     */
     public function openShop(){
         $isOpen = logic\ShopLogic::isOpenShop(getUserId());
         if($isOpen){
@@ -20,7 +22,9 @@ class ShopController extends Controller {
         $this->display();
     }
 
-    //开店提交
+    /**
+     * 开店提交
+     */
     public function openShopCommit(){
         $name = I('post.name');
         $address = I('post.address');
@@ -44,7 +48,9 @@ class ShopController extends Controller {
     }
 
 
-    //店首页
+    /**
+     * 店首页
+     */
     public function index()
     {
         $nickName = logic\UserLogic::getNickName(getUserId());
@@ -57,8 +63,42 @@ class ShopController extends Controller {
         $this->display();
     }
 
-    //店铺
+    /**
+     * 店铺
+     */
     public function shopDetail(){
+        $info = logic\ShopLogic::getShopInfoByUserId(getUserId());
+        $bScope = logic\ScopeBusinessLogic::showAllTree();
+        $shopImgs = logic\MediaLogic::getEntityAllImgUrl($info['id'],logic\MediaLogic::EntityType_SHOP);
+        $this->assign('bScope',$bScope);
+        $this->assign('info',$info);
+        $this->assign('shopImgs',$shopImgs);
+        $this->display();
+    }
+
+    /**
+     * 商品列表页
+     */
+    public function goods(){
+        $goodsList = logic\GoodsLogic::getShopGoodsListByShoper(getUserId());
+        $this->assign('list',$goodsList);
+        $this->display();
+    }
+
+    /**
+     * 商品编辑页
+     */
+    public function goodsEdit(){
+        $id = I('get.id');
+        if($id){
+            $goodsDetail = logic\GoodsLogic::getGoodsDetail($id);
+            $goodsImgInfos = logic\GoodsLogic::getGoodsImgInfos($id);
+            $this->assign('goodsDetail',$goodsDetail);
+            $this->assign('goodsImgInfos',$goodsImgInfos);
+        }
+        else{
+
+        }
         $this->display();
     }
 

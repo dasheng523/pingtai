@@ -23,9 +23,9 @@ class TestController extends Controller {
     }
 
     public function testCreateConfig(){
-        $info['ckey'] = "Text_VerifyCodeError";
-        $info['cvalue'] = "您的验证码错误";
-        $info['intro'] = "验证码错误提示语";
+        $info['ckey'] = "PageSize";
+        $info['cvalue'] = 10;
+        $info['intro'] = "每页数量";
         echo \Wechat\Logic\SysconfigLogic::createConfig($info);
     }
 

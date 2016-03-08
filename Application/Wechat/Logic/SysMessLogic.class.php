@@ -11,7 +11,12 @@ class SysMessLogic{
     public static function getUnReadMessNum($uid)
     {
         $lastLogInfo = logic\UserOpLogLogic::getLastOpLog($uid,'readMess');
-        $lastReadTime = $lastLogInfo['ctime'];
+        if($lastLogInfo['ctime']){
+            $lastReadTime = $lastLogInfo['ctime'];
+        }
+        else{
+            $lastReadTime = 0;
+        }
         return D('SysMess')->where("(to_user_id=0 or to_user_id=$uid) and ctime>$lastReadTime")->count(1);
     }
 
