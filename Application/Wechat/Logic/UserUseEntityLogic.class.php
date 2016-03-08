@@ -20,6 +20,7 @@ class UserUseEntityLogic
     const EntityType_Shop = 1;
     const EntityType_Goods = 2;
     const EntityType_Comment = 3;
+    const EntityType_Collection = 4;
 
     const UseType_Comment = 1;
     const UseType_Like = 2;

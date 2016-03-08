@@ -57,5 +57,15 @@ class ShopLogic{
         return D('Shop')->save($info);
     }
 
+    /**
+     * @param $uid
+     * @return mixed
+     * 根据userId获取对应的店铺ID
+     */
+    public static function getShopIdByUserId($uid)
+    {
+        return D('Shop')->where(array('user_id'=>$uid))->getField('id');
+    }
+
 
 }

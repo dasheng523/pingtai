@@ -176,4 +176,91 @@ class ShopController extends Controller {
         }
     }
 
+    /**
+     * 妙集列表
+     */
+    public function collection(){
+        $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+        $list = logic\CollectionLogic::getCollectionListByShopId($shopId);
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    /**
+     * 妙集编辑
+     */
+    public function collectionEdit(){
+        $id = I('get.id');
+        if($id){
+            $info = logic\CollectionLogic::getCollectionInfo($id);
+            $imgInfo = logic\CollectionLogic::getCollectionFaceImgInfo($id);
+
+            $this->assign('info',$info);
+            $this->assign('imgInfo',$imgInfo);
+        }
+
+        $this->display();
+    }
+
+    /**
+     * 妙集编辑提交
+     */
+    public function collectionEditCommit(){
+        $id = I('post.id');
+        $info['name'] = I('post.name');
+        $info['intro'] = I('post.intro');
+        if($id){
+            $info['id'] = $id;
+            $res = logic\CollectionLogic::updateCollectionInfo($info);
+        }else{
+            $res = logic\CollectionLogic::addCollectionInfo($info);
+        }
+        if($res){
+            $this->success("操作成功");
+        }else{
+            $this->error("操作失败");
+        }
+    }
+
+    /**
+     * 妙集删除
+     */
+    public function delCollection(){
+        $id = I('post.id');
+        $res = logic\CollectionLogic::delCollectionById($id);
+        if($res){
+            $this->success("操作成功");
+        }else{
+            $this->error("操作失败");
+        }
+    }
+
+    /**
+     * 妙集详情
+     */
+    public function collectionInfo(){
+        $id = I('get.id');
+        $info = logic\CollectionLogic::getCollectionInfo($id);
+        $imgInfo = logic\CollectionLogic::getCollectionFaceImgInfo($id);
+        $goodsList = logic\CollectionLogic::getCollectionGoodsList($id);
+
+        $this->assign('info',$info);
+        $this->assign('imgInfo',$imgInfo);
+        $this->assign('goodsList',$goodsList);
+        $this->display();
+    }
+
+    /**
+     * 删除妙集中的商品
+     */
+    public function delCollectionGoods(){
+        $id = I('post.id');
+        $res = logic\CollectionLogic::delCollectionGoodsById($id);
+        if($res){
+            $this->success("操作成功");
+        }else{
+            $this->error("操作失败");
+        }
+    }
+
 }

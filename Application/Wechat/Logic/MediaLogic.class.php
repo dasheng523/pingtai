@@ -17,7 +17,8 @@ class MediaLogic
 {
 
     const EntityType_SHOP = 1; //店铺
-    const EntityType_Goods = 2; //店铺
+    const EntityType_Goods = 2; //商品
+    const EntityType_Collection = 3; //妙集
 
     const MediaType_Image = 1;
     const MediaType_Video = 2;
@@ -44,7 +45,7 @@ class MediaLogic
      * @param $entityId
      * @param $entityType
      * @return mixed
-     * 获取某个实体第一个图片
+     * 获取某个实体第一个图片URL
      */
     public static function getEntityFirstImgUrl($entityId, $entityType)
     {
@@ -53,6 +54,20 @@ class MediaLogic
             ->order('id asc')
             ->getField('url');
         return $url;
+    }
+
+    /**
+     * @param $entityId
+     * @param $entityType
+     * @return mixed
+     * 获取某个实体的第一个图片实体
+     */
+    public static function getEntityFirstImg($entityId, $entityType)
+    {
+        return D('Media')
+            ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>self::MediaType_Image))
+            ->order('id asc')
+            ->find();
     }
 
     /**
@@ -84,7 +99,7 @@ class MediaLogic
     /**
      * @param $info
      * @return mixed
-     * 添加商店数据
+     * 添加商店图片数据
      */
     public static function addShopImg($info)
     {
