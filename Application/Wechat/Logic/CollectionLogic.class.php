@@ -106,4 +106,56 @@ class CollectionLogic
     {
         return D('CollectionGoods')->where(array('id'=>$id))->delete();
     }
+
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取某商店下所有妙集的喜欢数
+     */
+    public static function getCollectionLikeTotalCountByShop($shopId)
+    {
+        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $entitySql = D('CollectionGoods')->where("collection_id in $collectSql")->field('goods_id')->select(false);
+        $count = logic\UserUseEntityLogic::getLikeCountByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Comment);
+        return $count;
+    }
+
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取某商店下所有妙集的评论数
+     */
+    public static function getCollectionCommentTotalCountByShop($shopId)
+    {
+        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $entitySql = D('CollectionGoods')->where("collection_id in $collectSql")->field('goods_id')->select(false);
+        $count = logic\UserUseEntityLogic::getCommentCountByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Comment);
+        return $count;
+    }
+
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取某商店下所有妙集的喜欢列表
+     */
+    public static function getGoodsLikeListByShop($shopId)
+    {
+        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $entitySql = D('CollectionGoods')->where("collection_id in $collectSql")->field('goods_id')->select(false);
+        $list = logic\UserUseEntityLogic::getLikeListByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Comment);
+        return self::fillMoreInfo($list);
+    }
+
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取某商店下所有妙集的评论列表
+     */
+    public static function getGoodsCommentListByShop($shopId)
+    {
+        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $entitySql = D('CollectionGoods')->where("collection_id in $collectSql")->field('goods_id')->select(false);
+        $list = logic\UserUseEntityLogic::getCommentListByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Comment);
+        return self::fillMoreInfo($list);
+    }
 }

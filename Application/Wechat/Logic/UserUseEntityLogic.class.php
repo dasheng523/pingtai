@@ -61,4 +61,74 @@ class UserUseEntityLogic
         return self::count($entityId,$entityType,self::UseType_Like);
     }
 
+    /**
+     * @param $entitySql
+     * @param $entityType
+     * @param $useType
+     * @return mixed
+     * 根据实体的sql获取记录数
+     */
+    public static function getCountByEntitySql($entitySql, $entityType,$useType){
+        return D('UserUseEntity')
+            ->where("entity_id in $entitySql and entity_type=$entityType and use_type=$useType")
+            ->count(1);
+    }
+
+    /**
+     * @param $entitySql
+     * @param $entityType
+     * @param $useType
+     * @return mixed
+     * 根据实体的sql获取记录列表
+     */
+    public static function getListByEntitySql($entitySql, $entityType,$useType){
+        return D('UserUseEntity')
+            ->where("entity_id in $entitySql and entity_type=$entityType and use_type=$useType")
+            ->select();
+    }
+
+    /**
+     * @param $entitySql
+     * @param $entityType
+     * @return mixed
+     * 获取实体SQL的喜欢数量
+     */
+    public static function getLikeCountByEntitySql($entitySql, $entityType)
+    {
+        return self::getCountByEntitySql($entitySql,$entityType,self::UseType_Like);
+    }
+
+    /**
+     * @param $entitySql
+     * @param $entityType
+     * @return mixed
+     * 获取实体SQL的评论数量
+     */
+    public static function getCommentCountByEntitySql($entitySql, $entityType)
+    {
+        return self::getCountByEntitySql($entitySql,$entityType,self::UseType_Comment);
+    }
+
+    /**
+     * @param $entitySql
+     * @param $entityType
+     * @return mixed
+     * 获取实体SQL的喜欢列表
+     */
+    public static function getLikeListByEntitySql($entitySql, $entityType)
+    {
+        return self::getListByEntitySql($entitySql,$entityType,self::UseType_Like);
+    }
+
+    /**
+     * @param $entitySql
+     * @param $entityType
+     * @return mixed
+     * 获取实体SQL的评论列表
+     */
+    public static function getCommentListByEntitySql($entitySql, $entityType)
+    {
+        return self::getListByEntitySql($entitySql,$entityType,self::UseType_Comment);
+    }
+
 }

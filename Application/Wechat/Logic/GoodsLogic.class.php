@@ -138,5 +138,48 @@ class GoodsLogic
         return D('Goods')->where(array('id'=>$id))->delete();
     }
 
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取店铺下所有商品的喜欢数量
+     */
+    public static function getGoodsLikeTotalCountByShop($shopId)
+    {
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
+        $count = logic\UserUseEntityLogic::getLikeCountByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
+        return $count;
+    }
+
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取店铺下所有商品的评论数
+     */
+    public static function getGoodsCommentTotalCountByShop($shopId)
+    {
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
+        $count = logic\UserUseEntityLogic::getCommentCountByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
+        return $count;
+    }
+
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取店铺下所有商品的喜欢列表
+     */
+    public static function getGoodsLikeListByShop($shopId)
+    {
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
+        $list = logic\UserUseEntityLogic::getLikeListByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
+        return self::fillMoreInfo($list);
+    }
+
+    public static function getGoodsCommentListByShop($shopId)
+    {
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
+        $list = logic\UserUseEntityLogic::getCommentListByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
+        return self::fillMoreInfo($list);
+    }
+
 
 }

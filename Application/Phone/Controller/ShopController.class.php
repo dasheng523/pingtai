@@ -263,4 +263,48 @@ class ShopController extends Controller {
         }
     }
 
+    /**
+     * 粉丝页面
+     */
+    public function fans(){
+        $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+        $goodsLikeNum = logic\GoodsLogic::getGoodsLikeTotalCountByShop($shopId);
+        $collectionLikeNum = logic\CollectionLogic::getCollectionLikeTotalCountByShop($shopId);
+        $likeTotal = $goodsLikeNum + $collectionLikeNum;
+        $this->assign('likeTotal',$likeTotal);
+
+        $goodsCommentNum = logic\GoodsLogic::getGoodsCommentTotalCountByShop($shopId);
+        $collectionCommentNum = logic\CollectionLogic::getCollectionCommentTotalCountByShop($shopId);
+        $commentTotal = $goodsCommentNum + $collectionCommentNum;
+        $this->assign('commentTotal',$commentTotal);
+
+        $this->display();
+    }
+
+    /**
+     * 收藏列表
+     */
+    public function fansCollect(){
+        $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+        $goodsLikeList = logic\GoodsLogic::getGoodsLikeListByShop($shopId);
+        $collectionLikeList = logic\CollectionLogic::getGoodsLikeListByShop($shopId);
+
+        $this->assign('goodsLikeList',$goodsLikeList);
+        $this->assign('collectionLikeList',$collectionLikeList);
+        $this->display();
+    }
+
+    /**
+     * 评论列表
+     */
+    public function fansComment(){
+        $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+        $goodsCommentList = logic\GoodsLogic::getGoodsCommentListByShop($shopId);
+        $collectionCommentList = logic\CollectionLogic::getGoodsCommentListByShop($shopId);
+
+        $this->assign('goodsCommentList',$goodsCommentList);
+        $this->assign('collectionCommentList',$collectionCommentList);
+        $this->display();
+    }
+
 }
