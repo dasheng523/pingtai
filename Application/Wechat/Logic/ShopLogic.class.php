@@ -7,6 +7,7 @@
  */
 
 namespace Wechat\Logic;
+use \Wechat\Logic as logic;
 
 class ShopLogic{
 
@@ -45,5 +46,16 @@ class ShopLogic{
     {
         return D('Shop')->where(array('user_id'=>$uid))->find();
     }
+
+    /**
+     * @param $info
+     * @return bool
+     * 更新店铺信息
+     */
+    public static function updateShop($info)
+    {
+        return D('Shop')->save($info);
+    }
+
 
 }

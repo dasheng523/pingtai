@@ -65,4 +65,87 @@ class MediaLogic
     {
         return self::getMediaUrl($entityId,$entityType,self::MediaType_Image);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     * 删除制定ID的媒体
+     */
+    public static function delMediaById($id){
+        $path = self::getMediaPathById($id);
+        self::delMediaFile($path);
+        return D('Media')
+            ->where(array('id'=>$id))
+            ->delete();
+    }
+
+
+
+    /**
+     * @param $info
+     * @return mixed
+     * 添加商店数据
+     */
+    public static function addShopImg($info)
+    {
+        return self::addMedia(self::EntityType_SHOP,self::MediaType_Image,$info);
+    }
+
+    /**
+     * @param $entityType
+     * @param $mediaType
+     * @param $info
+     * @return mixed
+     * 添加媒体数据
+     */
+    public static function addMedia($entityType,$mediaType,$info){
+        $info['entity_type'] = $entityType;
+        $info['mediaType'] = $mediaType;
+        return D('Media')->data($info)->add();
+    }
+
+    /**
+     * @return array
+     * 上传媒体
+     */
+    public static function updateMedia()
+    {
+        return array();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * 获取媒体路径
+     */
+    public static function getMediaPathById($id)
+    {
+        return D('Media')
+            ->where(array('id'=>$id))
+            ->getField('path');
+    }
+
+
+    /**
+     * @param $path
+     * 删除媒体文件
+     */
+    public static function delMediaFile($path)
+    {
+        //TODO 删除具体媒体文件
+    }
+
+    /**
+     * @param $entityId
+     * @param $entityType
+     * @param $mediaType
+     * @return mixed
+     * 获取某个实体的所有媒体
+     */
+    public static function getEntityAllMedia($entityId, $entityType, $mediaType)
+    {
+        return D('Media')
+            ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>$mediaType))
+            ->select();
+    }
 }

@@ -77,6 +77,44 @@ class ShopController extends Controller {
     }
 
     /**
+     * 提交店铺资料
+     */
+    public function shopEditCommit(){
+        $info['id'] = I('post.id');
+        $info['name'] = I('post.name');
+        $info['address'] = I('post.address');
+        $info['phone'] = I('post.phone');
+        $info['lng'] = I('post.lng');
+        $info['lat'] = I('post.lat');
+        $info['intro'] = I('post.intro');
+        $info['scope_business'] = I('post.bScope');
+
+        $res = logic\ShopLogic::updateShop($info);
+        if($res){
+            $this->success('修改成功');
+        }
+        else{
+            $this->error('修改失败');
+        }
+    }
+
+    /**
+     * 删除店铺图片
+     */
+    public function delShopImg(){
+        $imgId = I('post.id');
+        logic\MediaLogic::delMediaById($imgId);
+    }
+
+    /**
+     * 添加店铺图片
+     */
+    public function addShopImg(){
+        $info = logic\MediaLogic::updateMedia();
+        logic\MediaLogic::addShopImg($info);
+    }
+
+    /**
      * 商品列表页
      */
     public function goods(){
@@ -100,6 +138,42 @@ class ShopController extends Controller {
 
         }
         $this->display();
+    }
+
+    /**
+     * 商品编辑提交页
+     */
+    public function goodsEditCommit(){
+        $id = I('post.id');
+        $info['name'] = I('post.name');
+        $info['price'] = I('post.price');
+        $info['intro'] = I('post.intro');
+        $shop = logic\ShopLogic::getShopInfoByUserId(getUserId());
+        if($id){
+            $info['id'] = $id;
+            $res = logic\GoodsLogic::updateGoods($info,$shop['id']);
+        }
+        else{
+            $res = logic\GoodsLogic::addGoods($info,$shop['id']);
+        }
+        if($res){
+            $this->success("操作成功");
+        }else{
+            $this->error("操作失败");
+        }
+    }
+
+    /**
+     * 商品删除
+     */
+    public function goodsDel(){
+        $id = I('post.id');
+        $res = logic\GoodsLogic::delGoods($id);
+        if($res){
+            $this->success("操作成功");
+        }else{
+            $this->error("操作失败");
+        }
     }
 
 }

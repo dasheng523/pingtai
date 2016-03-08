@@ -85,9 +85,57 @@ class GoodsLogic
         return logic\MediaLogic::getEntityFirstImgUrl($gid,logic\MediaLogic::EntityType_Goods);
     }
 
+    /**
+     * @param $gid
+     * @return mixed
+     * 获取商品基本内容
+     */
     public static function getGoodsDetail($gid)
     {
         return D('Goods')->where(array('id'=>$gid))->find();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * 获得商品图片信息
+     */
+    public static function getGoodsImgInfos($id)
+    {
+        return logic\MediaLogic::getEntityAllMedia($id,logic\MediaLogic::EntityType_Goods,logic\MediaLogic::MediaType_Image);
+    }
+
+    /**
+     * @param $info
+     * @param $shopId
+     * @return mixed
+     * 更新商品
+     */
+    public static function updateGoods($info,$shopId)
+    {
+        $info['shop_id'] = $shopId;
+        return D('Goods')->data($info)->save();
+    }
+
+    /**
+     * @param $info
+     * @param $shopId
+     * @return mixed
+     * 添加商品
+     */
+    public static function addGoods($info, $shopId)
+    {
+        $info['shop_id'] = $shopId;
+        return D('Goods')->data($info)->add();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * 删除商品
+     */
+    public static function delGoods($id){
+        return D('Goods')->where(array('id'=>$id))->delete();
     }
 
 
