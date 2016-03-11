@@ -40,4 +40,13 @@ class RequestLogic{
         return S('client_server_user_'.$clientUserCode);
     }
 
+    /**
+     * @return array
+     * 获取经纬度
+     */
+    public static function getLocation(){
+        // TODO 经纬度
+        return array();
+    }
+
 }

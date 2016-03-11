@@ -17,13 +17,6 @@ use \Wechat\Logic as logic;
 class UserUseEntityLogic
 {
 
-    const EntityType_Shop = 1;
-    const EntityType_Goods = 2;
-    const EntityType_Comment = 3;
-    const EntityType_Collection = 4;
-
-    const UseType_Comment = 1;
-    const UseType_Like = 2;
 
     /**
      * @param $entityId
@@ -46,7 +39,7 @@ class UserUseEntityLogic
      */
     public static function getCommentCount($entityId, $entityType)
     {
-        return self::count($entityId,$entityType,self::UseType_Comment);
+        return self::count($entityId,$entityType,C('UseType_Comment'));
     }
 
 
@@ -58,7 +51,7 @@ class UserUseEntityLogic
      */
     public static function getLikeCount($entityId, $entityType)
     {
-        return self::count($entityId,$entityType,self::UseType_Like);
+        return self::count($entityId,$entityType,C('UseType_Like'));
     }
 
     /**
@@ -70,7 +63,7 @@ class UserUseEntityLogic
      */
     public static function getCountByEntitySql($entitySql, $entityType,$useType){
         return D('UserUseEntity')
-            ->where("entity_id in $entitySql and entity_type=$entityType and use_type=$useType")
+            ->where("entity_id in ($entitySql) and entity_type=$entityType and use_type=$useType")
             ->count(1);
     }
 
@@ -83,7 +76,7 @@ class UserUseEntityLogic
      */
     public static function getListByEntitySql($entitySql, $entityType,$useType){
         return D('UserUseEntity')
-            ->where("entity_id in $entitySql and entity_type=$entityType and use_type=$useType")
+            ->where("entity_id in ($entitySql) and entity_type=$entityType and use_type=$useType")
             ->select();
     }
 
@@ -95,7 +88,7 @@ class UserUseEntityLogic
      */
     public static function getLikeCountByEntitySql($entitySql, $entityType)
     {
-        return self::getCountByEntitySql($entitySql,$entityType,self::UseType_Like);
+        return self::getCountByEntitySql($entitySql,$entityType,C('UseType_Like'));
     }
 
     /**
@@ -106,7 +99,7 @@ class UserUseEntityLogic
      */
     public static function getCommentCountByEntitySql($entitySql, $entityType)
     {
-        return self::getCountByEntitySql($entitySql,$entityType,self::UseType_Comment);
+        return self::getCountByEntitySql($entitySql,$entityType,C('UseType_Comment'));
     }
 
     /**
@@ -117,7 +110,7 @@ class UserUseEntityLogic
      */
     public static function getLikeListByEntitySql($entitySql, $entityType)
     {
-        return self::getListByEntitySql($entitySql,$entityType,self::UseType_Like);
+        return self::getListByEntitySql($entitySql,$entityType,C('UseType_Like'));
     }
 
     /**
@@ -128,7 +121,80 @@ class UserUseEntityLogic
      */
     public static function getCommentListByEntitySql($entitySql, $entityType)
     {
-        return self::getListByEntitySql($entitySql,$entityType,self::UseType_Comment);
+        return self::getListByEntitySql($entitySql,$entityType,C('UseType_Comment'));
     }
+
+    /**
+     * @param $page
+     * @param $pageSize
+     * @return mixed
+     * 获取最多喜欢的集合
+     */
+    public static function getTopLikeCollection($page, $pageSize)
+    {
+        return self::getTopList(C('EntityType_Collection'),C('UseType_Like'),$page,$pageSize);
+    }
+
+    /**
+     * @param $entityType
+     * @param $useType
+     * @param $page
+     * @param $pageSize
+     * @return mixed
+     * 获取排前的列表
+     */
+    public static function getTopList($entityType, $useType, $page, $pageSize)
+    {
+        return D('UserUseEntity')
+            ->group('entity_id')
+            ->where(array('entity_type'=>$entityType,'use_type'=>$useType))
+            ->order("count(1) desc")
+            ->page($page,$pageSize)
+            ->field("entity_id,count(1)")
+            ->select();
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
+     * 获取用户收藏妙集
+     */
+    public static function getUserCollection($userId)
+    {
+        return D('UserUseEntity')
+            ->where(array("user_id=$userId",
+                'entity_type'=>C('EntityType_Collection'),
+                'use_type'=>C('UseType_Collection')))
+            ->select();
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
+     * 获取用户收藏商品
+     */
+    public static function getUserGoods($userId)
+    {
+        return D('UserUseEntity')
+            ->where(array("user_id=$userId",
+                'entity_type'=>C('EntityType_Goods'),
+                'use_type'=>C('UseType_Collection')))
+            ->select();
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
+     * 获取用户的评论
+     */
+    public static function getUserComment($userId)
+    {
+        return D('UserUseEntity')
+            ->where(array("user_id=$userId",
+                'entity_type'=>C('EntityType_Comment'),
+                'use_type'=>C('UseType_Comment')))
+            ->select();
+    }
+
 
 }

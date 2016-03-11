@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9871529-962f-45de-9b42-e0c088e05976" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/Controller/PublicController.class.php" afterPath="$PROJECT_DIR$/Application/Phone/Controller/PublicController.class.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/ScoreLogic.class.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/TaskLogic.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Common/Common/function.php" afterPath="$PROJECT_DIR$/Application/Common/Common/function.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Common/Conf/config.php" afterPath="$PROJECT_DIR$/Application/Common/Conf/config.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/Controller/ShopController.class.php" afterPath="$PROJECT_DIR$/Application/Phone/Controller/ShopController.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/View/Shop/fans.html" afterPath="$PROJECT_DIR$/Application/Phone/View/Shop/fans.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Phone/Controller/UserController.class.php" afterPath="$PROJECT_DIR$/Application/Phone/Controller/UserController.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Logic/CollectionLogic.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/CollectionLogic.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Logic/GoodsLogic.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/GoodsLogic.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Logic/SysMessLogic.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/SysMessLogic.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Logic/RequestLogic.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/RequestLogic.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Logic/ShopLogic.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/ShopLogic.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Wechat/Logic/UserUseEntityLogic.class.php" afterPath="$PROJECT_DIR$/Application/Wechat/Logic/UserUseEntityLogic.class.php" />
     </list>
     <ignored path="pingtai.iws" />
@@ -30,33 +36,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ShopController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Phone/Controller/ShopController.class.php">
+      <file leaf-file-name="ScoreLogic.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/ScoreLogic.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.6">
-              <caret line="302" column="81" selection-start-line="302" selection-start-column="56" selection-end-line="302" selection-end-column="81" />
-              <folding>
-                <element signature="e#117#144#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CollectionLogic.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/CollectionLogic.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57575756">
-              <caret line="148" column="7" selection-start-line="148" selection-start-column="7" selection-end-line="148" selection-end-column="7" />
+            <state vertical-scroll-proportion="-9.8">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoodsLogic.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/GoodsLogic.class.php">
+      <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Application/Phone/Controller/UserController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.1">
-              <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.83501685">
+              <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+              <folding>
+                <element signature="e#118#139#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserUseEntityLogic.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/UserUseEntityLogic.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.5">
+              <caret line="189" column="41" selection-start-line="189" selection-start-column="27" selection-end-line="189" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/Common/Conf/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.606558">
+              <caret line="25" column="20" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -70,9 +86,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Application/Phone/View/template/main.html" />
-        <option value="$PROJECT_DIR$/Application/Phone/View/User/index.html" />
-        <option value="$PROJECT_DIR$/Application/Phone/View/Index/publishGoodsList.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Index/publishNeedDetail.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Index/index.html" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Index/publishNeed.html" />
@@ -82,7 +95,6 @@
         <option value="$PROJECT_DIR$/Public/ng-crop-reactangle-with-aspect/index.html" />
         <option value="$PROJECT_DIR$/Application/Wechat/Service/WechatService.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/QueryLogic.class.php" />
-        <option value="$PROJECT_DIR$/Application/Wechat/Logic/RequestLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/WechatUserLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Model/UserModel.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/WechatLogic.class.php" />
@@ -98,29 +110,33 @@
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/OauthLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/OauthController.class.php" />
         <option value="$PROJECT_DIR$/Application/Common/Conf/tags.php" />
-        <option value="$PROJECT_DIR$/Application/Common/Conf/config.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Behaviors/OauthBehavior.class.php" />
-        <option value="$PROJECT_DIR$/Application/Phone/Controller/UserController.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/TestController.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/IndexController.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/UserOpLogLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/ScopeBusinessLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/logic/MediaLogic.class.php" />
-        <option value="$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/logic/logic/UserEntityLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/logic/GoodsLogic.class.php" />
-        <option value="$PROJECT_DIR$/Application/Common/Common/function.php" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/shopDetail.html" />
-        <option value="$PROJECT_DIR$/Application/Wechat/Logic/ShopLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/MediaLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/logic/CollectionLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/Controller/PublicController.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/SysMessLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Phone/View/Shop/fans.html" />
-        <option value="$PROJECT_DIR$/Application/Phone/Controller/ShopController.class.php" />
-        <option value="$PROJECT_DIR$/Application/Wechat/Logic/GoodsLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Wechat/Logic/logic/TaskLogic.class.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/CollectionLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Wechat/Logic/GoodsLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Common/Common/function.php" />
+        <option value="$PROJECT_DIR$/Application/Wechat/Logic/RequestLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Wechat/Logic/ShopLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Phone/Controller/ShopController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Wechat/Logic/ScoreLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Wechat/Logic/TaskLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Common/Conf/config.php" />
         <option value="$PROJECT_DIR$/Application/Wechat/Logic/UserUseEntityLogic.class.php" />
+        <option value="$PROJECT_DIR$/Application/Phone/Controller/UserController.class.php" />
       </list>
     </option>
   </component>
@@ -164,7 +180,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -375,32 +391,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="View" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Shop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pingtai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pingtai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -469,20 +459,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Application/Wechat/Logic" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Application/Wechat/Logic" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Public" />
       <recent name="$PROJECT_DIR$/Public/css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Application/Wechat/Logic" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.WechatUserLogic.class.php">
@@ -543,7 +534,7 @@
     <frame x="62" y="-9" width="1861" height="1095" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31357342" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32576177" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -599,20 +590,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/goodsdetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.6">
-          <caret line="142" column="12" selection-start-line="142" selection-start-column="12" selection-end-line="147" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/View/Index/publishNeedDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4107744">
-          <caret line="117" column="49" selection-start-line="117" selection-start-column="49" selection-end-line="117" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Public/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -666,7 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3445567">
           <caret line="828" column="9" selection-start-line="828" selection-start-column="9" selection-end-line="828" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -681,7 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4949495">
           <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -703,7 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25925925">
           <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -725,7 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5185185">
           <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -733,7 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.047138046">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -776,21 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/OauthLogic.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.8">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Common/Conf/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.852459">
-          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Common/Conf/tags.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.1">
@@ -802,13 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23569024">
           <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Phone/Controller/UserController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11784512">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -851,23 +801,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35353535">
           <caret line="15" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/UserOpLogLogic.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23569024">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/RequestLogic.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44781145">
-          <caret line="24" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="42" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -875,7 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09090909">
           <caret line="1119" column="43" selection-start-line="1119" selection-start-column="43" selection-end-line="1119" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -887,34 +819,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.5">
-          <caret line="25" column="33" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/Phone/View/Shop/shopDetail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.9">
           <caret line="34" column="103" selection-start-line="34" selection-start-column="103" selection-end-line="34" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22222222">
-          <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/ShopLogic.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6700337">
-          <caret line="62" column="24" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -930,9 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.3">
           <caret line="34" column="47" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="47" />
-          <folding>
-            <element signature="e#118#139#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -940,49 +845,127 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.733334">
           <caret line="44" column="66" selection-start-line="44" selection-start-column="66" selection-end-line="44" selection-end-column="66" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Controller/TestController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8484849">
+          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/OauthLogic.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.7">
+          <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/SysMessLogic.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.3">
-          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.18518518">
+          <caret line="23" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/UserOpLogLogic.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23569024">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/CollectionLogic.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76430976">
+          <caret line="199" column="112" selection-start-line="199" selection-start-column="112" selection-end-line="199" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/RequestLogic.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/ShopLogic.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76430976">
+          <caret line="110" column="20" selection-start-line="110" selection-start-column="20" selection-end-line="110" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/GoodsLogic.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.023569023">
+          <caret line="47" column="44" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Common/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4814815">
+          <caret line="122" column="9" selection-start-line="122" selection-start-column="9" selection-end-line="122" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Phone/Controller/ShopController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.6">
-          <caret line="302" column="81" selection-start-line="302" selection-start-column="56" selection-end-line="302" selection-end-column="81" />
+        <state vertical-scroll-proportion="0.15151516">
+          <caret line="286" column="12" selection-start-line="286" selection-start-column="12" selection-end-line="286" selection-end-column="12" />
           <folding>
             <element signature="e#117#144#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/GoodsLogic.class.php">
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/TaskLogic.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.1">
-          <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
+        <state vertical-scroll-proportion="-21.0">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Common/Conf/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.606558">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/ScoreLogic.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.8">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/UserUseEntityLogic.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6936027">
-          <caret line="126" column="19" selection-start-line="126" selection-start-column="19" selection-end-line="126" selection-end-column="19" />
+        <state vertical-scroll-proportion="-18.5">
+          <caret line="189" column="41" selection-start-line="189" selection-start-column="27" selection-end-line="189" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/Wechat/Logic/CollectionLogic.class.php">
+    <entry file="file://$PROJECT_DIR$/Application/Phone/Controller/UserController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57575756">
-          <caret line="148" column="7" selection-start-line="148" selection-start-column="7" selection-end-line="148" selection-end-column="7" />
-          <folding />
+        <state vertical-scroll-proportion="0.83501685">
+          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+          <folding>
+            <element signature="e#118#139#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -307,4 +307,32 @@ class ShopController extends Controller {
         $this->display();
     }
 
+    /**
+     * 影响力页面
+     */
+    public function effect(){
+        $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+        $totalScore = logic\ScoreLogic::totalShopScore($shopId);
+        $taskList = logic\TaskLogic::getShopTaskList($shopId);
+
+        $this->assign('totalScore',$totalScore);
+        $this->assign('taskList',$taskList);
+        $this->display();
+    }
+
+    /**
+     * 排行榜
+     */
+    public function effectTopbar(){
+        //全市
+        $list1 = logic\ScoreLogic::topShopScore(1,getSysConfig('PageSize'));
+        $list1 = logic\ShopLogic::fillShopList($list1);
+        $list1 = logic\ShopLogic::fillDistance($list1);
+
+        $list2 = logic\ScoreLogic::topNearShopScore();
+
+        $this->assign('list1',$list1);
+        $this->display();
+    }
+
 }

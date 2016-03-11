@@ -67,5 +67,49 @@ class ShopLogic{
         return D('Shop')->where(array('user_id'=>$uid))->getField('id');
     }
 
+    /**
+     * @param $list
+     * @return mixed
+     * 填充店铺内容列表
+     */
+    public static function fillShopList($list)
+    {
+        foreach($list as &$info){
+            $shopInfo = self::getShopInfoById($info['id']);
+            $info = array_merge($info,$shopInfo);
+        }
+        return $list;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * 根据ID获取店铺信息
+     */
+    public static function getShopInfoById($id)
+    {
+        return D('Shop')
+            ->where(array('id'=>$id))
+            ->find();
+    }
+
+    /**
+     * @param $list
+     * @return mixed
+     * 填充距离
+     */
+    public static function fillDistance($list)
+    {
+        foreach($list as &$info){
+            $lat = $info['lat'];
+            $lng = $info['lng'];
+            $location = logic\RequestLogic::getLocation();
+            $llat = $location['lat'];
+            $llng = $location['lng'];
+            $info['distance'] = distance($lat,$lng,$llat,$llng);
+        }
+        return $list;
+    }
+
 
 }

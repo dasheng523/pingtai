@@ -58,6 +58,6 @@ class TestController extends Controller {
     }
 
     public function test(){
-        print_r(CONTROLLER_NAME);
+        print_r(getUserId());
     }
 }

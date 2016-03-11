@@ -61,7 +61,7 @@ class GoodsLogic
      */
     public static function getGoodsCommentCount($gid)
     {
-        return logic\UserUseEntityLogic::getCommentCount($gid,logic\UserUseEntityLogic::EntityType_Goods);
+        return logic\UserUseEntityLogic::getCommentCount($gid,C('EntityType_Goods'));
     }
 
     /**
@@ -71,7 +71,7 @@ class GoodsLogic
      */
     public static function getGoodsLikeCount($gid)
     {
-        return logic\UserUseEntityLogic::getLikeCount($gid,logic\UserUseEntityLogic::EntityType_Goods);
+        return logic\UserUseEntityLogic::getLikeCount($gid,C('EntityType_Goods'));
     }
 
 
@@ -82,7 +82,7 @@ class GoodsLogic
      */
     public static function getGoodsFirstImgUrl($gid)
     {
-        return logic\MediaLogic::getEntityFirstImgUrl($gid,logic\MediaLogic::EntityType_Goods);
+        return logic\MediaLogic::getEntityFirstImgUrl($gid,C('EntityType_Goods'));
     }
 
     /**
@@ -102,7 +102,7 @@ class GoodsLogic
      */
     public static function getGoodsImgInfos($id)
     {
-        return logic\MediaLogic::getEntityAllMedia($id,logic\MediaLogic::EntityType_Goods,logic\MediaLogic::MediaType_Image);
+        return logic\MediaLogic::getEntityAllMedia($id,C('EntityType_Goods'),logic\MediaLogic::MediaType_Image);
     }
 
     /**
@@ -145,8 +145,8 @@ class GoodsLogic
      */
     public static function getGoodsLikeTotalCountByShop($shopId)
     {
-        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
-        $count = logic\UserUseEntityLogic::getLikeCountByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $count = logic\UserUseEntityLogic::getLikeCountByEntitySql($entitySql,C('EntityType_Goods'));
         return $count;
     }
 
@@ -157,8 +157,8 @@ class GoodsLogic
      */
     public static function getGoodsCommentTotalCountByShop($shopId)
     {
-        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
-        $count = logic\UserUseEntityLogic::getCommentCountByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $count = logic\UserUseEntityLogic::getCommentCountByEntitySql($entitySql,C('EntityType_Goods'));
         return $count;
     }
 
@@ -169,16 +169,66 @@ class GoodsLogic
      */
     public static function getGoodsLikeListByShop($shopId)
     {
-        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
-        $list = logic\UserUseEntityLogic::getLikeListByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
-        return self::fillMoreInfo($list);
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $list = logic\UserUseEntityLogic::getLikeListByEntitySql($entitySql,C('EntityType_Goods'));
+        $list = self::fillImgList($list);
+        $list = self::fillLikeNumList($list);
+        $list = self::fillCommentNumList($list);
+        return $list;
     }
 
+    /**
+     * @param $shopId
+     * @return mixed
+     * 获取店铺下所有商品的评论列表
+     */
     public static function getGoodsCommentListByShop($shopId)
     {
-        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('goods_id')->select(false);
-        $list = logic\UserUseEntityLogic::getCommentListByEntitySql($entitySql,logic\UserUseEntityLogic::EntityType_Goods);
-        return self::fillMoreInfo($list);
+        $entitySql = D('Goods')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $list = logic\UserUseEntityLogic::getCommentListByEntitySql($entitySql,C('EntityType_Goods'));
+        $list = self::fillImgList($list);
+        $list = self::fillLikeNumList($list);
+        $list = self::fillCommentNumList($list);
+        return $list;
+    }
+
+    /**
+     * @param $list
+     * @return mixed
+     * 填充图片Url
+     */
+    private static function fillImgList($list)
+    {
+        foreach($list as &$goodsInfo){
+            $goodsInfo['goodsfirstimg'] = self::getGoodsFirstImgUrl($goodsInfo['id']);
+        }
+        return $list;
+    }
+
+    /**
+     * @param $list
+     * @return mixed
+     * 填充喜欢数量
+     */
+    private static function fillLikeNumList($list)
+    {
+        foreach($list as &$goodsInfo){
+            $goodsInfo['like'] = self::getGoodsLikeCount($goodsInfo['id']);
+        }
+        return $list;
+    }
+
+    /**
+     * @param $list
+     * @return mixed
+     * 填充评论数量
+     */
+    private static function fillCommentNumList($list)
+    {
+        foreach($list as &$goodsInfo){
+            $goodsInfo['commentnum'] = self::getGoodsCommentCount($goodsInfo['id']);
+        }
+        return $list;
     }
 
 
