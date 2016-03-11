@@ -196,5 +196,58 @@ class UserUseEntityLogic
             ->select();
     }
 
+    /**
+     * @param $userId
+     * @param $goodsId
+     * @return mixed
+     * 删除用户收藏的商品
+     */
+    public static function delUserCollectionGoods($userId, $goodsId)
+    {
+        return self::delItem($userId,$goodsId,C('EntityType_Goods'),C('UseType_Collection'));
+    }
+
+    /**
+     * @param $userId
+     * @param $collId
+     * @return mixed
+     * 删除用户收藏的妙集
+     */
+    public static function delUserCollectionColl($userId, $collId)
+    {
+        return self::delItem($userId,$collId,C('EntityType_Collection'),C('UseType_Collection'));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * 删除指定ID的记录
+     */
+    public static function delItemById($id){
+        return D('UserUseEntity')
+            ->where(array('id'=>$id))
+            ->delete();
+    }
+
+    /**
+     * @param $userId
+     * @param $entityID
+     * @param $entityType
+     * @param $useType
+     * @return mixed
+     * 删除一些项
+     */
+    public static function delItem($userId, $entityID, $entityType, $useType)
+    {
+        return D('UserUseEntity')
+            ->where(array(
+                "user_id"=>$userId,
+                "entity_type"=>$entityType,
+                "entity_id" =>$entityID,
+                "use_type"=>$useType
+            ))
+            ->delete();
+    }
+
 
 }

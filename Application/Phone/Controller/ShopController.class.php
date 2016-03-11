@@ -54,11 +54,9 @@ class ShopController extends Controller {
     public function index()
     {
         $nickName = logic\UserLogic::getNickName(getUserId());
-        $shopInfo = logic\ShopLogic::getShopInfoByUserId(getUserId());
         $shopMessnum = logic\SysMessLogic::getUnReadMessNum(getUserId());
 
         $this->assign('nickName',$nickName);
-        $this->assign('shopInfo',$shopInfo);
         $this->assign('shopMessnum',$shopMessnum);
         $this->display();
     }

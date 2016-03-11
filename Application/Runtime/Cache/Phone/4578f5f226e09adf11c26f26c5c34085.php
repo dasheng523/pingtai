@@ -16,6 +16,7 @@
 
     
 
+
 </head>
 <body>
 <div class="page-group">
@@ -207,6 +208,12 @@
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
 <script type='text/javascript' src="http://192.168.23.105/pingtai/Public/js/main.js" charset='utf-8'></script>
+
+    <script>
+        $('.searchbar').click(function(){
+            window.location.href = "<?php echo UC('Index/search');?>";
+        });
+    </script>
 
 </body>
 </html>

@@ -24,6 +24,8 @@
 
 .iconfont{font-family:"iconfont";font-style:normal;}
 
+.error{border: 1px solid red;}
+
 .green-text{color: #3cc51f !important;}
 .red-text{color: red !important;}
 .gray-text{color: #A1A1A1;}
@@ -107,6 +109,11 @@
 
 .zqoneimgbox{flex-wrap: wrap;}
 .zqoneimgbox > .imgitem{min-width: 25%;}
+
+.hotsearchbox{padding: 10px 10px;}
+.hotsearchlist{}
+.hotsearchitem{width: 32%;padding: 5px 0; text-align: center;background: #fff;display: inline-block;margin-bottom: 5px;}
+
 
 .footer{position: fixed;bottom: 0;left: 0;width: 100%;border-top: solid 1px #ccc;z-index: 5;}
 .footer-menu{background: #fff;}

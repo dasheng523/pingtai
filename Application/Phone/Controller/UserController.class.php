@@ -24,6 +24,7 @@ class UserController extends Controller {
         $taskList = logic\TaskLogic::getUserTaskList(getUserId());
 
         $this->assign('totalScore',$totalScore);
+        $this->assign('taskList',$taskList);
         $this->display();
     }
 
@@ -38,6 +39,32 @@ class UserController extends Controller {
         $goods = logic\UserUseEntityLogic::getUserGoods(getUserId());
         $this->assign('goods',$goods);
         $this->display();
+    }
+
+    /**
+     * 删除我收藏的商品
+     */
+    public function delGoods(){
+        $goodsId = I('post.id');
+        $res = logic\UserUseEntityLogic::delUserCollectionGoods(getUserId(),$goodsId);
+        if($res){
+            $this->success('操作成功');
+        }else{
+            $this->error("操作失败");
+        }
+    }
+
+    /**
+     * 删除我收藏的妙集
+     */
+    public function delCollection(){
+        $collId = I('post.id');
+        $res = logic\UserUseEntityLogic::delUserCollectionColl(getUserId(),$collId);
+        if($res){
+            $this->success('操作成功');
+        }else{
+            $this->error("操作失败");
+        }
     }
 
     /**

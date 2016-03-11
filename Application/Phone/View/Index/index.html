@@ -1,10 +1,14 @@
 <extend name="template/main" />
 
 <block name="css">
-    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
-    <style>
-        .swiper-pagination-bullet-active{background: red;}
-    </style>
+</block>
+
+<block name="script">
+    <script>
+        $('.searchbar').click(function(){
+            window.location.href = "{:UC('Index/search')}";
+        });
+    </script>
 </block>
 
 <block name="content">

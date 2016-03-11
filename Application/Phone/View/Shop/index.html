@@ -1,93 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<extend name="template/shop_main" />
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css?v=5">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=16">
+<block name="css">
+</block>
 
-</head>
-<body>
-<div class="page-group">
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
     <div class="page page-current">
         <div class="content">
-        <div class="hd">
-            <h1 class="page-title">
-                一妙集
-            </h1>
-            <p class="page-desc">欢迎回来，xxx</p>
-        </div>
-
-
-        <div class="bd">
-            <div class="weui_grids">
-                <a href="{:UC('Shop/goods')}" class="weui_grid js_grid" data-id="button">
-                    <div class="weui_grid_icon">
-                        <img src="__PUBLIC__/images/iconfont-shangpinguanli.png" alt="">
-                    </div>
-                    <p class="weui_grid_label">
-                        商品
-                    </p>
-                </a>
-                <a href="{:UC('Shop/shopDetail')}" class="weui_grid js_grid" data-id="toast">
-                    <div class="weui_grid_icon">
-                        <img src="__PUBLIC__/images/iconfont-dianpuguanli.png" alt="">
-                    </div>
-                    <p class="weui_grid_label">
-                        店铺
-                    </p>
-                </a>
-                <a href="{:UC('Shop/collection')}" class="weui_grid js_grid" data-id="cell">
-                    <div class="weui_grid_icon">
-                        <img src="__PUBLIC__/images/iconfont-ji.png" alt="">
-                    </div>
-                    <p class="weui_grid_label">
-                        妙集
-                    </p>
-                </a>
-                <a href="{:UC('Shop/effect')}" class="weui_grid js_grid" data-id="progress">
-                    <div class="weui_grid_icon">
-                        <img src="__PUBLIC__/images/iconfont-jifen.png" alt="">
-                    </div>
-                    <p class="weui_grid_label">
-                        影响
-                    </p>
-                </a>
-                <a href="{:UC('Shop/fans')}" class="weui_grid js_grid" data-id="icons">
-                    <div class="weui_grid_icon">
-                        <img src="__PUBLIC__/images/iconfont-11guanzhufensi.png" alt="">
-                    </div>
-                    <p class="weui_grid_label">
-                        粉丝
-                    </p>
-                </a>
-                <a href="{:UC('Public/message')}" class="weui_grid js_grid" data-id="dialog">
-                    <div class="weui_grid_icon">
-                        <img src="__PUBLIC__/images/iconfont-xiaoxi.png" alt="">
-                    </div>
-                    <p class="weui_grid_label">
-                        消息
-                    </p>
-                </a>
+            <div class="hd">
+                <h1 class="page-title">
+                    一妙集
+                </h1>
+                <p class="page-desc">欢迎回来，{$nickName}</p>
             </div>
-        </div>
+
+
+            <div class="bd">
+                <div class="weui_grids">
+                    <a href="{:UC('Shop/goods')}" class="weui_grid js_grid" data-id="button">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-shangpinguanli.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            商品
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/shopDetail')}" class="weui_grid js_grid" data-id="toast">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-dianpuguanli.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            店铺
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/collection')}" class="weui_grid js_grid" data-id="cell">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-ji.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            妙集
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/effect')}" class="weui_grid js_grid" data-id="progress">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-jifen.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            影响
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/fans')}" class="weui_grid js_grid" data-id="icons">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-11guanzhufensi.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            粉丝
+                        </p>
+                    </a>
+                    <a href="{:UC('Public/message')}" class="weui_grid js_grid" data-id="dialog">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-xiaoxi.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            消息
+                        </p>
+                    </a>
+                </div>
+            </div>
 
         </div>
     </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-<script type='text/javascript' src="__PUBLIC__/js/main.js?v=1" charset='utf-8'></script>
-
-</body>
-</html>
+</block>
