@@ -30,7 +30,7 @@ class GoodsLogic
         $goodsList = self::getGoodsListByShopId($shop['id'],$page,$size);
         foreach($goodsList as &$goodsInfo){
             $goodsInfo['commentnum'] = self::getGoodsCommentCount($goodsInfo['id']);
-            $goodsInfo['like'] = self::getGoodsLikeCount($goodsInfo['id']);
+            $goodsInfo['likenum'] = self::getGoodsLikeCount($goodsInfo['id']);
             $goodsInfo['goodsfirstimg'] = self::getGoodsFirstImgUrl($goodsInfo['id']);
         }
         return $goodsList;
@@ -50,6 +50,7 @@ class GoodsLogic
         $list = D('goods')
             ->where(array('user_id'=>$shopId))
             ->page($page,$size)
+            ->order('mtime desc')
             ->select();
         return $list;
     }
@@ -114,7 +115,8 @@ class GoodsLogic
     public static function updateGoods($info,$shopId)
     {
         $info['shop_id'] = $shopId;
-        return D('Goods')->data($info)->save();
+        $info['mtime'] = time();
+        return D('Goods')->save($info);
     }
 
     /**
@@ -126,7 +128,10 @@ class GoodsLogic
     public static function addGoods($info, $shopId)
     {
         $info['shop_id'] = $shopId;
-        return D('Goods')->data($info)->add();
+        $info['ctime'] = time();
+        $info['mtime'] = time();
+        D('Goods')->create($info,1);
+        return D('Goods')->add();
     }
 
     /**

@@ -4,30 +4,7 @@
 </block>
 
 <block name="script">
-    <script src="__PUBLIC__/js/validator.min.js"></script>
     <script>
-        var error = false;
-        $('#form').validator({
-            errorCallback: function() {
-                error = true;
-            },
-            before:function(){
-                error = false;
-            },
-            after:function(){
-                return false;
-            }
-        });
-        $('#form').submit(function(){
-            if(!error){
-                var data = $(this).serialize();
-                $.showPreloader();
-                $.post("{:UC('Shop/goodsEditCommit')}",data,function(){
-                    $.hidePreloader();
-                });
-            }
-            return false;
-        });
     </script>
 </block>
 
@@ -41,7 +18,7 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <input class="weui_input" type="text"
                                placeholder="请输入商品名称"
-                               name="name" value="{$info['name']}"
+                               name="name" value="{$goodsDetail['name']}"
                                required minlength="2" maxlength="20">
                     </div>
                 </div>
@@ -53,7 +30,7 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <input class="weui_input" type="number"
                                placeholder="请输入商品价格"
-                               name="price"
+                               name="price" value="{$goodsDetail['price']}"
                                pattern="[0-9]*" required>
                     </div>
                 </div>
@@ -64,7 +41,7 @@
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" placeholder="请输入商品描述" rows="3"
-                                  name="intro" required maxlength="200"></textarea>
+                                  name="intro" required maxlength="200">{$goodsDetail['intro']}</textarea>
                         <div class="weui_textarea_counter">限200字</div>
                     </div>
                 </div>
@@ -77,13 +54,6 @@
                         <div class="weui_uploader_bd">
                             <ul class="weui_uploader_files">
                                 <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                                <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                                <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                                <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
-                                    <div class="weui_uploader_status_content">
-                                        <i class="weui_icon_warn"></i>
-                                    </div>
-                                </li>
                                 <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
                                     <div class="weui_uploader_status_content">50%</div>
                                 </li>
@@ -96,10 +66,12 @@
                 </div>
             </div>
 
-
+            <input type="hidden" name="id" value="{$_GET['id']}">
 
             <div class="weui_btn_area">
-                <button type="submit" class="weui_btn weui_btn_primary" id="showTooltips">发布</button>
+                <button type="submit" class="weui_btn weui_btn_primary" id="showTooltips">
+                    <if condition="$_GET['id']">重新发布<else/>发布</if>
+                </button>
             </div>
             </form>
         </div>

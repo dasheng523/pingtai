@@ -17,31 +17,31 @@
 </head>
 <body>
 <div class="page-group">
-    <div class="page page-current">
+    <div class="page page-current" id="goodsDel">
         <div class="content">
-            <span class="tip">您还没有发布商品呢</span>
-            <div class="weui_cells weui_cells_checkbox">
-                <label class="weui_cell weui_check_label" for="s11">
-                    <div class="weui_cell_hd">
-                        <input type="checkbox" class="weui_check" name="checkbox1" id="s11">
-                        <i class="weui_icon_checked"></i>
+            <form>
+                <empty name="list">
+                    <span class="tip">您还没有发布商品呢</span>
+                    <else/>
+                    <div class="weui_cells weui_cells_checkbox">
+                        <volist name="list" id="info">
+                            <label class="weui_cell weui_check_label" for="s_{$info['id']}">
+                                <div class="weui_cell_hd">
+                                    <input type="checkbox" class="weui_check" name="ids[]" id="s_{$info['id']}" value="{$info['id']}">
+                                    <i class="weui_icon_checked"></i>
+                                </div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>{$info['name']}</p>
+                                </div>
+                            </label>
+                        </volist>
                     </div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>秋香螺丝粉</p>
-                    </div>
-                </label>
-                <label class="weui_cell weui_check_label" for="s12">
-                    <div class="weui_cell_hd">
-                        <input type="checkbox" name="checkbox1" class="weui_check" id="s12">
-                        <i class="weui_icon_checked"></i>
-                    </div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <p>多功能拖把</p>
-                    </div>
-                </label>
-            </div>
+                </empty>
+            </form>
+
+
             <div class="weui_btn_area">
-                <a href="javascript:;" class="weui_btn weui_btn_warn">确认删除</a>
+                <button class="weui_btn weui_btn_warn" id="goodsDelBtn">确认删除</button>
             </div>
 
         </div>

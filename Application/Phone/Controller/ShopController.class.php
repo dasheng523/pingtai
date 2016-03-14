@@ -65,7 +65,8 @@ class ShopController extends Controller {
      * 店铺
      */
     public function shopDetail(){
-        $info = logic\ShopLogic::getShopInfoByUserId(getUserId());
+        $uid = getUserId();
+        $info = logic\ShopLogic::getShopInfoByUserId($uid);
         $bScope = logic\ScopeBusinessLogic::showAllTree();
         $shopImgs = logic\MediaLogic::getEntityAllImgUrl($info['id'],logic\MediaLogic::EntityType_SHOP);
         $this->assign('bScope',$bScope);
@@ -129,6 +130,7 @@ class ShopController extends Controller {
         if($id){
             $goodsDetail = logic\GoodsLogic::getGoodsDetail($id);
             $goodsImgInfos = logic\GoodsLogic::getGoodsImgInfos($id);
+            print_r($goodsDetail);
             $this->assign('goodsDetail',$goodsDetail);
             $this->assign('goodsImgInfos',$goodsImgInfos);
         }
@@ -155,20 +157,32 @@ class ShopController extends Controller {
             $res = logic\GoodsLogic::addGoods($info,$shop['id']);
         }
         if($res){
-            $this->success("操作成功");
+            $this->success("操作成功",UC('Shop/goods'));
         }else{
             $this->error("操作失败");
         }
     }
 
     /**
-     * 商品删除
+     * 商品删除页
      */
     public function goodsDel(){
-        $id = I('post.id');
-        $res = logic\GoodsLogic::delGoods($id);
+        $goodsList = logic\GoodsLogic::getShopGoodsListByShoper(getUserId());
+        $this->assign('list',$goodsList);
+        $this->display();
+    }
+
+    /**
+     * 商品执行删除
+     */
+    public function goodsDoDel(){
+        $ids = I('post.ids');
+        $res = 0;
+        foreach($ids as $id){
+            $res = logic\GoodsLogic::delGoods($id);
+        }
         if($res){
-            $this->success("操作成功");
+            $this->success("操作成功",UC('Shop/goods'));
         }else{
             $this->error("操作失败");
         }

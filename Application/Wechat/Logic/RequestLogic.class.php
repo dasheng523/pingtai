@@ -37,7 +37,8 @@ class RequestLogic{
      */
     public static function getUserId(){
         $clientUserCode = self::getClientUserCode();
-        return S('client_server_user_'.$clientUserCode);
+        $dd = S('client_server_user_'.$clientUserCode);
+        return $dd;
     }
 
     /**

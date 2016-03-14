@@ -1,5 +1,5 @@
 .hd{padding: 2em 0;}
-
+.clear{clear: both;}
 .page-title{
     text-align: center;
     font-size: 34px;
@@ -48,6 +48,12 @@
 .content{}
 .text-line3{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;}
 .text-line2{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 2;}
+
+.myfooter{
+    min-height: 2.2rem;
+    position: relative;
+    padding: .5rem .75rem;
+}
 
 .margin-top{margin-top: 30px;}
 .block{display: block;color: inherit;}

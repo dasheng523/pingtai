@@ -108,7 +108,7 @@ class UserLogic{
      */
     public static function getNickName($uid)
     {
-        return D('UserInfo')->where(array('user_id',$uid))->getField('nickname');
+        return D('UserInfo')->where(array('user_id'=>$uid))->getField('nickname');
     }
 
 
