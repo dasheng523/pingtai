@@ -54,7 +54,7 @@ class ShopLogic{
      */
     public static function updateShop($info)
     {
-        return D('Shop')->save($info);
+        return D('Shop')->data($info)->save();
     }
 
     /**

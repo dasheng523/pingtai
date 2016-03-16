@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<extend name="template/shop_main" />
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=4">
+<block name="css">
+</block>
 
-</head>
-<body>
-<div class="page-group">
-    <div class="page page-current" id="collection-page">
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="effect">
         <div class="content">
             <div class="content native-scroll">
                 <div class="effect-header">
                     <p class="effect-header-desc">店铺影响力</p>
-                    <h3 class="effect-header-primary">5000</h3>
+                    <h3 class="effect-header-primary">{$totalScore}</h3>
                     <a href="#" class="effect-header-link">查看说明</a>
                 </div>
 
@@ -41,33 +33,18 @@
                 </div>
 
                 <div class="content-block-title">提升影响力</div>
-                <div class="card demo-card-header-pic">
-                    <div class="card-content">
-                        <div class="card-content-inner">
-                            <p class="">每次10分<span class="fr">2/10</span></p>
-                            <p>每天登录一次</p>
+                <volist name="taskList" id="taskInfo">
+                    <div class="card demo-card-header-pic">
+                        <div class="card-content">
+                            <div class="card-content-inner">
+                                <p class="">每次{$taskInfo.score}分<span class="fr">{$taskInfo.dones}/{$taskInfo.repeat_max}</span></p>
+                                <p>{$taskInfo.intro}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card demo-card-header-pic">
-                    <div class="card-content">
-                        <div class="card-content-inner">
-                            <p class="color-gray">每次10分<span class="fr">已完成</span></p>
-                            <p>制作集单</p>
-                        </div>
-                    </div>
-                </div>
-
+                </volist>
             </div>
 
         </div>
     </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
-
-</body>
-</html>
+</block>

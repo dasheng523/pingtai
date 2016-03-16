@@ -48,7 +48,7 @@ class CollectionLogic
      */
     public static function getCollectionFaceImgInfo($cid)
     {
-        return logic\MediaLogic::getEntityFirstImg($cid,logic\MediaLogic::MediaType_Image);
+        return logic\MediaLogic::getEntityFirstImg($cid,C('EntityType_Collection'));
     }
 
     /**
@@ -89,9 +89,8 @@ class CollectionLogic
     public static function getCollectionGoodsList($collection_id)
     {
         $list = D('CollectionGoods')->where(array('collection_id'=>$collection_id))->select();
-        foreach($list as &$info){
-            $info['faceImg'] = logic\MediaLogic::getEntityFirstImg($info['id'],logic\MediaLogic::EntityType_Goods);
-        }
+        $list = logic\GoodsLogic::fillImgList($list,'goods_id');
+        $list = logic\GoodsLogic::fillGoodsInfo($list,'goods_id');
         return $list;
     }
 
@@ -171,7 +170,7 @@ class CollectionLogic
     private static function fillImgList($list)
     {
         foreach($list as &$info){
-            $info['faceImgUrl'] =  logic\MediaLogic::getEntityFirstImg($info['id'],logic\MediaLogic::EntityType_Collection);
+            $info['faceImgUrl'] =  logic\MediaLogic::getEntityFirstImg($info['id'],C('EntityType_Collection'));
         }
         return $list;
     }

@@ -68,7 +68,7 @@ class ShopController extends Controller {
         $uid = getUserId();
         $info = logic\ShopLogic::getShopInfoByUserId($uid);
         $bScope = logic\ScopeBusinessLogic::showAllTree();
-        $shopImgs = logic\MediaLogic::getEntityAllImgUrl($info['id'],logic\MediaLogic::EntityType_SHOP);
+        $shopImgs = logic\MediaLogic::getEntityAllImgInfo($info['id'],C('EntityType_SHOP'));
         $this->assign('bScope',$bScope);
         $this->assign('info',$info);
         $this->assign('shopImgs',$shopImgs);
@@ -89,6 +89,11 @@ class ShopController extends Controller {
         $info['scope_business'] = I('post.bScope');
 
         $res = logic\ShopLogic::updateShop($info);
+
+        $mediaIds = I('post.media_ids');
+        foreach($mediaIds as $mediaId){
+            $res = logic\MediaLogic::setEntityId($mediaId,$info['id']);
+        }
         if($res){
             $this->success('修改成功');
         }
@@ -148,7 +153,6 @@ class ShopController extends Controller {
         $info['name'] = I('post.name');
         $info['price'] = I('post.price');
         $info['intro'] = I('post.intro');
-        $mediaIds = I('post.media_ids');
         $shop = logic\ShopLogic::getShopInfoByUserId(getUserId());
         if($id){
             $info['id'] = $id;
@@ -158,6 +162,7 @@ class ShopController extends Controller {
             $id = logic\GoodsLogic::addGoods($info,$shop['id']);
         }
         //设置每个图片的entityID
+        $mediaIds = I('post.media_ids');
         foreach($mediaIds as $mediaId){
             $res = logic\MediaLogic::setEntityId($mediaId,$id);
         }
@@ -231,7 +236,13 @@ class ShopController extends Controller {
             $info['id'] = $id;
             $res = logic\CollectionLogic::updateCollectionInfo($info);
         }else{
-            $res = logic\CollectionLogic::addCollectionInfo($info);
+            $id = $res = logic\CollectionLogic::addCollectionInfo($info);
+        }
+
+        //设置每个图片的entityID
+        $mediaIds = I('post.media_ids');
+        foreach($mediaIds as $mediaId){
+            $res = logic\MediaLogic::setEntityId($mediaId,$id);
         }
         if($res){
             $this->success("操作成功",UC('Shop/collection'));
@@ -274,7 +285,7 @@ class ShopController extends Controller {
         $info = logic\CollectionLogic::getCollectionInfo($id);
         $imgInfo = logic\CollectionLogic::getCollectionFaceImgInfo($id);
         $goodsList = logic\CollectionLogic::getCollectionGoodsList($id);
-
+        print_r($goodsList);
         $this->assign('info',$info);
         $this->assign('imgInfo',$imgInfo);
         $this->assign('goodsList',$goodsList);
@@ -355,8 +366,8 @@ class ShopController extends Controller {
         $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
         $totalScore = logic\ScoreLogic::totalShopScore($shopId);
         $taskList = logic\TaskLogic::getShopTaskList($shopId);
-
-        $this->assign('totalScore',$totalScore);
+print_r($taskList);
+        $this->assign('totalScore',$totalScore+0);
         $this->assign('taskList',$taskList);
         $this->display();
     }
@@ -370,9 +381,13 @@ class ShopController extends Controller {
         $list1 = logic\ShopLogic::fillShopList($list1);
         $list1 = logic\ShopLogic::fillDistance($list1);
 
-        $list2 = logic\ScoreLogic::topNearShopScore();
+        //附近
+        $list2 = logic\ScoreLogic::topNearShopScore(1,getSysConfig('PageSize'));
+        $list2 = logic\ShopLogic::fillShopList($list2);
+        $list2 = logic\ShopLogic::fillDistance($list2);
 
         $this->assign('list1',$list1);
+        $this->assign('list2',$list2);
         $this->display();
     }
 

@@ -103,7 +103,7 @@ class GoodsLogic
      */
     public static function getGoodsImgInfos($id)
     {
-        return logic\MediaLogic::getEntityAllMedia($id,C('EntityType_Goods'),logic\MediaLogic::MediaType_Image);
+        return logic\MediaLogic::getEntityAllMedia($id,C('EntityType_Goods'),C('MediaType_Image'));
     }
 
     /**
@@ -199,39 +199,56 @@ class GoodsLogic
 
     /**
      * @param $list
+     * @param string $key
      * @return mixed
      * 填充图片Url
      */
-    private static function fillImgList($list)
+    public static function fillImgList($list,$key='id')
     {
         foreach($list as &$goodsInfo){
-            $goodsInfo['goodsfirstimg'] = self::getGoodsFirstImgUrl($goodsInfo['id']);
+            $goodsInfo['goodsfirstimg'] = self::getGoodsFirstImgUrl($goodsInfo[$key]);
         }
         return $list;
     }
 
     /**
      * @param $list
+     * @param string $key
      * @return mixed
      * 填充喜欢数量
      */
-    private static function fillLikeNumList($list)
+    public static function fillLikeNumList($list,$key='id')
     {
         foreach($list as &$goodsInfo){
-            $goodsInfo['like'] = self::getGoodsLikeCount($goodsInfo['id']);
+            $goodsInfo['like'] = self::getGoodsLikeCount($goodsInfo[$key]);
         }
         return $list;
     }
 
     /**
      * @param $list
+     * @param string $key
      * @return mixed
      * 填充评论数量
      */
-    private static function fillCommentNumList($list)
+    public static function fillCommentNumList($list,$key='id')
     {
         foreach($list as &$goodsInfo){
-            $goodsInfo['commentnum'] = self::getGoodsCommentCount($goodsInfo['id']);
+            $goodsInfo['commentnum'] = self::getGoodsCommentCount($goodsInfo[$key]);
+        }
+        return $list;
+    }
+
+    /**
+     * @param $list
+     * @param string $key
+     * @return mixed
+     * 填充商品基本信息
+     */
+    public static function fillGoodsInfo($list, $key='id')
+    {
+        foreach($list as &$goodsInfo){
+            $goodsInfo['goodsInfo'] = self::getGoodsDetail($goodsInfo[$key]);
         }
         return $list;
     }

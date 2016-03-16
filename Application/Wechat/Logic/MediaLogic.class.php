@@ -16,13 +16,6 @@ namespace Wechat\Logic;
 class MediaLogic
 {
 
-    const EntityType_SHOP = 1; //店铺
-    const EntityType_Goods = 2; //商品
-    const EntityType_Collection = 3; //妙集
-
-    const MediaType_Image = 1;
-    const MediaType_Video = 2;
-    const MediaType_Music = 3;
 
     /**
      * @param $entityId
@@ -44,13 +37,28 @@ class MediaLogic
     /**
      * @param $entityId
      * @param $entityType
+     * @param $mediaType
+     * @return array
+     * 获取某个实体的所有媒体数据
+     */
+    public static function getMediaInfo($entityId, $entityType,$mediaType)
+    {
+        $list = D('Media')
+            ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>$mediaType))
+            ->select();
+        return $list;
+    }
+
+    /**
+     * @param $entityId
+     * @param $entityType
      * @return mixed
      * 获取某个实体第一个图片URL
      */
     public static function getEntityFirstImgUrl($entityId, $entityType)
     {
         $url = D('Media')
-            ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>self::MediaType_Image))
+            ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>C('MediaType_Image')))
             ->order('id asc')
             ->getField('url');
         return $url;
@@ -64,10 +72,11 @@ class MediaLogic
      */
     public static function getEntityFirstImg($entityId, $entityType)
     {
-        return D('Media')
-            ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>self::MediaType_Image))
+        $rs = D('Media')
+            ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>C('MediaType_Image')))
             ->order('id asc')
             ->find();
+        return $rs;
     }
 
     /**
@@ -78,7 +87,18 @@ class MediaLogic
      */
     public static function getEntityAllImgUrl($entityId, $entityType)
     {
-        return self::getMediaUrl($entityId,$entityType,self::MediaType_Image);
+        return self::getMediaUrl($entityId,$entityType,C('MediaType_Image'));
+    }
+
+
+    /**
+     * @param $entityId
+     * @param $entityType
+     * @return array
+     * 获取某个实体所有的图片数据
+     */
+    public static function getEntityAllImgInfo($entityId, $entityType){
+        return self::getMediaInfo($entityId,$entityType,C('MediaType_Image'));
     }
 
     /**
@@ -113,7 +133,7 @@ class MediaLogic
      */
     public static function addShopImg($info)
     {
-        return self::addMedia(self::EntityType_SHOP,self::MediaType_Image,$info);
+        return self::addMedia(C('EntityType_SHOP'),C('MediaType_Image'),$info);
     }
 
     /**

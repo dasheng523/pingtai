@@ -74,13 +74,18 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <div class="weui_uploader_bd">
                             <ul class="weui_uploader_files">
-                                <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                                <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
-                                    <div class="weui_uploader_status_content">50%</div>
-                                </li>
+                                <volist name="shopImgs" id="imgInfo">
+                                    <li class="weui_uploader_file" style="background-image:url('{$imgInfo.url}')">
+                                        <input type="hidden" name="media_ids[]" value="{$imgInfo.id}">
+                                    </li>
+                                </volist>
                             </ul>
                             <div class="weui_uploader_input_wrp">
-                                <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="">
+                                <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif"
+                                       data-mediatype="<?php echo C('MediaType_Image');?>"
+                                       data-entitytype="<?php echo C('EntityType_Shop');?>"
+                                       data-entityid="{$info['id']}"
+                                       id="uploadFile">
                             </div>
                         </div>
                     </div>

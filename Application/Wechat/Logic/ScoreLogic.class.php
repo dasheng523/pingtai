@@ -38,8 +38,8 @@ class ScoreLogic{
     {
         return D('ShopScore')
             ->group('shop_id')
-            ->order('sum(score) desc')
-            ->field('shop_id,sum(score) as totalScore')
+            ->order('sum(op_score) desc')
+            ->field('shop_id,sum(op_score) as totalScore')
             ->page($page,$pageSize)
             ->select();
     }
@@ -53,8 +53,8 @@ class ScoreLogic{
     public static function topUserScore($page,$pageSize){
         return D('UserScore')
             ->group('shop_id')
-            ->order('sum(score) desc')
-            ->field('shop_id,sum(score) as totalScore')
+            ->order('sum(op_score) desc')
+            ->field('shop_id,sum(op_score) as totalScore')
             ->page($page,$pageSize)
             ->select();
     }
@@ -68,6 +68,22 @@ class ScoreLogic{
     public static function topCollectionScore($page,$pageSize){
         $list = logic\UserUseEntityLogic::getTopLikeCollection($page,$pageSize);
         return $list;
+    }
+
+    /**
+     * @param $page
+     * @param $pageSize
+     * @return mixed
+     * 获取附近店铺排行榜
+     */
+    public static function topNearShopScore($page,$pageSize)
+    {
+        return D('ShopScore')
+            ->group('shop_id')
+            ->order('sum(op_score) desc')
+            ->field('shop_id,sum(op_score) as totalScore')
+            ->page($page,$pageSize)
+            ->select();
     }
 
 }

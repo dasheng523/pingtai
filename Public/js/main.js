@@ -288,6 +288,8 @@ var shopDetail = {
     pageId:"#shopDetail",
     handler:function(e, pageId, $page){
         FormUtils.initForm('form');
+        var ddd = UploadUtils('#uploadFile');
+        ddd.initUpload();
     }
 };
 createPageHandler(shopDetail);
@@ -327,7 +329,7 @@ var collectionInfo = {
             text: '删除商品',
             color: 'danger',
             onClick: function() {
-                $.router.load(domain+"/index.php/Phone/Shop/collectionGoodsDel.html");
+                $.router.load(domain+"/index.php/Phone/Shop/collectionGoodsDel.html",true);
             }
         }],
     handler:function(e, pageId, $page){
@@ -358,6 +360,9 @@ var collectionEdit = {
     pageId:"#collectionEdit",
     handler:function(e, pageId, $page){
         FormUtils.initForm('form','back');
+
+        var ddd = UploadUtils('#uploadFile',1);
+        ddd.initUpload();
     }
 };
 createPageHandler(collectionEdit);
@@ -375,6 +380,16 @@ var collectionDel = {
 };
 createPageHandler(collectionDel);
 
+/**
+ * 影响力页面
+ * @type {{pageId: string, handler: effect.handler}}
+ */
+var effect = {
+    pageId:"#effect",
+    handler:function(e, pageId, $page){
+    }
+};
+createPageHandler(effect);
 
 
 
