@@ -130,7 +130,6 @@ class ShopController extends Controller {
         if($id){
             $goodsDetail = logic\GoodsLogic::getGoodsDetail($id);
             $goodsImgInfos = logic\GoodsLogic::getGoodsImgInfos($id);
-            print_r($goodsDetail);
             $this->assign('goodsDetail',$goodsDetail);
             $this->assign('goodsImgInfos',$goodsImgInfos);
         }
@@ -144,17 +143,23 @@ class ShopController extends Controller {
      * 商品编辑提交页
      */
     public function goodsEditCommit(){
+        $res = 0;
         $id = I('post.id');
         $info['name'] = I('post.name');
         $info['price'] = I('post.price');
         $info['intro'] = I('post.intro');
+        $mediaIds = I('post.media_ids');
         $shop = logic\ShopLogic::getShopInfoByUserId(getUserId());
         if($id){
             $info['id'] = $id;
             $res = logic\GoodsLogic::updateGoods($info,$shop['id']);
         }
         else{
-            $res = logic\GoodsLogic::addGoods($info,$shop['id']);
+            $id = logic\GoodsLogic::addGoods($info,$shop['id']);
+        }
+        //设置每个图片的entityID
+        foreach($mediaIds as $mediaId){
+            $res = logic\MediaLogic::setEntityId($mediaId,$id);
         }
         if($res){
             $this->success("操作成功",UC('Shop/goods'));
@@ -221,6 +226,7 @@ class ShopController extends Controller {
         $id = I('post.id');
         $info['name'] = I('post.name');
         $info['intro'] = I('post.intro');
+        $info['shop_id'] = logic\ShopLogic::getShopIdByUserId(getUserId());
         if($id){
             $info['id'] = $id;
             $res = logic\CollectionLogic::updateCollectionInfo($info);
@@ -228,20 +234,33 @@ class ShopController extends Controller {
             $res = logic\CollectionLogic::addCollectionInfo($info);
         }
         if($res){
-            $this->success("操作成功");
+            $this->success("操作成功",UC('Shop/collection'));
         }else{
             $this->error("操作失败");
         }
     }
 
     /**
-     * 妙集删除
+     * 秒及删除页面
      */
-    public function delCollection(){
-        $id = I('post.id');
-        $res = logic\CollectionLogic::delCollectionById($id);
+    public function collectionDel(){
+        $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+        $list = logic\CollectionLogic::getCollectionListByShopId($shopId);
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    /**
+     * 妙集执行删除
+     */
+    public function collectionDoDel(){
+        $ids = I('post.ids');
+        $res = false;
+        foreach($ids as $id){
+            $res = logic\CollectionLogic::delCollectionById($id);
+        }
         if($res){
-            $this->success("操作成功");
+            $this->success("操作成功",UC('Shop/collection'));
         }else{
             $this->error("操作失败");
         }
@@ -263,9 +282,19 @@ class ShopController extends Controller {
     }
 
     /**
+     * 妙集商品删除页
+     */
+    public function collectionGoodsDel(){
+        $id = I('get.id');
+        $list = logic\CollectionLogic::getCollectionGoodsList($id);
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    /**
      * 删除妙集中的商品
      */
-    public function delCollectionGoods(){
+    public function collectionGoodsDoDel(){
         $id = I('post.id');
         $res = logic\CollectionLogic::delCollectionGoodsById($id);
         if($res){

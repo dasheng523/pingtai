@@ -51,15 +51,10 @@ function refleshPage(){
         this._loadDocument(url, {
             success: function($doc) {
                 try {
-
                     context._parseDocument(url, $doc);
-                    //var $newDoc = $($('<div></div>').append($doc.find('.page-group')).html());
-                    //context.$view.prepend($newDoc);
                     context._doSwitchDocument(url, false,'from-left-to-right');
                 } catch (e) {
-                    //console.log(e);
                     location.href = url;
-                    //alert("123");
                 }
             },
             error: function() {
@@ -75,7 +70,7 @@ function refleshPage(){
  */
 function backLoadPage(url){
     $.router.back();
-    $.router.load(url, true,false);
+    $.router.load(url, true);
 }
 
 //创建一个页面处理器
@@ -106,6 +101,136 @@ function createPageHandler(handleObj){
 }
 
 /************************  core end  ********************************/
+var UploadUtils = function(fileId,limitCount){
+    if(limitCount == undefined){
+        limitCount = 6;
+    }
+    var i = 1;
+    var mediaType = $(fileId).data('mediatype') ? $(fileId).data('mediatype') : 0;
+    var entityType = $(fileId).data('entitytype') ? $(fileId).data('entitytype') : 0;
+    var entityId = $(fileId).data('entityid') ? $(fileId).data('entityid') : 0;
+
+    function createShowNode(){
+        var id = "i"+(i++);
+        return {
+            id:id,
+            node:function($imgUrl){
+                return '<li id="'+id+'" class="weui_uploader_file weui_uploader_status" style="background-image:url('+$imgUrl+')"><div class="weui_uploader_status_content">0%</div></li>';
+            }
+        };
+    }
+    var showImg = function(fileNode,showNode){
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var node = showNode.node(e.target.result);
+            $('.weui_uploader_files').append(node);
+        };
+        reader.readAsDataURL(fileNode.files[0]);
+    };
+    var uploadFile = function(fileNode,showNode){
+        var fileData = new FormData();
+        var id = showNode.id;
+        fileData.append('fileData', fileNode.files[0]);
+        fileData.append('mediaType',mediaType);
+        fileData.append('entityType',entityType);
+        fileData.append('entityId',entityId);
+        $.ajax({
+            url: domain+'/index.php/Phone/Upload/uploadFile.html',
+            type: 'POST',
+            xhr: function() {
+                var xhr = $.ajaxSettings.xhr();
+                if (xhr.upload) {
+                    xhr.upload.addEventListener('progress', function(evt) {
+                        var process = (evt.loaded / evt.total) * 100 + '%';
+                        $('#'+id+' .weui_uploader_status_content').html(process);
+                    }, false);
+                }
+                return xhr;
+            },
+            success: function(data) {
+                var tmp = $('#'+id);
+                tmp.removeClass('weui_uploader_status');
+                tmp.html('<input type="hidden" name="media_ids[]" value="'+data['info'][0]+'">');
+            },
+            error: function() {
+                $.toast("您的手机似乎不支持上传功能");
+            },
+            data: fileData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+    };
+    var initUpload = function(){
+        $(fileId).change(function(){
+            var total = $('.weui_uploader_file').length + 1;
+            if(total == limitCount){
+                $('.weui_uploader_input_wrp').addClass('hide');
+            }
+            if (this.files && this.files[0]) {
+                var showNode = createShowNode();
+                showImg(this,showNode);
+                uploadFile(this,showNode);
+            }
+        });
+    };
+    return {initUpload:initUpload};
+};
+
+
+var FormUtils = {
+    /**
+     * 初始化表单
+     * @param formId
+     * @param urlHandle back,forward,default
+     */
+    initForm : function(formId,urlHandle){
+        var isError = false;
+        var form = $(formId);
+        //初始化表单验证控件
+        form.validator({
+            errorCallback: function() {
+                isError = true;
+            },
+            before:function(){
+                isError = false;
+            }
+        });
+        //表单提交事件
+        form.submit(function(e){
+            e.preventDefault();
+            if(isError){
+                $.toast('您填写的信息有一些错误');
+                return;
+            }
+            var formNode = form;
+            var submit = formNode.serialize();
+            var postUrl = formNode.attr('action');
+            $.showPreloader();
+            //发送数据
+            $.post(postUrl,submit,function(res){
+                $.hidePreloader();
+                if(res.status==1){
+                    $.toast(res.info);
+                    if(res.url && res.url!=''){
+                        switch (urlHandle){
+                            case "back":
+                                backLoadPage(res.url);
+                                break;
+                            case "forward":
+                                $.router.load(res.url, true);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }else{
+                    $.toast(res.info);
+                }
+            },'json');
+        });
+    }
+};
 
 /*************** 顾客 *******************/
 var index = {
@@ -129,7 +254,7 @@ var goods = {
             text: '删除商品',
             color: 'danger',
             onClick: function() {
-                $.router.load(domain+"/index.php/Phone/Shop/goodsDel.html");
+                $.router.load(domain+"/index.php/Phone/Shop/goodsDel.html",true);
             }
         }],
     handler:function(e, pageId, $page){
@@ -142,33 +267,9 @@ createPageHandler(goods);
 var goodsEdit = {
     pageId:"#goodsEdit",
     handler:function(e, pageId, $page){
-        var error = false;
-        $('#form').validator({
-            errorCallback: function() {
-                error = true;
-            },
-            before:function(){
-                error = false;
-            }
-        });
-        $('#form').submit(function(){
-            if(!error){
-                var data = $(this).serialize();
-                $.showPreloader();
-                $.post(domain+"/index.php/Phone/Shop/goodsEditCommit.html",data,function(res){
-                    $.hidePreloader();
-                    if(res.status==1){
-                        $.toast(res.info);
-                        if(res.url && res.url!=''){
-                            backLoadPage(res.url);
-                        }
-                    }else{
-                        $.toast(res.info);
-                    }
-                },'json');
-            }
-            return false;
-        });
+        FormUtils.initForm('form','back');
+        var ddd = UploadUtils('#uploadFile');
+        ddd.initUpload();
     }
 };
 createPageHandler(goodsEdit);
@@ -177,22 +278,19 @@ createPageHandler(goodsEdit);
 var goodsDel = {
     pageId:"#goodsDel",
     handler:function(e, pageId, $page){
-        $('#goodsDelBtn').click(function(){
-            var submit = $('form').serialize();
-            $.post(domain+"/index.php/Phone/Shop/goodsDoDel.html",submit,function(res){
-                if(res.status==1){
-                    $.toast(res.info);
-                    if(res.url && res.url!=''){
-                        backLoadPage(res.url);
-                    }
-                }else{
-                    $.toast(res.info);
-                }
-            },'json');
-        });
+        FormUtils.initForm('form','back');
     }
 };
 createPageHandler(goodsDel);
+
+//商店编辑页
+var shopDetail = {
+    pageId:"#shopDetail",
+    handler:function(e, pageId, $page){
+        FormUtils.initForm('form');
+    }
+};
+createPageHandler(shopDetail);
 
 
 //集合管理处理器
@@ -209,7 +307,7 @@ var collection = {
             text: '删除妙集',
             color: 'danger',
             onClick: function() {
-                $.router.load(domain+"/index.php/Phone/Shop/collectionDel.html");
+                $.router.load(domain+"/index.php/Phone/Shop/collectionDel.html",true);
             }
         }],
     handler:function(e, pageId, $page){
@@ -218,7 +316,10 @@ var collection = {
 };
 createPageHandler(collection);
 
-//集合详情
+/**
+ * 集合详情
+ * @type {{pageId: string, menu: *[], handler: collectionInfo.handler}}
+ */
 var collectionInfo = {
     pageId:"#collection-info",
     menu:[
@@ -226,7 +327,7 @@ var collectionInfo = {
             text: '删除商品',
             color: 'danger',
             onClick: function() {
-                $.router.load(domain+"/index.php/Phone/Shop/collectionDel.html");
+                $.router.load(domain+"/index.php/Phone/Shop/collectionGoodsDel.html");
             }
         }],
     handler:function(e, pageId, $page){
@@ -235,8 +336,44 @@ var collectionInfo = {
 };
 createPageHandler(collectionInfo);
 
+/**
+ * 集合商品删除页
+ * @type {{pageId: string, menu: *[], handler: collectionGoodsDel.handler}}
+ */
+var collectionGoodsDel = {
+    pageId:"#collectionGoodsDel",
+    handler:function(e, pageId, $page){
+        FormUtils.initForm('form','back');
+    }
+};
+createPageHandler(collectionGoodsDel);
 
 
+
+/**
+ * 编辑集合基本内容
+ * @type {{pageId: string, handler: collectionEdit.handler}}
+ */
+var collectionEdit = {
+    pageId:"#collectionEdit",
+    handler:function(e, pageId, $page){
+        FormUtils.initForm('form','back');
+    }
+};
+createPageHandler(collectionEdit);
+
+
+/**
+ * 集合删除页面
+ * @type {{pageId: string, handler: goodsDel.handler}}
+ */
+var collectionDel = {
+    pageId:"#collectionDel",
+    handler:function(e, pageId, $page){
+        FormUtils.initForm('form','back');
+    }
+};
+createPageHandler(collectionDel);
 
 
 

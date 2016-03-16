@@ -18,6 +18,10 @@ return array(
 	'DefaultWechatID' => 1,   //默认的微信公众号ID
 	'CommonCustomer' => 1,	//常规的顾客角色ID
 
+	'MediaType_Image' => 1,
+	'MediaType_Video' => 2,
+	'MediaType_Music' => 3,
+
 	//实体类型
 	'EntityType_Shop' => 1,
 	'EntityType_Goods' => 2,

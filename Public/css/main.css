@@ -1,5 +1,6 @@
 .hd{padding: 2em 0;}
 .clear{clear: both;}
+.hide{display: none !important;}
 .page-title{
     text-align: center;
     font-size: 34px;
@@ -20,6 +21,12 @@
     url('//at.alicdn.com/t/font_1457261953_9633522.woff') format('woff'), /* chrome、firefox */
     url('//at.alicdn.com/t/font_1457261953_9633522.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
     url('//at.alicdn.com/t/font_1457261953_9633522.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.item-img{
+    background-position: center;
+    background-size: cover;
+    width: 50px;
+    height:50px;
 }
 
 .iconfont{font-family:"iconfont";font-style:normal;}

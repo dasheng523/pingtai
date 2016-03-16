@@ -25,7 +25,7 @@ function currentUrl(){
 }
 //获得项目根路径
 function domainurl(){
-    return 'http://'.$_SERVER['HTTP_HOST'];
+    return 'http://'.$_SERVER['HTTP_HOST'].'/pingtai';
 }
 
 

@@ -10,6 +10,7 @@ Runtime
 node_modules
 docs/dist/
 .package/
+Public/upload/
 .sass-cache/
 .DS_Store
 _site/*

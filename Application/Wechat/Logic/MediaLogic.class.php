@@ -94,7 +94,17 @@ class MediaLogic
             ->delete();
     }
 
-
+    /**
+     * @param $mediaId
+     * @param $entityId
+     * @return bool
+     * 设置媒体的entityId
+     */
+    public static function setEntityId($mediaId,$entityId){
+        return D('Media')
+            ->where(array('id'=>$mediaId))
+            ->save(array('entity_id'=>$entityId));
+    }
 
     /**
      * @param $info
@@ -120,12 +130,33 @@ class MediaLogic
     }
 
     /**
+     * @param $info
+     * @return mixed
+     * 添加媒体数据
+     */
+    public static function addMediaInfo($info){
+        return D('Media')->data($info)->add();
+    }
+
+    /**
      * @return array
      * 上传媒体
      */
     public static function updateMedia()
     {
-        return array();
+        $uploadFiles = $_FILES;
+        $rs = array();
+        foreach($uploadFiles as $upload){
+            $info = array();
+            $info['fileName'] = ysuuid().'.png';
+            $info['path'] = "Public/upload/".$info['fileName'];
+            $info['url'] = __ROOT__ .'/' .$info['path'];
+            if(!@move_uploaded_file($upload['tmp_name'],$info['path'])){
+                echo "error";
+            }
+            $rs[] = $info;
+        }
+        return $rs;
     }
 
     /**

@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<extend name="template/shop_main" />
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=4">
+<block name="css">
+</block>
 
-</head>
-<body>
-<div class="page-group">
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
     <div class="page page-current" id="goodsDel">
         <div class="content">
-            <form>
+            <form action="{:UC('Shop/goodsDoDel')}">
                 <empty name="list">
                     <span class="tip">您还没有发布商品呢</span>
                     <else/>
@@ -37,21 +29,11 @@
                         </volist>
                     </div>
                 </empty>
+
+                <div class="weui_btn_area">
+                    <button class="weui_btn weui_btn_warn" id="goodsDelBtn" type="submit">确认删除</button>
+                </div>
             </form>
-
-
-            <div class="weui_btn_area">
-                <button class="weui_btn weui_btn_warn" id="goodsDelBtn">确认删除</button>
-            </div>
-
         </div>
     </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
-
-</body>
-</html>
+</block>
