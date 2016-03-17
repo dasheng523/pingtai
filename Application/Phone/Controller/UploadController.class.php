@@ -32,4 +32,13 @@ class UploadController extends Controller {
         }
         $this->success($ids);
     }
+
+    /**
+     * 删除媒体文件
+     */
+    public function delFile(){
+        $id = I('post.id');
+        $rs = logic\MediaLogic::delMediaById($id);
+        $this->success($rs);
+    }
 }

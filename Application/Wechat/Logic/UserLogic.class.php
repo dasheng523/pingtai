@@ -111,5 +111,19 @@ class UserLogic{
         return D('UserInfo')->where(array('user_id'=>$uid))->getField('nickname');
     }
 
+    /**
+     * @param $list
+     * @param string $key
+     * @return mixed
+     * 填充微信用户数据
+     */
+    public static function fillUserInfo($list, $key='id')
+    {
+        foreach($list as &$info){
+            $info['userInfo'] = self::getUserInfo($info[$key]);
+        }
+        return $list;
+    }
+
 
 }

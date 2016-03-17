@@ -162,6 +162,20 @@ var UploadUtils = function(fileId,limitCount){
         }, 'json');
     };
     var initUpload = function(){
+        $('.weui_uploader_file').click(function(){
+            var context = this;
+            $.confirm('确定要删除这个图片吗？', function () {
+                var id = $(context).find('input').val();
+                $.ajax({
+                    url:domain+'/index.php/Phone/Upload/delFile.html',
+                    data:{id:id},
+                    type:'POST',
+                    success:function(){
+                        $(context).remove();
+                    }
+                });
+            },'json');
+        });
         $(fileId).change(function(){
             var total = $('.weui_uploader_file').length + 1;
             if(total == limitCount){

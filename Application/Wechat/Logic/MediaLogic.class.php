@@ -214,4 +214,18 @@ class MediaLogic
             ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'media_type'=>$mediaType))
             ->select();
     }
+
+    /**
+     * @param $list
+     * @param string $key
+     * @return mixed
+     * 填充集合第一张图片
+     */
+    public static function fillCollectFirstImgUrl($list, $key='id')
+    {
+        foreach($list as &$info){
+            $info['firstImgUrl'] = self::getEntityFirstImgUrl($info[$key],C('EntityType_Collection'));
+        }
+        return $list;
+    }
 }

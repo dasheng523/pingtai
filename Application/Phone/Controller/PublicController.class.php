@@ -21,7 +21,6 @@ class PublicController extends Controller {
      * 用户消息列表页
      */
     public function message(){
-        echo getUserId();
         $list = logic\SysMessLogic::getMessListByUserId(getUserId());
         $this->assign('list',$list);
         $this->display();
@@ -34,7 +33,6 @@ class PublicController extends Controller {
         $id = I('get.id');
         logic\SysMessLogic::setReadStatus($id);
         $info = logic\SysMessLogic::getMessInfo($id);
-        print_r($info);
         $this->assign('info',$info);
         $this->display();
     }

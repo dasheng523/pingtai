@@ -164,7 +164,7 @@ class ShopController extends Controller {
         //设置每个图片的entityID
         $mediaIds = I('post.media_ids');
         foreach($mediaIds as $mediaId){
-            $res = logic\MediaLogic::setEntityId($mediaId,$id);
+            logic\MediaLogic::setEntityId($mediaId,$id);
         }
         if($res){
             $this->success("操作成功",UC('Shop/goods'));
@@ -285,7 +285,6 @@ class ShopController extends Controller {
         $info = logic\CollectionLogic::getCollectionInfo($id);
         $imgInfo = logic\CollectionLogic::getCollectionFaceImgInfo($id);
         $goodsList = logic\CollectionLogic::getCollectionGoodsList($id);
-        print_r($goodsList);
         $this->assign('info',$info);
         $this->assign('imgInfo',$imgInfo);
         $this->assign('goodsList',$goodsList);
@@ -366,7 +365,6 @@ class ShopController extends Controller {
         $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
         $totalScore = logic\ScoreLogic::totalShopScore($shopId);
         $taskList = logic\TaskLogic::getShopTaskList($shopId);
-print_r($taskList);
         $this->assign('totalScore',$totalScore+0);
         $this->assign('taskList',$taskList);
         $this->display();

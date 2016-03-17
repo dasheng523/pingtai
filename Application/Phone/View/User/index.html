@@ -1,13 +1,11 @@
 <extend name="template/main" />
 
 <block name="css">
-    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
-    <style>
-        .swiper-pagination-bullet-active{background: red;}
-    </style>
 </block>
 
 <block name="content">
+    <div class="page page-current" id="IndexPublishNeed">
+        {$tplBar}
         <div class="content">
             <div class="userinfobox">
                 <img src="__PUBLIC__/images/head.jpg" class="userinfobox-img">
@@ -122,4 +120,6 @@
 
             <div style="height: 70px;width: 100%;"></div>
         </div>
+    </div>
+
 </block>

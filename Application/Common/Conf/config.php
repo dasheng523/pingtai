@@ -33,4 +33,5 @@ return array(
 	'UseType_Comment' => 1,
 	'UseType_Like' => 2,
 	'UseType_Collection' => 3,  //收藏
+	'UseType_Visit' => 4,  //访问
 );

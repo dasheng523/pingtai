@@ -16,6 +16,16 @@ use \Wechat\Logic as logic;
  * 顾客模块
  */
 class UserController extends Controller {
+
+    protected function _initialize(){
+        //初始化菜单
+        $currentMenu = logic\PageMenuLogic::current();
+        if($currentMenu){
+            $this->assign('current',$currentMenu);
+            $tplBar = $this->fetch('Index:tplBar');
+            $this->assign('tplBar',$tplBar);
+        }
+    }
     /**
      * 首页
      */

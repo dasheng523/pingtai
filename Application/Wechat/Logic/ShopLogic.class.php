@@ -112,4 +112,25 @@ class ShopLogic{
     }
 
 
+    /**
+     * @param $shopId
+     * @return mixed
+     * 根据ID获取店铺名称
+     */
+    public static function getShopNameById($shopId)
+    {
+        return D('Shop')->where(array('id'=>$shopId))->getField('name');
+    }
+
+    /**
+     * 获取店铺的所有者ID
+     * @param $shopId
+     * @return mixed
+     */
+    public static function getOwnUserId($shopId)
+    {
+        return D('Shop')->where(array('id'=>$shopId))->getField('user_id');
+    }
+
+
 }

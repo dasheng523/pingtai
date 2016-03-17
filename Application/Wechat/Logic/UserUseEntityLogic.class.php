@@ -7,6 +7,7 @@
  */
 
 namespace Wechat\Logic;
+use Think\Model;
 use \Wechat\Logic as logic;
 
 /**
@@ -249,5 +250,112 @@ class UserUseEntityLogic
             ->delete();
     }
 
+    /**
+     * @param $userId
+     * @param $entityId
+     * @param $entityType
+     * @return $id
+     * 访问一个对象
+     */
+    public static function visit($userId, $entityId, $entityType)
+    {
+        return self::createCommonInfo($userId,C('UseType_Visit'),$entityId,$entityType);
+    }
+
+
+    /**
+     * @param $userId
+     * @param $useType
+     * @param $entityId
+     * @param $entityType
+     * @return mixed
+     * 常规的添加记录
+     */
+    private static function createCommonInfo($userId, $useType, $entityId, $entityType)
+    {
+        $info['user_id'] = $userId;
+        $info['user_type'] = $useType;
+        $info['entity_id'] = $entityId;
+        $info['entity_type'] = $entityType;
+        $info['ctime'] = time();
+        return D('UserUseEntity')->data($info)->add();
+    }
+
+    /**
+     * @param $page
+     * @return mixed
+     * 获取热门商品列表
+     */
+    public static function getHotGoodsList($page)
+    {
+        $pageSize = getSysConfig('PageSize');
+        $startReco = $pageSize * ($page-1);
+
+        $visitSql = self::countUseTimeSql(C('EntityType_Goods'),'UseType_Visit');
+        $commentSql = self::countUseTimeSql(C('EntityType_Goods'),'UseType_Comment');
+        $likeSql = self::countUseTimeSql(C('EntityType_Goods'),'UseType_Like');
+        $collectSql = self::countUseTimeSql(C('EntityType_Goods'),'UseType_Collection');
+
+        $sql = "select vs.entity_id,
+                      vs.UseType_Visit,
+                      cm.UseType_Comment,
+                      lk.UseType_Like,
+                      cl.UseType_Collection,
+                      vs.UseType_Visit+cm.UseType_Comment*50+lk.UseType_Like*50+cl.UseType_Collection*60 as total
+                from ($visitSql) vs
+                left join ($commentSql) cm on cm.entity_id=vs.entity_id
+                left join ($likeSql) lk on lk.entity_id=vs.entity_id
+                left join ($collectSql) cl on cl.entity_id=vs.entity_id
+                ORDER BY total
+                limit $startReco,$pageSize";
+        //print_r($sql);
+        return M()->query($sql);
+    }
+
+    /**
+     * @param $page
+     * @return mixed
+     * 获取热门妙集
+     */
+    public static function getHotCollectList($page)
+    {
+        $pageSize = getSysConfig('PageSize');
+        $startReco = $pageSize * ($page-1);
+
+        $visitSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Visit');
+        $commentSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Comment');
+        $likeSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Like');
+        $collectSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Collection');
+
+        $sql = "select vs.entity_id,
+                      vs.UseType_Visit,
+                      cm.UseType_Comment,
+                      lk.UseType_Like,
+                      cl.UseType_Collection,
+                      vs.UseType_Visit+cm.UseType_Comment*50+lk.UseType_Like*50+cl.UseType_Collection*60 as total
+                from ($visitSql) vs
+                left join ($commentSql) cm on cm.entity_id=vs.entity_id
+                left join ($likeSql) lk on lk.entity_id=vs.entity_id
+                left join ($collectSql) cl on cl.entity_id=vs.entity_id
+                ORDER BY total
+                limit $startReco,$pageSize";
+        //print_r($sql);
+        return M()->query($sql);
+    }
+
+    /**
+     * @param $entityType
+     * @param $useType
+     * @return mixed
+     * 统计最近七天实体的使用情况的SQL
+     */
+    private static function countUseTimeSql($entityType,$useType){
+        $beforeTime = time() - 3600*24*7;
+        return D('UserUseEntity')
+            ->where("entity_type=".$entityType." and use_type=".C($useType)." and ctime>$beforeTime")
+            ->group('entity_id')
+            ->field("entity_id,count(1) as $useType")
+            ->select(false);
+    }
 
 }

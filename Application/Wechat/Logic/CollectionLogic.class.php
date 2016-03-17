@@ -24,7 +24,8 @@ class CollectionLogic
      */
     public static function getCollectionListByShopId($shopId)
     {
-        $list = D('Collection')->where(array('shop_id'=>$shopId))->select();
+        $userId = logic\ShopLogic::getOwnUserId($shopId);
+        $list = D('Collection')->where(array('user_id'=>$userId))->select();
         $list = self::fillImgList($list);
         $list = self::fillLikeNumList($list);
         $list = self::fillCommentNumList($list);
@@ -111,7 +112,8 @@ class CollectionLogic
      */
     public static function getCollectionLikeTotalCountByShop($shopId)
     {
-        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $userId = logic\ShopLogic::getOwnUserId($shopId);
+        $collectSql = D('Collection')->where(array('user_id'=>$userId))->field('id')->select(false);
         $entitySql = D('CollectionGoods')->where("collection_id in ($collectSql)")->field('goods_id')->select(false);
         $count = logic\UserUseEntityLogic::getLikeCountByEntitySql($entitySql,C('EntityType_Comment'));
         return $count;
@@ -124,7 +126,8 @@ class CollectionLogic
      */
     public static function getCollectionCommentTotalCountByShop($shopId)
     {
-        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $userId = logic\ShopLogic::getOwnUserId($shopId);
+        $collectSql = D('Collection')->where(array('user_id'=>$userId))->field('id')->select(false);
         $entitySql = D('CollectionGoods')->where("collection_id in ($collectSql)")->field('goods_id')->select(false);
         $count = logic\UserUseEntityLogic::getCommentCountByEntitySql($entitySql,C('EntityType_Comment'));
         return $count;
@@ -137,7 +140,8 @@ class CollectionLogic
      */
     public static function getGoodsLikeListByShop($shopId)
     {
-        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $userId = logic\ShopLogic::getOwnUserId($shopId);
+        $collectSql = D('Collection')->where(array('user_id'=>$userId))->field('id')->select(false);
         $entitySql = D('CollectionGoods')->where("collection_id in ($collectSql)")->field('goods_id')->select(false);
         $list = logic\UserUseEntityLogic::getLikeListByEntitySql($entitySql,C('EntityType_Comment'));
         $list = self::fillImgList($list);
@@ -153,7 +157,8 @@ class CollectionLogic
      */
     public static function getGoodsCommentListByShop($shopId)
     {
-        $collectSql = D('Collection')->where(array('shop_id'=>$shopId))->field('id')->select(false);
+        $userId = logic\ShopLogic::getOwnUserId($shopId);
+        $collectSql = D('Collection')->where(array('user_id'=>$userId))->field('id')->select(false);
         $entitySql = D('CollectionGoods')->where("collection_id in ($collectSql)")->field('goods_id')->select(false);
         $list = logic\UserUseEntityLogic::getCommentListByEntitySql($entitySql,C('EntityType_Comment'));
         $list = self::fillImgList($list);
@@ -164,39 +169,56 @@ class CollectionLogic
 
     /**
      * @param $list
+     * @param string $key
      * @return mixed
      * 填充图片Url
      */
-    private static function fillImgList($list)
+    private static function fillImgList($list, $key='id')
     {
         foreach($list as &$info){
-            $info['faceImgUrl'] =  logic\MediaLogic::getEntityFirstImg($info['id'],C('EntityType_Collection'));
+            $info['faceImgUrl'] =  logic\MediaLogic::getEntityFirstImg($info[$key],C('EntityType_Collection'));
         }
         return $list;
     }
 
     /**
      * @param $list
+     * @param string $key
      * @return mixed
      * 填充喜欢数量
      */
-    private static function fillLikeNumList($list)
+    private static function fillLikeNumList($list, $key='id')
     {
         foreach($list as &$info){
-            $info['likeNum'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Collection'));
+            $info['likeNum'] = logic\UserUseEntityLogic::getLikeCount($info[$key],C('EntityType_Collection'));
         }
         return $list;
     }
 
     /**
      * @param $list
+     * @param string $key
      * @return mixed
      * 填充评论数量
      */
-    private static function fillCommentNumList($list)
+    private static function fillCommentNumList($list, $key='id')
     {
         foreach($list as &$info){
-            $info['commentNum'] = logic\UserUseEntityLogic::getCommentCount($info['id'],C('EntityType_Collection'));
+            $info['commentNum'] = logic\UserUseEntityLogic::getCommentCount($info[$key],C('EntityType_Collection'));
+        }
+        return $list;
+    }
+
+    /**
+     * @param $list
+     * @param string $key
+     * @return mixed
+     * 填充集合基本数据
+     */
+    public static function fillColleInfo($list, $key='id')
+    {
+        foreach($list as &$info){
+            $info['collInfo'] = self::getCollectionInfo($info[$key]);
         }
         return $list;
     }

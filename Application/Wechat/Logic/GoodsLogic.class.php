@@ -253,5 +253,30 @@ class GoodsLogic
         return $list;
     }
 
+    /**
+     * @param $list
+     * @param string $key
+     * @return mixed
+     * 填充店铺名称
+     */
+    public static function fillShopName($list, $key='id')
+    {
+        foreach($list as &$goodsInfo){
+            $goodsInfo['shopName'] = self::getShopName($goodsInfo[$key]);
+        }
+        return $list;
+    }
+
+    /**
+     * @param $goods_id
+     * @return mixed
+     * 根据商品ID获得店铺名称
+     */
+    public static function getShopName($goods_id)
+    {
+        $shopId = D('Goods')->where(array('id'=>$goods_id))->getField('shop_id');
+        return logic\ShopLogic::getShopNameById($shopId);
+    }
+
 
 }
