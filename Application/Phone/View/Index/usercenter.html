@@ -1,0 +1,104 @@
+<extend name="template/main" />
+
+<block name="css">
+    <link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css">
+    <style>
+        .swiper-pagination-bullet-active{background: red;}
+    </style>
+</block>
+
+<block name="script">
+    <script src="__PUBLIC__/js/swiper.min.js"></script>
+    <script>
+        $('#showdetail').click(function(){
+            $('.groupshowbox').removeClass('hide');
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+        });
+
+        $('.groupshow-close').click(function(){
+            $('.groupshowbox').addClass('hide');
+        });
+
+    </script>
+</block>
+
+<block name="content">
+    <div class="topnavbar flex flex-align-center">
+        <a href="javascript:" class="backbtn" onclick="window.history.back();">
+            <i class="iconfont">&#xe612;</i>
+        </a>
+        <div class="pagetitle flex-1">个人中心</div>
+        <a href="#" class="rightbtn">
+            <i class="iconfont">&#xe619;</i>
+        </a>
+    </div>
+
+    <div class="main-container">
+        <div class="userinfobox">
+            <img src="__PUBLIC__/images/head.jpg" class="userinfobox-img">
+            <div class="userinfobox-scorebox">
+                <strong>yesheng</strong>
+                <h3>影响力:55664分</h3>
+            </div>
+            <a href="#" class="shortbox default-text"><i class="iconfont">&#xe625;</i> 关注ta</a>
+        </div>
+
+        <div class="margin-top"></div>
+        <div class="boxcontent">
+            <button class="weui_btn weui_btn_plain_primary">联系ta</button>
+        </div>
+
+        <div class="margin-top"></div>
+        <div class="panel box">
+            <h3 class="title">个人说明</h3>
+            <div class="foldbox list">
+                <p class="item">123415465456新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包新春大红包</p>
+                <a class="foldbox-morebtn" href="#"><i class="iconfont">&#xe61e;</i></a>
+            </div>
+        </div>
+
+        <div class="margin-top"></div>
+        <div class="panel box">
+            <h3 class="title">ta的制作组单</h3>
+            <div class="list">
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">喜欢：50 | 人气度：40</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
+                    </div>
+                </a>
+                <a class="item flex flex-align-center" href="{:UC('Index/groupinfo')}">
+                    <img src="__PUBLIC__/images/head.jpg" class="item-img">
+                    <div class="item-info flex-1">
+                        <h3>新春大红包</h3>
+                        <p class="group-good-price">参考市场价：<strong>￥50元</strong></p>
+                        <p class="desc">地址：广西北流市城北路花果山0241号</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</block>

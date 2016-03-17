@@ -1,0 +1,39 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="collectionDel">
+        <div class="content">
+            <form action="{:UC('Shop/collectionDoDel')}">
+                <empty name="list">
+                    <span class="tip">您还没有发布商品呢</span>
+                    <else/>
+                    <div class="weui_cells weui_cells_checkbox">
+                        <volist name="list" id="info">
+                            <label class="weui_cell weui_check_label" for="s{$info['id']}">
+                                <div class="weui_cell_hd">
+                                    <input type="checkbox" class="weui_check" name="ids[]" id="s{$info['id']}" value="{$info['id']}">
+                                    <i class="weui_icon_checked"></i>
+                                </div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>{$info['name']}</p>
+                                </div>
+                            </label>
+                        </volist>
+                    </div>
+                </empty>
+
+                <div class="weui_btn_area">
+                    <button type="submit" class="weui_btn weui_btn_warn">确认删除</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>

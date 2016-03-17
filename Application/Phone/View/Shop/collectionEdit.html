@@ -1,0 +1,75 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="collectionEdit">
+        <div class="content">
+            <form action="{:UC('Shop/collectionEditCommit')}">
+                <div class="weui_cells_title">妙集标题</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text"
+                                   required
+                                   name="name" value="{$info['name']}"
+                                   placeholder="请输入妙集标题">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui_cells_title">妙集描述</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <textarea class="weui_textarea"
+                                      required maxlength="200"
+                                      name="intro"
+                                      placeholder="请输入妙集描述" rows="3">{$info['intro']}</textarea>
+                            <div class="weui_textarea_counter">200以内</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui_cells_title">上传封面</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <div class="weui_uploader_bd">
+                                <ul class="weui_uploader_files">
+                                    <volist name="goodsImgInfos" id="imgInfo">
+                                        <li class="weui_uploader_file" style="background-image:url('{$imgInfo.url}')">
+                                            <input type="hidden" name="media_ids[]" value="{$imgInfo.id}">
+                                        </li>
+                                    </volist>
+                                </ul>
+                                <div class="weui_uploader_input_wrp">
+                                    <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif"
+                                           data-mediatype="<?php echo C('MediaType_Image');?>"
+                                           data-entitytype="<?php echo C('EntityType_Collection');?>"
+                                           data-entityid="{$info['id']}"
+                                           id="uploadFile">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="weui_btn_area">
+                    <button class="weui_btn weui_btn_primary" type="submit">
+                        <if condition="$_GET['id']">重新发布<else/>发布</if>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</block>
+

@@ -1,0 +1,99 @@
+<extend name="template/main" />
+
+<block name="css">
+</block>
+
+<block name="content">
+    <div class="page page-current" id="IndexPublishNeed">
+        {$tplBar}
+        <div class="content native-scroll">
+            <div class="mainmenu">
+                <a href="{:UC('Index/publishNeed')}" class="item-menu current">导购咨询</a>
+                <a href="{:UC('Index/publishGoodsList')}" class="item-menu">最新宝贝</a>
+            </div>
+            <div class="buttons-tab fixed-tab" data-offset="0">
+                <a href="#tab1" class="tab-link active button">待推荐</a>
+                <a href="#tab2" class="tab-link button">已推荐</a>
+            </div>
+            <div class="tabs">
+                <div id="tab1" class="tab active">
+                    <div class="card facebook-card list-block">
+                        <a class="item-link" href="{:UC('Index/publishNeedDetail')}">
+                            <div class="card-header no-border">
+                                <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+                                <div class="facebook-name">小生有理</div>
+                                <div class="facebook-date">今天09:01 <span class="fr green-text" style="font-size: 0.5rem;">暂未推荐</span></div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    请问这些东西哪里有卖？
+                                </div>
+                                <div class="card-pic">
+                                    <div class="row no-gutter">
+                                        <div class="col-25"><img src="http://192.168.23.105/pingtai/Public/images/head.jpg"></div>
+                                        <div class="col-25"><img src="http://192.168.23.105/pingtai/Public/images/head.jpg"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="card-footer no-border">
+                            <a href="#" class="link">评论(10)</a>
+                            <a href="#" class="link">推荐给TA</a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div id="tab2" class="tab">
+                    <div class="card facebook-card list-block">
+                        <a class="item-link" href="{:UC('Index/publishNeedDetail')}">
+                            <div class="card-header no-border">
+                                <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+                                <div class="facebook-name">夜声</div>
+                                <div class="facebook-date">今天09:01 <span class="fr red-text" style="font-size: 0.5rem;">有 3 人推荐</span></div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    牙齿疼了吃一些什么比较好？
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="card-footer no-border">
+                            <a href="#" class="link">评论(50)</a>
+                            <a href="#" class="link">推荐给TA</a>
+                        </div>
+                    </div>
+
+                    <div class="card facebook-card list-block">
+                        <a class="item-link" href="{:UC('Index/publishNeedDetail')}">
+                            <div class="card-header no-border">
+                                <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
+                                <div class="facebook-name">雨后彩虹</div>
+                                <div class="facebook-date">今天09:01 <span class="fr red-text" style="font-size: 0.5rem;">有 3 人推荐</span></div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-text">
+                                    烧烤必备用品有哪些？
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="card-footer no-border">
+                            <a href="#" class="link">评论(50)</a>
+                            <a href="#" class="link">推荐给TA</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a href="javascript:;" class="extra_button" id="showActionBtn">发布</a>
+            </div>
+            <div style="height: 50px;"></div>
+        </div>
+    </div>
+
+</block>

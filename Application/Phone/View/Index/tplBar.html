@@ -1,0 +1,19 @@
+<nav class="bar bar-tab">
+    <a class="tab-item external <?php if($current == 'home'){echo 'active';}?>" href="{:UC('Index/index')}" data-no-cache="true">
+        <span class="icon"><i class="iconfont">&#xe602;</i></span>
+        <span class="tab-label">首页</span>
+    </a>
+    <a class="tab-item external <?php if($current == 'publish'){echo 'active';}?>" href="{:UC('Index/publishNeed')}" data-no-cache="true">
+        <span class="icon"><i class="iconfont">&#xe604;</i></span>
+        <span class="tab-label">发布</span>
+    </a>
+    <a class="tab-item external <?php if($current == 'bang'){echo 'active';}?>" href="{:UC('Index/topbar')}" data-no-cache="true">
+        <span class="icon"><i class="iconfont">&#xe605;</i></span>
+        <span class="tab-label">排行榜</span>
+    </a>
+    <a class="tab-item external <?php if($current == 'user'){echo 'active';}?>" href="{:UC('User/index')}" data-no-cache="true">
+        <span class="icon"><i class="iconfont">&#xe603;</i></span>
+        <span class="tab-label">个人中心</span>
+        <span class="badge">2</span>
+    </a>
+</nav>

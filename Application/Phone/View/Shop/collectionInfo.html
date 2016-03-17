@@ -1,0 +1,53 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="collection-info">
+        <div class="content">
+            <div class="collection-header flex flex-align-center">
+                <img src="{$imgInfo['url']}" class="collection-header-img">
+                <div class="flex-1 collection-header-info">
+                    <h3>{$info['name']}</h3>
+                    <p>{$info['intro']}</p>
+                </div>
+            </div>
+
+            <div class="weui_panel weui_panel_access">
+                <div class="content-block-title">包含的商品</div>
+                <empty name="goodsList">
+                    <span class="tip">暂无商品<br>到首页浏览商品时，点击“加入妙集”<br>可以把商品加入到自己的妙集里</span>
+                    <else/>
+                    <div class="list-block media-list inset">
+                        <ul>
+                            <volist name="goodsList" id="goodsInfo">
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media">
+                                        <div class="item-img" style="background-image: url({$goodsInfo['goodsfirstimg']})"></div>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">{$goodsInfo['goodsInfo']['name']}</div>
+                                        </div>
+                                        <div class="item-subtitle">{$goodsInfo['goodsInfo']['intro']}</div>
+                                    </div>
+                                </a>
+                            </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </empty>
+
+
+            </div>
+            <a href="javascript:;" class="extra_button" id="showActionBtn"><i class="iconfont text">&#xe601;</i></a>
+        </div>
+    </div>
+</block>

@@ -1,0 +1,77 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current">
+        <div class="content">
+            <div class="hd">
+                <h1 class="page-title">
+                    一妙集
+                </h1>
+                <p class="page-desc">欢迎回来，{$nickName}</p>
+            </div>
+
+
+            <div class="bd">
+                <div class="weui_grids">
+                    <a href="{:UC('Shop/goods')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-shangpinguanli.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            商品
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/shopDetail')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-dianpuguanli.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            店铺
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/collection')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-ji.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            妙集
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/effect')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-jifen.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            影响
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/fans')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-11guanzhufensi.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            粉丝
+                        </p>
+                    </a>
+                    <a href="{:UC('Public/message')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-xiaoxi.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            消息
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</block>

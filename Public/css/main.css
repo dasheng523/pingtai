@@ -1,0 +1,178 @@
+.hd{padding: 2em 0;}
+.clear{clear: both;}
+.hide{display: none !important;}
+.page-title{
+    text-align: center;
+    font-size: 34px;
+    color: #3cc51f;
+    font-weight: 400;
+    margin: 0 15%;
+}
+.page-desc{
+    margin: 0;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+}
+@font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_1457261953_9633522.eot'); /* IE9*/
+    src: url('//at.alicdn.com/t/font_1457261953_9633522.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//at.alicdn.com/t/font_1457261953_9633522.woff') format('woff'), /* chrome、firefox */
+    url('//at.alicdn.com/t/font_1457261953_9633522.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('//at.alicdn.com/t/font_1457261953_9633522.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.item-img{
+    background-position: center;
+    background-size: cover;
+    width: 80px;
+    height:80px;
+}
+
+.iconfont{font-family:"iconfont";font-style:normal;}
+
+.error{border: 1px solid red;}
+
+.green-text{color: #3cc51f !important;}
+.red-text{color: red !important;}
+.gray-text{color: #A1A1A1;}
+
+.center-text{text-align: center;}
+
+.big-text{font-size: 20px;}
+.small-text{font-size: 12px;}
+
+.bg-tip-text{text-align: center;display: block;color: #A1A1A1;font-size: 12px;}
+
+.graybg{background: #EEEEEE;}
+
+.index-item-primary{color: #000 !important;}
+.index-item-grey{color: #888888 !important;font-size: 12px;}
+
+.fix-bottom{position: fixed;left: 0;bottom: 0;width: 100%;}
+.bottom-menu{background: #fff;border-top: solid 1px #eee;width: 100%;}
+
+.content{}
+.text-line3{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;}
+.text-line2{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 2;}
+
+.myfooter{
+    min-height: 2.2rem;
+    position: relative;
+    padding: .5rem .75rem;
+}
+
+.margin-top{margin-top: 30px;}
+.block{display: block;color: inherit;}
+.fl{float: left;}
+.fr{float: right;}
+.tip{color: #888888;display: block;text-align: center;font-size: 12px;padding: 10px 10px;}
+.extra_button{position: fixed;z-index: 5;background: #3cc51f;width:50px;height:50px;border-radius: 50px;text-align: center;line-height: 50px;color: #fff;right: 30px;bottom: 70px;}
+.extra_button .text{font-size: 16px;}
+.collection-header{width: 100%;height: 10rem;background: #333;color: #fff;padding: 20px;}
+.collection-header-img{width: 80px;margin-right: 10px;}
+.collection-header-info {}
+.collection-header-info > h3 {font-size: 16px;}
+.collection-header-info > p {margin: 5px 0;font-size: 12px; overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;}
+.effect-header{width: 100%;height: 8rem;background: #3cc51f;padding: 10px; color: #fff;}
+.effect-header-desc{text-align: center;font-size: 14px;}
+.effect-header-primary{text-align: center;font-size: 35px;margin: 0;}
+.effect-header-link{text-align: center;font-size: 12px;display: block;}
+.topnum{width: 34px;height: 34px;line-height:34px;border:solid 1px #3cc51f;display: inline-block;text-align: center;}
+
+.adbox{margin-top: 2rem;padding-bottom: 0;}
+.card-pic img{width: 95%;margin: 0 auto;}
+.card-text{
+    padding: 5px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    height: 2.5rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    line-height: 1.05rem;}
+
+
+.banner-header{width: 100%;background: #333333;padding: 10px;}
+.banner-header-imgbox{width: 100px;margin-right: 10px;}
+.banner-header-imgbox img{width: 100px;height: 100px;}
+.banner-header-infobox{color: #fff;}
+.banner-header-infobox .info-title{line-height: 1.2rem;font-size: 16px;height: 2.4rem;}
+.banner-header-infobox .info{margin: 4px 0;overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;line-height: 0.85rem;}
+.banner-header .pricebox{width: 100px;text-align: center;}
+
+.card-morebox{background: #eee;width: 100%;padding: 5px;}
+.text-right{text-align: right;}
+
+.userinfobox{background:#04be02;padding: 15px;}
+.userinfobox-img{margin: 0 auto;display: block;width: 80px;height: 80px;border-radius: 40px;}
+.userinfobox-scorebox{padding: 0 10px;color: #eee;margin-top: 5px;text-align: center;}
+.userinfobox-btns{background:rgba(0,0,0,0.4);background:#000\9;margin-top: 10px;}
+.userinfobox-btnitem{color: #eee;text-align: center;display: block;padding: 5px 0;font-size: 12px;border-right: solid 1px #aaa;}
+.userinfobox-btnitem:last-child{border-right: none;}
+
+.mainmenu{margin: 5px auto;text-align: center;font-size: 0;}
+.mainmenu .item-menu{text-align: center;display: inline-block;width: 30%;border:solid 1px #0894ec;color: #0894ec;background: #fff;font-size: 16px;padding: 5px;margin-left: -1px;}
+.mainmenu .item-menu.current{color: #fff;background:#0894ec; }
+
+.comment-box{display: block; background: #fff;padding: 5px;}
+.comment-box-head{width: 30px;height: 30px;border-radius: 15px;margin-right: 10px;}
+.comment-box-name{font-size: 14px;font-weight: lighter;}
+.comment-box-replybtn{float: right;}
+.comment-box-time{color: #888888;font-size: 12px;}
+
+.zqoneimgbox{flex-wrap: wrap;}
+.zqoneimgbox > .imgitem{min-width: 25%;}
+
+.hotsearchbox{padding: 10px 10px;}
+.hotsearchlist{}
+.hotsearchitem{width: 32%;padding: 5px 0; text-align: center;background: #fff;display: inline-block;margin-bottom: 5px;}
+
+
+.footer{position: fixed;bottom: 0;left: 0;width: 100%;border-top: solid 1px #ccc;z-index: 5;}
+.footer-menu{background: #fff;}
+.footer-menu .footer-menu-item{display: block;width: 25%;float: left;text-align: center;color: #666666;padding: 5px 0;font-size: 12px;}
+.footer-menu .footer-menu-item.hover{color:#04be02;}
+
+
+.flex{
+    /* 设置弹性布局 */
+    display:-webkit-box;/* android 2.1-3.0, ios 3.2-4.3 */
+    display:-webkit-flex;/* Chrome 21+ */
+    display:-ms-flexbox;/* WP IE 10 */
+    display:flex;/* android 4.4 */
+}
+.flex-direction-column{
+    /* 设置弹性布局的方向，子元素按照在源文档中声明的顺序从上到下显示 */
+    -webkit-box-orient: vertical;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex-direction: column;/* Chrome 21+ */
+    -ms-flex-direction: column;/* WP IE 10 */
+    flex-direction: column;/* android 4.4 */
+}
+.flex-1{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:1;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:1;/* Chrome 21+ */
+    -ms-flex:1;/* WP IE 10 */
+    flex:1;/* android 4.4 */
+}
+.flex-pack-center{
+    /* 水平布局下的子元素 水平居中 */
+    -webkit-box-pack: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: center;/* Chrome 21+ */
+    -ms-flex-pack: center;/* WP IE 10 */
+    justify-content: center;/* android 4.4 */
+}
+.flex-align-center{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-align-items: center;/* Chrome 21+ */
+    -ms-flex-align: center;/* WP IE 10 */
+    align-items: center;/* android 4.4 */
+}
+.flex-pack-justify{
+    /* 水平布局下的子元素 2端对齐 */
+    -webkit-box-pack: justify;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: space-between;/* Chrome 21+ */
+    -ms-flex-pack: justify;/* WP IE 10 */
+    justify-content: space-between;/* android 4.4 */
+}

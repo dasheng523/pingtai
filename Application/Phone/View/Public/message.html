@@ -1,0 +1,42 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current">
+        <div class="content">
+            <div class="content native-scroll">
+                <div class="content-block-title">我的消息</div>
+                <div class="list-block media-list">
+                    <ul>
+                        <volist name="list" id="info">
+                            <li>
+                                <a href="{:UC('Public/messageDetail',array('id'=>$info['id']))}" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">{$info['title']}</div>
+                                            <div class="item-after">{$info['ctime']|formatDate}</div>
+                                        </div>
+                                        <if condition="$info['status'] eq 1">
+                                            <div class="item-subtitle">已读</div>
+                                            <else/>
+                                            <div class="item-subtitle green-text">未读</div>
+                                        </if>
+                                        <div class="item-text">{$info['subtext']}</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </volist>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

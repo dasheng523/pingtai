@@ -1,0 +1,103 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="shopDetail">
+        <div class="content">
+            <form action="{:UC('Shop/shopEditCommit')}">
+            <div class="weui_cells_title">店铺名称</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="text" placeholder="请输入您的店名"
+                               name="name" value="{$info['name']}"
+                               required minlength="2" maxlength="20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui_cells_title">联系电话</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="number" placeholder="请输入您的联系电话"
+                               name="phone" value="{$info['phone']}"
+                               required pattern="[0-9]*">
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui_cells_title">店铺地址</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" placeholder="请输入地址" rows="3" name="address" required>{$info['address']}</textarea>
+                        <div class="weui_textarea_counter">200字以内</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui_cells_title">定位</div>
+            <div class="weui_cells weui_cells_access">
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>在店铺内进行定位</p>
+                    </div>
+                    <div class="weui_cell_ft">重新定位</div>
+                </a>
+            </div>
+            <input type="hidden" name="lat" value="{$info['lat']}">
+            <input type="hidden" name="lng" value="{$info['lng']}">
+
+
+            <div class="weui_cells_title">店铺简介</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" placeholder="请店铺简介" rows="3" name="intro" required>{$info['intro']}</textarea>
+                        <div class="weui_textarea_counter">200字以内</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="weui_cells_title">上传店铺照片</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div class="weui_uploader_bd">
+                            <ul class="weui_uploader_files">
+                                <volist name="shopImgs" id="imgInfo">
+                                    <li class="weui_uploader_file" style="background-image:url('{$imgInfo.url}')">
+                                        <input type="hidden" name="media_ids[]" value="{$imgInfo.id}">
+                                    </li>
+                                </volist>
+                            </ul>
+                            <div class="weui_uploader_input_wrp">
+                                <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif"
+                                       data-mediatype="<?php echo C('MediaType_Image');?>"
+                                       data-entitytype="<?php echo C('EntityType_Shop');?>"
+                                       data-entityid="{$info['id']}"
+                                       id="uploadFile">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="{$info['id']}">
+            <div class="weui_btn_area">
+                <button class="weui_btn weui_btn_primary" id="shopDetailBtn">更新</button>
+            </div>
+            </form>
+
+
+        </div>
+    </div>
+</block>

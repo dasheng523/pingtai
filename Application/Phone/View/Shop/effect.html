@@ -1,0 +1,50 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="effect">
+        <div class="content">
+            <div class="content native-scroll">
+                <div class="effect-header">
+                    <p class="effect-header-desc">店铺影响力</p>
+                    <h3 class="effect-header-primary">{$totalScore}</h3>
+                    <a href="#" class="effect-header-link">查看说明</a>
+                </div>
+
+                <div class="list-block media-list inset">
+                    <ul>
+                        <li>
+                            <a href="{:UC('Shop/effectTopbar')}" class="item-link item-content">
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">查看排行榜</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-block-title">提升影响力</div>
+                <volist name="taskList" id="taskInfo">
+                    <div class="card demo-card-header-pic">
+                        <div class="card-content">
+                            <div class="card-content-inner">
+                                <p class="">每次{$taskInfo.score}分<span class="fr">{$taskInfo.dones}/{$taskInfo.repeat_max}</span></p>
+                                <p>{$taskInfo.intro}</p>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+
+        </div>
+    </div>
+</block>
