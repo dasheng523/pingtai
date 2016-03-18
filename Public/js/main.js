@@ -6,7 +6,7 @@
 
 //全局变量
 var domain = "http://192.168.23.105/pingtai";
-var pageInitEventHandles = new Array();
+var pageInitEventHandles = [];
 
 //初始化程序
 function initApp(){
@@ -44,7 +44,8 @@ function createShowActionHandler(buttons){
  * 刷新页面
  */
 function refleshPage(){
-    $.router.reflesh = function(url, ignoreCache) {
+    $.router.refresh = function(ignoreCache) {
+        var url = window.location.href;
         var context = this;
 
         this._saveDocumentIntoCache($(document), location.href);
@@ -62,7 +63,7 @@ function refleshPage(){
             }
         });
     };
-    $.router.reflesh(window.location.href,true);
+    $.router.refresh(true);
 }
 
 /**
@@ -102,7 +103,7 @@ function createPageHandler(handleObj){
 
 /************************  core end  ********************************/
 var UploadUtils = function(fileId,limitCount){
-    if(limitCount == undefined){
+    if(limitCount === undefined){
         limitCount = 6;
     }
     var i = 1;
@@ -150,7 +151,7 @@ var UploadUtils = function(fileId,limitCount){
             success: function(data) {
                 var tmp = $('#'+id);
                 tmp.removeClass('weui_uploader_status');
-                tmp.html('<input type="hidden" name="media_ids[]" value="'+data['info'][0]+'">');
+                tmp.html('<input type="hidden" name="media_ids[]" value="'+data.info[0]+'">');
             },
             error: function() {
                 $.toast("您的手机似乎不支持上传功能");
@@ -226,7 +227,7 @@ var FormUtils = {
                 $.hidePreloader();
                 if(res.status==1){
                     $.toast(res.info);
-                    if(res.url && res.url!=''){
+                    if(res.url && res.url!==''){
                         switch (urlHandle){
                             case "back":
                                 backLoadPage(res.url);

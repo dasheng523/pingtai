@@ -222,4 +222,17 @@ class CollectionLogic
         }
         return $list;
     }
+
+    public static function getLatestCollection($pageSize){
+        $list = D('Collection')->order('ctime desc')->page(1,$pageSize)->select();
+        foreach($list as &$info){
+            $info['mtime'] = $info['ctime'];
+            $info['collection'] = 1;
+        }
+        $list = logic\UserLogic::fillUserInfo($list,'user_id');
+        $list = self::fillLikeNumList($list,'id');
+        $list = self::fillCommentNumList($list,'id');
+        $list = self::fillImgList($list,'id');
+        return $list;
+    }
 }

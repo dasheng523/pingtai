@@ -278,5 +278,52 @@ class GoodsLogic
         return logic\ShopLogic::getShopNameById($shopId);
     }
 
+    /**
+     * @param $page
+     * @return array
+     * 商品和集合的最新内容
+     */
+    public static function getLastGoodsAndCollection($page){
+      $page = $page - 1;
+      $bufferList = self::getBufferGoodsAndCollectionList();//获取缓存数据
+      $pageSize = getSysConfig('PageSize') + 0;
+      $pageBegin = $page*$pageSize;
+      return array_slice($bufferList,$pageBegin,$pageSize);
+    }
+
+    /**
+     * @return mixed
+     * 获取缓存的商品和集合资料
+     */
+    public static function getBufferGoodsAndCollectionList(){
+      $bufferList = S('bufferGoodsAndColloction1');
+      if(!$bufferList){
+            //获取最新商品
+            $goodsLatest = self::getLatestGoods(1000);
+            //获取最新集合
+            $collectionLatest = logic\CollectionLogic::getLatestCollection(1000);
+            //融合排序
+            $bufferList = array_merge($goodsLatest,$collectionLatest);
+            usort($bufferList,'sortTime');
+            //保存缓存
+            //S('bufferGoodsAndColloction1',$list,3600);
+      }
+      return $bufferList;
+    }
+
+    /**
+     * @param $limitNum
+     * @return mixed
+     * 获取最新的商品信息
+     */
+    public static function getLatestGoods($limitNum){
+      $goodsList = D('Goods')->order('mtime desc')->page(1,$limitNum)->select();
+      $list = logic\UserLogic::fillUserInfoByShopId($goodsList,'shop_id');
+      $list = self::fillLikeNumList($list,'id');
+      $list = self::fillCommentNumList($list,'id');
+      $list = self::fillImgList($list,'id');
+      return $list;
+    }
+
 
 }

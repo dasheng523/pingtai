@@ -33,7 +33,7 @@ class PageMenuLogic{
 
     //返回地址当前属于哪个菜单
     public static function current(){
-        $pathinfo = $_SERVER['REQUEST_URI'];
+        $pathinfo = __ACTION__;
         foreach(self::$pageMenu as $key => $urls){
             foreach($urls as $url){
                 if(strstr($pathinfo,$url)){

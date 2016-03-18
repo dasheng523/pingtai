@@ -115,7 +115,7 @@ class UserLogic{
      * @param $list
      * @param string $key
      * @return mixed
-     * 填充微信用户数据
+     * 填充用户数据
      */
     public static function fillUserInfo($list, $key='id')
     {
@@ -125,5 +125,19 @@ class UserLogic{
         return $list;
     }
 
-
+    /**
+     * 根据ShopId填充用户数据
+     * @param  [type] $list [description]
+     * @param  string $key  [description]
+     * @return [type]       [description]
+     */
+    public static function fillUserInfoByShopId($list, $key='shop_id'){
+        foreach($list as &$info){
+            $userId = ShopLogic::getOwnUserId($info[$key]);
+            if($userId){
+                $info['userInfo'] = self::getUserInfo($userId);
+            }
+        }
+        return $list;
+    }
 }

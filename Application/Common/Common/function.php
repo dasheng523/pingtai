@@ -168,3 +168,8 @@ function distance($lat1, $lng1, $lat2, $lng2){
 function rad($d){
     return $d * pi() / 180.0;
 }
+
+function sortTime($a,$b){
+  if ($a['mtime']==$b['mtime']) return 0;
+  return ($a['mtime']<$b['mtime'])?-1:1;
+}

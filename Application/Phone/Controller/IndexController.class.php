@@ -15,7 +15,10 @@ class IndexController extends Controller {
         }
     }
 
-    //首页
+    /**
+     * 首页
+     * @return [type] [description]
+     */
     public function index(){
         $page = 1;
         $goodsList = logic\UserUseEntityLogic::getHotGoodsList($page);
@@ -32,6 +35,18 @@ class IndexController extends Controller {
         $this->display();
     }
 
+    /**
+     * 最新宝贝页面
+     */
+    public function publishGoodsList()
+    {
+        $page = 1;
+        $list = logic\GoodsLogic::getLastGoodsAndCollection($page);
+        print_r($list);
+        $this->assign('list',$list);
+        $this->display();
+    }
+
     //组合详情
     public function groupinfo(){
         $this->display();
@@ -40,7 +55,8 @@ class IndexController extends Controller {
     //商品详情
     public function goodsdetail(){
         $id = I('get.id');
-        logic\UserUseEntityLogic::visit(getUserId(),$id,C('EntityType_Goods'));
+        $list = logic\UserUseEntityLogic::visit(getUserId(),$id,C('EntityType_Goods'));
+        $this->assign('list',$list);
         $this->display();
     }
 

@@ -14,7 +14,7 @@ class IndexController extends Controller {
             $type = $weobj->getRev()->getRevType();
             switch($type) {
                 case Wechat::MSGTYPE_TEXT:
-                    $weobj->text(getSysConfig('wechat_welcome'))->reply();
+                    $weobj->text(getSysConfig('wechat_welcome'))->reply(); 
                     exit;
                     break;
                 case Wechat::MSGTYPE_EVENT:
