@@ -231,7 +231,7 @@ class ShopController extends Controller {
         $id = I('post.id');
         $info['name'] = I('post.name');
         $info['intro'] = I('post.intro');
-        $info['shop_id'] = logic\ShopLogic::getShopIdByUserId(getUserId());
+        $info['user_id'] = getUserId();
         if($id){
             $info['id'] = $id;
             $res = logic\CollectionLogic::updateCollectionInfo($info);

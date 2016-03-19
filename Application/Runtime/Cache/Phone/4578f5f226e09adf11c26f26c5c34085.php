@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/SUI-Mobile/dist/css/sm.min.css">
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
-    <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/main.css?v=25">
+    <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/main.css?v=27">
 
     
 

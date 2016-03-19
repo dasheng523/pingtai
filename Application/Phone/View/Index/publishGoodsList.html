@@ -5,7 +5,11 @@
 
 <block name="content">
   <div class="page page-current" id="PublishGoodsList">
-    <div class="content native-scroll">
+    <div class="content native-scroll pull-to-refresh-content">
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
         <div class="mainmenu">
             <a href="javascript:;" onclick="history.back();" class="item-menu">导购咨询</a>
             <a href="{:UC('Index/publishGoodsList')}" class="item-menu current">最新宝贝</a>
@@ -17,16 +21,16 @@
                         <!-- 妙集 -->
                         <if condition="$info['collection'] eq 1">
                             <div class="card facebook-card list-block">
-                                <a class="item-link" href="{:UC('Index/collection',array('id'=>$info['id']))}">
+                                <a class="item-link" href="{:UC('Index/groupinfo')}">
                                     <div class="card-header no-border">
-                                        <div class="facebook-avatar">
-                                            <img src="{$info['userInfo']['headimgurl']}" width="34" height="34">
+                                        <h3 class="card-title text-line2">{$info['name']}<span class="fr green-text" style="font-size: 0.6rem;">包含5个宝贝</span></h3>
+                                        <div class="card-header-desc">
+                                            <span class="gray-text">by </span> <span class="blue-text">{$info['userInfo']['nickname']}</span>
+                                            <span class="fr gray-text">{$info['mtime']|formatDate}</span>
                                         </div>
-                                        <div class="facebook-name">{$info['name']}</div>
-                                        <div class="facebook-date">by {$info['userInfo']['nickname']} <span class="fr red-text" style="font-size: 0.5rem;">妙集</span></div>
                                     </div>
                                     <div class="card-content">
-                                        <div class="card-text">
+                                        <div class="" style="padding: 5px">
                                             {$info['intro']}
                                         </div>
                                         <div class="card-pic">
@@ -44,16 +48,16 @@
                             <else/>
                             <!-- 商品 -->
                             <div class="card facebook-card list-block">
-                                <a class="item-link" href="{:UC('Index/goods',array('id'=>$info['id']))}">
+                                <a class="item-link" href="{:UC('Index/goodsdetail',array('id'=>$info['id']))}">
                                     <div class="card-header no-border">
-                                        <div class="facebook-avatar">
-                                            <img src="{$info['userInfo']['headimgurl']}" width="34" height="34">
+                                        <h3 class="card-title text-line2">{$info['name']}</h3>
+                                        <div class="card-header-desc">
+                                            <span class="gray-text">by </span> <span class="blue-text">{$info['userInfo']['nickname']}</span>
+                                            <span class="fr gray-text">{$info['mtime']|formatDate}</span>
                                         </div>
-                                        <div class="facebook-name">{$info['name']}</div>
-                                        <div class="facebook-date">by {$info['userInfo']['nickname']} <span class="fr green-text" style="font-size: 0.5rem;">商品</span></div>
                                     </div>
                                     <div class="card-content">
-                                        <div class="card-text">
+                                        <div class="" style="padding: 5px">
                                             {$info['intro']}
                                         </div>
                                         <div class="card-pic">
@@ -63,8 +67,8 @@
                                 </a>
 
                                 <div class="card-footer no-border">
-                                    <a href="#" class="link">赞一个(30)</a>
-                                    <a href="#" class="link">想买(30)</a>
+                                    <a href="#" class="link">喜欢({$info['likeNum']})</a>
+                                    <a href="#" class="link">评论({$info['commentNum']})</a>
                                 </div>
                             </div>
                         </if>

@@ -27,9 +27,10 @@ class UserUseEntityLogic
      * 计算某个实体的使用情况
      */
     public static function count($entityId,$entityType,$useType){
-        return D('UserUseEntity')
+        $rs = D('UserUseEntity')
             ->where(array('entity_id'=>$entityId,'entity_type'=>$entityType,'use_type'=>$useType))
             ->count(1);
+        return $rs;
     }
 
     /**
@@ -78,6 +79,20 @@ class UserUseEntityLogic
     public static function getListByEntitySql($entitySql, $entityType,$useType){
         return D('UserUseEntity')
             ->where("entity_id in ($entitySql) and entity_type=$entityType and use_type=$useType")
+            ->select();
+    }
+
+
+    /**
+     * @param $entityType
+     * @param $entityId
+     * @return mixed
+     * 获取评论列表
+     */
+    public static function getCommentList($entityType,$entityId)
+    {
+        return D('UserUseEntity')
+            ->where(array('entity_type'=>$entityType,'entity_id'=>$entityId,'use_type'=>C('UseType_Comment')))
             ->select();
     }
 
@@ -254,12 +269,41 @@ class UserUseEntityLogic
      * @param $userId
      * @param $entityId
      * @param $entityType
-     * @return $id
+     * @return mixed
      * 访问一个对象
      */
     public static function visit($userId, $entityId, $entityType)
     {
+        $exist = D('UserUseEntity')->where(array('user_id'=>$userId,'entity_id'=>$entityId,'entity_type'=>$entityType,'use_type'=>C('UseType_Visit')))->find();
+        if($exist){
+            return 0;
+        }
         return self::createCommonInfo($userId,C('UseType_Visit'),$entityId,$entityType);
+    }
+
+    /**
+     * @param $userId
+     * @param $entityId
+     * @param $entityType
+     * @return mixed
+     * 喜欢一个对象
+     */
+    public static function like($userId, $entityId, $entityType){
+        $exist = D('UserUseEntity')->where(array('user_id'=>$userId,'entity_id'=>$entityId,'entity_type'=>$entityType,'use_type'=>C('UseType_Like')))->find();
+        if($exist){
+            return 0;
+        }
+        return self::createCommonInfo($userId,C('UseType_Like'),$entityId,$entityType);
+    }
+
+
+    public static function comment($userId, $entityId, $entityType, $content)
+    {
+        $exist = D('UserUseEntity')->where(array('user_id'=>$userId,'entity_id'=>$entityId,'entity_type'=>$entityType,'use_type'=>C('UseType_Like')))->find();
+        if($exist){
+            return 0;
+        }
+        return self::createCommonInfo($userId,C('UseType_Like'),$entityId,$entityType,$content);
     }
 
 
@@ -271,12 +315,13 @@ class UserUseEntityLogic
      * @return mixed
      * 常规的添加记录
      */
-    private static function createCommonInfo($userId, $useType, $entityId, $entityType)
+    private static function createCommonInfo($userId, $useType, $entityId, $entityType,$content='')
     {
         $info['user_id'] = $userId;
-        $info['user_type'] = $useType;
+        $info['use_type'] = $useType;
         $info['entity_id'] = $entityId;
         $info['entity_type'] = $entityType;
+        $info['ccontent'] = $content;
         $info['ctime'] = time();
         return D('UserUseEntity')->data($info)->add();
     }
@@ -357,5 +402,7 @@ class UserUseEntityLogic
             ->field("entity_id,count(1) as $useType")
             ->select(false);
     }
+
+
 
 }

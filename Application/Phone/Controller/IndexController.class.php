@@ -42,7 +42,6 @@ class IndexController extends Controller {
     {
         $page = 1;
         $list = logic\GoodsLogic::getLastGoodsAndCollection($page);
-        print_r($list);
         $this->assign('list',$list);
         $this->display();
     }
@@ -55,9 +54,50 @@ class IndexController extends Controller {
     //商品详情
     public function goodsdetail(){
         $id = I('get.id');
-        $list = logic\UserUseEntityLogic::visit(getUserId(),$id,C('EntityType_Goods'));
-        $this->assign('list',$list);
+        logic\UserUseEntityLogic::visit(getUserId(),$id,C('EntityType_Goods'));
+        $goodsInfo = logic\GoodsLogic::getGoodsDetail($id);
+        $imgList = logic\MediaLogic::getEntityAllImgInfo($goodsInfo['id'],C('EntityType_Goods'));
+        $commentList = logic\UserUseEntityLogic::getCommentList($goodsInfo['id'],C('EntityType_Goods'));
+        $commentList = logic\UserLogic::fillUserInfo($commentList,'user_id');
+        $commentCount = count($commentList);
+        $likeCount = logic\UserUseEntityLogic::getLikeCount($goodsInfo['id'],C('EntityType_Goods'));
+        $shopInfo = logic\ShopLogic::getShopInfoById($goodsInfo['shop_id']);
+        $shopInfo['imgurl'] = logic\MediaLogic::getEntityFirstImgUrl($shopInfo['id'],C('EntityType_Shop'));
+
+        //print_r($commentList);
+        $this->assign('goodsInfo',$goodsInfo);
+        $this->assign('imgList',$imgList);
+        $this->assign('commentCount',$commentCount);
+        $this->assign('likeCount',$likeCount);
+        $this->assign('shopInfo',$shopInfo);
         $this->display();
+    }
+
+    /**
+     * 喜欢商品
+     */
+    public function likeGoods(){
+        $id = I('post.id');
+        $res = logic\UserUseEntityLogic::like(getUserId(),$id,C('EntityType_Goods'));
+        if($res){
+            $this->success('ok');
+        }else{
+            $this->error('error');
+        }
+    }
+
+    /**
+     * 评论商品
+     */
+    public function submitComment(){
+        $id = I('post.id');
+        $content = I('post.content');
+        $res = logic\UserUseEntityLogic::comment(getUserId(),$id,C('EntityType_Goods'),$content);
+        if($res){
+            $this->success('评论成功');
+        }else{
+            $this->error('服务器错误');
+        }
     }
 
     //店铺详情

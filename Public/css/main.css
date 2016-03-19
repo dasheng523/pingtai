@@ -92,6 +92,8 @@
     line-height: 1.05rem;}
 
 
+.typetag{width: 35px;height: 35px;background: orange;color: #fff;font-size: 12px;text-align: center;line-height: 35px;}
+
 .banner-header{width: 100%;background: #333333;padding: 10px;}
 .banner-header-imgbox{width: 100px;margin-right: 10px;}
 .banner-header-imgbox img{width: 100px;height: 100px;}
@@ -127,6 +129,9 @@
 .hotsearchlist{}
 .hotsearchitem{width: 32%;padding: 5px 0; text-align: center;background: #fff;display: inline-block;margin-bottom: 5px;}
 
+
+.card-title{font-size: 0.9rem;}
+.card-header-desc{background: #EEEEEE;padding: 3px 5px; font-size: 0.7rem;}
 
 .footer{position: fixed;bottom: 0;left: 0;width: 100%;border-top: solid 1px #ccc;z-index: 5;}
 .footer-menu{background: #fff;}

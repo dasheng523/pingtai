@@ -1,22 +1,29 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>北流商业平台</title>
-    <link href="http://192.168.23.105/pingtai/Public/css/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
-    <link rel="stylesheet" type="text/css" href="http://192.168.23.105/pingtai/Public/css/app.css?v=15">
+    <title>一妙集</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/SUI-Mobile/dist/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/weui.min.css">
+    <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/main.css?v=27">
+
     
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
     <style>
         .swiper-pagination-bullet-active{background: #04be02;}
     </style>
 
-</head>
 
+</head>
 <body>
+<div class="page-group">
     
     <div class="groupshowbox hide">
         <a class="groupshow-close" href="javascript:"><i class="iconfont">&#xe61f;</i></a>
@@ -148,8 +155,14 @@
         </div>
     </div>
 
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
-    
+
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="http://192.168.23.105/pingtai/Public/js/main.js?v=7" charset='utf-8'></script>
+
     <script src="http://192.168.23.105/pingtai/Public/js/swiper.min.js"></script>
     <script>
         $('#showdetail').click(function(){

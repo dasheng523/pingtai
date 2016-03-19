@@ -17,16 +17,17 @@
 </head>
 <body>
 <div class="page-group">
-    <div class="page page-current" id="collection-info">
+    <div class="page page-current" id="goodsDetail">
         <div class="content">
-            <div class="swiper-container swiper-container-horizontal" data-space-between="10">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide swiper-slide-active" style="width: 320px; margin-right: 10px;"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_640x640q60.jpg" alt="" style="width: 100%"></div>
-                    <div class="swiper-slide swiper-slide-next" style="width: 320px; margin-right: 10px;"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_640x640q60.jpg" alt="" style="width: 100%"></div>
-                    <div class="swiper-slide" style="width: 320px; margin-right: 10px;"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_640x640q60.jpg" alt="" style="width: 100%"></div>
-                </div>
-                <div class="swiper-pagination"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
-            </div>
+            <?php if($imgList): ?><div class="swiper-container swiper-container-horizontal" data-space-between="10">
+                    <div class="swiper-wrapper">
+                        <?php if(is_array($imgList)): $i = 0; $__LIST__ = $imgList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$imgInfo): $mod = ($i % 2 );++$i;?><div class="swiper-slide swiper-slide-active" style="width: 320px; margin-right: 10px;">
+                                <img src="<?php echo ($imgInfo['url']); ?>" alt="" style="width: 100%">
+                            </div><?php endforeach; endif; else: echo "" ;endif; ?>
+                    </div>
+                    <div class="swiper-pagination"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+                </div><?php endif; ?>
+
 
             <div class="card">
                 <div class="card-content">
@@ -34,29 +35,32 @@
                         <ul>
                             <li class="item-content">
                                 <div class="item-inner">
-                                    <div class="item-title text-center" style="width: 100%;">何玲三角米粽</div>
+                                    <div class="item-title text-center" style="width: 100%;"><?php echo ($goodsInfo['name']); ?></div>
                                 </div>
                             </li>
                             <li class="item-content">
                                 <div class="item-inner">
                                     <div class="green-text big-text">
                                         <small class="gray-text small-text">市面价：</small>
-                                        ￥50
+                                        ￥<?php echo ($goodsInfo['price']); ?>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div class="card-footer no-border">
-                        <a href="#" class="link">收藏(30)</a>
-                        <a href="#" class="link">想买(30)</a>
+                        <a href="javascript:;" class="button button-warning open-comment">评论(<?php echo ($commentCount); ?>)</a>
+                        <a href="javascript:;" class="button button-warning" id="likeBtn" data-id="<?php echo ($goodsInfo['id']); ?>">喜欢(<span><?php echo ($likeCount); ?></span>)</a>
                     </div>
                 </div>
             </div>
+
+            <input type="hidden" name="id" value="<?php echo ($_GET['id']); ?>" id="goodsIdInput">
+
             <div class="content-block-title">描述</div>
             <div class="card">
                 <div class="card-content">
-                    <div class="card-content-inner">这是一个用纯文本的简单卡片。但卡片可以包含自己的页头，页脚，列表视图，图像，和里面的任何元素。</div>
+                    <div class="card-content-inner"><?php echo ($goodsInfo['intro']); ?></div>
                 </div>
             </div>
 
@@ -66,84 +70,76 @@
                     <div class="list-block media-list inset">
                         <ul>
                             <li>
-                                <a href="#" class="item-link item-content">
-                                    <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="44"></div>
+                                <a href="<?php echo UC('Index/shopDetail');?>" class="item-link item-content">
+                                    <div class="item-media">
+                                        <img src="<?php echo ($shopInfo['imgurl']); ?>" width="44">
+                                    </div>
                                     <div class="item-inner">
                                         <div class="item-title-row">
-                                            <div class="item-title">东门口何玲米粽店</div>
+                                            <div class="item-title"><?php echo ($shopInfo['name']); ?></div>
                                         </div>
-                                        <div class="item-subtitle">十字步行街往西门口方向右边摊位</div>
+                                        <div class="item-subtitle"><?php echo ($shopInfo['address']); ?></div>
                                     </div>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="card-footer"><a href="#" class="link">点击查看地图</a></div>
+                <div class="card-footer"><a href="<?php echo UC('Index/shopMap');?>" class="link">点击查看地图</a></div>
             </div>
 
 
-            <div class="content-block-title">评论(50)<a href="#" class="fr">写评论</a></div>
-            <div class="card facebook-card list-block">
-                <div class="card-header no-border">
-                    <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
-                    <div class="facebook-name">夜声</div>
-                    <div class="facebook-date">今天09:01</div>
-                </div>
-                <div class="card-content" style="margin-top: -15px;">
-                    <div class="card-content-inner">
-                        吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。
-                        <div class="comment-box flex" style="background: #eeeeee;">
-                            <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="comment-box-head">
-                            <div class="comment-box-infobox flex-1">
-                                <h3 class="comment-box-name">夜声<a href="#" class="comment-box-replybtn">回复TA</a></h3>
-                                <span class="comment-box-time">今天15:30 </span>
-                                <div class="comment-box-content">
-                                    那里的牙医比较呢？
-                                </div>
+            <div class="content-block-title">评论(<?php echo ($commentCount); ?>)<a href="#" class="fr">写评论</a></div>
+            <?php if(empty($$commentList)): ?><p class="gray-text center-text">暂无评论</p>
+                <?php else: ?>
+                <?php if(is_array($commentList)): $i = 0; $__LIST__ = $commentList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$commentInfo): $mod = ($i % 2 );++$i;?><div class="card facebook-card list-block">
+                        <div class="card-header no-border">
+                            <div class="facebook-avatar">
+                                <img src="<?php echo ($commentInfo['headimgurl']); ?>" width="34" height="34">
+                            </div>
+                            <div class="facebook-name"><?php echo ($commentInfo['name']); ?></div>
+                            <div class="facebook-date">今天09:01</div>
+                        </div>
+                        <div class="card-content" style="margin-top: -15px;">
+                            <div class="card-content-inner">
+                                <?php echo ($commentInfo['ccontent']); ?>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="card-footer no-border">
-                    <a href="#" class="link">回复</a>
-                    <a href="#" class="link">赞</a>
-                </div>
-            </div>
-            <div class="card facebook-card list-block">
-                <div class="card-header no-border">
-                    <div class="facebook-avatar"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="34" height="34"></div>
-                    <div class="facebook-name">夜声</div>
-                    <div class="facebook-date">今天09:01</div>
-                </div>
-                <div class="card-content" style="margin-top: -15px;">
-                    <div class="card-content-inner">
-                        吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。吃牙疼药最好，还要去牙科。
-                        <div class="comment-box flex" style="background: #eeeeee;">
-                            <img src="http://192.168.23.105/pingtai/Public/images/head.jpg" class="comment-box-head">
-                            <div class="comment-box-infobox flex-1">
-                                <h3 class="comment-box-name">夜声<a href="#" class="comment-box-replybtn">回复TA</a></h3>
-                                <span class="comment-box-time">今天15:30 </span>
-                                <div class="comment-box-content">
-                                    那里的牙医比较呢？
-                                </div>
-                            </div>
+                        <div class="card-footer no-border">
+                            <a href="#" class="link">赞Ta</a>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card-footer no-border">
-                    <a href="#" class="link">回复</a>
-                    <a href="#" class="link">赞</a>
-                </div>
-            </div>
+                    </div><?php endforeach; endif; else: echo "" ;endif; endif; ?>
 
 
             <div style="height: 50px;"></div>
             <div class="fix-bottom row no-gutter">
                 <div class="col-100">
-                    <a href="#" class="button button-big button-fill button-warning">联系店主</a>
+                    <a href="tel:<?php echo ($shopInfo['phone']); ?>" class="button button-big button-fill button-warning">联系店主</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="popup popup-comment">
+        <div class="content-block">
+            <div class="commentBox">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" placeholder="请输入评论" rows="3" id="commentInput"
+                                  name="ccontent" required maxlength="200"><?php echo ($goodsDetail['intro']); ?></textarea>
+                            <div class="weui_textarea_counter">限200字</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="row">
+                    <div class="col-50"><a href="#" class="button button-light close-popup">返回</a></div>
+                    <div class="col-50"><a href="#" class="button button-fill button-success" id="submitCommentBtn">提交</a></div>
                 </div>
             </div>
         </div>

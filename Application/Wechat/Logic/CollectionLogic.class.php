@@ -69,6 +69,7 @@ class CollectionLogic
      */
     public static function addCollectionInfo($info)
     {
+        $info['ctime'] = time();
         return D('Collection')->data($info)->add();
     }
 

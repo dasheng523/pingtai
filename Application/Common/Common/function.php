@@ -171,5 +171,5 @@ function rad($d){
 
 function sortTime($a,$b){
   if ($a['mtime']==$b['mtime']) return 0;
-  return ($a['mtime']<$b['mtime'])?-1:1;
+  return ($a['mtime']>$b['mtime'])?-1:1;
 }

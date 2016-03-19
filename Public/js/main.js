@@ -43,7 +43,7 @@ function createShowActionHandler(buttons){
 /**
  * 刷新页面
  */
-function refleshPage(){
+function refreshPage(){
     $.router.refresh = function(ignoreCache) {
         var url = window.location.href;
         var context = this;
@@ -89,7 +89,7 @@ function createPageHandler(handleObj){
             }
             //下拉刷新
             $(document).on('refresh', '.pull-to-refresh-content',function(e) {
-                refleshPage();
+                refreshPage();
                 $.pullToRefreshDone('.pull-to-refresh-content');
             });
         }
@@ -153,7 +153,9 @@ var UploadUtils = function(fileId,limitCount){
                 tmp.removeClass('weui_uploader_status');
                 tmp.html('<input type="hidden" name="media_ids[]" value="'+data.info[0]+'">');
             },
-            error: function() {
+            error: function(xhr,errorType, error) {
+                console.log(error);
+                console.log(errorType);
                 $.toast("您的手机似乎不支持上传功能");
             },
             data: fileData,
@@ -252,6 +254,45 @@ var index = {
     pageId:""
 };
 
+var publishGoodsList = {
+    pageId: "#PublishGoodsList",
+    handler:function(e, pageId, $page){
+        $('#likeBtn').click(function(){
+            alert(123);
+        });
+    }
+};
+createPageHandler(publishGoodsList);
+
+var goodsDetail = {
+    pageId: "#goodsDetail",
+    handler:function(e, pageId, $page){
+        $('#likeBtn').click(function(){
+            var id = $(this).data('id');
+            $.post(domain+'/Phone/Index/likeGoods',{id:id},function(res){
+                if(res.status==1){
+                    var count = $('#likeBtn span').html();
+                    count++;
+                    $('#likeBtn span').html(count);
+                }
+            },'json');
+        });
+
+        $('.open-comment').click(function(){
+            $.popup('.popup-comment');
+        });
+
+        $('#submitCommentBtn').click(function(){
+            var content = $('#commentInput').val();
+            var id = $('#goodsIdInput').val();
+            $.post(domain+'/Phone/Index/submitComment',{content:content,id:id},function(res){
+                $.toast(res.info);
+                $.closeModal('.popup-comment');
+            },'json');
+        });
+    }
+};
+createPageHandler(goodsDetail);
 
 
 /*************** 店铺 *******************/

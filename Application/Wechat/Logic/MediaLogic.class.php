@@ -172,7 +172,7 @@ class MediaLogic
             $info['path'] = "Public/upload/".$info['fileName'];
             $info['url'] = __ROOT__ .'/' .$info['path'];
             if(!@move_uploaded_file($upload['tmp_name'],$info['path'])){
-                echo "error";
+                echo "error move file";
             }
             $rs[] = $info;
         }

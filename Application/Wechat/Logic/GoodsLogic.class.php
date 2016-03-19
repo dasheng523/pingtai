@@ -296,7 +296,7 @@ class GoodsLogic
      * 获取缓存的商品和集合资料
      */
     public static function getBufferGoodsAndCollectionList(){
-      $bufferList = S('bufferGoodsAndColloction1');
+      $bufferList = S('bufferGoodsAndColloction');
       if(!$bufferList){
             //获取最新商品
             $goodsLatest = self::getLatestGoods(1000);
@@ -306,7 +306,7 @@ class GoodsLogic
             $bufferList = array_merge($goodsLatest,$collectionLatest);
             usort($bufferList,'sortTime');
             //保存缓存
-            //S('bufferGoodsAndColloction1',$list,3600);
+            //S('bufferGoodsAndColloction',$list,3600);
       }
       return $bufferList;
     }
