@@ -15,10 +15,6 @@
     <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/main.css?v=27">
 
     
-    <link rel="stylesheet" href="http://192.168.23.105/pingtai/Public/css/swiper.min.css">
-    <style>
-        .swiper-pagination-bullet-active{background: #04be02;}
-    </style>
 
 
 </head>
@@ -163,21 +159,6 @@
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
 <script type='text/javascript' src="http://192.168.23.105/pingtai/Public/js/main.js?v=7" charset='utf-8'></script>
 
-    <script src="http://192.168.23.105/pingtai/Public/js/swiper.min.js"></script>
-    <script>
-        $('#showdetail').click(function(){
-            $('.groupshowbox').removeClass('hide');
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                paginationClickable: true
-            });
-        });
-
-        $('.groupshow-close').click(function(){
-            $('.groupshowbox').addClass('hide');
-        });
-
-    </script>
 
 </body>
 </html>

@@ -47,7 +47,30 @@ class IndexController extends Controller {
     }
 
     //组合详情
-    public function groupinfo(){
+    public function collection(){
+        $id = I('get.id');
+        logic\UserUseEntityLogic::visit(getUserId(),$id,C('EntityType_Collection'));
+        $collectionInfo = logic\CollectionLogic::getCollectionInfo($id);
+        $faceUrl = logic\MediaLogic::getEntityFirstImgUrl($id,C('EntityType_Collection'));
+        $commentList = logic\UserUseEntityLogic::getCommentList($id,C('EntityType_Collection'));
+        $commentList = logic\UserLogic::fillUserInfo($commentList,'user_id');
+        $commentCount = count($commentList);
+        $likeCount = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Collection'));
+        $userInfo = logic\UserLogic::getUserInfo($collectionInfo['user_id']);
+        $goodsList = logic\CollectionLogic::getCollectionGoodsList($id);
+        $totalPrice = 0;
+        foreach($goodsList as $goodsInfo){
+            $totalPrice += $goodsInfo['goodsInfo']['price'];
+        }
+
+        $this->assign('totalPrice',$totalPrice);
+        $this->assign('userInfo',$userInfo);
+        $this->assign('commentCount',$commentCount);
+        $this->assign('commentList',$commentList);
+        $this->assign('likeCount',$likeCount);
+        $this->assign('collectionInfo',$collectionInfo);
+        $this->assign('faceUrl',$faceUrl);
+        $this->assign('goodsList',$goodsList);
         $this->display();
     }
 
@@ -68,6 +91,7 @@ class IndexController extends Controller {
         $this->assign('goodsInfo',$goodsInfo);
         $this->assign('imgList',$imgList);
         $this->assign('commentCount',$commentCount);
+        $this->assign('commentList',$commentList);
         $this->assign('likeCount',$likeCount);
         $this->assign('shopInfo',$shopInfo);
         $this->display();
@@ -87,6 +111,20 @@ class IndexController extends Controller {
     }
 
     /**
+     *
+     * 喜欢集合
+     */
+    public function likeCollection(){
+        $id = I('post.id');
+        $res = logic\UserUseEntityLogic::like(getUserId(),$id,C('EntityType_Collection'));
+        if($res){
+            $this->success('ok');
+        }else{
+            $this->error('error');
+        }
+    }
+
+    /**
      * 评论商品
      */
     public function submitComment(){
@@ -96,7 +134,22 @@ class IndexController extends Controller {
         if($res){
             $this->success('评论成功');
         }else{
-            $this->error('服务器错误');
+            $this->error('一天只能评论一次');
+        }
+    }
+
+    /**
+     * 评论集合
+     */
+    public function submitCollectionComment()
+    {
+        $id = I('post.id');
+        $content = I('post.content');
+        $res = logic\UserUseEntityLogic::comment(getUserId(),$id,C('EntityType_Collection'),$content);
+        if($res){
+            $this->success('评论成功');
+        }else{
+            $this->error('一天只能评论一次');
         }
     }
 

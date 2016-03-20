@@ -1,132 +1,158 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<extend name="template/main" />
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=12">
+<block name="css">
+</block>
 
-</head>
-<body>
-<div class="page-group">
-    <div class="page page-current" id="collection-info">
+<block name="script">
+</block>
+
+<block name="content">
+    <div class="page page-current" id="collectionInfo">
         <div class="content">
             <div class="banner-header">
-                <div class="flex">
+                <div class="flex banner-detail">
                     <div class="banner-header-imgbox">
-                        <img src="__PUBLIC__/images/head.jpg">
+                        <img src="{$faceUrl}">
                     </div>
 
                     <div class="banner-header-infobox flex-1">
-                        <h3 class="info-title text-line2">美人鱼美人鱼美人鱼美人鱼美人鱼美人鱼美人鱼美人鱼美人鱼</h3>
-                        <p class="info green-text big-text"><span class="small-text gray-text">市场价:</span>￥50</p>
-                        <div class="buttons-row greenbg">
-                            <a href="#" class="button button-round button-success">收藏(50)</a>
-                            <a href="#" class="button  button-round ">想买(100)</a>
-                        </div>
+                        <h3 class="info-title text-line2">{$collectionInfo['name']}</h3>
+                        <a href="#" class="author-box text-line">
+                            <img src="{$userInfo['headimgurl']}">
+                            {$userInfo['nickname']} >
+                        </a>
                     </div>
                 </div>
-
-
+                <div class="flex banner-header-btns">
+                    <div class="flex-1 btn-item" id="likeBtn" data-id="{$collectionInfo['id']}">
+                        <div class="small-text">{$likeCount}</div>
+                        喜欢
+                    </div>
+                    <div class="flex-1 btn-item open-comment">
+                        <div class="small-text">{$commentCount}</div>
+                        评论
+                    </div>
+                </div>
             </div>
 
             <div class="weui_btn_area">
-                <a class="weui_btn weui_btn_primary" href="javascript:" id="showTooltips">查看详情</a>
+                <a class="weui_btn weui_btn_primary" href="javascript:" id="showdetail">查看详情</a>
             </div>
             <div class="card">
-                <div class="card-header">商品说明</div>
+                <div class="card-header">说明</div>
                 <div class="card-content">
-                    <div class="card-content-inner">头和尾的卡片。卡头是用来显示一些额外的信息，或自定义操作卡标题和页脚。头和尾的卡片。卡头是用来显示一些额外的信息，或自定义操作卡标题和页脚。头和尾的卡片。卡头是用来显示一些额外的信息，或自定义操作卡标题和页脚。</div>
+                    <div class="card-content-inner">
+                        {$collectionInfo['intro']}
+                    </div>
                 </div>
             </div>
 
-            <div class="content-block-title">商品列表</div>
+
+            <input type="hidden" name="idInput" value="{$collectionInfo['id']}">
+
+            <div class="content-block-title">商品列表 <span class="fr green-text">总价：￥{$totalPrice}</span></div>
             <div class="list-block media-list">
                 <ul>
-                    <li>
-                        <a href="#" class="item-link item-content">
-                            <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
-                            <div class="item-inner">
-                                <div class="item-title-row">
-                                    <div class="item-title">臭豆腐</div>
-                                    <div class="item-after">$15</div>
+                    <volist name="goodsList" id="info">
+                        <li>
+                            <a href="{:UC('Index/goodsdetail',array('id'=>$info['goodsInfo']['id']))}" class="item-link item-content">
+                                <div class="item-media">
+                                    <img src="{$info['goodsfirstimg']}" width="80">
                                 </div>
-                                <div class="item-subtitle" style="font-size: 12px;">by 夜声旗舰店</div>
-                                <div class="item-text">此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="item-link item-content">
-                            <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
-                            <div class="item-inner">
-                                <div class="item-title-row">
-                                    <div class="item-title">臭豆腐</div>
-                                    <div class="item-after">$15</div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{$info['goodsInfo']['name']}</div>
+                                        <div class="item-after small-text">￥{$info['goodsInfo']['price']}</div>
+                                    </div>
+                                    <div class="item-subtitle" style="font-size: 12px;">by {$info['shopName']}</div>
+                                    <div class="item-text">{$info['goodsInfo']['intro']}</div>
                                 </div>
-                                <div class="item-subtitle" style="font-size: 12px;">by 夜声旗舰店</div>
-                                <div class="item-text">此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="item-link item-content">
-                            <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
-                            <div class="item-inner">
-                                <div class="item-title-row">
-                                    <div class="item-title">臭豆腐</div>
-                                    <div class="item-after">$15</div>
-                                </div>
-                                <div class="item-subtitle" style="font-size: 12px;">by 夜声旗舰店</div>
-                                <div class="item-text">此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="item-link item-content">
-                            <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
-                            <div class="item-inner">
-                                <div class="item-title-row">
-                                    <div class="item-title">臭豆腐</div>
-                                    <div class="item-after">$15</div>
-                                </div>
-                                <div class="item-subtitle" style="font-size: 12px;">by 夜声旗舰店</div>
-                                <div class="item-text">此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="item-link item-content">
-                            <div class="item-media"><img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" width="80"></div>
-                            <div class="item-inner">
-                                <div class="item-title-row">
-                                    <div class="item-title">臭豆腐</div>
-                                    <div class="item-after">$15</div>
-                                </div>
-                                <div class="item-subtitle" style="font-size: 12px;">by 夜声旗舰店</div>
-                                <div class="item-text">此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容此处是文本内容</div>
-                            </div>
-                        </a>
-                    </li>
-
+                            </a>
+                        </li>
+                    </volist>
                 </ul>
+            </div>
+            <div class="content-block-title">评论({$commentCount})<a href="#" class="fr open-comment">写评论</a></div>
+            <empty name="commentList">
+                <p class="gray-text center-text">暂无评论</p>
+                <else/>
+                <volist name="commentList" id="commentInfo">
+                    <div class="card facebook-card list-block">
+                        <div class="card-header no-border">
+                            <div class="facebook-avatar">
+                                <img src="{$commentInfo['userInfo']['headimgurl']}" width="34" height="34">
+                            </div>
+                            <div class="facebook-name">{$commentInfo['userInfo']['nickname']}</div>
+                            <div class="facebook-date">{$commentInfo['ctime']|formatDate}</div>
+                        </div>
+                        <div class="card-content" style="margin-top: -15px;">
+                            <div class="card-content-inner">
+                                {$commentInfo['ccontent']}
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+            </empty>
+            <div class="groupshowbox hide">
+                <a class="groupshow-close" href="javascript:"><i class="iconfont">&#xe607;</i></a>
+                <div class="swiper-container2 groupshowcontainer">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide groupshow-item">
+                            <img src="__PUBLIC__/images/share2.jpg" class="groupshowpic">
+                            <h3 class="groupshow-title">
+                                拖把
+                            </h3>
+                            <p class="groupshow-text">
+                                一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用。
+                            </p>
+                        </div>
+                        <div class="swiper-slide groupshow-item">
+                            <img src="__PUBLIC__/images/share2.jpg" class="groupshowpic">
+                            <h3 class="groupshow-title">
+                                拖把
+                            </h3>
+                            <p class="groupshow-text">
+                                一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用。
+                            </p>
+                        </div>
+                        <div class="swiper-slide groupshow-item">
+                            <img src="__PUBLIC__/images/share2.jpg" class="groupshowpic">
+                            <h3 class="groupshow-title">
+                                拖把
+                            </h3>
+                            <p class="groupshow-text">
+                                一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用一般家庭的拖把是很难刷掉水的，也很难使得地板变得干净。所以必须要用。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <a href="tel:{$userInfo['phone']}" class="extra_button iconfont" id="phoneBtn">&#xe606;</a>
+        </div>
+    </div>
+
+    <div class="popup popup-comment">
+        <div class="content-block">
+            <div class="commentBox">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" placeholder="请输入评论" rows="3" id="commentInput"
+                                  name="ccontent" required maxlength="200">{$goodsDetail['intro']}</textarea>
+                            <div class="weui_textarea_counter">限200字</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="row">
+                    <div class="col-50"><a href="#" class="button button-light close-popup">返回</a></div>
+                    <div class="col-50"><a href="#" class="button button-fill button-success" id="submitCommentBtn">提交</a></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
-
-</body>
-</html>
+</block>

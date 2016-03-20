@@ -288,11 +288,55 @@ var goodsDetail = {
             $.post(domain+'/Phone/Index/submitComment',{content:content,id:id},function(res){
                 $.toast(res.info);
                 $.closeModal('.popup-comment');
+                setTimeout(function(){
+                    refreshPage();
+                },500);
             },'json');
         });
     }
 };
 createPageHandler(goodsDetail);
+
+var collectionInfo = {
+    pageId: "#collectionInfo",
+    handler:function(e, pageId, $page){
+        $('#showdetail').click(function(){
+            $('.groupshowbox').removeClass('hide');
+            $(".swiper-container2").swiper();
+        });
+        $('.groupshow-close').click(function(){
+            $('.groupshowbox').addClass('hide');
+        });
+
+        $('#likeBtn').click(function(){
+            var id = $(this).data('id');
+            $.post(domain+'/Phone/Index/likeCollection',{id:id},function(res){
+                if(res.status==1){
+                    var count = $('#likeBtn > div').html();
+                    count++;
+                    $('#likeBtn > div').html(count);
+                }
+            },'json');
+        });
+
+        $('.open-comment').click(function(){
+            $.popup('.popup-comment');
+        });
+
+        $('#submitCommentBtn').click(function(){
+            var content = $('#commentInput').val();
+            var id = $('#idInput').val();
+            $.post(domain+'/Phone/Index/submitCollectionComment',{content:content,id:id},function(res){
+                $.toast(res.info);
+                $.closeModal('.popup-comment');
+                setTimeout(function(){
+                    refreshPage();
+                },500);
+            },'json');
+        });
+    }
+};
+createPageHandler(collectionInfo);
 
 
 /*************** 店铺 *******************/
@@ -378,7 +422,7 @@ createPageHandler(collection);
  * 集合详情
  * @type {{pageId: string, menu: *[], handler: collectionInfo.handler}}
  */
-var collectionInfo = {
+var collectionInfoCustomer = {
     pageId:"#collection-info",
     menu:[
         {
@@ -392,7 +436,7 @@ var collectionInfo = {
 
     }
 };
-createPageHandler(collectionInfo);
+createPageHandler(collectionInfoCustomer);
 
 /**
  * 集合商品删除页

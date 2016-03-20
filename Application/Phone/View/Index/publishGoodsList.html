@@ -18,10 +18,10 @@
             <ul>
                 <volist name="list" id="info">
                     <li>
-                        <!-- 妙集 -->
                         <if condition="$info['collection'] eq 1">
+                            <!-- 妙集 -->
                             <div class="card facebook-card list-block">
-                                <a class="item-link" href="{:UC('Index/groupinfo')}">
+                                <a class="item-link" href="{:UC('Index/collection',array('id'=>$info['id']))}">
                                     <div class="card-header no-border">
                                         <h3 class="card-title text-line2">{$info['name']}<span class="fr green-text" style="font-size: 0.6rem;">包含5个宝贝</span></h3>
                                         <div class="card-header-desc">
@@ -44,7 +44,6 @@
                                     <a href="#" class="link">评论({$info['commentNum']})</a>
                                 </div>
                             </div>
-
                             <else/>
                             <!-- 商品 -->
                             <div class="card facebook-card list-block">

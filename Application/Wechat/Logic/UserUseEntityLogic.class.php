@@ -89,7 +89,7 @@ class UserUseEntityLogic
      * @return mixed
      * 获取评论列表
      */
-    public static function getCommentList($entityType,$entityId)
+    public static function getCommentList($entityId,$entityType)
     {
         return D('UserUseEntity')
             ->where(array('entity_type'=>$entityType,'entity_id'=>$entityId,'use_type'=>C('UseType_Comment')))
@@ -299,11 +299,17 @@ class UserUseEntityLogic
 
     public static function comment($userId, $entityId, $entityType, $content)
     {
-        $exist = D('UserUseEntity')->where(array('user_id'=>$userId,'entity_id'=>$entityId,'entity_type'=>$entityType,'use_type'=>C('UseType_Like')))->find();
-        if($exist){
+        $exist = D('UserUseEntity')->where(array(
+            'user_id'=>$userId,
+            'entity_id'=>$entityId,
+            'entity_type'=>$entityType,
+            'use_type'=>C('UseType_Comment')))
+            ->order('id desc')
+            ->find();
+        if($exist['ctime']>time()-3600*24){
             return 0;
         }
-        return self::createCommonInfo($userId,C('UseType_Like'),$entityId,$entityType,$content);
+        return self::createCommonInfo($userId,C('UseType_Comment'),$entityId,$entityType,$content);
     }
 
 

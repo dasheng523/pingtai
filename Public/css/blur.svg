@@ -10,5 +10,4 @@
             <feGaussianBlur stdDeviation="10" />
         </filter>
     </defs>
-    <image xlink:href="./mm.jpg" x="0" y="0" height="200" width="200" filter="url(#blur)"/>
 </svg>

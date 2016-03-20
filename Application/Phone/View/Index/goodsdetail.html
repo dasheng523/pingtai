@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<extend name="template/main" />
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=12">
+<block name="css">
+</block>
 
-</head>
-<body>
-<div class="page-group">
+<block name="script">
+</block>
+
+<block name="content">
     <div class="page page-current" id="goodsDetail">
         <div class="content">
             <if condition="$imgList">
                 <div class="swiper-container swiper-container-horizontal" data-space-between="10">
                     <div class="swiper-wrapper">
                         <volist name="imgList" id="imgInfo">
-                            <div class="swiper-slide swiper-slide-active" style="width: 320px; margin-right: 10px;">
+                            <div class="swiper-slide swiper-slide-active">
                                 <img src="{$imgInfo['url']}" alt="" style="width: 100%">
                             </div>
                         </volist>
@@ -93,27 +83,23 @@
             </div>
 
 
-            <div class="content-block-title">评论({$commentCount})<a href="#" class="fr">写评论</a></div>
-            <empty name="$commentList">
+            <div class="content-block-title">评论({$commentCount})<a href="#" class="fr open-comment">写评论</a></div>
+            <empty name="commentList">
                 <p class="gray-text center-text">暂无评论</p>
                 <else/>
                 <volist name="commentList" id="commentInfo">
                     <div class="card facebook-card list-block">
                         <div class="card-header no-border">
                             <div class="facebook-avatar">
-                                <img src="{$commentInfo['headimgurl']}" width="34" height="34">
+                                <img src="{$commentInfo['userInfo']['headimgurl']}" width="34" height="34">
                             </div>
-                            <div class="facebook-name">{$commentInfo['name']}</div>
-                            <div class="facebook-date">今天09:01</div>
+                            <div class="facebook-name">{$commentInfo['userInfo']['nickname']}</div>
+                            <div class="facebook-date">{$commentInfo['ctime']|formatDate}</div>
                         </div>
                         <div class="card-content" style="margin-top: -15px;">
                             <div class="card-content-inner">
                                 {$commentInfo['ccontent']}
                             </div>
-                        </div>
-
-                        <div class="card-footer no-border">
-                            <a href="#" class="link">赞Ta</a>
                         </div>
                     </div>
                 </volist>
@@ -152,13 +138,4 @@
             </div>
         </div>
     </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
-
-<script type='text/javascript' src="__PUBLIC__/js/main.js" charset='utf-8'></script>
-
-</body>
-</html>
+</block>

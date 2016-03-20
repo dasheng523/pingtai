@@ -93,6 +93,9 @@ class CollectionLogic
         $list = D('CollectionGoods')->where(array('collection_id'=>$collection_id))->select();
         $list = logic\GoodsLogic::fillImgList($list,'goods_id');
         $list = logic\GoodsLogic::fillGoodsInfo($list,'goods_id');
+        foreach($list as &$info){
+            $info['shopName'] = logic\ShopLogic::getShopNameById($info['goodsInfo']['shop_id']);
+        }
         return $list;
     }
 
