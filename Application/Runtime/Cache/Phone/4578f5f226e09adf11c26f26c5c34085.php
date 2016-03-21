@@ -54,8 +54,8 @@
                                             <div class="item-img" style="background-image: url(<?php echo ($info['goodsfirstimg']); ?>)"></div>
                                         </div>
                                         <div class="item-inner">
-                                            <div class="item-text index-item-primary">$info['goodsInfo']['name']</div>
-                                            <div class="item-subtitle"><span class="index-item-grey">by $info['shopName']</span></div>
+                                            <div class="item-text index-item-primary"><?php echo ($info['goodsInfo']['name']); ?></div>
+                                            <div class="item-subtitle"><span class="index-item-grey">by <?php echo ($info['shopName']); ?></span></div>
                                             <div class="item-subtitle">
                                                 <span class="green-text fr" style="font-size: 16px;vertical-align: bottom;">￥<?php echo ($info['goodsInfo']['price']); ?></span>
                                                 <span class="index-item-grey">浏览：<?php echo ($info['UseType_Visit']); ?> | 喜欢：<?php echo ($info['UseType_Like']); ?> </span></div>

@@ -351,15 +351,14 @@ class UserUseEntityLogic
                       vs.UseType_Visit,
                       cm.UseType_Comment,
                       lk.UseType_Like,
-                      cl.UseType_Collection,
-                      vs.UseType_Visit+cm.UseType_Comment*50+lk.UseType_Like*50+cl.UseType_Collection*60 as total
+                      vs.UseType_Visit+cm.UseType_Comment*50+lk.UseType_Like*50 as total
                 from ($visitSql) vs
-                left join ($commentSql) cm on cm.entity_id=vs.entity_id
-                left join ($likeSql) lk on lk.entity_id=vs.entity_id
-                left join ($collectSql) cl on cl.entity_id=vs.entity_id
+                INNER join ($commentSql) cm on cm.entity_id=vs.entity_id
+                INNER join ($likeSql) lk on lk.entity_id=vs.entity_id
                 ORDER BY total
                 limit $startReco,$pageSize";
         //print_r($sql);
+
         return M()->query($sql);
     }
 
@@ -376,18 +375,15 @@ class UserUseEntityLogic
         $visitSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Visit');
         $commentSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Comment');
         $likeSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Like');
-        $collectSql = self::countUseTimeSql(C('EntityType_Collection'),'UseType_Collection');
 
         $sql = "select vs.entity_id,
                       vs.UseType_Visit,
                       cm.UseType_Comment,
                       lk.UseType_Like,
-                      cl.UseType_Collection,
-                      vs.UseType_Visit+cm.UseType_Comment*50+lk.UseType_Like*50+cl.UseType_Collection*60 as total
+                      vs.UseType_Visit+cm.UseType_Comment*50+lk.UseType_Like*50 as total
                 from ($visitSql) vs
                 left join ($commentSql) cm on cm.entity_id=vs.entity_id
                 left join ($likeSql) lk on lk.entity_id=vs.entity_id
-                left join ($collectSql) cl on cl.entity_id=vs.entity_id
                 ORDER BY total
                 limit $startReco,$pageSize";
         //print_r($sql);
