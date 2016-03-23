@@ -1,5 +1,6 @@
 <?php
 return array(
+    'LOCAL_DEV' => true,	//本地开发模式
     /* 数据库配置 */
     'DB_TYPE'   => 'mysql',     // 数据库类型
     'DB_HOST'   => 'localhost', // 服务器地址
