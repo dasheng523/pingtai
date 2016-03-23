@@ -7,22 +7,18 @@ class WechatController extends Controller {
     public function index(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
         //验证微信请求
-        if ( isset($_GET["echostr"])){
-            $weobj->valid();
-            return;
-        }
+        $weobj->valid();
 
         if(IS_POST){
             \Think\Log::write('微信客户端请求：','DEBUG');
-            \Think\Log::write(print_r($weobj->getRev()->getRevData()),'DEBUG');
-
-
+            \Think\Log::write(print_r($weobj->getRev()->getRevData(),true),'DEBUG');
+            
             $type = $weobj->getRev()->getRevType();
             switch($type) {
                 case Wechat::MSGTYPE_TEXT:
                     \Think\Log::write('文本消息','DEBUG');
                     $msg = $weobj->getRev()->getRevContent();
-                    if($msg == 'text'){
+                    if($msg == 'test'){
                         $weobj->text('test')->reply();
                     }
                     break;

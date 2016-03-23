@@ -25,7 +25,7 @@ class WechatLogic{
     //初始化微信操作类
     public static function initWechatById($id){
         $info = D('wechat')->where(array('id'=>$id))->find();
-
+print_r($info);
         if($info){
             $weObj = new Wechat($info);
             return $weObj;
