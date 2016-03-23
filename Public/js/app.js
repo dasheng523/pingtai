@@ -1,7 +1,7 @@
 /************************  core  ********************************/
 
 //全局变量
-var domain = "http://192.168.23.105/pingtai";
+var domain = "http://www.dianduoduo.top";
 var pageInitEventHandles = [];
 
 //初始化程序
@@ -54,7 +54,7 @@ function createPageHandler(handleObj){
     var tmpHandle = function(e, pageId, $page) {
         initWechatJs();
         wx.ready(function(){
-            share();
+            share('testShare','testDetail',window.location.href,domain+"/Public/images/caomei.jpg");
             if(handleObj.wechatReady){
                 handleObj.wechatReady();
             }
