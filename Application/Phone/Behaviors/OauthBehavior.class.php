@@ -17,12 +17,6 @@ class OauthBehavior extends Behavior{
             return;
         }
 
-        //本地开发模式直接进入
-        if(C('LOCAL_DEV')){
-            logic\RequestLogic::setClientServerUserMap(logic\RequestLogic::getClientUserCode(),1);
-            return;
-        }
-
         $userId = getUserId();
         //如果$userId不存在就进入授权
         if(!$userId){

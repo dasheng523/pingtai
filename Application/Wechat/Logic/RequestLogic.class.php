@@ -26,9 +26,6 @@ class RequestLogic{
      */
     public static function getClientUserCode()
     {
-        if(isWeixin()){
-            return session_id();
-        }
         return session_id();
     }
 
@@ -36,6 +33,10 @@ class RequestLogic{
      * 获取当前的用户ID
      */
     public static function getUserId(){
+        if(C('LOCAL_DEV')){
+            self::setClientServerUserMap(self::getClientUserCode(),1);
+            return 1;
+        }
         $clientUserCode = self::getClientUserCode();
         $dd = S('client_server_user_'.$clientUserCode);
         return $dd;
