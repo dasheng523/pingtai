@@ -1,0 +1,65 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="detail">
+        <div class="content native-scroll">
+            <div class="yspanel">
+                <div class="swiper-container" data-space-between="10">
+                    <div class="swiper-wrapper">
+                        <volist name="info.imglist" id="imgurl">
+                            <div class="swiper-slide swiper-slide-active">
+                                <img src="{$imgurl}" alt="" style="width: 100%">
+                            </div>
+                        </volist>
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="yspanel-content-box" style="margin-top: -30px;">
+                    <div class="flex flex-align-center yspanel-titlebox">
+                        <h3 class="text-center flex-1">{$info['name']}</h3>
+                        <div class="pricebox orange-text">￥{$info['price']}+</div>
+                    </div>
+                    <div class="flex">
+                        <a class="btnitem ysbtn flex-1" href="#" id="shareBtn">
+                            <i class="iconfont">&#xe609;</i>分享
+                        </a>
+                        <a class="btnitem ysbtn flex-1" href="tel:{$info['phone']}">
+                            <i class="iconfont">&#xe606;</i>电话
+                        </a>
+                        <a class="btnitem ysbtn flex-1">
+                            <i class="iconfont">&#xe608;</i>喜欢
+                        </a>
+                    </div>
+                    <div class="margin-top"></div>
+                    <table class="ystable table table-bordered">
+                        <volist name="info.other_info" id="other">
+                            <tr>
+                                <td style="text-align: center;">{$other['name']}</td>
+                                <td>{$other['val']}</td>
+                            </tr>
+                        </volist>
+                        <tr>
+                            <td colspan="2">
+                                {$info['address']} <a href="#" class="pull-right">查看地图</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="margin-top">
+                        {$info['intro']}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mask hide">
+                <div class="text-nomal-box text-center">
+                    <img src="__PUBLIC__/images/jiantou.png" class="share-jiantou"><br>
+                    点击右上角的菜单<br>
+                    选择分享朋友圈或者分享给朋友
+                </div>
+            </div>
+
+            <include file="./Application/Phone/View/Miaoji/footer.html" />
+        </div>
+    </div>
+</block>

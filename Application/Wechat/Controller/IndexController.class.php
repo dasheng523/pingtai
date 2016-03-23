@@ -1,6 +1,8 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Common\Lib\Wechat;
+
 class IndexController extends Controller {
     public function index(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
@@ -14,14 +16,18 @@ class IndexController extends Controller {
             $type = $weobj->getRev()->getRevType();
             switch($type) {
                 case Wechat::MSGTYPE_TEXT:
+                    \Think\Log::write('文本消息','DEBUG');
                     $weobj->text(getSysConfig('wechat_welcome'))->reply(); 
                     exit;
                     break;
                 case Wechat::MSGTYPE_EVENT:
+                    \Think\Log::write('事件消息','DEBUG');
                     break;
                 case Wechat::MSGTYPE_IMAGE:
+                    \Think\Log::write('图片消息','DEBUG');
                     break;
                 default:
+                    \Think\Log::write('其他','DEBUG');
                     $weobj->text("help info")->reply();
             }
         }
