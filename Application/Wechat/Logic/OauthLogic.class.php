@@ -17,7 +17,10 @@ class OauthLogic{
         //如果是微信就进入微信的授权流程
         if(isWeixin()){
             $weObj = logic\WechatLogic::initDefaultWechat();
-            $url = $weObj->getOauthRedirect(UC('Oauth/authorize',array('redirect'=>urlencode(currentUrl()))));
+            $url = $weObj->getOauthRedirect(
+                UC('Oauth/authorize',
+                array('redirect'=>urlencode(currentUrl())),
+                'snsapi_userinfo'));
             redirect($url);
         }
         //如果是别的就进入app授权流程
@@ -47,9 +50,10 @@ class OauthLogic{
 
         $uid = 0;
         $isExist = logic\WechatUserLogic::isExistOpenId($tokenInfo['openid']);  //判断是否存在openId
-
+        \Think\Log::write('授权Token:'.print_r($tokenInfo,true),'DEBUG');
         //snsapi授权
         if($tokenInfo['scope'] == 'snsapi_userinfo'){
+            \Think\Log::write('snsapi授权','DEBUG');
             $wechatUserInfo = $weObj->getOauthUserinfo($tokenInfo['access_token'],$tokenInfo['openid']);    //获得微信用户的资料
         }
         //普通授权
