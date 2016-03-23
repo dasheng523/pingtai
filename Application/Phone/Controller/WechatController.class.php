@@ -21,6 +21,10 @@ class WechatController extends Controller {
                     if($msg == 'test'){
                         $weobj->text('test')->reply();
                     }
+                    //转换URL
+                    if(strstr($msg,'dianduoduo.top')){
+                        $weobj->text('<a href="'.$msg.'">点击链接</a>')->reply();
+                    }
                     break;
                 case Wechat::MSGTYPE_EVENT:
                     \Think\Log::write('事件消息','DEBUG');
