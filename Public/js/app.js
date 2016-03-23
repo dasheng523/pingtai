@@ -69,6 +69,8 @@ function createPageHandler(handleObj){
     pageInitEventHandles.push({pageId:pageId,handler:tmpHandle});
 }
 
+
+
 /**
  * 查看地图，只能在微信里面调用
  */
