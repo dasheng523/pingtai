@@ -58,5 +58,14 @@ class WechatUserLogic{
         return false;
     }
 
-
+    /**
+     * @param $openid
+     * @return mixed
+     * 根据openid获得userId
+     */
+    public static function getUserIdByOpenId($openid)
+    {
+        $userId = D('WechatUser')->where(array('open_id'=>$openid))->getField('user_id');
+        return $userId;
+    }
 }
