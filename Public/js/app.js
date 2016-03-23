@@ -53,7 +53,12 @@ function createPageHandler(handleObj){
     var pageId = handleObj.pageId;
     var tmpHandle = function(e, pageId, $page) {
         initWechatJs();
-
+        wx.ready(function(){
+            share();
+            if(handleObj.wechatReady){
+                handleObj.wechatReady();
+            }
+        });
 
         //初始化lookMap按钮
         $('.lookmap').click(function(){
@@ -63,6 +68,7 @@ function createPageHandler(handleObj){
             var address = $(this).data('address');
             openLocation(lat,lng,name,address);
         });
+
 
         //执行自定义事件
         if(handleObj.handler){
@@ -74,8 +80,6 @@ function createPageHandler(handleObj){
 
 function initWechatJs(){
     wx.config(jsConfig);
-    wx.ready(function(){
-    });
     wx.error(function(res){
         alert(JSON.stringify(res));
     });
@@ -96,7 +100,42 @@ function openLocation(lat,lng,name,address){
     });
 }
 
-
+/**
+ * 分享
+ * @param title
+ * @param desc
+ * @param link
+ * @param imgUrl
+ * @param type
+ * @param dataUrl
+ * @param success
+ * @param cancel
+ */
+function share(title,desc,link,imgUrl,type,dataUrl,success,cancel){
+    var info = {
+        title:title,
+        desc:desc,
+        link:link,
+        imgUrl:imgUrl
+    };
+    if(type){
+        info.type = type;
+    }
+    if(dataUrl){
+        info.dataUrl = dataUrl;
+    }
+    if(success){
+        info.success = success;
+    }
+    if(cancel){
+        info.cancel = cancel;
+    }
+    wx.onMenuShareTimeline(info);
+    wx.onMenuShareAppMessage(info);
+    wx.onMenuShareQQ(info);
+    wx.onMenuShareWeibo(info);
+    wx.onMenuShareQZone(info);
+}
 
 
 
@@ -110,6 +149,9 @@ var detail = {
         $('.mask').click(function(){
             $(this).addClass('hide');
         });
+    },
+    wechatReady : function(){
+
     }
 };
 createPageHandler(detail);
