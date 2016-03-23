@@ -26,7 +26,10 @@ class RequestLogic{
      */
     public static function getClientUserCode()
     {
-        return session_id();
+        if(isWeixin()){
+            return session_id();
+        }
+        E('目前仅支持在微信里浏览');
     }
 
     /**
@@ -34,7 +37,6 @@ class RequestLogic{
      */
     public static function getUserId(){
         if(C('LOCAL_DEV')){
-            self::setClientServerUserMap(self::getClientUserCode(),1);
             return 1;
         }
         $clientUserCode = self::getClientUserCode();
