@@ -1,6 +1,6 @@
 <extend name="template/temp" />
 <block name="content">
-    <div class="page">
+    <div class="page" id="showcaseDetail">
         <div class="content native-scroll">
             <div class="margin-top"></div>
             <volist name="list" id="info">
@@ -31,7 +31,11 @@
                     </div>
                     <div class="yspanel-footer gray-text1 flex">
                         <div class="flex-1">{$info['address']}</div>
-                        <a class="lookmap" href="#">查看地图</a>
+                        <a class="lookmap" href="javascript:;"
+                           data-lat="{$info['lat']}"
+                           data-lng="{$info['lng']}"
+                           data-name="{$info['name']}"
+                           data-address="{$info['address']}">查看地图</a>
                     </div>
                 </div>
             </volist>

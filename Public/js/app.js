@@ -52,6 +52,15 @@ function backLoadPage(url){
 function createPageHandler(handleObj){
     var pageId = handleObj.pageId;
     var tmpHandle = function(e, pageId, $page) {
+        //初始化lookMap按钮
+        $('.lookmap').click(function(){
+            var lat = $(this).data('lat');
+            var lng = $(this).data('lng');
+            var name = $(this).data('name');
+            var address = $(this).data('address');
+            openLocation(lat,lng,name,address);
+        });
+
         //执行自定义事件
         if(handleObj.handler){
             handleObj.handler(e, pageId, $page);
@@ -59,6 +68,22 @@ function createPageHandler(handleObj){
     };
     pageInitEventHandles.push({pageId:pageId,handler:tmpHandle});
 }
+
+/**
+ * 查看地图，只能在微信里面调用
+ */
+function openLocation(lat,lng,name,address){
+    wx.openLocation({
+        latitude: lat, // 纬度，浮点数，范围为90 ~ -90
+        longitude: lng, // 经度，浮点数，范围为180 ~ -180。
+        name: name, // 位置名
+        address: address, // 地址详情说明
+        scale: 5, // 地图缩放级别,整形值,范围从1~28。默认为最大
+        infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
+    });
+}
+
+
 
 
 
@@ -76,6 +101,13 @@ var detail = {
 };
 createPageHandler(detail);
 
+var showcaseDetail = {
+    pageId:"#showcaseDetail",
+    handler: function (e, pageId, $page) {
+
+    }
+};
+createPageHandler(showcaseDetail);
 
 
 

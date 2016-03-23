@@ -5,6 +5,11 @@ use Wechat\Logic as logic;
 
 class MiaojiController extends Controller {
 
+    protected function _initialize(){
+        $jsConfig = logic\WechatJsLogic::makeJSSignature(logic\WechatLogic::defaultWechatConfig());
+        $this->assign('jsConfig',$jsConfig);
+    }
+
     /**
      * 妙集展示
      */
@@ -25,7 +30,7 @@ class MiaojiController extends Controller {
         $id = I('get.id');
         $list = D('park')
             ->where(array('collection_id'=>$id))
-            ->field('id,name,short_intro,price,address,phone,imglist')
+            ->field('id,name,short_intro,price,address,phone,imglist,lat,lng')
             ->select();
         foreach($list as &$info){
             $info['imglist'] = $this->getFirstImg($info['imglist']);

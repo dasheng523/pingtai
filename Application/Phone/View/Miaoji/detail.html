@@ -40,7 +40,11 @@
                         </volist>
                         <tr>
                             <td colspan="2">
-                                {$info['address']} <a href="#" class="pull-right">查看地图</a>
+                                {$info['address']} <a href="javascript:;" class="pull-right lookmap"
+                                                      data-lat="{$info['lat']}"
+                                                      data-lng="{$info['lng']}"
+                                                      data-name="{$info['name']}"
+                                                      data-address="{$info['address']}">查看地图</a>
                             </td>
                         </tr>
                     </table>
