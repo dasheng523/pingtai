@@ -70,6 +70,11 @@ function ysuuid(){
     return md5(uniqid(rand(),true));
 }
 
+//随机数
+function generateCode($length = 4) {
+    return rand(pow(10,($length-1)), pow(10,$length)-1);
+}
+
 /**
  * 时间格式化
  */
