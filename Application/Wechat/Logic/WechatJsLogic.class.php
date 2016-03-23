@@ -7,7 +7,7 @@ class WechatJsLogic{
     public static function makeJSSignature($weConfig){
         $weobj = \Wechat\Logic\WechatLogic::initWechatByConfig($weConfig);
         $signature = $weobj->getJsSign(currentUrl(),time(),md5(rand(1,9999)),$weConfig['appid']);
-        $signature['debug'] = true;
+        //$signature['debug'] = true;
         $signature['jsApiList'] = [
             'onMenuShareTimeline',
             'onMenuShareAppMessage',
