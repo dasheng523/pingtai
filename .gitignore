@@ -4,6 +4,7 @@
 Runtime
 .idea/
 *.log
+index.php
 
 *.swp
 *.swo
