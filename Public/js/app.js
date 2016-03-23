@@ -52,6 +52,9 @@ function backLoadPage(url){
 function createPageHandler(handleObj){
     var pageId = handleObj.pageId;
     var tmpHandle = function(e, pageId, $page) {
+        initWechatJs();
+
+
         //初始化lookMap按钮
         $('.lookmap').click(function(){
             var lat = $(this).data('lat');
@@ -69,6 +72,14 @@ function createPageHandler(handleObj){
     pageInitEventHandles.push({pageId:pageId,handler:tmpHandle});
 }
 
+function initWechatJs(){
+    wx.config(jsConfig);
+    wx.ready(function(){
+    });
+    wx.error(function(res){
+        alert(JSON.stringify(res));
+    });
+}
 
 
 /**
@@ -80,7 +91,7 @@ function openLocation(lat,lng,name,address){
         longitude: lng, // 经度，浮点数，范围为180 ~ -180。
         name: name, // 位置名
         address: address, // 地址详情说明
-        scale: 25, // 地图缩放级别,整形值,范围从1~28。默认为最大
+        scale: 20, // 地图缩放级别,整形值,范围从1~28。默认为最大
         infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
     });
 }
