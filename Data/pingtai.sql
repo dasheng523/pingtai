@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016-03-23 10:28:55
+-- Generation Time: 2016-03-23 10:50:48
 -- 服务器版本： 5.5.42-log
 -- PHP Version: 5.4.41
 
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `sysconfig` (
   `ckey` varchar(255) NOT NULL,
   `cvalue` text NOT NULL,
   `intro` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- 转存表中的数据 `sysconfig`
@@ -232,7 +232,8 @@ INSERT INTO `sysconfig` (`id`, `ckey`, `cvalue`, `intro`) VALUES
 (2, 'Num_validateCodeExpires', '300', '验证码过期时间'),
 (3, 'Text_OpenShopSuccess', '恭喜你开店成功', '开店成功提示语'),
 (4, 'Text_VerifyCodeError', '您的验证码错误', '验证码错误提示语'),
-(5, 'PageSize', '10', '每页数量');
+(5, 'PageSize', '10', '每页数量'),
+(6, 'wechat_welcome', '欢迎来到这里，这里包括所有最新鲜的，最好玩的集合。', '');
 
 -- --------------------------------------------------------
 
@@ -655,7 +656,7 @@ ALTER TABLE `shop_score`
 -- AUTO_INCREMENT for table `sysconfig`
 --
 ALTER TABLE `sysconfig`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `sys_mess`
 --
