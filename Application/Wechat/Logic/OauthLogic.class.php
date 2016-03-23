@@ -17,7 +17,7 @@ class OauthLogic{
         //如果是微信就进入微信的授权流程
         if(isWeixin()){
             $weObj = logic\WechatLogic::initDefaultWechat();
-            $url = $weObj->getOauthRedirect(UC('Oauth/authorize',array('redirect'=>currentUrl())));
+            $url = $weObj->getOauthRedirect(UC('Oauth/authorize',array('redirect'=>urlencode(currentUrl()))));
             redirect($url);
         }
         //如果是别的就进入app授权流程
@@ -69,7 +69,8 @@ class OauthLogic{
         }
 
         //跳回原来的地址
-        redirect(I('get.redirect'));
+        $url = urldecode(I('get.redirect'));
+        redirect($url);
     }
 
 }
