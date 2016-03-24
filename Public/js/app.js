@@ -149,13 +149,14 @@ function like(){
         if($(this).hasClass('hover')){
             return;
         }
-        $count = $('#likebtn > span').html();
+        $count = $(this).find('span').html();
         var id = $(this).data('id');
+        var context = this;
         $.post(domain+'/index.php/Phone/Miaoji/like',{id:id},function(rs){
             if(rs.status){
                 $count ++;
-                $('#likebtn > span').html($count);
-                $('#likebtn').addClass('hover');
+                $(context).find('span').html($count);
+                $(context).addClass('hover');
             }else{
                 $.toast(rs.info);
             }
