@@ -26,9 +26,16 @@
                         <a class="btnitem ysbtn flex-1" href="tel:{$info['phone']}">
                             <i class="iconfont">&#xe606;</i>电话
                         </a>
-                        <a class="btnitem ysbtn flex-1">
-                            <i class="iconfont">&#xe608;</i>喜欢
-                        </a>
+                        <if condition="$info['isLike']">
+                            <a class="btnitem ysbtn flex-1 hover"data-id="{$info['id']}">
+                                <i class="iconfont">&#xe608;</i> <span>{$info['likecount']}</span>
+                            </a>
+                            <else/>
+                            <a class="btnitem ysbtn flex-1" id="likebtn" data-id="{$info['id']}">
+                                <i class="iconfont">&#xe608;</i> <span>{$info['likecount']}</span>
+                            </a>
+                        </if>
+
                     </div>
                     <div class="margin-top"></div>
                     <table class="ystable table table-bordered">

@@ -24,7 +24,12 @@
                                 <a class="ysbtn" href="tel:{$info['phone']}"><i class="iconfont">&#xe606;</i>电话</a>
                             </div>
                             <div class="flex-1">
-                                <span class="ysbtn hover"><i class="iconfont">&#xe608;</i> 5</span>
+                                <if condition="$info['isLike']">
+                                    <a class="ysbtn hover" data-id="{$info['id']}"><i class="iconfont">&#xe608;</i> <span>{$info['likecount']}</span></a>
+                                    <else/>
+                                    <a class="ysbtn" id="likebtn" data-id="{$info['id']}"><i class="iconfont">&#xe608;</i> <span>{$info['likecount']}</span></a>
+                                </if>
+
                             </div>
                         </div>
 

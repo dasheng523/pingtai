@@ -38,6 +38,8 @@ class MiaojiController extends Controller {
             ->select();
         foreach($list as &$info){
             $info['imglist'] = $this->getFirstImg($info['imglist']);
+            $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Park'));
+            $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Park'));
         }
 
         $this->assign('list',$list);
@@ -54,7 +56,8 @@ class MiaojiController extends Controller {
             ->find();
         $info['imglist'] = $this->parseImgList($info['imglist']);
         $info['other_info'] = $this->parseOtherInfo($info['other_info']);
-        //print_r($info);
+        $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Park'));
+        $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Park'));
         $this->assign('info',$info);
         $this->display();
     }
@@ -65,7 +68,12 @@ class MiaojiController extends Controller {
     public function like(){
         $id = I('post.id');
         $uid = getUserId();
-        
+        $rs = logic\UserUseEntityLogic::like($uid,$id,C('EntityType_Park'));
+        if($rs){
+            $this->success('ok');
+        }else{
+            $this->error('error');
+        }
     }
 
     /**

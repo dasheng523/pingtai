@@ -1,7 +1,6 @@
 /************************  core  ********************************/
 
 //全局变量
-var domain = "http://www.dianduoduo.top";
 var pageInitEventHandles = [];
 
 //初始化程序
@@ -141,6 +140,30 @@ function share(title,desc,link,imgUrl,type,dataUrl,success,cancel){
     wx.onMenuShareQZone(info);
 }
 
+/**
+ * 喜欢
+ * @param id 公园ID
+ */
+function like(){
+    $('#likebtn').click(function(){
+        if($(this).hasClass('hover')){
+            return;
+        }
+        $count = $('#likebtn > span').html();
+        var id = $(this).data('id');
+        $.post(domain+'/index.php/Phone/Miaoji/like',{id:id},function(rs){
+            if(rs.status){
+                $count ++;
+                $('#likebtn > span').html($count);
+                $('#likebtn').addClass('hover');
+            }else{
+                $.toast(rs.info);
+            }
+        });
+    });
+
+}
+
 /*************** Bussiness *******************/
 var detail = {
     pageId:"#detail",
@@ -151,6 +174,8 @@ var detail = {
         $('.mask').click(function(){
             $(this).addClass('hide');
         });
+
+        like();
     },
     wechatReady : function(){
 
@@ -161,7 +186,7 @@ createPageHandler(detail);
 var showcaseDetail = {
     pageId:"#showcaseDetail",
     handler: function (e, pageId, $page) {
-
+        like();
     }
 };
 

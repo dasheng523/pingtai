@@ -11,6 +11,7 @@ return array(
 	'MediaType_Music' => 3,
 
 	//实体类型
+	'EntityType_Park' => 111,
 	'EntityType_Shop' => 1,
 	'EntityType_Goods' => 2,
 	'EntityType_Comment' => 3,

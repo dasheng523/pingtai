@@ -297,6 +297,18 @@ class UserUseEntityLogic
     }
 
 
+
+    public static function isLike($userId, $entityId, $entityType)
+    {
+        $exist = D('UserUseEntity')->where(array('user_id'=>$userId,'entity_id'=>$entityId,'entity_type'=>$entityType,'use_type'=>C('UseType_Like')))->find();
+        if($exist){
+            return true;
+        }
+        return false;
+    }
+
+
+
     public static function comment($userId, $entityId, $entityType, $content)
     {
         $exist = D('UserUseEntity')->where(array(
@@ -404,7 +416,6 @@ class UserUseEntityLogic
             ->field("entity_id,count(1) as $useType")
             ->select(false);
     }
-
 
 
 }
