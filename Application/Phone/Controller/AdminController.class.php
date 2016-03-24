@@ -26,7 +26,7 @@ class AdminController extends Controller {
             }else{
                 $rs = D('logform')->data($_POST)->add();
             }
-            
+
             if($rs){
                 $this->success('成功',UC('Admin/formlist'));
             }
