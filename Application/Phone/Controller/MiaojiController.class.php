@@ -60,6 +60,15 @@ class MiaojiController extends Controller {
     }
 
     /**
+     * 喜欢
+     */
+    public function like(){
+        $id = I('post.id');
+        $uid = getUserId();
+        
+    }
+
+    /**
      * @param $imglist
      * 获取字符串中的第一个图片
      */

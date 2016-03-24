@@ -29,7 +29,8 @@ class RequestLogic{
         if(isWeixin()){
             return session_id();
         }
-        E('目前仅支持在微信里浏览');
+        redirect(UC('Public/wechatOpen'));
+        //E('目前仅支持在微信里浏览');
     }
 
     /**

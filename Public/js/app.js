@@ -79,12 +79,16 @@ function createPageHandler(handleObj){
 }
 
 function initWechatJs(){
+    if(typeof(jsConfig) == 'undefined'){
+        return;
+    }
     wx.config(jsConfig);
     wx.error(function(res){
         alert(JSON.stringify(res));
     });
 }
 
+/*************** Wiget *******************/
 
 /**
  * 查看地图，只能在微信里面调用
@@ -137,8 +141,6 @@ function share(title,desc,link,imgUrl,type,dataUrl,success,cancel){
     wx.onMenuShareQZone(info);
 }
 
-
-
 /*************** Bussiness *******************/
 var detail = {
     pageId:"#detail",
@@ -162,7 +164,28 @@ var showcaseDetail = {
 
     }
 };
+
+var showcase = {
+    pageId:"#showcase",
+    handler: function (e, pageId, $page) {
+
+    }
+};
+
 createPageHandler(showcaseDetail);
+
+var wechatOpen = {
+    pageId:"#wechatOpen",
+    handler: function (e, pageId, $page) {
+        $('#showMaskBtn').click(function () {
+            $('.mask').removeClass('hide');
+        });
+        $('.mask').click(function(){
+            $(this).addClass('hide');
+        });
+    }
+};
+createPageHandler(wechatOpen);
 
 
 

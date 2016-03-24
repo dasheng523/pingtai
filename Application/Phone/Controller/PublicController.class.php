@@ -36,4 +36,11 @@ class PublicController extends Controller {
         $this->assign('info',$info);
         $this->display();
     }
+
+    /**
+     * 微信打开
+     */
+    public function wechatOpen(){
+        $this->display();
+    }
 }

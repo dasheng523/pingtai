@@ -16,7 +16,6 @@ class OauthBehavior extends Behavior{
         if(in_array(MODULE_NAME.'/'.CONTROLLER_NAME,$noAuthCtrList)){
             return;
         }
-
         $userId = getUserId();
         //如果$userId不存在就进入授权
         if(!$userId){
