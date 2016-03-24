@@ -1,0 +1,20 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="formlist">
+        <div class="content native-scroll">
+            <a href="{:UC('Admin/uploadForm')}" class="button">新建记录</a>
+            <div class="list-block">
+                <volist name="list" id="info">
+                    <a class="item-content item-link" href="{:UC('Admin/uploadForm',array('id'=>$info['id']))}">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">{$info['name']}</div>
+                            <div class="item-after">{$info['ctime']|formatDate}</div>
+                        </div>
+                    </a>
+                </volist>
+            </div>
+
+        </div>
+    </div>
+</block>

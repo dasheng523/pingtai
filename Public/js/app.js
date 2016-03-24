@@ -219,15 +219,12 @@ var uploadForm = {
     handler: function (e, pageId, $page) {
         var open = false;
         $('#getLocationBtn').click(function(){
-            open = !open;
-            if(open){
-                wx.getLocation({
-                    success: function (res) {
-                        var val = res.latitude + ','+res.longitude;
-                        $('#lnglatInput').val(val);
-                    }
-                });
-            }
+            wx.getLocation({
+                success: function (res) {
+                    var val = res.latitude + ','+res.longitude;
+                    $('#latlngInput').val(val);
+                }
+            });
         });
 
         $('#resetBtn').click(function () {

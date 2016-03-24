@@ -19,11 +19,37 @@ class AdminController extends Controller {
      */
     public function uploadForm(){
         if(IS_POST){
-            print_r($_POST);
+            $id = I('post.id');
+            $_POST['ctime'] = time();
+            if($id){
+                $rs = D('logform')->data($_POST)->save();
+            }else{
+                $rs = D('logform')->data($_POST)->add();
+            }
+            
+            if($rs){
+                $this->success('成功',UC('Admin/formlist'));
+            }
+            else{
+                $this->error('提交失败了');
+            }
+            return;
+        }
+        $id = I('get.id');
+        if($id){
+            $info = D('logform')->where(array('id'=>$id))->find();
+            $this->assign('info',$info);
         }
         $this->display();
     }
 
-
+    /**
+     * 列表
+     */
+    public function formlist(){
+        $list = D('logform')->order('id desc')->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
 
 }
