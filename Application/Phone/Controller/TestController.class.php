@@ -18,6 +18,10 @@ class TestController extends Controller {
         $this->success('修改成功',UC('Index/index'));
     }
 
+    public function testWebhook(){
+        echo "test1";
+    }
+
 }
 
 
