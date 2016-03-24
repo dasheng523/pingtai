@@ -19,7 +19,7 @@ class TestController extends Controller {
     }
 
     public function testWebhook(){
-        echo "test3";
+        echo "test4";
     }
 
 }
