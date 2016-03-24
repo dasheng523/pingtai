@@ -190,6 +190,7 @@ var showcaseDetail = {
         like();
     }
 };
+createPageHandler(showcaseDetail);
 
 var showcase = {
     pageId:"#showcase",
@@ -197,8 +198,7 @@ var showcase = {
 
     }
 };
-
-createPageHandler(showcaseDetail);
+createPageHandler(showcase);
 
 var wechatOpen = {
     pageId:"#wechatOpen",
@@ -213,6 +213,32 @@ var wechatOpen = {
 };
 createPageHandler(wechatOpen);
 
+
+var uploadForm = {
+    pageId:"#uploadForm",
+    handler: function (e, pageId, $page) {
+        var open = false;
+        $('#getLocationBtn').click(function(){
+            open = !open;
+            if(open){
+                wx.getLocation({
+                    success: function (res) {
+                        var val = res.latitude + ','+res.longitude;
+                        $('#lnglatInput').val(val);
+                    }
+                });
+            }
+        });
+
+        $('#resetBtn').click(function () {
+            $('form')[0].reset();
+        });
+        $('#submitBtn').click(function(){
+            $('form').submit();
+        });
+    }
+};
+createPageHandler(uploadForm);
 
 
 initApp();
