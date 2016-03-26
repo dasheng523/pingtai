@@ -67,6 +67,11 @@ function createPageHandler(handleObj){
             var address = $(this).data('address');
             openLocation(lat,lng,name,address);
         });
+        
+        //初始化tellme按钮事件
+        $('.telmebtn').click(function () {
+            $.toast('很快将会开放此功能');
+        });
 
 
         //执行自定义事件
