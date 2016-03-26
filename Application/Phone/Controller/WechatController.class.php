@@ -46,6 +46,6 @@ class WechatController extends Controller {
             0 => array('name'=>"最佳妙集",'type'=>'view','url'=>UC('Miaoji/showcase')),
             1 => array('name'=>"草莓园",'type'=>'view','url'=>UC('Miaoji/showcaseDetail',array('id'=>1)))
         ));
-        $weobj->createMenu($menu);
+        echo $weobj->createMenu($menu);
     }
 }
