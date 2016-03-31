@@ -18,13 +18,33 @@ class MiaojiController extends Controller {
      * 妙集展示
      */
     public function showcase(){
-        $list = D('collection')->select();
+        $id = I('get.id');
+        if(!$id){
+            $id = 0;
+        }
+        $list = D('collection')->where(array('parent_id'=>$id))->select();
         foreach($list as &$info){
             $info['imglist'] = $this->getFirstImg($info['imglist']);
         }
 
         $this->assign('list',$list);
         $this->display();
+    }
+
+    /**
+     * 判断妙集下是否还有子妙集，有的话继续显示子妙集，没有就显示妙集里面的内容
+     */
+    public function showcaseDispatch(){
+        $id = I('get.id');
+        if(!$id){
+            $id = 0;
+        }
+        $isHasChild = D('collection')->where(array('parent_id'=>$id))->find();
+        if($isHasChild){
+            $this->redirect('Miaoji/showcase',array('id'=>$id));
+        }else{
+            $this->redirect('Miaoji/showcaseDetail',array('id'=>$id));
+        }
     }
 
     /**

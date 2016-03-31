@@ -10,19 +10,23 @@
                             <div class="flex-1">
                                 {$info['name']}
                             </div>
-                            <div class="yspanel-pricebox gray-text1">
-                                ￥{$info['price']}
-                            </div>
+                            <if condition="($info['price']) and ($info['price'] neq 0)">
+                                <div class="yspanel-pricebox gray-text1">
+                                    ￥{$info['price']}
+                                </div>
+                            </if>
                         </div>
                         <div class="yspanel-image-box">
-                            <img class="yspanel-image-image" src="{$info['imglist']}">
+                            <if condition="($info['imglist']) AND ($info['imglist'][0])">
+                                <img class="yspanel-image-image" src="{$info['imglist']}">
+                                <else/>
+                                <div class="swiper-slide-center-text">求图片>_<</div>
+                                <img src="__PUBLIC__/images/nopic.png" alt="" style="width: 100%">
+                            </if>
                         </div>
                     </a>
                     <div class="yspanel-content-box">
                         <div class="yspanel-ysbtnlist flex">
-                            <div class="flex-1">
-                                <a class="ysbtn" href="tel:{$info['phone']}"><i class="iconfont">&#xe606;</i>电话</a>
-                            </div>
                             <div class="flex-1">
                                 <if condition="$info['isLike']">
                                     <a class="ysbtn hover" data-id="{$info['id']}"><i class="iconfont">&#xe608;</i> <span>{$info['likecount']}</span></a>
@@ -36,11 +40,13 @@
                     </div>
                     <div class="yspanel-footer gray-text1 flex">
                         <div class="flex-1">{$info['address']}</div>
+                        <if condition="$info['lat'] and $info['lng']">
                         <a class="lookmap" href="javascript:;"
                            data-lat="{$info['lat']}"
                            data-lng="{$info['lng']}"
                            data-name="{$info['name']}"
                            data-address="{$info['address']}">查看地图</a>
+                        </if>
                     </div>
                 </div>
             </volist>

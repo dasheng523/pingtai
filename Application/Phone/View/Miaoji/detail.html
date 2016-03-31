@@ -5,11 +5,19 @@
             <div class="yspanel">
                 <div class="swiper-container" data-space-between="10">
                     <div class="swiper-wrapper">
-                        <volist name="info.imglist" id="imgurl">
+                        <if condition="($info['imglist']) AND ($info['imglist'][0])">
+                            <volist name="info.imglist" id="imgurl">
+                                <div class="swiper-slide swiper-slide-active">
+                                    <img src="{$imgurl}" alt="" style="width: 100%">
+                                </div>
+                            </volist>
+                            <else/>
                             <div class="swiper-slide swiper-slide-active">
-                                <img src="{$imgurl}" alt="" style="width: 100%">
+                                <div class="swiper-slide-center-text">求图片>_<</div>
+                                <img src="__PUBLIC__/images/nopic.png" alt="" style="width: 100%">
                             </div>
-                        </volist>
+                        </if>
+
 
                     </div>
                     <div class="swiper-pagination"></div>
@@ -17,14 +25,13 @@
                 <div class="yspanel-content-box" style="margin-top: -30px;">
                     <div class="flex flex-align-center yspanel-titlebox">
                         <h3 class="text-center flex-1">{$info['name']}</h3>
+                        <if condition="($info['price']) and ($info['price'] neq 0)">
                         <div class="pricebox orange-text">￥{$info['price']}+</div>
+                        </if>
                     </div>
                     <div class="flex">
                         <a class="btnitem ysbtn flex-1" href="#" id="shareBtn">
                             <i class="iconfont">&#xe609;</i>分享
-                        </a>
-                        <a class="btnitem ysbtn flex-1" href="tel:{$info['phone']}">
-                            <i class="iconfont">&#xe606;</i>电话
                         </a>
                         <if condition="$info['isLike']">
                             <a class="btnitem ysbtn flex-1 hover"data-id="{$info['id']}">
@@ -47,11 +54,17 @@
                         </volist>
                         <tr>
                             <td colspan="2">
-                                {$info['address']} <a href="javascript:;" class="pull-right lookmap"
-                                                      data-lat="{$info['lat']}"
-                                                      data-lng="{$info['lng']}"
-                                                      data-name="{$info['name']}"
-                                                      data-address="{$info['address']}">查看地图</a>
+                                {$info['address']}
+                                <if condition="$info['lat'] and $info['lng']">
+                                    <a href="javascript:;"
+                                       class="pull-right lookmap"
+                                       data-lat="{$info['lat']}"
+                                       data-lng="{$info['lng']}"
+                                       data-name="{$info['name']}"
+                                       data-address="{$info['address']}">
+                                        查看地图
+                                    </a>
+                                </if>
                             </td>
                         </tr>
                     </table>
@@ -60,6 +73,10 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="fixbtnbox">
+                <a class="fixbtn" href="tel:{$info['phone']}"><i class="iconfont">&#xe606;</i></a>
             </div>
 
             <div class="mask hide">
