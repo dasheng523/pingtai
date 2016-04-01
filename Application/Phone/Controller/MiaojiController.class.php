@@ -112,6 +112,53 @@ class MiaojiController extends Controller {
         $this->display();
     }
 
+
+    /**
+     * 提交修改请求
+     */
+    public function editSuggest(){
+        $this->display();
+    }
+
+    public function editSuggestCommit(){
+        $name = I('post.name');
+        $priceIntro = I('post.priceIntro');
+        $intro = I('post.intro');
+        $address = I('post.address');
+        $phone = I('post.phone');
+        $latlngInput = I('post.latlngInput');
+        $media_ids = I('post.media_ids');
+
+        if(!$name || !$address){
+            $this->error('您没有填写店铺的名称或者地址哦～');
+            return;
+        }
+        $data['name'] = $name;
+        $data['extra'] = $priceIntro;
+        $data['intro'] = $intro;
+        $data['address'] = $address;
+        $data['phone'] = $phone;
+        $data['latlng'] = $latlngInput;
+        $data['media_ids'] = json_encode($media_ids);
+        $data['imglist'] = implode(';',$this->getImgUrlList($media_ids));
+        $data['ctime'] = time();
+
+        $rs = D('logform')->data($data)->add();
+        if($rs){
+            $this->success('提交成功,我们将尽快审核');
+        }else{
+            $this->error('抱歉，服务器似乎出现BUG了');
+        }
+    }
+
+    private function getImgUrlList($ids){
+        $rs = array();
+        foreach($ids as $id){
+            $rs[] = D('Media')->where(array('id'=>$id))->getField('url');
+        }
+        return $rs;
+    }
+
     /**
      * @param $imglist
      * 获取字符串中的第一个图片

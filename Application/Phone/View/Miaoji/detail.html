@@ -3,9 +3,12 @@
     <div class="page" id="detail">
         <div class="content native-scroll">
             <div class="yspanel">
-                <div class="banner-header-imgbox showimglist" data-imglist="<?php echo implode(',',$info['imglist']);?>">
+                <div class="banner-header-imgbox">
                     <if condition="($info['imglist']) AND ($info['imglist'][0])">
-                        <img src="{$info['imglist'][0]}" alt="" style="width: 100%">
+                        <img src="{$info['imglist'][0]}"
+                             class="showimglist"
+                             data-imglist="<?php echo implode(',',$info['imglist']);?>"
+                             alt="" style="width: 100%">
                         <else/>
                         <div class="swiper-slide swiper-slide-active">
                             <div class="swiper-slide-center-text">>_<<br>谁给我一张靓照</div>
@@ -14,7 +17,7 @@
                     </if>
 
                 </div>
-                <div class="yspanel-content-box" style="margin-top: -30px;">
+                <div class="yspanel-content-box">
                     <div class="flex flex-align-center yspanel-titlebox">
                         <h3 class="text-center flex-1">{$info['name']}</h3>
                         <if condition="($info['price']) and ($info['price'] neq 0)">
@@ -79,7 +82,9 @@
                 </div>
             </div>
 
-            <include file="./Application/Phone/View/Miaoji/footer.html" />
+            <p class="gray-text1 text-center small-text margin-top30">
+                如果这店铺的内容有遗漏或者错误，请<a href="#" id="telmebtn">告诉我们</a>吧
+            </p>
         </div>
     </div>
 </block>
