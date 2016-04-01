@@ -19,6 +19,12 @@ body{background: #eee;font-size: 14px;}
 .clear{clear: both;}
 .block{display: block;}
 
+.text-line3{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;}
+.text-line2{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 2;}
+.text-line{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 1;}
+
+
+
 .gray-text1{color:#aaa;}
 .small-text{font-size: 12px;}
 
@@ -93,10 +99,11 @@ a.yspanel,.yspanel > a{color: #333333;}
 .yspanel-image-image{width: 100%;}
 .yspanel-image-textbox{position: absolute;z-index: 20;top: 50%;left: 50%;margin-top: -15px;margin-left: -60px;color: #fff;font-size: 20px;}
 .yspanel-image-textbox > .text{text-align: center;width: 120px;text-shadow:1px 1px 1px #666;display: inline-block;}
-.yspanel-content-box{padding: 10px;}
+.yspanel-content-box{padding: 0 10px;margin: 10px 0;}
 .yspanel-titlebox{padding: 10px;font-size: 18px;}
 .yspanel-ysbtnlist{text-align: center;font-size: 18px;padding: 10px 0;}
 .ysbtn{border:solid 1px #aaa;padding: 5px 20px;border-radius: 50px; color: #666;}
+.ysbtn-big{font-size: 36px;}
 .ysbtn.hover{color: #fff;background: orange;border: none;}
 .yspanel-footer{border-top: solid 1px #dddddd;padding: 10px;}
 .yspanel-bigimage-textbox{position: relative;display: block;}

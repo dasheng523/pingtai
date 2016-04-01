@@ -42,7 +42,6 @@ class WechatController extends Controller {
 
     public function createMenu(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
-        print_r(UC('Miaoji/showcase'));
         $menu = array('button' => array(
             0 => array('name'=>"最佳妙集",'type'=>'view','url'=>UC('Miaoji/showcaseDispatch')),
             1 => array('name'=>"草莓园",'type'=>'view','url'=>UC('Miaoji/showcaseDetail',array('id'=>1)))

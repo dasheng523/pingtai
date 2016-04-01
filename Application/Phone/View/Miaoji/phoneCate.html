@@ -1,0 +1,30 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="showcaseDetail">
+        <div class="content native-scroll">
+            <div class="margin-top"></div>
+            <volist name="list" id="info">
+                <div class="yspanel margin-top30">
+                    <div class="yspanel-titlebox flex">
+                        <div class="flex-1 text-center">
+                            {$info['name']}
+                        </div>
+                    </div>
+                    <div class="yspanel-content-box">
+                        <div class="yspanel-ysbtnlist flex">
+                            <div class="flex-1">
+                                <a class="ysbtn ysbtn-big hover" href="tel:{$info['phone']}"><i class="iconfont">&#xe606;</i> <span>{$info['likecount']}</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yspanel-footer gray-text1 flex">
+                        <div class="flex-1">没有定位数据</div>
+                        <a class="aa" href="javascript:;">提供定位</a>
+                    </div>
+                </div>
+            </volist>
+
+            <include file="./Application/Phone/View/Miaoji/footer.html" />
+        </div>
+    </div>
+</block>

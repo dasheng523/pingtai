@@ -53,7 +53,7 @@ function createPageHandler(handleObj){
     var tmpHandle = function(e, pageId, $page) {
         initWechatJs();
         wx.ready(function(){
-            share('testShare','testDetail',window.location.href,domain+"/Public/images/caomei.jpg");
+            share('店多多','这里汇聚了北流所有的好玩的，有趣的玩意哦～',window.location.href,domain+"/Public/images/iconfont-dianpuguanli.png");
             if(handleObj.wechatReady){
                 handleObj.wechatReady();
             }

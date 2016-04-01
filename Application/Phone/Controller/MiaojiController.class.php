@@ -54,7 +54,7 @@ class MiaojiController extends Controller {
         $id = I('get.id');
         $list = D('park')
             ->where(array('collection_id'=>$id))
-            ->field('id,name,short_intro,price,address,phone,imglist,lat,lng')
+            ->field('id,name,short_intro,price,address,phone,imglist,lat,lng,intro')
             ->select();
         foreach($list as &$info){
             $info['imglist'] = $this->getFirstImg($info['imglist']);
@@ -94,6 +94,22 @@ class MiaojiController extends Controller {
         }else{
             $this->error('error');
         }
+    }
+
+    /**
+     * 电话列表
+     */
+    public function phoneList(){
+        $list = D('collection')->where(array('parent_id'=>9))->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function phoneCate(){
+        $id = I('get.id');
+        $list = D('park')->where(array('collection_id'=>$id))->select();
+        $this->assign('list',$list);
+        $this->display();
     }
 
     /**

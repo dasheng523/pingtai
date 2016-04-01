@@ -2,15 +2,12 @@
 <block name="content">
     <div class="page" id="showcase">
         <div class="content native-scroll">
-            <p class="gray-text1 text-center">北流最佳妙集</p>
+            <p class="gray-text1 text-center">北流便民电话</p>
             <volist name="list" id="info">
-                <a class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
+                <a class="yspanel margin-top30" href="{:UC('Miaoji/phoneCate',array('id'=>$info['id']))}">
                     <div class="yspanel-image-box">
                         <div class="yspanel-image-textbox">- <span class="text">{$info['name']}</span> -</div>
                         <img class="yspanel-image-image" src="{$info['imglist']}">
-                    </div>
-                    <div class="yspanel-content-box">
-                        {$info['intro']}
                     </div>
                 </a>
             </volist>
