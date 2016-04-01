@@ -72,7 +72,15 @@ function createPageHandler(handleObj){
         $('.telmebtn').click(function () {
             $.toast('很快将会开放此功能');
         });
-
+        
+        $('.showimglist').click(function () {
+            var imglist = $(this).data('imglist');
+            imglist = imglist.split(',');
+            wx.previewImage({
+                current: imglist[0], // 当前显示图片的http链接
+                urls: imglist // 需要预览的图片http链接列表
+            });
+        });
 
         //执行自定义事件
         if(handleObj.handler){

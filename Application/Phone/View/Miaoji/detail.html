@@ -3,24 +3,16 @@
     <div class="page" id="detail">
         <div class="content native-scroll">
             <div class="yspanel">
-                <div class="swiper-container" data-space-between="10">
-                    <div class="swiper-wrapper">
-                        <if condition="($info['imglist']) AND ($info['imglist'][0])">
-                            <volist name="info.imglist" id="imgurl">
-                                <div class="swiper-slide swiper-slide-active">
-                                    <img src="{$imgurl}" alt="" style="width: 100%">
-                                </div>
-                            </volist>
-                            <else/>
-                            <div class="swiper-slide swiper-slide-active">
-                                <div class="swiper-slide-center-text">求图片>_<</div>
-                                <img src="__PUBLIC__/images/nopic.png" alt="" style="width: 100%">
-                            </div>
-                        </if>
+                <div class="banner-header-imgbox showimglist" data-imglist="<?php echo implode(',',$info['imglist']);?>">
+                    <if condition="($info['imglist']) AND ($info['imglist'][0])">
+                        <img src="{$info['imglist'][0]}" alt="" style="width: 100%">
+                        <else/>
+                        <div class="swiper-slide swiper-slide-active">
+                            <div class="swiper-slide-center-text">>_<<br>谁给我一张靓照</div>
+                            <img src="__PUBLIC__/images/nopic.png" alt="" style="width: 100%">
+                        </div>
+                    </if>
 
-
-                    </div>
-                    <div class="swiper-pagination"></div>
                 </div>
                 <div class="yspanel-content-box" style="margin-top: -30px;">
                     <div class="flex flex-align-center yspanel-titlebox">
@@ -68,7 +60,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="margin-top">
+                    <div class="margin-top" style="padding: 10px 0;">
                         {$info['intro']}
                     </div>
                 </div>
