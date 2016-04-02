@@ -22,4 +22,11 @@ class TestController extends Controller {
         echo "test4";
     }
 
+    public function testLocation(){
+        \Wechat\Logic\LocationLogic::setLocation('ddd',array('lng'=>0.554,'lat'=>5565));
+
+        $ff = \Wechat\Logic\LocationLogic::getLocation('ddd');
+        print_r($ff);
+    }
+
 }

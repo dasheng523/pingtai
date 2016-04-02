@@ -28,7 +28,21 @@ class WechatController extends Controller {
                     break;
                 case Wechat::MSGTYPE_EVENT:
                     \Think\Log::write('事件消息','DEBUG');
-                    $weobj->text(getSysConfig('wechat_welcome'))->reply();
+                    //上报定位模块
+                    $geo = $weobj->getRev()->getRevEventGeo();
+                    if($geo){
+                        $openId = $weobj->getRev()->getRevFrom();
+                        \Wechat\Logic\LocationLogic::setLocation($openId,$geo);
+                    }
+                    $event = $weobj->getRev()->getRevEvent();
+                    //订阅模块
+                    if($event['event'] == Wechat::EVENT_SUBSCRIBE){
+                        $weobj->text('dingyue')->reply();
+                    }
+                    //其他内容
+                    else{
+                        $weobj->text(getSysConfig('wechat_welcome'))->reply();
+                    }
                     break;
                 case Wechat::MSGTYPE_IMAGE:
                     \Think\Log::write('图片消息','DEBUG');
