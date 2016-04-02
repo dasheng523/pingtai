@@ -29,15 +29,34 @@ class WechatController extends Controller {
                 case Wechat::MSGTYPE_EVENT:
                     \Think\Log::write('事件消息','DEBUG');
                     //上报定位模块
-                    $geo = $weobj->getRev()->getRevEventGeo();
-                    if($geo){
-                        $openId = $weobj->getRev()->getRevFrom();
-                        \Wechat\Logic\LocationLogic::setLocation($openId,$geo);
-                    }
                     $event = $weobj->getRev()->getRevEvent();
+                    $geoObj = $weobj->getRev()->getRevEventGeo();
+                    $geo['lat'] = $geoObj['x'];
+                    $geo['lng'] = $geoObj['y'];
+                    $openId = $weobj->getRev()->getRevFrom();
+                    if($geo){
+                        $userId = \Wechat\Logic\WechatUserLogic::getUserIdByOpenId($openId);
+                        \Wechat\Logic\LocationLogic::setLocation($userId,$geo);
+                    }
                     //订阅模块
-                    if($event['event'] == Wechat::EVENT_SUBSCRIBE){
-                        $weobj->text('dingyue')->reply();
+                    else if($event['event'] == Wechat::EVENT_SUBSCRIBE){
+                        //如果不存在，就保存用户数据
+                        $isExist = \Wechat\logic\WechatUserLogic::isExistOpenId($openId);
+                        if(!$isExist){
+                            $wechatUserInfo = $weobj->getUserInfo($openId);
+                            if($wechatUserInfo){
+                                \Wechat\logic\WechatUserLogic::createWechatUser($wechatUserInfo);
+                            }
+                        }
+                        $welcomeMsg = array(
+                            array(
+                                'Title'=>'终于等到您来啦！',
+                                'Description'=>'我们正收集北流最新鲜最好玩的，最新鲜的事情，欢迎加入我们的行列。',
+                                'PicUrl'=>'http://media.dianduoduo.top/collect/6355.jpg_wh300.jpg',
+                                'Url'=>UC('Miaoji/showcaseDispatch')
+                            )
+                        );
+                        $weobj->news($welcomeMsg)->reply();
                     }
                     //其他内容
                     else{

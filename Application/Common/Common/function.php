@@ -11,7 +11,6 @@ function wechatInstance(){
 
 function getUserId(){
     $rs = \Wechat\Logic\RequestLogic::getUserId();
-
     return $rs;
 }
 
@@ -177,4 +176,9 @@ function rad($d){
 function sortTime($a,$b){
   if ($a['mtime']==$b['mtime']) return 0;
   return ($a['mtime']>$b['mtime'])?-1:1;
+}
+
+function sortDistance($a,$b){
+    if ($a['distance']==$b['distance']) return 0;
+    return ($a['distance']<$b['distance'])?-1:1;
 }

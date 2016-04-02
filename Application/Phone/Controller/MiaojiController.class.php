@@ -108,6 +108,12 @@ class MiaojiController extends Controller {
     public function phoneCate(){
         $id = I('get.id');
         $list = D('park')->where(array('collection_id'=>$id))->select();
+        $myLocation = logic\LocationLogic::getLocation(getUserId());
+        foreach($list as &$info){
+            $dis = distance($myLocation['lat'],$myLocation['lng'],$info['lat'],$info['lng']);
+            $info['distance'] = $dis;
+        }
+        usort($list,'sortDistance');
         $this->assign('list',$list);
         $this->display();
     }

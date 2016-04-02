@@ -16,12 +16,12 @@ namespace Wechat\Logic;
 class LocationLogic
 {
 
-    public static function setLocation($openId, $geo)
+    public static function setLocation($userId, $geo)
     {
-        S('location_'.$openId,$geo,3600);
+        S('location_'.$userId,$geo,3600);
     }
 
-    public static function getLocation($openId){
-        return S('location_'.$openId);
+    public static function getLocation($userId){
+        return S('location_'.$userId);
     }
 }
