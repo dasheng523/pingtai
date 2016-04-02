@@ -28,13 +28,14 @@ class WechatController extends Controller {
                     break;
                 case Wechat::MSGTYPE_EVENT:
                     \Think\Log::write('事件消息','DEBUG');
-                    //上报定位模块
+
                     $event = $weobj->getRev()->getRevEvent();
-                    $geoObj = $weobj->getRev()->getRevEventGeo();
-                    $geo['lat'] = $geoObj['x'];
-                    $geo['lng'] = $geoObj['y'];
                     $openId = $weobj->getRev()->getRevFrom();
-                    if($geo){
+                    //上报定位模块
+                    if($event['event'] == Wechat::EVENT_LOCATION){
+                        $geoObj = $weobj->getRev()->getRevEventGeo();
+                        $geo['lat'] = $geoObj['x'];
+                        $geo['lng'] = $geoObj['y'];
                         $userId = \Wechat\Logic\WechatUserLogic::getUserIdByOpenId($openId);
                         \Wechat\Logic\LocationLogic::setLocation($userId,$geo);
                     }
@@ -51,7 +52,7 @@ class WechatController extends Controller {
                         $welcomeMsg = array(
                             array(
                                 'Title'=>'终于等到您来啦！',
-                                'Description'=>'我们正收集北流最新鲜最好玩的，最新鲜的事情，欢迎加入我们的行列。',
+                                'Description'=>'我们正收集北流最新鲜最好玩的，最新鲜的事情，欢迎加入我们的行列吧。',
                                 'PicUrl'=>'http://media.dianduoduo.top/collect/6355.jpg_wh300.jpg',
                                 'Url'=>UC('Miaoji/showcaseDispatch')
                             )
@@ -68,7 +69,7 @@ class WechatController extends Controller {
                     break;
                 default:
                     \Think\Log::write('其他','DEBUG');
-                    $weobj->text("help info")->reply();
+                    $weobj->text(">_<你这是要干嘛")->reply();
             }
         }
     }
