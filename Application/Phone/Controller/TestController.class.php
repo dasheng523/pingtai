@@ -29,6 +29,16 @@ class TestController extends Controller {
         print_r($ff);
     }
 
-
+    public function testAddUser(){
+        $openId = '123';
+        $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
+        $isExist = \Wechat\logic\WechatUserLogic::isExistOpenId($openId);
+        if(!$isExist){
+            $wechatUserInfo = $weobj->getUserInfo($openId);
+            if($wechatUserInfo){
+                \Wechat\logic\WechatUserLogic::createWechatUser($wechatUserInfo);
+            }
+        }
+    }
 
 }

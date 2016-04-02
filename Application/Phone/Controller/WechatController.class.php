@@ -11,7 +11,7 @@ class WechatController extends Controller {
 
         if(IS_POST){
             \Think\Log::write('微信客户端请求：','DEBUG');
-            \Think\Log::write(print_r($weobj->getRev()->getRevData(),true),'DEBUG');
+            \Think\Log::write(json_encode($weobj->getRev()->getRevData(),true),'DEBUG');
             
             $type = $weobj->getRev()->getRevType();
             switch($type) {
@@ -42,11 +42,11 @@ class WechatController extends Controller {
                     //订阅模块
                     else if($event['event'] == Wechat::EVENT_SUBSCRIBE){
                         //如果不存在，就保存用户数据
-                        $isExist = \Wechat\logic\WechatUserLogic::isExistOpenId($openId);
+                        $isExist = \Wechat\Logic\WechatUserLogic::isExistOpenId($openId);
                         if(!$isExist){
                             $wechatUserInfo = $weobj->getUserInfo($openId);
                             if($wechatUserInfo){
-                                \Wechat\logic\WechatUserLogic::createWechatUser($wechatUserInfo);
+                                \Wechat\Logic\WechatUserLogic::createWechatUser($wechatUserInfo);
                             }
                         }
                         $welcomeMsg = array(
