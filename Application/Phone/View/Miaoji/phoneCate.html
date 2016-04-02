@@ -18,8 +18,14 @@
                         </div>
                     </div>
                     <div class="yspanel-footer gray-text1 flex">
-                        <div class="flex-1">没有定位数据</div>
-                        <a class="aa" href="javascript:;">提供定位</a>
+                        <div class="flex-1">感谢 @雨后彩虹 提供数据</div>
+                        <if condition="$info['lat'] and $info['lng']">
+                            <a class="lookmap" href="javascript:;"
+                               data-lat="{$info['lat']}"
+                               data-lng="{$info['lng']}"
+                               data-name="{$info['name']}"
+                               data-address="{$info['address']}">查看地图</a>
+                        </if>
                     </div>
                 </div>
             </volist>
