@@ -17,7 +17,7 @@ class WechatController extends Controller {
             switch($type) {
                 case Wechat::MSGTYPE_TEXT:
                     \Think\Log::write('文本消息','DEBUG');
-                    $msg = $weobj->getRev()->getRevContent();
+                    $msg = $weobj->getRevContent();
                     if($msg == 'test'){
                         $weobj->text('test')->reply();
                     }
@@ -29,11 +29,11 @@ class WechatController extends Controller {
                 case Wechat::MSGTYPE_EVENT:
                     \Think\Log::write('事件消息','DEBUG');
 
-                    $event = $weobj->getRev()->getRevEvent();
-                    $openId = $weobj->getRev()->getRevFrom();
+                    $event = $weobj->getRevEvent();
+                    $openId = $weobj->getRevFrom();
                     //上报定位模块
                     if($event['event'] == Wechat::EVENT_LOCATION){
-                        $geoObj = $weobj->getRev()->getRevEventGeo();
+                        $geoObj = $weobj->getRevEventGeo();
                         $geo['lat'] = $geoObj['x'];
                         $geo['lng'] = $geoObj['y'];
                         $userId = \Wechat\Logic\WechatUserLogic::getUserIdByOpenId($openId);
