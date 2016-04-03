@@ -130,5 +130,8 @@ a.btnitem{display: block;}
 .branch-box h3,.branch-box p{text-align: center;}
 
 .swiper-slide-center-text{position: absolute;top:50%;left: 50%;color: #fff;font-size: 28px;width: 200px;line-height: 50px;margin-top: -25px;margin-left: -100px;text-align: center;text-shadow: 1px 1px 1px #666;}
-.fixbtnbox{position: fixed;right: 20px;bottom: 40px;}
-.fixbtn{display: block;width:60px;height: 60px;background: #00CC00;border-radius: 80px;text-align: center;line-height: 60px;color: #fff;font-size: 24px;}
+.fixbtnbox{position: fixed;left: 20px;bottom: 20px;}
+.fixbtn{display: block;width:60px;height: 60px;background:rgba(0,0,0,0.6);border-radius: 80px;text-align: center;line-height: 55px;color: #fff;font-size: 24px;}
+
+.gs-content-wrap{background: #ec4949;}
+.gs-content-wrap .db-logo{font-size: 36px;text-align: center;padding: 40px 0;color: #fff;}
