@@ -193,7 +193,7 @@ var UploadUtils = function(fileId,limitCount){
                 var xhr = $.ajaxSettings.xhr();
                 if (xhr.upload) {
                     xhr.upload.addEventListener('progress', function(evt) {
-                        var process = (evt.loaded / evt.total) * 100 + '%';
+                        var process = parseInt(evt.loaded / evt.total) * 100 + '%';
                         $('#'+id+' .weui_uploader_status_content').html(process);
                     }, false);
                 }
