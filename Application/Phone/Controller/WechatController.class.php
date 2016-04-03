@@ -41,15 +41,9 @@ class WechatController extends Controller {
                     }
                     //订阅模块
                     else if($event['event'] == Wechat::EVENT_SUBSCRIBE){
-                        $welcomeMsg = array(
-                            array(
-                                'Title'=>'终于等到您来啦！',
-                                'Description'=>'我们正收集北流最新鲜最好玩的，最新鲜的事情，欢迎加入我们的行列吧。',
-                                'PicUrl'=>'http://media.dianduoduo.top/collect/6355.jpg_wh300.jpg',
-                                'Url'=>UC('Miaoji/showcaseDispatch')
-                            )
-                        );
-                        $weobj->news($welcomeMsg)->reply();
+                        $welcomeMsg = "终于等到您来啦！\n\n我们这里收集有北流最新鲜最实用的店铺，欢迎大家收藏和分享。\n
+                        如果你也知道新鲜实用的店铺，加入我们的行列吧。";
+                        $weobj->text($welcomeMsg)->reply();
                         //如果不存在，就保存用户数据
                         $isExist = \Wechat\Logic\WechatUserLogic::isExistOpenId($openId);
                         if(!$isExist){
