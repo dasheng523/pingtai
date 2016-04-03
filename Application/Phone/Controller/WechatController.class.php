@@ -88,11 +88,11 @@ class WechatController extends Controller {
                 array('type'=>'view','name'=>'女人专属','url'=>UC('Miaoji/showcaseDispatch',array('id'=>22)))
             )),
             array('name'=>"家居生活",'sub_button'=>array(
-                array('type'=>'view','name'=>'婚庆','url'=>UC('Miaoji/phoneCate',array('id'=>8))),
-                array('type'=>'view','name'=>'家具','url'=>UC('Miaoji/phoneCate',array('id'=>18))),
-                array('type'=>'view','name'=>'电器','url'=>UC('Miaoji/phoneCate',array('id'=>12))),
-                array('type'=>'view','name'=>'装修','url'=>UC('Miaoji/phoneCate',array('id'=>19))),
-                array('type'=>'view','name'=>'便民电话','url'=>UC('Miaoji/phoneCate',array('id'=>9))),
+                array('type'=>'view','name'=>'婚庆','url'=>UC('Miaoji/showcaseDispatch',array('id'=>8))),
+                array('type'=>'view','name'=>'家具','url'=>UC('Miaoji/showcaseDispatch',array('id'=>18))),
+                array('type'=>'view','name'=>'电器','url'=>UC('Miaoji/showcaseDispatch',array('id'=>12))),
+                array('type'=>'view','name'=>'装修','url'=>UC('Miaoji/showcaseDispatch',array('id'=>19))),
+                array('type'=>'view','name'=>'便民电话','url'=>UC('Miaoji/phoneList')),
             ))
         ));
         echo $weobj->createMenu($menu);
