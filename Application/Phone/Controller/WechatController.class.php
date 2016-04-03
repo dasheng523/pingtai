@@ -80,7 +80,7 @@ class WechatController extends Controller {
             array('name'=>"聚好玩",'sub_button'=>array(
                 array('type'=>'view','name'=>'KTV','url'=>UC('Miaoji/showcaseDispatch',array('id'=>4))),
                 array('type'=>'view','name'=>'酒吧','url'=>UC('Miaoji/showcaseDispatch',array('id'=>15))),
-                array('type'=>'view','name'=>'美食','url'=>UC('Miaoji/showcaseDispatch',array('id'=>3))),
+                array('type'=>'view','name'=>'美食','url'=>UC('Miaoji/showcaseDispatch',array('id'=>14))),
                 array('type'=>'view','name'=>'所有集合','url'=>UC('Miaoji/showcaseDispatch',array('id'=>0))),
             )),
             array('name'=>"男女部落",'sub_button'=>array(

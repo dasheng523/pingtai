@@ -142,17 +142,15 @@ var FormUtils = {
                 $.hidePreloader();
                 if(res.status==1){
                     $.toast(res.info);
-                    if(res.url && res.url!==''){
-                        switch (urlHandle){
-                            case "back":
-                                backLoadPage(res.url);
-                                break;
-                            case "forward":
-                                $.router.load(res.url, true);
-                                break;
-                            default:
-                                break;
-                        }
+                    switch (urlHandle){
+                        case "back":
+                            backLoadPage(res.url);
+                            break;
+                        case "forward":
+                            $.router.load(res.url, true);
+                            break;
+                        default:
+                            break;
                     }
                 }else{
                     $.toast(res.info);
@@ -209,7 +207,7 @@ var UploadUtils = function(fileId,limitCount){
             error: function(xhr,errorType, error) {
                 console.log(error);
                 console.log(errorType);
-                $.toast("您的手机似乎不支持上传功能");
+                $.toast("上传图片似乎出现了问题");
             },
             data: fileData,
             cache: false,
@@ -305,7 +303,7 @@ function share(title,desc,link,imgUrl,type,dataUrl,success,cancel){
  * @param id 公园ID
  */
 function like(){
-    $('#likebtn').click(function(){
+    $('.likebtn').click(function(){
         if($(this).hasClass('hover')){
             return;
         }
