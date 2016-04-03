@@ -18,7 +18,7 @@ use \Wechat\Logic as logic;
 class UploadController extends Controller {
 
     /**
-     * 上传文件
+     * 上传文件 如果这里出现问题，那看看有没有upload这个文件夹
      */
     public function uploadFile(){
         $files = logic\MediaLogic::updateMedia();
@@ -28,6 +28,7 @@ class UploadController extends Controller {
         foreach($files as &$file){
             $file['media_type'] = $mediaType;
             $file['entity_type'] = $entityType;
+            $file['name'] = 's';
             $ids[] = logic\MediaLogic::addMediaInfo($file);
         }
         $this->success($ids);
