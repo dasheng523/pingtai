@@ -27,8 +27,6 @@ class UserLogic{
     public static function createUser(){
         $data['ctime'] = time();
         $uid = D('User')->data($data)->add();
-        echo "tsss";
-        echo C('CommonCustomer');
         self::joinToRole($uid,C('CommonCustomer'));
 
         return $uid;
