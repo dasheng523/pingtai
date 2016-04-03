@@ -41,14 +41,6 @@ class WechatController extends Controller {
                     }
                     //订阅模块
                     else if($event['event'] == Wechat::EVENT_SUBSCRIBE){
-                        //如果不存在，就保存用户数据
-                        $isExist = \Wechat\Logic\WechatUserLogic::isExistOpenId($openId);
-                        if(!$isExist){
-                            $wechatUserInfo = $weobj->getUserInfo($openId);
-                            if($wechatUserInfo){
-                                \Wechat\Logic\WechatUserLogic::createWechatUser($wechatUserInfo);
-                            }
-                        }
                         $welcomeMsg = array(
                             array(
                                 'Title'=>'终于等到您来啦！',
@@ -58,6 +50,18 @@ class WechatController extends Controller {
                             )
                         );
                         $weobj->news($welcomeMsg)->reply();
+                        //如果不存在，就保存用户数据
+                        $isExist = \Wechat\Logic\WechatUserLogic::isExistOpenId($openId);
+                        if(!$isExist){
+                            $wechatUserInfo = $weobj->getUserInfo($openId);
+                            if($wechatUserInfo){
+                                \Wechat\Logic\WechatUserLogic::createWechatUser($wechatUserInfo);
+                            }
+                        }
+                    }
+                    else if($event['event'] == Wechat::EVENT_UNSUBSCRIBE){
+                        \Think\Log::write('取消关注','DEBUG');
+                        \Wechat\Logic\WechatUserLogic::unSubscribe($openId);
                     }
                     //其他内容
                     else{

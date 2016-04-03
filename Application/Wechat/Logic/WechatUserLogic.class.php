@@ -34,7 +34,6 @@ class WechatUserLogic{
         $info['user_id'] = $uid;
         logic\UserLogic::saveUserInfo($info);
 
-
         //创建微信资料
         $weUser = $info;
         $weUser['wechat_id'] = C('DefaultWechatID');
@@ -67,5 +66,15 @@ class WechatUserLogic{
     {
         $userId = D('WechatUser')->where(array('open_id'=>$openid))->getField('user_id');
         return $userId;
+    }
+
+
+    /**
+     * @param $openId
+     * 取消关注
+     */
+    public static function unSubscribe($openId)
+    {
+        D('WechatUser')->where(array('open_id'=>$openId))->save(array('subscribe'=>0));
     }
 }
