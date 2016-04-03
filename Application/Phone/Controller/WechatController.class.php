@@ -77,10 +77,22 @@ class WechatController extends Controller {
     public function createMenu(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
         $menu = array('button' => array(
-            array('name'=>"首页",'type'=>'view','url'=>UC('Miaoji/showcaseDispatch')),
-            array('name'=>"便民电话",'sub_button'=>array(
-                array('type'=>'view','name'=>'医院电话','url'=>UC('Miaoji/phoneCate',array('id'=>11))),
-                array('type'=>'view','name'=>'学校电话','url'=>UC('Miaoji/phoneCate',array('id'=>10))),
+            array('name'=>"聚好玩",'sub_button'=>array(
+                array('type'=>'view','name'=>'KTV','url'=>UC('Miaoji/showcaseDispatch',array('id'=>4))),
+                array('type'=>'view','name'=>'酒吧','url'=>UC('Miaoji/showcaseDispatch',array('id'=>15))),
+                array('type'=>'view','name'=>'美食','url'=>UC('Miaoji/showcaseDispatch',array('id'=>3))),
+                array('type'=>'view','name'=>'所有集合','url'=>UC('Miaoji/showcaseDispatch',array('id'=>0))),
+            )),
+            array('name'=>"男女部落",'sub_button'=>array(
+                array('type'=>'view','name'=>'男人领地','url'=>UC('Miaoji/showcaseDispatch',array('id'=>23))),
+                array('type'=>'view','name'=>'女人专属','url'=>UC('Miaoji/showcaseDispatch',array('id'=>22)))
+            )),
+            array('name'=>"家居生活",'sub_button'=>array(
+                array('type'=>'view','name'=>'婚庆','url'=>UC('Miaoji/phoneCate',array('id'=>8))),
+                array('type'=>'view','name'=>'家具','url'=>UC('Miaoji/phoneCate',array('id'=>18))),
+                array('type'=>'view','name'=>'电器','url'=>UC('Miaoji/phoneCate',array('id'=>12))),
+                array('type'=>'view','name'=>'装修','url'=>UC('Miaoji/phoneCate',array('id'=>19))),
+                array('type'=>'view','name'=>'便民电话','url'=>UC('Miaoji/phoneCate',array('id'=>9))),
             ))
         ));
         echo $weobj->createMenu($menu);
