@@ -1,7 +1,11 @@
 <extend name="template/temp" />
 <block name="content">
     <div class="page" id="showcaseDetail">
-        <div class="content native-scroll">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
             <div class="margin-top"></div>
             <volist name="list" id="info">
                 <div class="yspanel margin-top30">

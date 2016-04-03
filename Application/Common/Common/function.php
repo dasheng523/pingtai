@@ -182,3 +182,24 @@ function sortDistance($a,$b){
     if ($a['distance']==$b['distance']) return 0;
     return ($a['distance']<$b['distance'])?-1:1;
 }
+
+
+/**
+ * 百度地图坐标转化为soso地图坐标
+ */
+function baiduMapToSosoMap($lat,$lng){
+    $key = 'QIQBZ-AKC3U-4DXVB-B2CVU-WFKJT-7DFVW';
+    $url = "http://apis.map.qq.com/ws/coord/v1/translate?key=$key&type=3&locations=$lat,$lng";
+    return httpGet($url);
+}
+
+
+function httpGet($url){
+    $curl = new \Common\Lib\Curl();
+    return $curl->get($url);
+}
+
+function httpPost($url, $data){
+    $curl = new \Common\Lib\Curl();
+    return $curl->post($url, $data);
+}

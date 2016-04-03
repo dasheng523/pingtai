@@ -59,6 +59,12 @@ function createPageHandler(handleObj){
             }
         });
 
+        //下拉刷新
+        $(document).on('refresh', '.pull-to-refresh-content',function(e) {
+            refreshPage();
+            $.pullToRefreshDone('.pull-to-refresh-content');
+        });
+
         //初始化lookMap按钮
         $('.lookmap').click(function(){
             var lat = $(this).data('lat');
@@ -252,7 +258,7 @@ function openLocation(lat,lng,name,address){
         longitude: lng, // 经度，浮点数，范围为180 ~ -180。
         name: name, // 位置名
         address: address, // 地址详情说明
-        scale: 18, // 地图缩放级别,整形值,范围从1~28。默认为最大
+        scale: 13, // 地图缩放级别,整形值,范围从1~28。默认为最大
         infoUrl: '' // 在查看位置界面底部显示的超链接,可点击跳转
     });
 }

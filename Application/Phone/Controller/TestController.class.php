@@ -41,4 +41,24 @@ class TestController extends Controller {
         }
     }
 
+    public function testChangeLoc(){
+        $list = D('park')->where('ctime<>5')->select();
+        foreach($list as &$info){
+            $lat = $info['lat'];
+            $lng = $info['lng'];
+            $data = json_decode(baiduMapToSosoMap($lat,$lng),true);
+            if($data['locations'][0]['lat'] && $data['locations'][0]['lng']){
+                $info['lat'] = $data['locations'][0]['lat'];
+                $info['lng'] = $data['locations'][0]['lng'];
+                $info['ctime'] = 5;
+                D('park')->save($info);
+            }else{
+                print_r($info);
+            }
+
+        }
+        //$data = baiduMapToSosoMap(22.6992070,110.3750580);
+        echo "ok";
+    }
+
 }

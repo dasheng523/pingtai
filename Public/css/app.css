@@ -97,8 +97,8 @@ body{background: #eee;font-size: 14px;}
 a.yspanel,.yspanel > a{color: #333333;}
 .yspanel-image-box{position: relative;max-height: 200px;overflow: hidden;}
 .yspanel-image-image{width: 100%;}
-.yspanel-image-textbox{position: absolute;z-index: 20;top: 50%;left: 50%;margin-top: -15px;margin-left: -60px;color: #fff;font-size: 20px;}
-.yspanel-image-textbox > .text{text-align: center;width: 120px;text-shadow:1px 1px 1px #666;display: inline-block;}
+.yspanel-image-textbox{position: absolute;z-index: 20;top: 50%;left: 50%;width: 120px;margin-top: -15px;margin-left: -60px;color: #fff;font-size: 20px;text-align: center;}
+.yspanel-image-textbox > .text{text-shadow:1px 1px 1px #666;display: inline-block;}
 .yspanel-content-box{padding: 0 10px;margin: 10px 0;}
 .yspanel-content-box2{padding: 10px;}
 .yspanel-titlebox{padding: 10px;font-size: 18px;}

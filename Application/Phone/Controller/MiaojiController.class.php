@@ -30,6 +30,7 @@ class MiaojiController extends Controller {
         $this->assign('list',$list);
         $this->display();
     }
+    
 
     /**
      * 判断妙集下是否还有子妙集，有的话继续显示子妙集，没有就显示妙集里面的内容

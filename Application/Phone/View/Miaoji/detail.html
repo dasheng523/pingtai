@@ -1,7 +1,11 @@
 <extend name="template/temp" />
 <block name="content">
     <div class="page" id="detail">
-        <div class="content native-scroll">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
             <div class="yspanel">
                 <div class="banner-header-imgbox">
                     <if condition="($info['imglist']) AND ($info['imglist'][0])">
