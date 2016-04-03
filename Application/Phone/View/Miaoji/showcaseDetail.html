@@ -21,6 +21,10 @@
                             </if>
                         </div>
                         <div class="yspanel-image-box">
+                            <if condition="$info['ishaspic']">
+                                <div class="realpicbox"><img src="__PUBLIC__/images/904925059827350856.png"></div>
+                            </if>
+
                             <if condition="($info['imglist']) AND ($info['imglist'][0])">
                                 <img class="yspanel-image-image" src="{$info['imglist']}">
                                 <else/>
@@ -55,8 +59,8 @@
                 </div>
             </volist>
 
-            <p class="gray-text1 text-center small-text margin-top30">
-                如果您知道更多有趣的，那就<a href="{:UC('Miaoji/editSuggest',array('cid',$_GET['id']))}" id="telmebtn">告诉我们</a>吧
+            <p class="gray-text1 text-center margin-top30">
+                你中意的店铺不在这里？那就<a href="{:UC('Miaoji/editSuggest',array('cid',$_GET['id']))}" id="telmebtn">告诉我们</a>吧。
             </p>
         </div>
     </div>

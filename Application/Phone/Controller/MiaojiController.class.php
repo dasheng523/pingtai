@@ -15,14 +15,15 @@ class MiaojiController extends Controller {
     }
 
     /**
-     * 妙集展示
+     * 罗列所有叶子妙集
      */
     public function showcase(){
         $id = I('get.id');
         if(!$id){
-            $id = 0;
+            $id = 20;
         }
-        $list = D('collection')->where(array('parent_id'=>$id))->select();
+        $coid = $this->getLeafCollectionId($id);
+        $list = D('collection')->where(array('id'=>array('in',$coid)))->select();
         foreach($list as &$info){
             $info['imglist'] = $this->getFirstImg($info['imglist']);
         }
@@ -30,10 +31,28 @@ class MiaojiController extends Controller {
         $this->assign('list',$list);
         $this->display();
     }
-    
 
     /**
-     * 判断妙集下是否还有子妙集，有的话继续显示子妙集，没有就显示妙集里面的内容
+     * 获取叶子妙集
+     */
+    private function getLeafCollectionId($rootId){
+        $rs = array();
+        $list = D('collection')->field('id')->where(array('parent_id'=>$rootId))->select();
+        if($list){
+            foreach($list as $info){
+                $leafs = $this->getLeafCollectionId($info['id']);
+                $rs = array_merge($rs,$leafs);
+            }
+        }
+        else{
+            $rs[] = $rootId;
+        }
+        return $rs;
+    }
+
+
+    /**
+     * 判断妙集下是否还有子妙集，有的话继续显示叶子妙集，没有就显示妙集里面的内容
      */
     public function showcaseDispatch(){
         $id = I('get.id');
@@ -55,7 +74,7 @@ class MiaojiController extends Controller {
         $id = I('get.id');
         $list = D('park')
             ->where(array('collection_id'=>$id))
-            ->field('id,name,short_intro,price,address,phone,imglist,lat,lng,intro')
+            ->field('id,name,short_intro,price,address,phone,imglist,lat,lng,intro,ishaspic')
             ->select();
         foreach($list as &$info){
             $info['imglist'] = $this->getFirstImg($info['imglist']);
@@ -149,6 +168,7 @@ class MiaojiController extends Controller {
         $data['media_ids'] = json_encode($media_ids);
         $data['imglist'] = implode(';',$this->getImgUrlList($media_ids));
         $data['ctime'] = time();
+        $data['from_user_id'] = getUserId();
 
         $rs = D('logform')->data($data)->add();
         if($rs){
