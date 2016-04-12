@@ -7,9 +7,18 @@
  */
 namespace Phone\Controller;
 use Think\Controller;
+use Common\Lib\Curl;
 class TestController extends Controller {
 
     protected $dfsdfs = __ROOT__;
+
+
+    public function testPost(){
+      $curl = new Curl();
+      $rs = $curl->post(UC('Shop/isLogin'),array('code'=>55));
+      echo $rs;
+    }
+
 
     public function sdfsdf(){
         echo $this->dfsdfs;
