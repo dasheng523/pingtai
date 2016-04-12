@@ -9,6 +9,12 @@ namespace Phone\Controller;
 use Think\Controller;
 class TestController extends Controller {
 
+    protected $dfsdfs = __ROOT__;
+
+    public function sdfsdf(){
+        echo $this->dfsdfs;
+    }
+
     //测试滤镜
     public function test(){
         $this->error('失败');
@@ -71,6 +77,10 @@ class TestController extends Controller {
                 \Wechat\Logic\WechatUserLogic::createWechatUser($wechatUserInfo);
             }
         }
+    }
+
+    public function testUpload(){
+        echo json_encode(array('status'=>'ok'));
     }
 
 }
