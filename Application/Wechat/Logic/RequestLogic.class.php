@@ -29,7 +29,10 @@ class RequestLogic{
         if(isWeixin()){
             return session_id();
         }
-        redirect(UC('Public/wechatOpen'));
+        else{
+          return I('post.code');
+        }
+        //redirect(UC('Public/wechatOpen'));
         //E('目前仅支持在微信里浏览');
     }
 

@@ -23,21 +23,30 @@ class ShopController extends Controller {
     }
   }
 
-  public function isLogin(){
+  public function oauthCode(){
     $code = I('post.code');
     $uid = S('login_'.$code);
-    if($uid && $code){
+    if($code && $uid){
+      logic\RequestLogic::setClientServerUserMap($code,$uid);
       $shopInfo = D('Shop')->where(array('user_id'=>$uid))->find();
       $this->echoSuccessJson($shopInfo);
       return;
     }else{
-      $this->error('error');
+      $this->echoErrorJson('error');
     }
   }
+
 
   private function echoSuccessJson($arr){
     $rs = array();
     $rs['status'] = 1;
+    $rs['data'] = $arr;
+    echo json_encode($rs);
+  }
+
+  private function echoErrorJson($arr){
+    $rs = array();
+    $rs['status'] = 0;
     $rs['data'] = $arr;
     echo json_encode($rs);
   }
