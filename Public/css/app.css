@@ -29,6 +29,8 @@ body{background: #eee;font-size: 14px;}
 .small-text{font-size: 12px;}
 
 .orange-text{color: orange;}
+.green-text{color: #0BB20C;}
+.gray-text{color: #cccccc;}
 
 .iconfont{font-family:"iconfont";font-style:normal;}
 @font-face {
@@ -97,7 +99,7 @@ body{background: #eee;font-size: 14px;}
 a.yspanel,.yspanel > a{color: #333333;}
 .yspanel-image-box{position: relative;max-height: 200px;overflow: hidden;}
 .yspanel-image-image{width: 100%;}
-.yspanel-image-textbox{position: absolute;z-index: 20;top: 50%;left: 50%;width: 120px;margin-top: -15px;margin-left: -60px;color: #fff;font-size: 20px;text-align: center;}
+.yspanel-image-textbox{position: absolute;z-index: 20;top: 50%;left: 50%;width: 200px;margin-top: -15px;margin-left: -100px;color: #fff;font-size: 20px;text-align: center;}
 .yspanel-image-textbox > .text{text-shadow:1px 1px 1px #666;display: inline-block;}
 .yspanel-content-box{padding: 0 10px;margin: 10px 0;}
 .yspanel-content-box2{padding: 10px;}
@@ -109,6 +111,11 @@ a.yspanel,.yspanel > a{color: #333333;}
 .yspanel-footer{border-top: solid 1px #dddddd;padding: 10px;}
 .yspanel-bigimage-textbox{position: relative;display: block;}
 .yspanel-image-countbox{position: absolute;top: 15px;right: 15px;color: #fff;}
+
+
+.left-time-box{background: #eee;padding: 10px;text-align: center;}
+.left-time-box .label{color: #aaa;position: absolute;margin-left: -80px;}
+
 .btnitem{text-align: center;}
 a.btnitem{display: block;}
 .table {

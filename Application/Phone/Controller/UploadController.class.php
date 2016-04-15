@@ -22,8 +22,8 @@ class UploadController extends Controller {
      */
     public function uploadFile(){
         $files = logic\MediaLogic::updateMedia();
-        $mediaType = 0;
-        $entityType = 0;
+        $mediaType = I('post.mediaType');
+        $entityType = I('post.entityType');
         $ids = array();
         foreach($files as &$file){
             $file['media_type'] = $mediaType;

@@ -217,7 +217,7 @@ var FormUtils = {
         form.submit(function(e){
             e.preventDefault();
             if(isError){
-                $.toast('您填写的信息有一些错误');
+                $.toast('有些信息没有填写正确');
                 return;
             }
             var formNode = form;
@@ -263,6 +263,17 @@ var publishGoodsList = {
     }
 };
 createPageHandler(publishGoodsList);
+
+
+var openShop = {
+    pageId: "#openShop",
+    handler:function(e, pageId, $page){
+        FormUtils.initForm('form','forward');
+    }
+};
+createPageHandler(openShop);
+
+
 
 var goodsDetail = {
     pageId: "#goodsDetail",

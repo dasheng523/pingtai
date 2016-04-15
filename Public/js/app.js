@@ -299,10 +299,13 @@ function share(title,desc,link,imgUrl,type,dataUrl,success,cancel){
 }
 
 /**
- * 喜欢
- * @param id 公园ID
+ *
+ * @param url
  */
-function like(){
+function like(url){
+    if(!url){
+        url = "/index.php/Phone/Miaoji/like";
+    }
     $('.likebtn').click(function(){
         if($(this).hasClass('hover')){
             return;
@@ -310,7 +313,7 @@ function like(){
         $count = $(this).find('span').html();
         var id = $(this).data('id');
         var context = this;
-        $.post(domain+'/index.php/Phone/Miaoji/like',{id:id},function(rs){
+        $.post(domain+url,{id:id},function(rs){
             if(rs.status){
                 $count ++;
                 $(context).find('span').html($count);
@@ -382,6 +385,36 @@ var showcase = {
     }
 };
 createPageHandler(showcase);
+
+
+var activityList = {
+    pageId:"#activityList",
+    handler: function (e, pageId, $page) {
+        like('/index.php/Phone/Activity/zanActivity');
+        var changeTime = function () {
+            var hour = Math.floor(sen / 3600);
+            var minu = Math.floor((sen % 3600)/60);
+            var send = Math.floor(((sen % 3600)%60));
+            return hour+"小时"+minu+"分"+send+"秒";
+        };
+        var time = 0;
+        var sen = 0;
+        setInterval(function(){
+            $(".countdown").each(function(){
+                var node = $(this);
+                sen = node.data('lefttime') - time;
+                if(sen<=0){
+                    node.html("该活动已结束，欢迎关注下次活动");
+                    node.removeClass('countdown');
+                }
+                time++;
+                node.html(changeTime(sen));
+            });
+        },1000);
+    }
+};
+createPageHandler(activityList);
+
 
 var wechatOpen = {
     pageId:"#wechatOpen",

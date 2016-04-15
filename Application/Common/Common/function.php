@@ -81,27 +81,53 @@ function formatDate($time){
     $rtime = date ( "m-d H:i", $time );
     $htime = date ( "H:i", $time );
 
-    $time = time () - $time;
+    $now = time();
+    if($time <= $now){
+        $time = time () - $time;
 
-    if ($time < 60) {
-        $str = '刚刚';
-    } elseif ($time < 60 * 60) {
-        $min = floor ( $time / 60 );
-        $str = $min . '分钟前';
-    } elseif ($time < 60 * 60 * 24) {
-        $h = floor ( $time / (60 * 60) );
-        $str = $h . '小时前 ' . $htime;
-    } elseif ($time < 60 * 60 * 24 * 3) {
-        $d = floor ( $time / (60 * 60 * 24) );
-        if ($d == 1)
-            $str = '昨天 ' . $rtime;
-        else
-            $str = '前天 ' . $rtime;
-    } else {
-        $str = $rtime;
+        if ($time < 60) {
+            $str = '刚刚';
+        } elseif ($time < 60 * 60) {
+            $min = floor ( $time / 60 );
+            $str = $min . '分钟前';
+        } elseif ($time < 60 * 60 * 24) {
+            $h = floor ( $time / (60 * 60) );
+            $str = $h . '小时前 ' . $htime;
+        } elseif ($time < 60 * 60 * 24 * 3) {
+            $d = floor ( $time / (60 * 60 * 24) );
+            if ($d == 1)
+                $str = '昨天 ' . $rtime;
+            else
+                $str = '前天 ' . $rtime;
+        } else {
+            $str = $rtime;
+        }
     }
+    else{
+        $al = $time - $now;
+        $ahour = $al/3600;
+        if($ahour > 48){
+            $ahour = floor($ahour);
+            $str = floor($ahour / 24) . "天后";
+        }
+        else{
+            if($ahour < 1){
+                $mini = $ahour * 60;
+                $mini = floor($mini);
+                $str = $mini . "分后";
+            }
+            else{
+                $ahour = floor($ahour);
+                $str = $ahour . "小时后";
+            }
+
+        }
+    }
+
+
     return $str;
 }
+
 
 /**
  * array_column

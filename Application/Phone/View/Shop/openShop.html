@@ -1,71 +1,64 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的生活</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<extend name="template/shop_main" />
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css">
+<block name="css">
+</block>
 
-</head>
-<body>
-<div class="page-group">
-    <div class="page page-current">
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="openShop">
         <div class="content">
             <div class="hd">
                 <h1 class="page-title">
-                    一妙集
+                    店多多
                 </h1>
                 <p class="page-desc">让更多本地人知道您</p>
             </div>
-            <div class="weui_cells weui_cells_form">
-                <div class="weui_cell">
-                    <div class="weui_cell_hd"><label class="weui_label">店铺</label></div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入您的店名">
+
+            <form method="post" action="{:UC('Shop/openShopCommit')}" id="form">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">店铺</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text"
+                                   placeholder="请输入您的店名"
+                                   name="name"
+                                   required minlength="2" maxlength="20">
+                        </div>
                     </div>
-                </div>
-                <div class="weui_cell">
-                    <div class="weui_cell_hd"><label class="weui_label"></label></div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <textarea class="weui_textarea" placeholder="请输入店铺地址" rows="3"></textarea>
-                        <div class="weui_textarea_counter"><span>0</span>/200</div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label"></label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <textarea class="weui_textarea"
+                                      placeholder="请输入店铺地址"
+                                      name="address"
+                                      required
+                                      rows="3"></textarea>
+                            <div class="weui_textarea_counter"><span>0</span>/200</div>
+                        </div>
                     </div>
-                </div>
-                <div class="weui_cell">
-                    <div class="weui_cell_hd"><label class="weui_label">手机</label></div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" type="number" placeholder="请输入手机">
-                    </div>
-                </div>
-                <div class="weui_cell">
-                    <div class="weui_cell_hd"><label class="weui_label">验证码</label></div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <input class="weui_input" type="number" placeholder="输入验证码">
-                    </div>
-                    <div class="weui_cell_ft">
-                        <button class="weui_btn weui_btn_mini weui_btn_primary">获取验证码</button>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">手机</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input"
+                                   type="number"
+                                   required
+                                   placeholder="请输入手机">
+                        </div>
                     </div>
                 </div>
 
-            </div>
+                <div class="weui_btn_area">
+                    <button type="submit" class="weui_btn weui_btn_primary" id="showTooltips">
+                        立即开店
+                    </button>
+                </div>
+            </form>
 
-            <div class="weui_btn_area">
-                <a class="weui_btn weui_btn_primary" href="javascript:" id="showTooltips">立即开店</a>
-            </div>
+
         </div>
     </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
-
-<script>$.init()</script>
-</body>
-</html>
+</block>

@@ -107,6 +107,46 @@ class AdminController extends Controller {
         }
     }
 
+
+    public function addActivity(){
+        //活动内容
+        $act['name'] = '大特惠超市';
+        $act['shop_id'] = 2;
+        $act['coll_id'] = 26;
+        $act['stime'] = strtotime('2013-01-14 09:09:09');
+        $act['etime'] = strtotime('2013-01-14 09:09:07');
+        $act['intro'] = "优惠大酬宾，本超市全场5折大优惠，欢迎广大顾客前来购买。";
+        $act['piclist'] = "http://media.dianduoduo.top/activity/20120312134858418.jpg";
+        $act['ctime'] = time();
+        $act['zan'] = 0;
+        $actId = D('Activity')->data($act)->add();
+
+        //活动商品
+        $goodsList = array(
+            array(
+                "name" => "萝卜",
+                "price" => "1元/斤",
+                "intro" => "1元/斤",
+                "piclist" => "http://media.dianduoduo.top/activity/timg.jpg"
+            ),
+            array(
+                "name" => "萝卜",
+                "price" => "1元/斤",
+                "intro" => "1元/斤",
+                "piclist" => "http://media.dianduoduo.top/activity/timg.jpg"
+            ),
+        );
+
+        foreach($goodsList as $goodsInfo){
+            $goodsInfo['ctime'] = time();
+            $goodsInfo['activity_id'] = $actId;
+            D('ActivityGoods')->data($goodsInfo)->add();
+        }
+
+        print_r($act);
+    }
+
+
     private static function changeImglist($imgstr){
         if(!$imgstr){
             return "";
