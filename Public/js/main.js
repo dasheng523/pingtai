@@ -257,26 +257,6 @@ var FormUtils = {
                     alert(textStatus);
                 }
             });
-            $.post(postUrl,submit,function(res){
-                $.hidePreloader();
-                if(res.status==1){
-                    $.toast(res.info);
-                    if(res.url && res.url!==''){
-                        switch (urlHandle){
-                            case "back":
-                                backLoadPage(res.url);
-                                break;
-                            case "forward":
-                                $.router.load(res.url, true);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }else{
-                    $.toast(res.info);
-                }
-            },'json');
         });
     }
 };
