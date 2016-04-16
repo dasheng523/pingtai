@@ -25,7 +25,7 @@ class MiaojiController extends Controller {
         $coid = $this->getLeafCollectionId($id);
         $list = D('collection')->where(array('id'=>array('in',$coid)))->select();
         foreach($list as &$info){
-            $info['imglist'] = $this->getFirstImg($info['imglist']);
+            $info['imglist'] = getFirstImg($info['imglist']);
         }
 
         $this->assign('list',$list);
@@ -77,7 +77,7 @@ class MiaojiController extends Controller {
             ->field('id,name,short_intro,price,address,phone,imglist,lat,lng,intro,ishaspic')
             ->select();
         foreach($list as &$info){
-            $info['imglist'] = $this->getFirstImg($info['imglist']);
+            $info['imglist'] = getFirstImg($info['imglist']);
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Park'));
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Park'));
         }
@@ -94,7 +94,7 @@ class MiaojiController extends Controller {
         $info = D('park')
             ->where(array('id'=>$id))
             ->find();
-        $info['imglist'] = $this->parseImgList($info['imglist']);
+        $info['imglist'] = parseImgList($info['imglist']);
         $info['other_info'] = $this->parseOtherInfo($info['other_info']);
         $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Park'));
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Park'));
@@ -186,23 +186,6 @@ class MiaojiController extends Controller {
         return $rs;
     }
 
-    /**
-     * @param $imglist
-     * 获取字符串中的第一个图片
-     */
-    private function getFirstImg($imglist){
-        $temp = explode(';',$imglist);
-        return $temp[0];
-    }
-
-    /**
-     * @param $imglist
-     * @return array
-     * 将字符串转换成数组
-     */
-    private function parseImgList($imglist){
-        return explode(';',$imglist);
-    }
 
     /**
      * @param $otherInfo

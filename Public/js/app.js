@@ -53,7 +53,13 @@ function createPageHandler(handleObj){
     var tmpHandle = function(e, pageId, $page) {
         initWechatJs();
         wx.ready(function(){
-            share('店多多-汇聚本地的好玩，实用店铺','这里汇聚了北流所有的好玩的，有趣的玩意哦～',window.location.href,domain+"/Public/images/iconfont-dianpuguanli.png");
+            if(!shareTitle){
+                shareTitle = "店多多-汇聚本地的好玩，实用店铺";
+            }
+            if(!shareIntro){
+                shareIntro = "这里汇聚了北流所有的好玩的，有趣的玩意哦～";
+            }
+            share(shareTitle,shareIntro,window.location.href,domain+"/Public/images/iconfont-dianpuguanli.png");
             if(handleObj.wechatReady){
                 handleObj.wechatReady();
             }
@@ -391,7 +397,7 @@ var activityList = {
     pageId:"#activityList",
     handler: function (e, pageId, $page) {
         like('/index.php/Phone/Activity/zanActivity');
-        var changeTime = function () {
+        var changeTime = function (sen) {
             var hour = Math.floor(sen / 3600);
             var minu = Math.floor((sen % 3600)/60);
             var send = Math.floor(((sen % 3600)%60));
@@ -400,6 +406,7 @@ var activityList = {
         var time = 0;
         var sen = 0;
         setInterval(function(){
+            time++;
             $(".countdown").each(function(){
                 var node = $(this);
                 sen = node.data('lefttime') - time;
@@ -407,13 +414,28 @@ var activityList = {
                     node.html("该活动已结束，欢迎关注下次活动");
                     node.removeClass('countdown');
                 }
-                time++;
                 node.html(changeTime(sen));
             });
         },1000);
     }
 };
 createPageHandler(activityList);
+
+
+
+var activityInfo = {
+    pageId:"#activityInfo",
+    handler: function (e, pageId, $page) {
+        like('/index.php/Phone/Activity/zanActivity');
+        $('#shareBtn').click(function () {
+            $('.mask').removeClass('hide');
+        });
+        $('.mask').click(function(){
+            $(this).addClass('hide');
+        });
+    }
+};
+createPageHandler(activityInfo);
 
 
 var wechatOpen = {

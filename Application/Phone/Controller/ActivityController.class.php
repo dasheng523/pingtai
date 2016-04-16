@@ -74,15 +74,24 @@ class ActivityController extends Controller {
             ->field('activity.*, shop.name as shopname')
             ->where("activity.id=$id")
             ->find();
+        $info['piclist'] = parseImgList($info['piclist']);
+        $info['lefttime'] = floor(($info['etime']-time())/3600);
+        $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
+        $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
+
         $goodsList = D('activity_goods')
             ->where(array('activity_id'=>$id))
             ->select();
+
+        $share['title'] = "北流重大特惠：".$info['shopname'];
+        $share['intro'] = mb_substr($info['intro'], 0, 100,'utf-8');
+
+        $this->assign('share',$share);
 
         $this->assign('info',$info);
         $this->assign('goodsList',$goodsList);
         $this->display();
     }
-
 
     //赞活动
     public function zanActivity(){
@@ -95,4 +104,5 @@ class ActivityController extends Controller {
             $this->error('error');
         }
     }
+
 }
