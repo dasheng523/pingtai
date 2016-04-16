@@ -154,8 +154,8 @@ var UploadUtils = function(fileId,limitCount){
                 tmp.html('<input type="hidden" name="media_ids[]" value="'+data.info[0]+'">');
             },
             error: function(xhr,errorType, error) {
-                console.log(error);
-                console.log(errorType);
+                alert(error);
+                alert(errorType);
                 $.toast("您的手机似乎不支持上传功能");
             },
             data: fileData,
