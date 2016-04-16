@@ -161,3 +161,15 @@ a.btnitem{display: block;}
 .activity-goods-infobox .price{background: #eee;padding: 10px;margin-top: 5px;}
 .activity-goods-infobox .price .price-value{color: #990073;}
 .activity-goods-infobox .intro{margin-top: 5px;}
+
+.article .hd{padding: 2em 0;}
+.article .page_title {
+    color: #de7c23;
+}
+.page_title {
+    text-align: center;
+    font-size: 34px;
+    color: #3cc51f;
+    font-weight: 400;
+    margin: 0 15%;
+}

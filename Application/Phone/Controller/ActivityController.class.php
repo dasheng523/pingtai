@@ -48,6 +48,7 @@ class ActivityController extends Controller {
         }
         //print_r($list);return;
         $this->assign('list',$list);
+        $this->assign('pageTitle',"北流特惠活动");
         $this->display();
     }
 
@@ -55,13 +56,36 @@ class ActivityController extends Controller {
     //显示某集合下的活动
     public function showCateActivity(){
         $id = I('get.id');
+        if(!$id){
+            $id = 26;
+        }
         $now = time();
         $list = D('activity')
             ->join("shop on shop.id=activity.shop_id")
             ->field('activity.*, shop.name as shopname')
             ->where("activity.etime>$now and activity.coll_id=$id")
             ->select();
-        print_r($list);
+        foreach($list as &$info){
+            if($info['stime'] < time() && $info['etime'] > time()){
+                $info['status'] = 1;    //已经开始
+                $info['status_msg'] = "已经开始";
+            }
+            else if($info['stime'] > time()){
+                $info['status'] = 2;    //即将开始
+                $info['status_msg'] = "即将开始";
+            }
+            else{
+                $info['status'] = 0;    //已结束
+                $info['status_msg'] = "已结束";
+            }
+            $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
+            $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
+            $info['leftTime'] = $info['etime'] - time();
+        }
+        $cateInfo = D('collection')->where(array('id'=>$id))->find();
+        $this->assign('list',$list);
+        $this->assign('pageTitle',"北流".$cateInfo['name']);
+        $this->display('showAllActivity');
 
     }
 

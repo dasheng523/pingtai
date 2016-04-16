@@ -17,6 +17,7 @@ use \Wechat\Logic as logic;
  */
 class UserController extends Controller {
 
+
     protected function _initialize(){
         //初始化菜单
         $currentMenu = logic\PageMenuLogic::current();
@@ -26,6 +27,15 @@ class UserController extends Controller {
             $this->assign('tplBar',$tplBar);
         }
     }
+
+
+    /**
+     * 意见反馈
+     */
+    public function objection(){
+        $this->display();
+    }
+
     /**
      * 首页
      */

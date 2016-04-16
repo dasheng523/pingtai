@@ -43,4 +43,8 @@ class PublicController extends Controller {
     public function wechatOpen(){
         $this->display();
     }
+
+    public function about(){
+        $this->display();
+    }
 }

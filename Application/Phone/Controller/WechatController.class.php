@@ -81,22 +81,22 @@ class WechatController extends Controller {
     public function createMenu(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
         $menu = array('button' => array(
-            array('name'=>"聚好玩",'sub_button'=>array(
-                array('type'=>'view','name'=>'KTV','url'=>UC('Miaoji/showcaseDispatch',array('id'=>4))),
-                array('type'=>'view','name'=>'酒吧','url'=>UC('Miaoji/showcaseDispatch',array('id'=>15))),
-                array('type'=>'view','name'=>'美食','url'=>UC('Miaoji/showcaseDispatch',array('id'=>14))),
-                array('type'=>'view','name'=>'所有集合','url'=>UC('Miaoji/showcaseDispatch',array('id'=>0))),
+            array('name'=>"特价活动",'sub_button'=>array(
+                array('type'=>'view','name'=>'超市特价','url'=>UC('Activity/showCateActivity',array('id'=>26))),
+                array('type'=>'view','name'=>'游玩特价','url'=>UC('Activity/showCateActivity',array('id'=>27))),
+                array('type'=>'view','name'=>'美食特价','url'=>UC('Activity/showCateActivity',array('id'=>28))),
+                array('type'=>'view','name'=>'衣服特价','url'=>UC('Activity/showCateActivity',array('id'=>29))),
             )),
-            array('name'=>"男女部落",'sub_button'=>array(
+            array('name'=>"北流生活",'sub_button'=>array(
                 array('type'=>'view','name'=>'男人领地','url'=>UC('Miaoji/showcaseDispatch',array('id'=>23))),
-                array('type'=>'view','name'=>'女人专属','url'=>UC('Miaoji/showcaseDispatch',array('id'=>22)))
+                array('type'=>'view','name'=>'女人专属','url'=>UC('Miaoji/showcaseDispatch',array('id'=>22))),
+                array('type'=>'view','name'=>'聚好玩','url'=>UC('Miaoji/showcaseDispatch',array('id'=>21))),
+                array('type'=>'view','name'=>'家居生活','url'=>UC('Miaoji/showcaseDispatch',array('id'=>24))),
             )),
-            array('name'=>"家居生活",'sub_button'=>array(
-                array('type'=>'view','name'=>'婚庆','url'=>UC('Miaoji/showcaseDispatch',array('id'=>8))),
-                array('type'=>'view','name'=>'家具','url'=>UC('Miaoji/showcaseDispatch',array('id'=>18))),
-                array('type'=>'view','name'=>'电器','url'=>UC('Miaoji/showcaseDispatch',array('id'=>12))),
-                array('type'=>'view','name'=>'装修','url'=>UC('Miaoji/showcaseDispatch',array('id'=>19))),
-                array('type'=>'view','name'=>'便民电话','url'=>UC('Miaoji/phoneList')),
+            array('name'=>"店多多",'sub_button'=>array(
+                array('type'=>'view','name'=>'关于我们','url'=>UC('Public/about')),
+                array('type'=>'view','name'=>'意见反馈','url'=>UC('User/objection')),
+                array('type'=>'view','name'=>'商家入口','url'=>UC('shop/index')),
             ))
         ));
         echo $weobj->createMenu($menu);
