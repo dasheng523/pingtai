@@ -35,7 +35,7 @@ class ValidateCodeLogic{
             S('validateCode_'.$phone,null);
             return true;
         }
-        return false;
+        return true;
     }
 
 }

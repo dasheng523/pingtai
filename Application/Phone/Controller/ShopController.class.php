@@ -45,6 +45,8 @@ class ShopController extends Controller {
       $shopInfo['user_id'] = getUserId();
       $shopInfo['name'] = $name;
       $shopInfo['address'] = $address;
+      $shopInfo['phone'] = $phone;
+      $shopInfo['ctime'] = time();
       $id = logic\ShopLogic::createShop($shopInfo);
       if($id){
         $this->success(getSysConfig('Text_OpenShopSuccess'),"index");
