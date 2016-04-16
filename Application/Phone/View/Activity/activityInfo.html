@@ -48,12 +48,13 @@
                         </div>
                     </div>
                     <div class="activity-goodslist-box">
+                        <h3 class="green-text">活动特惠商品</h3>
                         <empty name="goodsList">
                             <div class="text-center margin-top30 gray-text">没有活动商品</div>
                             <else/>
                             <volist name="goodsList" id="goodsinfo">
                                 <div class="activity-goods-box flex">
-                                    <img class="activity-goods-img" src="__PUBLIC__/images/yuan4.png" />
+                                    <img class="activity-goods-img" src="{$goodsinfo['piclist']}" />
                                     <div class="activity-goods-infobox flex-1">
                                         <h3>{$goodsinfo['name']}</h3>
                                         <div class="price">价格：<span class="price-value">{$goodsinfo['price']}</span></div>
