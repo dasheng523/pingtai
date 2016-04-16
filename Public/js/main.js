@@ -5,7 +5,8 @@
 /************************  core  ********************************/
 
 //全局变量
-var domain = "http://192.168.23.105/pingtai";
+//var domain = "http://192.168.23.105/pingtai";
+var domain = "http://www.dianduoduo.top";
 var pageInitEventHandles = [];
 
 //初始化程序

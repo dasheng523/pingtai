@@ -88,8 +88,8 @@ class ShopController extends Controller {
     $info['name'] = I('post.name');
     $info['address'] = I('post.address');
     $info['phone'] = I('post.phone');
-    $info['lng'] = I('post.lng');
-    $info['lat'] = I('post.lat');
+    $info['lng'] = I('post.lng')+0;
+    $info['lat'] = I('post.lat')+0;
     $info['intro'] = I('post.intro');
     $info['scope_business'] = I('post.bScope');
     $res = logic\ShopLogic::updateShop($info);
