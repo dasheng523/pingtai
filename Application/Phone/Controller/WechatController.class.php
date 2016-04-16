@@ -86,6 +86,7 @@ class WechatController extends Controller {
                 array('type'=>'view','name'=>'游玩特价','url'=>UC('Activity/showCateActivity',array('id'=>27))),
                 array('type'=>'view','name'=>'美食特价','url'=>UC('Activity/showCateActivity',array('id'=>28))),
                 array('type'=>'view','name'=>'衣服特价','url'=>UC('Activity/showCateActivity',array('id'=>29))),
+                array('type'=>'view','name'=>'其他特价','url'=>UC('Activity/showCateActivity',array('id'=>30))),
             )),
             array('name'=>"北流生活",'sub_button'=>array(
                 array('type'=>'view','name'=>'男人领地','url'=>UC('Miaoji/showcaseDispatch',array('id'=>23))),
@@ -94,9 +95,8 @@ class WechatController extends Controller {
                 array('type'=>'view','name'=>'家居生活','url'=>UC('Miaoji/showcaseDispatch',array('id'=>24))),
             )),
             array('name'=>"店多多",'sub_button'=>array(
-                array('type'=>'view','name'=>'关于我们','url'=>UC('Public/about')),
-                array('type'=>'view','name'=>'意见反馈','url'=>UC('User/objection')),
                 array('type'=>'view','name'=>'商家入口','url'=>UC('shop/index')),
+                array('type'=>'view','name'=>'意见反馈','url'=>UC('User/objection')),
             ))
         ));
         echo $weobj->createMenu($menu);

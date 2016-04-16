@@ -33,6 +33,23 @@ class UserController extends Controller {
      * 意见反馈
      */
     public function objection(){
+        if(IS_POST){
+            $info['ncontent'] = I('post.ncontent');
+            if($info['ncontent']){
+                $info['uid'] = getUserId();
+                $info['ctime'] = time();
+                $res = D('objection')->data($info)->add();
+                if($res){
+                    $this->success('感谢您的意见反馈');
+                }else{
+                    $this->error('服务器似乎遇到一些问题');
+                }
+            }else{
+                $this->error('你需要填写意见内容');
+            }
+
+            return;
+        }
         $this->display();
     }
 
