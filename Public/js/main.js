@@ -225,6 +225,38 @@ var FormUtils = {
             var postUrl = formNode.attr('action');
             $.showPreloader();
             //发送数据
+            $.ajax({
+                type:'post',
+                url:postUrl,
+                data:submit,
+                dataType: "json",
+                success:function(res){
+                    $.hidePreloader();
+                    if(res.status==1){
+                        $.toast(res.info);
+                        if(res.url && res.url!==''){
+                            switch (urlHandle){
+                                case "back":
+                                    backLoadPage(res.url);
+                                    break;
+                                case "forward":
+                                    $.router.load(res.url, true);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }else{
+                        $.toast(res.info);
+                    }
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    $.hidePreloader();
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+                }
+            });
             $.post(postUrl,submit,function(res){
                 $.hidePreloader();
                 if(res.status==1){
