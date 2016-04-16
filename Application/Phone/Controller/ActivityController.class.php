@@ -11,6 +11,15 @@ use Think\Controller;
 
 class ActivityController extends Controller {
 
+    protected function _initialize(){
+        //调用微信JS的配置
+        $jsConfig = logic\WechatJsLogic::makeJSSignature(logic\WechatLogic::defaultWechatConfig());
+        $this->assign('jsConfig',$jsConfig);
+        //随机数
+        $rannum =generateCode();
+        $this->assign('rannum',$rannum);
+    }
+
     //显示所有未结束的活动
     public function showAllActivity(){
         $now = time();
@@ -68,8 +77,10 @@ class ActivityController extends Controller {
         $goodsList = D('activity_goods')
             ->where(array('activity_id'=>$id))
             ->select();
-        print_r($info);
-        print_r($goodsList);
+
+        $this->assign('info',$info);
+        $this->assign('goodsList',$goodsList);
+        $this->display();
     }
 
 

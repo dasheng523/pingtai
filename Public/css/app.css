@@ -142,3 +142,22 @@ a.btnitem{display: block;}
 
 .gs-content-wrap{background: #ec4949;}
 .gs-content-wrap .db-logo{font-size: 36px;text-align: center;padding: 40px 0;color: #fff;}
+
+.activity-title-box .chashi{text-align: right;}
+
+.activity-lefttime-box{margin-top: 15px;text-align: center;font-size: 16px;font-weight: bolder;}
+.activity-lefttime-box .label{}
+.activity-lefttime-box .countdown{color: #990073;}
+
+.activity-btngroup{margin-top: 15px;}
+.activity-btn{display: block;width: 100%;padding: 10px;text-align: center;border-radius: 5px;color: #fff;}
+.activity-btn.share{background: #ea7500;}
+.activity-btn.like{background: orange;}
+
+.activity-intro{margin-top: 15px;color: #666666;}
+.activity-goodslist-box{margin-top: 15px;border-top: 2px solid #aaa;}
+.activity-goods-box{margin-top: 5px;}
+.activity-goods-img{width: 120px;height:150px;margin-right: 10px;}
+.activity-goods-infobox .price{background: #eee;padding: 10px;margin-top: 5px;}
+.activity-goods-infobox .price .price-value{color: #990073;}
+.activity-goods-infobox .intro{margin-top: 5px;}
