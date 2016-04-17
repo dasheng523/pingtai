@@ -81,6 +81,7 @@ function createPageHandler(handleObj){
     var init = false;
     var tmpHandle = function(e, pageId, $page) {
         //如果已经初始化过就不必要再次初始化了
+        initWechatJs();
         if(!init){
             init = true;
             //初始化目录
@@ -103,6 +104,17 @@ function createPageHandler(handleObj){
 }
 
 /************************  core end  ********************************/
+
+function initWechatJs(){
+    if(typeof(jsConfig) == 'undefined'){
+        return;
+    }
+    wx.config(jsConfig);
+    wx.error(function(res){
+        alert(JSON.stringify(res));
+    });
+}
+
 var UploadUtils = function(fileId,limitCount){
     if(limitCount === undefined){
         limitCount = 6;
@@ -420,10 +432,8 @@ var shopDetail = {
         ddd.initUpload();
 
         $('#dignweiBtn').click(function () {
-            alert(123);
             wx.getLocation({
                 success: function (res) {
-                    alert(456);
                     $('#lat').val(res.latitude);
                     $('#lng').val(res.longitude);
                     var val = res.latitude + ','+res.longitude;
