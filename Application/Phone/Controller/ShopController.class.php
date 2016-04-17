@@ -157,21 +157,17 @@ class ShopController extends Controller {
     $shop = logic\ShopLogic::getShopInfoByUserId(getUserId());
     if($id){
       $info['id'] = $id;
-      $res = logic\GoodsLogic::updateGoods($info,$shop['id']);
+      logic\GoodsLogic::updateGoods($info,$shop['id']);
     }
     else{
-      $res = logic\GoodsLogic::addGoods($info,$shop['id']);
+      $id = logic\GoodsLogic::addGoods($info,$shop['id']);
     }
     //设置每个图片的entityID
     $mediaIds = I('post.media_ids');
     foreach($mediaIds as $mediaId){
       logic\MediaLogic::setEntityId($mediaId,$id);
     }
-    if($res){
-      $this->success("操作成功",UC('Shop/goods'));
-    }else{
-      $this->error("操作失败");
-    }
+    $this->success("操作成功",UC('Shop/goods'));
   }
   /**
    * 商品删除页
