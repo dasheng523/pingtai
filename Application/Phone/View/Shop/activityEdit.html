@@ -19,7 +19,7 @@
                             <input class="weui_input" type="text"
                                    required
                                    name="name" value="{$info['name']}"
-                                   placeholder="请输入妙集标题">
+                                   placeholder="活动标题要吸引人">
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
             <div class="content-block">
                 <p><a href="#" class="close-popup" id="closePublish">返回编辑页</a></p>
                 <empty name="goodslist">
-                        <span class="tip">您还没有发布商品呢</span>
+                        <span class="tip">您还没有上传商品，点击<a href="{:UC('Shop/goodsEdit')">上传商品</a></span>
                 <else/>
 
                     <form id="selectGoods">
