@@ -98,7 +98,7 @@ class ShopController extends Controller {
     $res = logic\ShopLogic::updateShop($info);
     $mediaIds = I('post.media_ids');
     foreach($mediaIds as $mediaId){
-      $res = logic\MediaLogic::setEntityId($mediaId,$info['id']);
+      logic\MediaLogic::setEntityId($mediaId,$info['id']);
     }
     if($res){
       $this->success('修改成功');
