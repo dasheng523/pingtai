@@ -420,8 +420,10 @@ var shopDetail = {
         ddd.initUpload();
 
         $('#dignweiBtn').click(function () {
+            alert(123);
             wx.getLocation({
                 success: function (res) {
+                    alert(456);
                     $('#lat').val(res.latitude);
                     $('#lng').val(res.longitude);
                     var val = res.latitude + ','+res.longitude;
