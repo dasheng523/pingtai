@@ -436,8 +436,7 @@ var shopDetail = {
                 success: function (res) {
                     $('#lat').val(res.latitude);
                     $('#lng').val(res.longitude);
-                    var val = res.latitude + ','+res.longitude;
-                    $('#latlngInput').val(val);
+                    $('#latlngInput').html("（完成）");
                 }
             });
         });
