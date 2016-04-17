@@ -199,7 +199,7 @@ var UploadUtils = function(fileId,limitCount){
                 var xhr = $.ajaxSettings.xhr();
                 if (xhr.upload) {
                     xhr.upload.addEventListener('progress', function(evt) {
-                        var process = parseInt(evt.loaded / evt.total) * 100 + '%';
+                        var process = Math.floor(evt.loaded / evt.total) * 100 + '%';
                         $('#'+id+' .weui_uploader_status_content').html(process);
                     }, false);
                 }
@@ -222,7 +222,7 @@ var UploadUtils = function(fileId,limitCount){
         }, 'json');
     };
     var initUpload = function(){
-        $('.weui_uploader_file').live('click',function(){
+        $(document).on('click', '.weui_uploader_file', function(e){
             var context = this;
             $.confirm('确定要删除这个图片吗？', function () {
                 var id = $(context).find('input').val();
