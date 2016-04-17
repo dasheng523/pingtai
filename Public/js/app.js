@@ -53,10 +53,11 @@ function createPageHandler(handleObj){
     var tmpHandle = function(e, pageId, $page) {
         initWechatJs();
         wx.ready(function(){
-            if(!shareTitle){
+
+            if(typeof(shareTitle)=="undefined" && !shareTitle){
                 shareTitle = "店多多-汇聚本地的好玩，实用店铺";
             }
-            if(!shareIntro){
+            if(typeof(shareTitle)=="undefined" && !shareIntro){
                 shareIntro = "这里汇聚了北流所有的好玩的，有趣的玩意哦～";
             }
             share(shareTitle,shareIntro,window.location.href,domain+"/Public/images/iconfont-dianpuguanli.png");
