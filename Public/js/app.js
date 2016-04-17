@@ -57,7 +57,7 @@ function createPageHandler(handleObj){
             if(typeof(shareTitle)=="undefined" || !shareTitle){
                 shareTitle = "店多多-汇聚本地的好玩，实用店铺";
             }
-            if(typeof(shareTitle)=="undefined" || !shareIntro){
+            if(typeof(shareIntro)=="undefined" || !shareIntro){
                 shareIntro = "这里汇聚了北流所有的好玩的，有趣的玩意哦～";
             }
             share(shareTitle,shareIntro,window.location.href,domain+"/Public/images/iconfont-dianpuguanli.png");
