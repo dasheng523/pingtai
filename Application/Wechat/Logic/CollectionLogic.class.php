@@ -53,6 +53,17 @@ class CollectionLogic
     }
 
     /**
+     * @param $parenId
+     * @return mixed
+     * @return mixed
+     */
+    public static function getSubCollection($parenId){
+        return D('Collection')->where(array('parent_id'=>$parenId))->select();
+    }
+
+
+
+    /**
      * @param $info
      * @return bool
      * 更新妙集

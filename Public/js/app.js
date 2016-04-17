@@ -329,7 +329,6 @@ function like(url){
             }
         });
     });
-
 }
 
 /*************** Bussiness *******************/
@@ -397,26 +396,6 @@ var activityList = {
     pageId:"#activityList",
     handler: function (e, pageId, $page) {
         like('/index.php/Phone/Activity/zanActivity');
-        var changeTime = function (sen) {
-            var hour = Math.floor(sen / 3600);
-            var minu = Math.floor((sen % 3600)/60);
-            var send = Math.floor(((sen % 3600)%60));
-            return hour+"小时"+minu+"分"+send+"秒";
-        };
-        var time = 0;
-        var sen = 0;
-        setInterval(function(){
-            time++;
-            $(".countdown").each(function(){
-                var node = $(this);
-                sen = node.data('lefttime') - time;
-                if(sen<=0){
-                    node.html("该活动已结束，欢迎关注下次活动");
-                    node.removeClass('countdown');
-                }
-                node.html(changeTime(sen));
-            });
-        },1000);
     }
 };
 createPageHandler(activityList);

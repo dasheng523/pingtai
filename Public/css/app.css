@@ -162,6 +162,8 @@ a.btnitem{display: block;}
 .activity-goods-infobox .price .price-value{color: #990073;}
 .activity-goods-infobox .intro{margin-top: 5px;}
 
+.activity-box .address-box{background: #eee;padding: 10px;}
+
 .article .hd{padding: 2em 0;}
 .article .page_title {
     color: #de7c23;

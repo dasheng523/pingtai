@@ -46,15 +46,15 @@
 
             <div class="weui_cells_title">定位</div>
             <div class="weui_cells weui_cells_access">
-                <a class="weui_cell" href="javascript:;">
+                <a class="weui_cell" href="javascript:;" id="dignweiBtn">
                     <div class="weui_cell_bd weui_cell_primary">
-                        <p>在店铺内进行定位</p>
+                        <p>点击定位，可以让顾客通过地图找到店铺(<span id="latlngInput"></span>)</p>
                     </div>
-                    <div class="weui_cell_ft">重新定位</div>
+                    <div class="weui_cell_ft"><if condition="$info['lat'] neq 0">重新定位<else/>定位</if></div>
                 </a>
             </div>
-            <input type="hidden" name="lat" value="{$info['lat']}">
-            <input type="hidden" name="lng" value="{$info['lng']}">
+            <input type="hidden" name="lat" value="{$info['lat']}" id="lat">
+            <input type="hidden" name="lng" value="{$info['lng']}" id="lng">
 
 
             <div class="weui_cells_title">店铺简介</div>

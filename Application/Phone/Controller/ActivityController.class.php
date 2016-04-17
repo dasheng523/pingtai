@@ -25,7 +25,7 @@ class ActivityController extends Controller {
         $now = time();
         $list = D('activity')
             ->join("shop on shop.id=activity.shop_id")
-            ->field('activity.*, shop.name as shopname')
+            ->field('activity.*, shop.name as shopname, shop.address, shop.phone')
             ->where("activity.etime>$now")
             ->select();
 
@@ -44,7 +44,7 @@ class ActivityController extends Controller {
             }
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
-            $info['leftTime'] = $info['etime'] - time();
+            $info['leftTime'] = floor(($info['etime'] - time())/3600);
         }
         //print_r($list);return;
         $this->assign('list',$list);
@@ -62,7 +62,7 @@ class ActivityController extends Controller {
         $now = time();
         $list = D('activity')
             ->join("shop on shop.id=activity.shop_id")
-            ->field('activity.*, shop.name as shopname')
+            ->field('activity.*, shop.name as shopname, shop.address, shop.phone')
             ->where("activity.etime>$now and activity.coll_id=$id")
             ->select();
         foreach($list as &$info){
@@ -80,13 +80,12 @@ class ActivityController extends Controller {
             }
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
-            $info['leftTime'] = $info['etime'] - time();
+            $info['leftTime'] = floor(($info['etime'] - time())/3600);
         }
         $cateInfo = D('collection')->where(array('id'=>$id))->find();
         $this->assign('list',$list);
         $this->assign('pageTitle',"北流".$cateInfo['name']);
         $this->display('showAllActivity');
-
     }
 
 
@@ -95,7 +94,7 @@ class ActivityController extends Controller {
         $id = I('get.id');
         $info = D('activity')
             ->join("shop on shop.id=activity.shop_id")
-            ->field('activity.*, shop.name as shopname')
+            ->field('activity.*, shop.name as shopname, shop.address, shop.phone')
             ->where("activity.id=$id")
             ->find();
         $info['piclist'] = parseImgList($info['piclist']);

@@ -6,7 +6,7 @@
 
 //全局变量
 //var domain = "http://192.168.23.105/pingtai";
-var domain = "http://www.dianduoduo.top";
+//var domain = "http://www.dianduoduo.top";
 var pageInitEventHandles = [];
 
 //初始化程序
@@ -184,6 +184,10 @@ var UploadUtils = function(fileId,limitCount){
             var total = $('.weui_uploader_file').length + 1;
             if(total == limitCount){
                 $('.weui_uploader_input_wrp').addClass('hide');
+            }else if(total > limitCount){
+                $.toast("活动封面只能上传一张");
+                $('.weui_uploader_input_wrp').addClass('hide');
+                return;
             }
             if (this.files && this.files[0]) {
                 var showNode = createShowNode();
@@ -414,10 +418,90 @@ var shopDetail = {
         FormUtils.initForm('form');
         var ddd = UploadUtils('#uploadFile');
         ddd.initUpload();
+
+        $('#dignweiBtn').click(function () {
+            wx.getLocation({
+                success: function (res) {
+                    $('#lat').val(res.latitude);
+                    $('#lng').val(res.longitude);
+                    var val = res.latitude + ','+res.longitude;
+                    $('#latlngInput').val(val);
+                }
+            });
+        });
     }
 };
 createPageHandler(shopDetail);
 
+var activity = {
+    pageId:"#activity",
+    menu:[
+        {
+            text: '新增活动',
+            onClick: function() {
+                $.router.load(domain+"/index.php/Phone/Shop/activityEdit.html");
+            }
+        },
+        {
+            text: '删除活动',
+            color: 'danger',
+            onClick: function() {
+                $.router.load(domain+"/index.php/Phone/Shop/activityDel.html",true);
+            }
+        }],
+    handler:function(e, pageId, $page){
+
+    }
+};
+
+/**
+ * 编辑活动基本内容
+ * @type {{pageId: string, handler: collectionEdit.handler}}
+ */
+var activityEdit = {
+    pageId:"#activityEdit",
+    handler:function(e, pageId, $page){
+        FormUtils.initForm('#mainform','back');
+        var ddd = UploadUtils('#uploadFile',1);
+        ddd.initUpload();
+
+        $('#showActivityGoodsBtn').click(function () {
+            $.popup('.popup-goodsList');
+            $('.popup-overlay').removeClass('popup-overlay');
+
+        });
+        $('#closePublish').click(function () {
+            $.closeModal('.popup-goodsList');
+        });
+
+        $('#goodsPublishBtn').click(function () {
+            var godsformval = $('#selectGoods').serializeArray();
+            var values = godsformval.map(function(n){
+                return n.value;
+            });
+            $("input[name^='goodslistids']").val(values.join(","));
+            $('#totalGoods').html(values.length);
+            $.closeModal('.popup-goodsList');
+        });
+
+
+        var selectGoodsStr = $("input[name^='goodslistids']").val();
+        if(selectGoodsStr!=""){
+            var selectGoodsList = selectGoodsStr.split(',');
+            $('#totalGoods').html(selectGoodsList.length);
+            $("input[id^='goodsV_']").each(function(){
+                if(selectGoodsList.indexOf($(this).val())>=0){
+                    $(this).attr('checked','true');
+                }
+            });
+        }
+
+
+    }
+};
+createPageHandler(activityEdit);
+
+createPageHandler(activity);
 
 //集合管理处理器
 var collection = {

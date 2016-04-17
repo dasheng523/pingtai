@@ -1,0 +1,163 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="activityEdit">
+        <div class="content">
+            <form action="{:UC('Shop/activityEditCommit')}" id="mainform">
+                <div class="weui_cells_title">活动标题</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text"
+                                   required
+                                   name="name" value="{$info['name']}"
+                                   placeholder="请输入妙集标题">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui_cells_title">活动开始时间</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="date"
+                                   required
+                                   name="stime" value="{$info['stime']}"
+                                   placeholder="输入活动开始时间">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui_cells_title">活动持续时间</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell weui_cell_select">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" name="duration">
+                                <?php
+                                for($i=1;$i<=7;$i++){
+                                    if($i == $info['duration']){
+                                        echo '<option value="'. $i .'" selected="true">'.$i.' 天</option>';
+                                    }
+                                    else{
+                                        echo '<option value="'. $i .'">'.$i.' 天</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="weui_cells">
+                    <a class="weui_cell open-goodsList" href="#" id="showActivityGoodsBtn">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>编辑活动商品</p>
+                        </div>
+                        <div class="weui_cell_ft">选择了 <span id="totalGoods">0</span> 件商品</div>
+                    </a>
+                </div>
+
+                <div class="weui_cells_title">活动描述</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <textarea class="weui_textarea"
+                                      required maxlength="200"
+                                      name="intro"
+                                      placeholder="请输入妙集描述" rows="3">{$info['intro']}</textarea>
+                            <div class="weui_textarea_counter">200以内</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui_cells_title">活动分类</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell weui_cell_select">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" name="coll_id">
+                                <volist name="collections" id="collInfo">
+                                    <option value="{$collInfo['id']}" <if condition="$collInfo['id'] eq $info['coll_id']">selected=seleced</if>>{$collInfo['name']}</option>
+                                </volist>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weui_cells_title">上传活动封面</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <div class="weui_uploader_bd">
+                                <ul class="weui_uploader_files">
+                                    <if condition="$imgInfo">
+                                    <li class="weui_uploader_file" style="background-image:url('{$imgInfo.url}')">
+                                        <input type="hidden" name="media_ids[]" value="{$imgInfo.id}">
+                                    </li>
+                                    </if>
+                                </ul>
+                                <div class="weui_uploader_input_wrp">
+                                    <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif"
+                                           data-mediatype="<?php echo C('MediaType_Image');?>"
+                                           data-entitytype="<?php echo C('EntityType_Activity');?>"
+                                           data-entityid="{$info['id']}"
+                                           id="uploadFile">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="goodslistids" value="{$goodsids}" />
+                <input type="hidden" name="id" value="{$info['id']}" />
+
+                <div class="weui_btn_area">
+                    <button class="weui_btn weui_btn_primary" type="submit" id="subgoodsBtn">
+                        <if condition="$_GET['id']">重新发布<else/>发布</if>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="popup popup-goodsList">
+            <div class="content-block">
+                <p><a href="#" class="close-popup" id="closePublish">返回编辑页</a></p>
+                <empty name="goodslist">
+                        <span class="tip">您还没有发布商品呢</span>
+                <else/>
+
+                    <form id="selectGoods">
+                        <div class="weui_cells weui_cells_checkbox">
+                            <volist name="goodslist" id="goodsInfo">
+                                <label class="weui_cell weui_check_label" for="goodsV_{$goodsInfo['id']}">
+                                    <div class="weui_cell_hd">
+                                        <input type="checkbox" class="weui_check" name="goodsIds[]" id="goodsV_{$goodsInfo['id']}" value="{$goodsInfo['id']}">
+                                        <i class="weui_icon_checked"></i>
+                                    </div>
+                                    <div class="weui_cell_bd weui_cell_primary">
+                                        <p>{$goodsInfo['name']}({$goodsInfo['price']})</p>
+                                    </div>
+                                </label>
+                            </volist>
+                        </div>
+
+                        <div class="weui_btn_area">
+                            <a class="weui_btn weui_btn_primary" id="goodsPublishBtn">上架</a>
+                        </div>
+                    </form>
+                </empty>
+
+            </div>
+        </div>
+    </div>
+</block>
+

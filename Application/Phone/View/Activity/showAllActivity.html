@@ -56,7 +56,7 @@
                         <if condition="$info['status'] eq 1">
                             <div class="left-time-box">
                                 <span class="label">剩余时间:</span>
-                                <span class="countdown" data-lefttime="{$info['leftTime']}"></span>
+                                <span class="countdown">{$info['leftTime']}小时</span>
                             </div>
                             <else/>
                             <div class="left-time-box">
@@ -64,6 +64,16 @@
                             </div>
                         </if>
 
+                    </div>
+                    <div class="yspanel-footer gray-text1 flex">
+                        <div class="flex-1">{$info['address']}</div>
+                        <if condition="$info['lat'] and $info['lng']">
+                            <a class="lookmap" href="javascript:;"
+                               data-lat="{$info['lat']}"
+                               data-lng="{$info['lng']}"
+                               data-name="{$info['name']}"
+                               data-address="{$info['address']}">查看地图</a>
+                        </if>
                     </div>
                 </div>
             </volist>

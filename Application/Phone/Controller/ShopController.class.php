@@ -16,6 +16,9 @@ class ShopController extends Controller {
     if(!$isOpen && ACTION_NAME != 'openShop' && ACTION_NAME != 'openShopCommit'){
       redirect('openShop', 0, '页面跳转中...');
     }else{
+
+      $domain = __ROOT__;
+      $this->assign('domain',$domain);
       return;
     }
   }
@@ -191,7 +194,109 @@ class ShopController extends Controller {
       $this->error("操作失败");
     }
   }
+
   /**
+   * 活动列表
+   */
+  public function activity(){
+    $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+    $list = logic\ActivityLogic::getActivityListByShopId($shopId);
+    foreach($list as &$info){
+      $info['faceImgUrl'] = logic\ActivityLogic::getActivityFaceImgInfo($info['id']);
+      $info['likenum'] = logic\ActivityLogic::getActivityLikeNum($info['id']);
+      $now = time();
+      if($info['stime']>$now){
+        $info['status'] = "未开始";
+      }else if($info['etime'] < $now){
+        $info['status'] = "已结束";
+      }else{
+        $info['status'] = "进行中";
+      }
+
+    }
+    $this->assign('list',$list);
+    $this->display();
+  }
+
+  public function activityEdit(){
+    $id = I('get.id');
+    if($id){
+      $info = logic\ActivityLogic::getActivityInfo($id);
+      $info['duration'] = ($info['etime']-$info['stime'])/(3600*24);
+      $info['stime'] = date('Y-m-d',$info['stime']);
+
+      $imgInfo = logic\ActivityLogic::getActivityFaceImgInfo($id);
+      $this->assign('info',$info);
+      $this->assign('imgInfo',$imgInfo);
+
+      $goodsIdList = logic\ActivityLogic::getActivityGoodsIdList($id);
+      $goodsids = implode(',',$goodsIdList);
+      $this->assign('goodsids',$goodsids);
+
+    }
+    $collections = logic\CollectionLogic::getSubCollection(25);
+    $this->assign('collections',$collections);
+
+    $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+    $goodsList = logic\GoodsLogic::getGoodsListByShopId($shopId);
+    $this->assign('goodslist',$goodsList);
+    $this->display();
+  }
+
+  public function activityEditCommit(){
+    $id = I('post.id');
+    $info['name'] = I('post.name');
+    $info['stime'] = I('post.stime');
+    $info['duration'] = I('post.duration');
+    $info['coll_id'] = I('post.coll_id');
+    $info['intro'] = I('post.intro');
+    $goodslistids = I('post.goodslistids');
+    $info['shop_id'] = logic\ShopLogic::getShopIdByUserId(getUserId());
+
+    $info['stime'] = strtotime($info['stime']);
+    $info['etime'] = $info['stime']+$info['duration']*24*3600;
+    $info['ctime'] = time();
+    if($id){
+      $info['id'] = $id;
+      logic\ActivityLogic::updateActivityInfo($info);
+    }else{
+      $id = $res = logic\ActivityLogic::addActivityInfo($info);
+    }
+
+    //添加活动商品
+    $goodsidList = explode(',',$goodslistids);
+    logic\ActivityLogic::saveGoodsList($goodsidList,$id);
+
+    //设置每个图片的entityID
+    $mediaIds = I('post.media_ids');
+    foreach($mediaIds as $mediaId){
+      logic\MediaLogic::setEntityId($mediaId,$id);
+    }
+    $this->success("操作成功",UC('Shop/activity'));
+
+  }
+
+  public function activityDel(){
+    $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
+    $list = logic\ActivityLogic::getActivityListByShopId($shopId);
+    $this->assign('list',$list);
+    $this->display();
+  }
+
+  public function activityDoDel(){
+    $ids = I('post.ids');
+    $res = false;
+    foreach($ids as $id){
+      $res = logic\ActivityLogic::delActivityById($id);
+    }
+    if($res){
+      $this->success("操作成功",UC('Shop/activity'));
+    }else{
+      $this->error("操作失败");
+    }
+  }
+
+    /**
    * 妙集列表
    */
   public function collection(){
