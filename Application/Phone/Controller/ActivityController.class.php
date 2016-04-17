@@ -42,11 +42,11 @@ class ActivityController extends Controller {
                 $info['status'] = 0;    //已结束
                 $info['status_msg'] = "已结束";
             }
+            $info['piclist'] = logic\ActivityLogic::getActivityFirstImgUrl($info['id']);
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
             $info['leftTime'] = floor(($info['etime'] - time())/3600);
         }
-        //print_r($list);return;
         $this->assign('list',$list);
         $this->assign('pageTitle',"北流特惠活动");
         $this->display();
@@ -78,6 +78,7 @@ class ActivityController extends Controller {
                 $info['status'] = 0;    //已结束
                 $info['status_msg'] = "已结束";
             }
+            $info['piclist'] = logic\ActivityLogic::getActivityFirstImgUrl($info['id']);
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
             $info['leftTime'] = floor(($info['etime'] - time())/3600);
@@ -97,14 +98,12 @@ class ActivityController extends Controller {
             ->field('activity.*, shop.name as shopname, shop.address, shop.phone')
             ->where("activity.id=$id")
             ->find();
-        $info['piclist'] = parseImgList($info['piclist']);
+        $info['piclist'] = logic\ActivityLogic::getActivityFirstImgUrl($id);
         $info['lefttime'] = floor(($info['etime']-time())/3600);
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
         $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
 
-        $goodsList = D('activity_goods')
-            ->where(array('activity_id'=>$id))
-            ->select();
+        $goodsList = logic\ActivityLogic::getActivityGoodsList($id);
 
         $share['title'] = "北流重大特惠：".$info['shopname'];
         $share['intro'] = mb_substr($info['intro'], 0, 100,'utf-8');

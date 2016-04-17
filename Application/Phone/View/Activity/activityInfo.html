@@ -8,7 +8,7 @@
             </div>
             <div class="yspanel">
                 <div class="banner-header-imgbox">
-                    <img src="{$info['piclist'][0]}"
+                    <img src="{$info['piclist']}"
                          class="showimglist"
                          data-imglist="<?php echo implode(',',$info['piclist']);?>"
                          alt="" style="width: 100%">
@@ -56,7 +56,7 @@
                             <else/>
                             <volist name="goodsList" id="goodsinfo">
                                 <div class="activity-goods-box flex">
-                                    <img class="activity-goods-img" src="{$goodsinfo['piclist']}" />
+                                    <img class="activity-goods-img" src="{$goodsinfo['imgurl']}" />
                                     <div class="activity-goods-infobox flex-1">
                                         <h3>{$goodsinfo['name']}</h3>
                                         <div class="price">价格：<span class="price-value">{$goodsinfo['price']}</span></div>

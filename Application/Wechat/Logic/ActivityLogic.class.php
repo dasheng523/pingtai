@@ -29,6 +29,10 @@ class ActivityLogic
         return logic\MediaLogic::getEntityFirstImg($aid,C('EntityType_Activity'));
     }
 
+    public static function getActivityFirstImgUrl($aid){
+        return logic\MediaLogic::getEntityFirstImgUrl($aid,C('EntityType_Activity'));
+    }
+
     /**
      * @param $id
      * @return mixed
@@ -79,6 +83,19 @@ class ActivityLogic
         return array_column($list,'goods_id');
     }
 
+    public static function getActivityGoodsList($id)
+    {
+        $list = D('activity_goods')->where(array('activity_id'=>$id))->field('goods_id')->select();
+        $goodsList = array();
+        foreach($list as $info){
+            $goodsInfo = GoodsLogic::getGoodsDetail($info['goods_id']);
+            $imgurl = GoodsLogic::getGoodsFirstImgUrl($goodsInfo['id']);
+            $goodsInfo['imgurl'] = $imgurl;
+            $goodsList[] = $goodsInfo;
+        }
+        return $goodsList;
+    }
+
     /**
      * @param $goodsidList
      * @param $id
@@ -108,4 +125,5 @@ class ActivityLogic
     {
         return D('activity')->where(array('id'=>$id))->delete();
     }
+
 }

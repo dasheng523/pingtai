@@ -22,21 +22,13 @@
                                 {$info['status_msg']}
                                 </span>
                             </div>
-                            <if condition="($info['price']) and ($info['price'] neq 0)">
-                                <div class="yspanel-pricebox gray-text1">
-                                    ￥{$info['price']}
-                                </div>
-                            </if>
                         </div>
                         <div class="yspanel-image-box">
                             <div class="yspanel-image-textbox">- <span class="text">{$info['name']}</span> -</div>
-                            <if condition="$info['ishaspic']">
-                                <div class="realpicbox"><img src="__PUBLIC__/images/904925059827350856.png"></div>
-                            </if>
-
-                            <if condition="($info['piclist']) AND ($info['piclist'][0])">
+                            <if condition="$info['piclist']">
                                 <img class="yspanel-image-image" src="{$info['piclist']}">
                                 <else/>
+                                <img class="yspanel-image-image" src="__PUBLIC__/upload/abd2ac815505109fc8102326b7677037.png">
                             </if>
                         </div>
                         <div class="yspanel-content-box text-line3">
