@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="__PUBLIC__/SUI-Mobile/dist/css/sm.min.css">
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
     <link rel="stylesheet" href="__PUBLIC__/css/weui.min.css">
-    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v=26">
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css?v={$rannum}">
 
     <block name="css"></block>
 
@@ -28,9 +28,16 @@
 <script src="__PUBLIC__/js/validator.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-    var domain = "{$domain}";
+    domain = "{$domain}";
 </script>
-<script type='text/javascript' src="__PUBLIC__/js/main.js?v=9" charset='utf-8'></script>
+
+<if condition="$jsConfig">
+    <script>
+        jsConfig = {$jsConfig};
+    </script>
+</if>
+
+<script type='text/javascript' src="__PUBLIC__/js/main.js?v={$rannum}" charset='utf-8'></script>
 <block name="script"></block>
 </body>
 </html>
