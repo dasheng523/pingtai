@@ -95,17 +95,12 @@ class ShopController extends Controller {
     $info['lat'] = I('post.lat')+0;
     $info['intro'] = I('post.intro');
     $info['scope_business'] = I('post.bScope');
-    $res = logic\ShopLogic::updateShop($info);
+    logic\ShopLogic::updateShop($info);
     $mediaIds = I('post.media_ids');
     foreach($mediaIds as $mediaId){
       logic\MediaLogic::setEntityId($mediaId,$info['id']);
     }
-    if($res){
-      $this->success('修改成功');
-    }
-    else{
-      $this->error('修改失败');
-    }
+    $this->success('修改成功');
   }
   /**
    * 删除店铺图片
