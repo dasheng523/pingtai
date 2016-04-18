@@ -48,7 +48,7 @@ class GoodsLogic
             $size = getSysConfig('PageSize');
         }
         $list = D('goods')
-            ->where(array('user_id'=>$shopId))
+            ->where(array('shop_id'=>$shopId))
             ->page($page,$size)
             ->order('mtime desc')
             ->select();
