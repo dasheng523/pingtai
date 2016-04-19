@@ -21,13 +21,27 @@ class UploadController extends Controller {
      * 上传文件 如果这里出现问题，那看看有没有upload这个文件夹
      */
     public function uploadFile(){
-        $files = logic\MediaLogic::updateMedia();
         $mediaType = I('post.mediaType');
         $entityType = I('post.entityType');
+
+        $files = logic\MediaLogic::updateMedia();
+
         $ids = array();
         foreach($files as &$file){
             $file['media_type'] = $mediaType;
             $file['entity_type'] = $entityType;
+            //生成缩略图
+            $suolveMap = array(
+                C('EntityType_Activity') => array('width'=>350,'height'=>200),
+                C('EntityType_Shop') => array('width'=>150,'height'=>200),
+                C('EntityType_Goods') => array('width'=>350,'height'=>200),
+            );
+
+            if($mediaType == C('MediaType_Image')){
+                $kuai = $suolveMap[$entityType];
+                //生成缩略图
+                logic\MediaLogic::resizePic($file['path'],$file['path'],$kuai['width'],$kuai['height']);
+            }
             $file['name'] = 's';
             $ids[] = logic\MediaLogic::addMediaInfo($file);
         }

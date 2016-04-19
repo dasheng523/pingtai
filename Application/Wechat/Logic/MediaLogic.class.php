@@ -7,6 +7,7 @@
  */
 
 namespace Wechat\Logic;
+use Think\Exception;
 
 /**
  * Class MediaLogic
@@ -184,10 +185,17 @@ class MediaLogic
      * @param $outFile
      * 缩略图
      */
-    public static function resizePic($inFile ,$outFile ){
-        $image = new \Imagick($inFile);
-        $image->thumbnailImage(200, 200);
-        $image->writeImage($outFile);
+    public static function resizePic($inFile ,$outFile ,$width ,$height){
+        if(APP_STATUS == 'local'){
+            return;
+        }
+        try{
+            $image = new \Imagick($inFile);
+            $image->thumbnailImage($width, $height);
+            $image->writeImage($outFile);
+        } catch(Exception $e){
+            \Think\Log::write('缩略图生成失败','ERR');
+        }
     }
 
     /**
