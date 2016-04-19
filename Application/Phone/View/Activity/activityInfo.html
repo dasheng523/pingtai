@@ -21,8 +21,18 @@
                             <div class="chashi">——{$info['shopname']}</div>
                         </div>
                         <div class="activity-lefttime-box">
-                            <span class="label">剩余时间:</span>
-                            <span class="countdownbox">{$info['lefttime']}小时</span>
+                            <if condition="$info['status'] == 1">
+                                <span class="label">剩余时间:</span>
+                                <span class="countdownbox">{$info['lefttime']}小时</span>
+                            </if>
+                            <if condition="$info['status'] == 2">
+                                <span class="label">即将开始:</span>
+                                <span class="countdownbox">{$info['stime'] | formatDate}</span>
+                            </if>
+                            <if condition="$info['status'] == 0">
+                                <span class="label">活动已结束</span>
+                            </if>
+
                         </div>
 
                         <div class="row activity-btngroup">
@@ -90,9 +100,6 @@
                 var shareTitle = "{$share.title}";
             </script>
 
-            <div class="fixbtnbox">
-                <a class="fixbtn showMenu" href="#"><i class="iconfont">&#xe602;</i></a>
-            </div>
 
             <div class="mask hide">
                 <div class="text-nomal-box text-center">
@@ -105,6 +112,10 @@
             <p class="gray-text1 text-center small-text margin-top30">
                 <a href="{:UC('Public/showMa')}" id="telmebtn">关注我们</a>将获得北流更多优惠信息
             </p>
+        </div>
+
+        <div class="fixbtnbox">
+            <a class="fixbtn showMenu" href="#"><i class="iconfont">&#xe602;</i></a>
         </div>
     </div>
 </block>
