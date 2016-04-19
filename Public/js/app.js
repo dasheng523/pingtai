@@ -72,6 +72,9 @@ function createPageHandler(handleObj){
             $.pullToRefreshDone('.pull-to-refresh-content');
         });
 
+        //延迟加载
+        $(".lazy").lazyload();
+
         //初始化lookMap按钮
         $('.lookmap').click(function(){
             var lat = $(this).data('lat');
@@ -501,7 +504,3 @@ initApp();
 
 $.init();
 
-
-$(function () {
-    $(".lazy").lazyload();
-});
