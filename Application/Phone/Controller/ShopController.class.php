@@ -15,7 +15,12 @@ class ShopController extends Controller {
     $jsConfig = logic\WechatJsLogic::makeJSSignature(logic\WechatLogic::defaultWechatConfig());
     $this->assign('jsConfig',$jsConfig);
     //随机数
-    $rannum =generateCode();
+    //随机数
+    if(APP_STATUS == 'local'){
+      $rannum = generateCode();
+    }else{
+      $rannum = C('Version');
+    }
     $this->assign('rannum',$rannum);
 
     $isOpen = logic\ShopLogic::isOpenShop(getUserId());
