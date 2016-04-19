@@ -24,4 +24,8 @@ return array(
 	'UseType_Like' => 2,
 	'UseType_Collection' => 3,  //收藏
 	'UseType_Visit' => 4,  //访问
+
+	'SESSION_OPTIONS'=> array(
+		'expire'=>24*3600*15,
+	),
 );

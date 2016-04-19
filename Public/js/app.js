@@ -8,6 +8,10 @@ function initApp(){
     $.each(pageInitEventHandles,function(i,handlerObj){
         $(document).on("pageInit", handlerObj.pageId, handlerObj.handler);
     });
+
+    $(function () {
+        $(".lazy").lazyload();
+    });
 }
 
 /**
