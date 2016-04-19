@@ -62,7 +62,7 @@ class ActivityController extends Controller {
         $now = time();
         $list = D('activity')
             ->join("shop on shop.id=activity.shop_id")
-            ->field('activity.*, shop.name as shopname, shop.address, shop.phone')
+            ->field('activity.*, shop.name as shopname, shop.address, shop.phone, shop.lat, shop.lng')
             ->where("activity.etime>$now and activity.coll_id=$id")
             ->select();
         foreach($list as &$info){
@@ -95,7 +95,7 @@ class ActivityController extends Controller {
         $id = I('get.id');
         $info = D('activity')
             ->join("shop on shop.id=activity.shop_id")
-            ->field('activity.*, shop.name as shopname, shop.address, shop.phone')
+            ->field('activity.*, shop.name as shopname, shop.address, shop.phone, shop.lat, shop.lng')
             ->where("activity.id=$id")
             ->find();
         $info['piclist'] = logic\ActivityLogic::getActivityFirstImgUrl($id);

@@ -154,7 +154,7 @@ a.btnitem{display: block;}
 .activity-btn.share{background: #ea7500;}
 .activity-btn.like{background: orange;}
 
-.activity-intro{margin-top: 15px;color: #666666;}
+.activity-intro{margin-top: 15px;color: #666666;padding: 10px 0;}
 .activity-goodslist-box{margin-top: 15px;}
 .activity-goods-box{border-bottom: 1px solid #dddddd;padding: 10px 0;}
 .activity-goods-img{width: 120px;height:150px;margin-right: 10px;}

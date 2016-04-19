@@ -33,8 +33,8 @@ class UploadController extends Controller {
             //生成缩略图
             $suolveMap = array(
                 C('EntityType_Activity') => array('width'=>350,'height'=>200),
-                C('EntityType_Shop') => array('width'=>150,'height'=>200),
-                C('EntityType_Goods') => array('width'=>350,'height'=>200),
+                C('EntityType_Goods') => array('width'=>150,'height'=>200),
+                C('EntityType_Shop') => array('width'=>350,'height'=>200),
             );
 
             if($mediaType == C('MediaType_Image')){
