@@ -47,4 +47,8 @@ class PublicController extends Controller {
     public function about(){
         $this->display();
     }
+
+    public function h5show(){
+        header("Location: http://q.eqxiu.com/s/EMGG01gO?eqrcode=1");
+    }
 }
