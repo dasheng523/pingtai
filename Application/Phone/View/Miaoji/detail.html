@@ -9,8 +9,8 @@
             <div class="yspanel">
                 <div class="banner-header-imgbox">
                     <if condition="($info['imglist']) AND ($info['imglist'][0])">
-                        <img src="{$info['imglist'][0]}"
-                             class="showimglist"
+                        <img data-original="{$info['imglist'][0]}"
+                             class="lazy showimglist"
                              data-imglist="<?php echo implode(',',$info['imglist']);?>"
                              alt="" style="width: 100%">
                         <else/>

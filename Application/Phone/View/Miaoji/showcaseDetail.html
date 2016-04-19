@@ -26,7 +26,7 @@
                             </if>
 
                             <if condition="($info['imglist']) AND ($info['imglist'][0])">
-                                <img class="yspanel-image-image" src="{$info['imglist']}">
+                                <img class="lazy yspanel-image-image" data-original="{$info['imglist']}">
                                 <else/>
                             </if>
                         </div>

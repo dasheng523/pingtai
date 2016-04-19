@@ -26,7 +26,7 @@
                         <div class="yspanel-image-box">
                             <div class="yspanel-image-textbox">- <span class="text">{$info['name']}</span> -</div>
                             <if condition="$info['piclist']">
-                                <img class="yspanel-image-image" src="{$info['piclist']}">
+                                <img class="lazy yspanel-image-image" data-original="{$info['piclist']}">
                                 <else/>
                                 <img class="yspanel-image-image" src="__PUBLIC__/upload/abd2ac815505109fc8102326b7677037.png">
                             </if>
