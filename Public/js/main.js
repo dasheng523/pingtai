@@ -386,7 +386,7 @@ var goods = {
         {
             text: '添加商品',
             onClick: function() {
-                $.router.load(domain+"/index.php/Phone/Shop/goodsEdit.html");
+                $.router.load(domain+"/index.php/Phone/Shop/goodsEdit.html",true);
             }
         },
         {

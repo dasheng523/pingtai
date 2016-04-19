@@ -92,4 +92,10 @@ class TestController extends Controller {
         echo json_encode(array('status'=>'ok'));
     }
 
+    public function testResize(){
+        $inFile = "./Public/images/yuan5.png";
+        $outFile = "./Public/images/test5.png";
+        \Wechat\Logic\MediaLogic::resizePic($inFile,$outFile);
+    }
+
 }

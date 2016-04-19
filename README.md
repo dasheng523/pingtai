@@ -23,6 +23,7 @@ require './ThinkPHP/ThinkPHP.php';
 
 ````
 3. 修改`Application/Common/Conf/local.php`，将数据库连接信息配置好。
+5. 新建Public/upload目录，并设置可写权限。
 4. 启动服务器。
 
 ## 商业友好的开源协议

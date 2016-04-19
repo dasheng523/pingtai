@@ -180,6 +180,17 @@ class MediaLogic
     }
 
     /**
+     * @param $inFile
+     * @param $outFile
+     * 缩略图
+     */
+    public static function resizePic($inFile ,$outFile ){
+        $image = new \Imagick($inFile);
+        $image->thumbnailImage(200, 200);
+        $image->writeImage($outFile);
+    }
+
+    /**
      * @param $id
      * @return mixed
      * 获取媒体路径
