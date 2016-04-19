@@ -73,7 +73,9 @@ function createPageHandler(handleObj){
         });
 
         //延迟加载
-        $(".lazy").lazyload();
+        $(".lazy").lazyload({
+            container: $(".content")
+        });
 
         //初始化lookMap按钮
         $('.lookmap').click(function(){
