@@ -40,12 +40,41 @@ class RequestLogic{
      * 获取当前的用户ID
      */
     public static function getUserId(){
-        if(C('LOCAL_DEV')){
-            return 1;
+        $dd = self::getRealUserId();
+        $asUserId = self::getAsUser($dd);
+        if($asUserId){
+            return $asUserId;
+        }else{
+            return $dd;
         }
-        $clientUserCode = self::getClientUserCode();
-        $dd = S('client_server_user_'.$clientUserCode);
+    }
+
+    public static function getRealUserId(){
+        if(C('LOCAL_DEV')){
+            $dd = 1;
+        }else{
+            $clientUserCode = self::getClientUserCode();
+            $dd = S('client_server_user_'.$clientUserCode);
+        }
         return $dd;
+    }
+
+    /**
+     * 当作某个用户
+     */
+    public static function asUser($userId,$asUserId){
+        S('as_user_'.$userId,$asUserId,3600);
+    }
+
+    public static function getAsUser($userId){
+        return S('as_user_'.$userId);
+    }
+
+    /**
+     * 取消被当作某个用户
+     */
+    public static function cancelAsUser($userId){
+        S('as_user_'.$userId,null);
     }
 
     /**

@@ -1,0 +1,40 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="activity">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <span class="tip">店铺列表</span>
+            <div>
+                <div class="content-block-title">店铺列表</div>
+                <div class="list-block">
+                    <ul>
+                        <volist name="list" id="info">
+                        <li class="item-content">
+                            <a class="item-inner" data-no-cache="true" href="{:UC('Admin/operateDetail',array('id'=>$info['id']))}">
+                                <div class="item-title">{$info['name']}</div>
+                                <div class="item-after">{$info['ctime']|formatDate}</div>
+                            </a>
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+        <a href="javascript:;" class="extra_button" id="showActionBtn"><i class="iconfont text">&#xe601;</i></a>
+    </div>
+</block>

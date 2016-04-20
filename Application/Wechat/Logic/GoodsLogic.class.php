@@ -36,6 +36,18 @@ class GoodsLogic
         return $goodsList;
     }
 
+    public static function getShopGoodsListByShopId($shopId,$page=1,$size=0)
+    {
+        $goodsList = self::getGoodsListByShopId($shopId,$page,$size);
+        foreach($goodsList as &$goodsInfo){
+            $goodsInfo['commentnum'] = self::getGoodsCommentCount($goodsInfo['id']);
+            $goodsInfo['likenum'] = self::getGoodsLikeCount($goodsInfo['id']);
+            $goodsInfo['goodsfirstimg'] = self::getGoodsFirstImgUrl($goodsInfo['id']);
+        }
+        return $goodsList;
+    }
+
+
     /**
      * @param $shopId
      * @param int $size

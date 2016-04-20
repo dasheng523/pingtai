@@ -167,4 +167,6 @@ class IndexController extends Controller {
     public function usercenter(){
         $this->display();
     }
+
+
 }

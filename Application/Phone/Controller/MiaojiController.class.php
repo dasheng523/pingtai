@@ -182,6 +182,9 @@ class MiaojiController extends Controller {
         }
     }
 
+
+
+
     private function getImgUrlList($ids){
         $rs = array();
         foreach($ids as $id){

@@ -1,0 +1,46 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="shopDetail">
+        <div class="content">
+            <div class="bd">
+                <div class="weui_grids">
+                    <a href="{:UC('Shop/goods')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-shangpinguanli.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            商品
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/shopDetail')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-dianpuguanli.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            店铺
+                        </p>
+                    </a>
+                    <a href="{:UC('Shop/activity')}" class="weui_grid js_grid" data-no-cache="true">
+                        <div class="weui_grid_icon">
+                            <img src="__PUBLIC__/images/iconfont-ji.png" alt="">
+                        </div>
+                        <p class="weui_grid_label">
+                            活动
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</block>

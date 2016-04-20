@@ -14,6 +14,31 @@ class AdminController extends Controller {
         $this->assign('rannum',$rannum);
     }
 
+
+    //商店列表
+    public function shopList(){
+        $list = D('shop')->order('ctime desc')->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function operateDetail(){
+        $shopId = I('get.id');
+        $realUser = logic\RequestLogic::getRealUserId();
+        logic\RequestLogic::cancelAsUser($realUser);
+        logic\RequestLogic::asUser($realUser,logic\ShopLogic::getOwnUserId($shopId));
+        $this->display();
+    }
+
+    public function shopGoods(){
+        $shopId = I('get.shopId');
+        $goodsList = logic\GoodsLogic::getShopGoodsListByShopId($shopId);
+        $this->assign('list',$goodsList);
+        $this->display('Shop/goods');
+    }
+
+    //其实就是直接拿那边的逻辑套进去就好了，OK，完事了，洗完澡在做。怎么做呢？先做商店列表吧。
+
     /**
      * 输入页面
      */

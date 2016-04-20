@@ -159,6 +159,7 @@ class ShopController extends Controller {
     $info['name'] = I('post.name');
     $info['price'] = I('post.price');
     $info['intro'] = I('post.intro');
+    $info['original_price'] = I('post.original_price');
     $shop = logic\ShopLogic::getShopInfoByUserId(getUserId());
     if($id){
       $info['id'] = $id;

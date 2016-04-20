@@ -1,0 +1,1 @@
+ALTER TABLE `goods` ADD `original_price` VARCHAR(255) NULL AFTER `mtime`;

@@ -24,13 +24,25 @@
                 </div>
             </div>
 
-            <div class="weui_cells_title">商品价格</div>
+            <div class="weui_cells_title">商品折扣价</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
                         <input class="weui_input" type="text"
                                placeholder="格式如： 5元/斤，2元/个，3元/张 等"
                                name="price" value="{$goodsDetail['price']}"
+                               required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui_cells_title">商品原价</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="text"
+                               placeholder="格式如： 5元/斤，2元/个，3元/张 等"
+                               name="original_price" value="{$goodsDetail['original_price']}"
                                required>
                     </div>
                 </div>
