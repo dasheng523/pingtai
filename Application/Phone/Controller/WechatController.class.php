@@ -89,10 +89,7 @@ class WechatController extends Controller {
                 array('type'=>'view','name'=>'其他特价','url'=>UC('Activity/showCateActivity',array('id'=>30))),
             )),
             array('name'=>"北流生活",'sub_button'=>array(
-                array('type'=>'view','name'=>'男人领地','url'=>UC('Miaoji/showcaseDispatch',array('id'=>23))),
-                array('type'=>'view','name'=>'女人专属','url'=>UC('Miaoji/showcaseDispatch',array('id'=>22))),
-                array('type'=>'view','name'=>'聚好玩','url'=>UC('Miaoji/showcaseDispatch',array('id'=>21))),
-                array('type'=>'view','name'=>'家居生活','url'=>UC('Miaoji/showcaseDispatch',array('id'=>24))),
+                array('type'=>'view','name'=>'便民店铺','url'=>UC('Miaoji/shopCate')),
             )),
             array('name'=>"店多多",'sub_button'=>array(
                 array('type'=>'view','name'=>'商家入口','url'=>UC('shop/index')),
