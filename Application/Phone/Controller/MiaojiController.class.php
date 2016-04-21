@@ -62,15 +62,8 @@ class MiaojiController extends Controller {
         $list = D('Shop')
             ->where(array('coll_id'=>$id))
             ->select();
-        /*
-        $list = D('park')
-            ->where(array('collection_id'=>$id))
-            ->field('id,name,short_intro,price,address,phone,imglist,lat,lng,intro,ishaspic')
-            ->select();
-        */
         foreach($list as &$info){
-            $info['imglist'] = getFirstImg($info['imglist']);
-            $info['piclist'] = logic\ShopLogic::getShopFirstImgUrl($info['id']);
+            $info['imglist'] = logic\ShopLogic::getShopFirstImgUrl($info['id']);
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Shop'));
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Shop'));
         }
@@ -84,13 +77,11 @@ class MiaojiController extends Controller {
      */
     public function detail(){
         $id = I('get.id');
-        $info = D('park')
-            ->where(array('id'=>$id))
-            ->find();
-        $info['imglist'] = parseImgList($info['imglist']);
-        $info['other_info'] = $this->parseOtherInfo($info['other_info']);
-        $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Park'));
-        $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Park'));
+
+        $info = D('Shop')->where(array('id'=>$id))->find();
+        $info['imglist'][] = logic\ShopLogic::getShopFirstImgUrl($id);
+        $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Shop'));
+        $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Shop'));
         $this->assign('info',$info);
         $this->display();
     }
