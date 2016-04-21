@@ -37,7 +37,6 @@ class AdminController extends Controller {
         $this->display('Shop/goods');
     }
 
-    //其实就是直接拿那边的逻辑套进去就好了，OK，完事了，洗完澡在做。怎么做呢？先做商店列表吧。
 
     /**
      * 输入页面

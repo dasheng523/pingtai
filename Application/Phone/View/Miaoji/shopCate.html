@@ -7,17 +7,11 @@
                 <div class="pull-to-refresh-arrow"></div>
             </div>
             <p class="gray-text1 text-center">北流店铺</p>
-            <volist name="list" id="info">
-                <a class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
-                    <div class="yspanel-image-box">
-                        <div class="yspanel-image-textbox">- <span class="text">{$info['name']}</span> -</div>
-                        <img class="lazy yspanel-image-image" data-original="{$info['imglist']}">
-                    </div>
-                    <div class="yspanel-content-box2">
-                        {$info['intro']}
-                    </div>
-                </a>
-            </volist>
+            <div class="shopCateBox list-block">
+                <volist name="list" id="info">
+                    <a href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}" class="cateLink">{$info['name']}</a>
+                </volist>
+            </div>
 
             <p class="gray-text1 text-center small-text margin-top30">
 

@@ -142,6 +142,17 @@ class MiaojiController extends Controller {
         $this->display();
     }
 
+    /**
+     * 商店分类
+     */
+    public function shopCate(){
+        $coid = $this->getLeafCollectionId(20);
+        $list = D('collection')->where(array('id'=>array('in',$coid)))->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+
 
     /**
      * 提交修改请求

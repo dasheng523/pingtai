@@ -161,8 +161,11 @@ a.btnitem{display: block;}
 .activity-goods-infobox .price{background: #eee;padding: 10px;margin-top: 5px;}
 .activity-goods-infobox .price .price-value{color: #990073;}
 .activity-goods-infobox .intro{margin-top: 5px;}
-
 .activity-box .address-box{background: #eee;padding: 10px;}
+
+.shopCateBox{padding: 0 10px;}
+.shopCateBox:after{clear: both;}
+.shopCateBox .cateLink{display: inline-block;width: 46%;text-align: center;padding: 15px 10px;margin: 5px;background: #fff;}
 
 .article .hd{padding: 2em 0;}
 .article .page_title {
