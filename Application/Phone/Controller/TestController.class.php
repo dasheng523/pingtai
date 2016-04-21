@@ -98,4 +98,27 @@ class TestController extends Controller {
         \Wechat\Logic\MediaLogic::resizePic($inFile,$outFile);
     }
 
+    public function testMoveData(){
+        $list = D('park')->where("collection_id<>10 or collection_id<>11")->select();
+        foreach($list as $info){
+            $info['id'] = "";
+            reset($info['id']);
+            $info['user_id'] = 0;
+            $info['coll_id'] = $info['collection_id'];
+            $info['ctime'] = time();
+            $shopId = D('Shop')->data($info)->add();
+
+            $file = array();
+            $file['media_type'] = C('MediaType_Image');
+            $file['entity_type'] = C('EntityType_Shop');
+            $file['entity_id'] =$shopId;
+            $file['name'] = 'A';
+
+            $uss = explode(';',$info['imglist']);
+            $file['url'] = $uss[0];
+            $file['path'] = '';
+            D('media')->data($file)->add();
+        }
+    }
+
 }

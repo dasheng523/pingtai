@@ -132,5 +132,15 @@ class ShopLogic{
         return D('Shop')->where(array('id'=>$shopId))->getField('user_id');
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * 获取商店图片
+     */
+    public static function getShopFirstImgUrl($id)
+    {
+        return logic\MediaLogic::getEntityFirstImgUrl($id,C('EntityType_Shop'));
+    }
+
 
 }
