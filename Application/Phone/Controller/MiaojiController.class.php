@@ -79,7 +79,7 @@ class MiaojiController extends Controller {
         $id = I('get.id');
 
         $info = D('Shop')->where(array('id'=>$id))->find();
-        $info['imglist'][] = logic\ShopLogic::getShopFirstImgUrl($id);
+        $info['imglist'] = logic\ShopLogic::getShopAllImgUrl($id);
         $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Shop'));
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Shop'));
         $this->assign('info',$info);

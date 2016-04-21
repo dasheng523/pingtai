@@ -143,4 +143,8 @@ class ShopLogic{
     }
 
 
+    public static function getShopAllImgUrl($id)
+    {
+        return logic\MediaLogic::getEntityAllImgUrl($id,C('EntityType_Shop'));
+    }
 }

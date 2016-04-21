@@ -103,7 +103,7 @@ class ActivityController extends Controller {
             ->field('activity.*, shop.name as shopname, shop.address, shop.phone, shop.lat, shop.lng')
             ->where("activity.id=$id")
             ->find();
-        $info['piclist'] = logic\ActivityLogic::getActivityFirstImgUrl($id);
+        $info['piclist'] = logic\ActivityLogic::getActivityAllImgUrl($id);
         if($info['stime'] < time() && $info['etime'] > time()){
             $info['status'] = 1;    //已经开始
             $info['status_msg'] = "已经开始";

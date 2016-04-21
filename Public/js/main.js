@@ -407,7 +407,7 @@ var goodsEdit = {
     pageId:"#goodsEdit",
     handler:function(e, pageId, $page){
         FormUtils.initForm('form','back');
-        var ddd = UploadUtils('#uploadFile');
+        var ddd = UploadUtils('#uploadFile',5);
         ddd.initUpload();
     }
 };
@@ -427,7 +427,7 @@ var shopDetail = {
     pageId:"#shopDetail",
     handler:function(e, pageId, $page){
         FormUtils.initForm('form');
-        var ddd = UploadUtils('#uploadFile');
+        var ddd = UploadUtils('#uploadFile',5);
         ddd.initUpload();
 
         $('#dignweiBtn').click(function () {
@@ -472,7 +472,7 @@ var activityEdit = {
     pageId:"#activityEdit",
     handler:function(e, pageId, $page){
         FormUtils.initForm('#mainform','back');
-        var ddd = UploadUtils('#uploadFile',1);
+        var ddd = UploadUtils('#uploadFile',5);
         ddd.initUpload();
 
         $('#showActivityGoodsBtn').click(function () {
@@ -579,7 +579,7 @@ var collectionEdit = {
     handler:function(e, pageId, $page){
         FormUtils.initForm('form','back');
 
-        var ddd = UploadUtils('#uploadFile',1);
+        var ddd = UploadUtils('#uploadFile',5);
         ddd.initUpload();
     }
 };

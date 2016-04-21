@@ -33,6 +33,10 @@ class ActivityLogic
         return logic\MediaLogic::getEntityFirstImgUrl($aid,C('EntityType_Activity'));
     }
 
+    public static function getActivityAllImgUrl($aid){
+        return logic\MediaLogic::getEntityAllImgUrl($aid,C('EntityType_Activity'));
+    }
+
     /**
      * @param $id
      * @return mixed

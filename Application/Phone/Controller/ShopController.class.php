@@ -107,6 +107,8 @@ class ShopController extends Controller {
     $this->assign('shopImgs',$shopImgs);
     $this->display();
   }
+
+
   /**
    * 提交店铺资料
    */
