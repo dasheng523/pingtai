@@ -36,23 +36,6 @@ class MiaojiController extends Controller {
         $this->display();
     }
 
-    /**
-     * 获取叶子妙集
-     */
-    private function getLeafCollectionId($rootId){
-        $rs = array();
-        $list = D('collection')->field('id')->where(array('parent_id'=>$rootId))->select();
-        if($list){
-            foreach($list as $info){
-                $leafs = $this->getLeafCollectionId($info['id']);
-                $rs = array_merge($rs,$leafs);
-            }
-        }
-        else{
-            $rs[] = $rootId;
-        }
-        return $rs;
-    }
 
 
     /**

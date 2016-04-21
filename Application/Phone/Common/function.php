@@ -18,3 +18,22 @@ function getFirstImg($imglist){
 function parseImgList($imglist){
     return explode(';',$imglist);
 }
+
+
+/**
+ * 获取叶子妙集
+ */
+function getLeafCollectionId($rootId){
+    $rs = array();
+    $list = D('collection')->field('id')->where(array('parent_id'=>$rootId))->select();
+    if($list){
+        foreach($list as $info){
+            $leafs = getLeafCollectionId($info['id']);
+            $rs = array_merge($rs,$leafs);
+        }
+    }
+    else{
+        $rs[] = $rootId;
+    }
+    return $rs;
+}

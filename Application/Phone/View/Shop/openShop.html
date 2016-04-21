@@ -39,6 +39,18 @@
                                       rows="3"></textarea>
                         </div>
                     </div>
+
+                    <div class="weui_cell weui_cell_select">
+                        <div class="weui_cell_hd" style="padding-left: 20px;"><label class="weui_label">分类</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select class="weui_select" name="coll_id">
+                                <option value="">请选择分类</option>
+                                <volist name="cateList" id="cate">
+                                    <option value="{$cate['id']}">{$cate['name']}</option>
+                                </volist>
+                            </select>
+                        </div>
+                    </div>
                     <div class="weui_cell">
                         <div class="weui_cell_hd"><label class="weui_label">电话</label></div>
                         <div class="weui_cell_bd weui_cell_primary">

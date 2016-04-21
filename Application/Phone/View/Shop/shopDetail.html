@@ -23,6 +23,7 @@
                 </div>
             </div>
 
+
             <div class="weui_cells_title">联系电话</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
@@ -30,6 +31,19 @@
                         <input class="weui_input" type="number" placeholder="请输入您的联系电话"
                                name="phone" value="{$info['phone']}"
                                required pattern="[0-9]*">
+                    </div>
+                </div>
+            </div>
+
+            <div class="weui_cells_title">店铺分类</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell weui_cell_select">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" name="coll_id">
+                            <volist name="cateList" id="cate">
+                                <option value="{$cate['id']}" <if condition="$info['coll_id'] eq $cate['id']">selected=seleced</if>>{$cate['name']}</option>
+                            </volist>
+                        </select>
                     </div>
                 </div>
             </div>

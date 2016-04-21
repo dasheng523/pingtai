@@ -45,8 +45,13 @@ class ShopController extends Controller {
       $this->success(getSysConfig('Text_IsOpenShop'),"index");
       return;
     }
+    $coid = getLeafCollectionId(C('ShopCateId'));
+    $list = D('collection')->where(array('id'=>array('in',$coid)))->select();
+    $this->assign('cateList',$list);
     $this->display();
   }
+
+
   /**
    * 开店提交
    */
@@ -55,12 +60,14 @@ class ShopController extends Controller {
     $address = I('post.address');
     $phone = I('post.phone');
     $validateCode = I('post.validateCode');
+    $coll_id = I('post.coll_id');
     $isTrue = logic\ValidateCodeLogic::verifyCode($phone,$validateCode);
     if($isTrue){
       $shopInfo['user_id'] = getUserId();
       $shopInfo['name'] = $name;
       $shopInfo['address'] = $address;
       $shopInfo['phone'] = $phone;
+      $shopInfo['coll_id'] = $coll_id;
       $shopInfo['ctime'] = time();
       $id = logic\ShopLogic::createShop($shopInfo);
       if($id){
@@ -90,6 +97,11 @@ class ShopController extends Controller {
     $info = logic\ShopLogic::getShopInfoByUserId($uid);
     $bScope = logic\ScopeBusinessLogic::showAllTree();
     $shopImgs = logic\MediaLogic::getEntityAllImgInfo($info['id'],C('EntityType_SHOP'));
+
+    $coid = getLeafCollectionId(C('ShopCateId'));
+    $cateList = D('collection')->where(array('id'=>array('in',$coid)))->select();
+
+    $this->assign('cateList',$cateList);
     $this->assign('bScope',$bScope);
     $this->assign('info',$info);
     $this->assign('shopImgs',$shopImgs);
@@ -106,6 +118,7 @@ class ShopController extends Controller {
     $info['lng'] = I('post.lng')+0;
     $info['lat'] = I('post.lat')+0;
     $info['intro'] = I('post.intro');
+    $info['coll_id'] = I('post.coll_id');
     $info['scope_business'] = I('post.bScope');
     logic\ShopLogic::updateShop($info);
     $mediaIds = I('post.media_ids');
