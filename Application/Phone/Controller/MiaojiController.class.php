@@ -83,6 +83,10 @@ class MiaojiController extends Controller {
         $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Shop'));
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Shop'));
         $this->assign('info',$info);
+
+        $share['title'] = "大家快来看看我的店铺#".$info['shopname'] . "# ---店多多广告平台";
+        $share['intro'] = mb_substr($info['intro'], 0, 100,'utf-8');
+
         $this->display();
     }
 
