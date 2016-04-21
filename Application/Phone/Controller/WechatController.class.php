@@ -83,9 +83,9 @@ class WechatController extends Controller {
         $menu = array('button' => array(
             array('name'=>"特价活动",'sub_button'=>array(
                 array('type'=>'view','name'=>'超市特价','url'=>UC('Activity/showCateActivity',array('id'=>26))),
-                array('type'=>'view','name'=>'游玩特价','url'=>UC('Activity/showCateActivity',array('id'=>27))),
-                array('type'=>'view','name'=>'美食特价','url'=>UC('Activity/showCateActivity',array('id'=>28))),
                 array('type'=>'view','name'=>'衣服特价','url'=>UC('Activity/showCateActivity',array('id'=>29))),
+                array('type'=>'view','name'=>'装修特价','url'=>UC('Activity/showCateActivity',array('id'=>36))),
+                array('type'=>'view','name'=>'家具特价','url'=>UC('Activity/showCateActivity',array('id'=>31))),
                 array('type'=>'view','name'=>'其他特价','url'=>UC('Activity/showCateActivity',array('id'=>30))),
             )),
             array('name'=>"北流生活",'sub_button'=>array(
