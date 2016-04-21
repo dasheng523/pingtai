@@ -58,9 +58,9 @@ function createPageHandler(handleObj){
                 shareTitle = "店多多-汇聚本地的好玩，实用店铺";
             }
             if(typeof(shareIntro)=="undefined" || !shareIntro){
-                shareIntro = "这里汇聚了北流所有的好玩的，有趣的玩意哦～";
+                shareIntro = "这里汇聚了北流丰富的特价活动，优惠信息，想便宜买好货就赶紧过来吧～";
             }
-            share(shareTitle,shareIntro,window.location.href,domain+"/Public/images/iconfont-dianpuguanli.png");
+            share(shareTitle,shareIntro,window.location.href,domain+"/Public/images/logo.png");
             if(handleObj.wechatReady){
                 handleObj.wechatReady();
             }
