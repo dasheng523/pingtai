@@ -85,7 +85,8 @@ class MiaojiController extends Controller {
         $this->assign('info',$info);
 
         $share['title'] = "大家快来看看我的店铺#".$info['shopname'] . "# ---店多多广告平台";
-        $share['intro'] = mb_substr($info['intro'], 0, 100,'utf-8');
+        $share['intro'] = mb_substr($info['intro'], 0, 500,'utf-8');
+        $this->assign('share',$share);
 
         $this->display();
     }
