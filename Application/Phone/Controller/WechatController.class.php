@@ -44,7 +44,7 @@ class WechatController extends Controller {
                         $welcomeMsg = array(
                             array(
                                 'Title'=>'终于等到您来啦！',
-                                'Description'=>'我们正收集北流最新鲜最好玩的，最新鲜的事情，欢迎加入我们的行列吧。',
+                                'Description'=>'五一即将来临，众多店铺正在火热备战五一，这注定是一场狂欢之夜，你准备好了吗？',
                                 'PicUrl'=>'http://media.dianduoduo.top/collect/6355.jpg_wh300.jpg',
                                 'Url'=>UC('Miaoji/showcaseDispatch')
                             )
