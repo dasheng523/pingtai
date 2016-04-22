@@ -7,9 +7,25 @@
                 <div class="pull-to-refresh-arrow"></div>
             </div>
             <div class="hot-activity-box">
-                <div class="activity-banner">
-                    <img src="__PUBLIC__/images/banner.png">
-                </div>
+                <p class="gray-text1 text-center">{$pageTitle}</p>
+
+                <empty name="goodsList">
+                    <div class="text-center margin-top30 gray-text">这个板块目前还没有商品哦，赶紧上架抢在最前面！</div>
+                    <else/>
+                    <div class="activity-goods-box flex" style="padding: 10px;">
+                        <a href="{:UC('Activity/hotActivityGoodsInfo')}"><img class="activity-goods-img" src="__PUBLIC__/images/caomei.jpg" /></a>
+                        <div class="activity-goods-infobox flex-1">
+                            <a href="{:UC('Activity/hotActivityGoodsInfo')}" class="black-text"><h3 class="text-line2">草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草草莓草莓草莓草莓</h3></a>
+                            <div class="price" style="margin-top: -5px;">
+                                优惠价格：<span class="price-value">20元/斤</span>
+                            </div>
+                            <div class="activity-goods-btns">
+                                <div class="activity-goods-btn">50人喜欢</div>
+                            </div>
+                            <div class="activity-shopname gray-text2">来自：<span class="red-text">百汇超市</span></div>
+                        </div>
+                    </div>
+                </empty>
 
                 <div class="activity-goods-box flex" style="padding: 10px;">
                     <a href="{:UC('Activity/hotActivityGoodsInfo')}"><img class="activity-goods-img" src="__PUBLIC__/images/caomei.jpg" /></a>
