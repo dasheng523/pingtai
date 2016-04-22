@@ -132,7 +132,10 @@ class MiaojiController extends Controller {
      */
     public function shopCate(){
         $coid = getLeafCollectionId(20);
-        $list = D('collection')->where(array('id'=>array('in',$coid)))->select();
+        $list = D('collection')
+            ->where(array('id'=>array('in',$coid)))
+            ->order('ctime desc')
+            ->select();
         $this->assign('list',$list);
         $this->display();
     }

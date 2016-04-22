@@ -129,6 +129,7 @@ class ShopController extends Controller {
     }
     $this->success('修改成功');
   }
+
   /**
    * 删除店铺图片
    */
