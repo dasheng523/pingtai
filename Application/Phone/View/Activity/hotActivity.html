@@ -1,0 +1,37 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="activityList">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="hot-activity-box hot">
+                <div class="activity-banner">
+                    <img src="__PUBLIC__/images/banner.png">
+                </div>
+
+                <div class="activity-intro">
+                    北流“五一”全体商家大让利，店多多收集了大量“五一”各商家的优惠信息，让大家在尽享优惠价，买的开心，买的便宜。
+                </div>
+
+                <div class="activity-content row">
+                    <volist name="list" id="info">
+                        <a class="hot-item col-50" href="#">
+                            <img src="{$info['imglist']}" class="hot-item-img">
+                            <div class="hot-item-text">
+                                {$info['name']}
+                            </div>
+                        </a>
+                    </volist>
+                </div>
+            </div>
+
+
+
+            <p class="gray-text1 text-center small-text margin-top30">
+
+            </p>
+        </div>
+    </div>
+</block>

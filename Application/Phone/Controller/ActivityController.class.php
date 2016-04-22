@@ -145,4 +145,18 @@ class ActivityController extends Controller {
         }
     }
 
+    public function hotActivity(){
+        $list = D('Collection')->where(array('parent_id'=>25))->order('ctime desc')->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function hotActivityGoodsList(){
+        $this->display();
+    }
+
+    public function hotActivityGoodsInfo(){
+        $this->display();
+    }
+
 }
