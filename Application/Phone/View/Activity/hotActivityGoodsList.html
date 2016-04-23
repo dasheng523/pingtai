@@ -1,6 +1,6 @@
 <extend name="template/temp" />
 <block name="content">
-    <div class="page" id="activityList">
+    <div class="page" id="hotActivityGoodsList">
         <div class="content native-scroll pull-to-refresh-content">
             <div class="pull-to-refresh-layer">
                 <div class="preloader"></div>
@@ -9,76 +9,30 @@
             <div class="hot-activity-box">
                 <p class="gray-text1 text-center">{$pageTitle}</p>
 
-                <empty name="goodsList">
+                <empty name="list">
                     <div class="text-center margin-top30 gray-text">这个板块目前还没有商品哦，赶紧上架抢在最前面！</div>
                     <else/>
-                    <div class="activity-goods-box flex" style="padding: 10px;">
-                        <a href="{:UC('Activity/hotActivityGoodsInfo')}"><img class="activity-goods-img" src="__PUBLIC__/images/caomei.jpg" /></a>
-                        <div class="activity-goods-infobox flex-1">
-                            <a href="{:UC('Activity/hotActivityGoodsInfo')}" class="black-text"><h3 class="text-line2">草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草草莓草莓草莓草莓</h3></a>
-                            <div class="price" style="margin-top: -5px;">
-                                优惠价格：<span class="price-value">20元/斤</span>
+                    <volist name="list" id="info">
+                        <div class="activity-goods-box flex" style="padding: 10px;">
+                            <a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}"><img class="activity-goods-img" src="{$info['imgUrl']}" /></a>
+                            <div class="activity-goods-infobox flex-1">
+                                <a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']) )}" class="black-text"><h3 class="text-line2 new-activity-title-box">{$info['name']}</h3></a>
+                                <div class="price" style="margin-top: -5px;">
+                                    优惠价格：<span class="price-value">{$info['price']}</span>
+                                </div>
+                                <div class="activity-goods-btns">
+                                    <div class="activity-goods-btn">
+                                        <a class="activity-btn like likebtn" href="javascript:;" data-id="{$info['id']}">
+                                            <i class="iconfont">&#xe608;</i>喜欢(<span>{$info['likecount']}</span>)
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="activity-shopname gray-text2">来自：<span class="red-text">{$info['shopName']}</span></div>
                             </div>
-                            <div class="activity-goods-btns">
-                                <div class="activity-goods-btn">50人喜欢</div>
-                            </div>
-                            <div class="activity-shopname gray-text2">来自：<span class="red-text">百汇超市</span></div>
                         </div>
-                    </div>
+                    </volist>
                 </empty>
 
-                <div class="activity-goods-box flex" style="padding: 10px;">
-                    <a href="{:UC('Activity/hotActivityGoodsInfo')}"><img class="activity-goods-img" src="__PUBLIC__/images/caomei.jpg" /></a>
-                    <div class="activity-goods-infobox flex-1">
-                        <a href="{:UC('Activity/hotActivityGoodsInfo')}" class="black-text"><h3 class="text-line2">草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草草莓草莓草莓草莓</h3></a>
-                        <div class="price" style="margin-top: -5px;">
-                            优惠价格：<span class="price-value">20元/斤</span>
-                        </div>
-                        <div class="activity-goods-btns">
-                            <div class="activity-goods-btn">50人喜欢</div>
-                        </div>
-                        <div class="activity-shopname gray-text2">来自：<span class="red-text">百汇超市</span></div>
-                    </div>
-                </div>
-                <a class="activity-goods-box flex" style="padding: 10px;background: #fff">
-                    <img class="activity-goods-img" src="__PUBLIC__/images/caomei.jpg" />
-                    <div class="activity-goods-infobox flex-1">
-                        <h3 class="text-line2">草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草草莓草莓草莓草莓</h3>
-                        <div class="price" style="margin-top: -5px;">
-                            优惠价格：<span class="price-value">20元/斤</span>
-                        </div>
-                        <div class="activity-goods-btns">
-                            <div class="activity-goods-btn">50人喜欢</div>
-                        </div>
-                        <div class="activity-shopname gray-text2">来自：百汇超市</div>
-                    </div>
-                </a>
-                <a class="activity-goods-box flex" style="padding: 10px;">
-                    <img class="activity-goods-img" src="__PUBLIC__/images/caomei.jpg" />
-                    <div class="activity-goods-infobox flex-1">
-                        <h3 class="text-line2">草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草草莓草莓草莓草莓</h3>
-                        <div class="price" style="margin-top: -5px;">
-                            优惠价格：<span class="price-value">20元/斤</span>
-                        </div>
-                        <div class="activity-goods-btns">
-                            <div class="activity-goods-btn">50人喜欢</div>
-                        </div>
-                        <div class="activity-shopname gray-text2">来自：百汇超市</div>
-                    </div>
-                </a>
-                <a class="activity-goods-box flex" style="padding: 10px;">
-                    <img class="activity-goods-img" src="__PUBLIC__/images/caomei.jpg" />
-                    <div class="activity-goods-infobox flex-1">
-                        <h3 class="text-line2">草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草莓草草莓草莓草莓草莓</h3>
-                        <div class="price" style="margin-top: -5px;">
-                            优惠价格：<span class="price-value">20元/斤</span>
-                        </div>
-                        <div class="activity-goods-btns">
-                            <div class="activity-goods-btn">50人喜欢</div>
-                        </div>
-                        <div class="activity-shopname gray-text2">来自：百汇超市</div>
-                    </div>
-                </a>
             </div>
 
 

@@ -152,11 +152,48 @@ class ActivityController extends Controller {
     }
 
     public function hotActivityGoodsList(){
+        $id = I('get.id');
+        $idSql = D('activity')->field('id')->where(array('coll_id'=>$id))->select(false);
+        $goodsIdSql = D('activity_goods')->where("activity_id in ($idSql)")->field('goods_id')->select(false);
+        $list = D('goods')->where("id in ($goodsIdSql)")->select();
+        $pageTitle = D('Collection')->where(array('id'=>$id))->getField('name');
+
+        foreach($list as &$info){
+            $info['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info['id']);
+            $info['shopName'] = logic\ShopLogic::getShopNameById($info['shop_id']);
+            $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Goods'));
+        }
+        $this->assign('pageTitle',$pageTitle);
+        $this->assign('list',$list);
         $this->display();
     }
 
     public function hotActivityGoodsInfo(){
+        $id = I('get.id');
+        $info = D('goods')->where(array('id'=>$id))->find();
+        $piclist = logic\GoodsLogic::getGoodsAllImgUrl($id);
+
+        $shopInfo = logic\ShopLogic::getShopInfoById($info['shop_id']);
+        $info['shopName'] = $shopInfo['name'];
+        $info['address'] = $shopInfo['address'];
+        $info['phone'] = $shopInfo['phone'];
+        $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Goods'));
+        $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Activity'));
+
+        $info['piclist'] = $piclist;
+        $this->assign('info',$info);
         $this->display();
+    }
+
+    public function zanGoods(){
+        $id = I('post.id');
+        $uid = getUserId();
+        $rs = logic\UserUseEntityLogic::like($uid,$id,C('EntityType_Goods'));
+        if($rs){
+            $this->success('ok');
+        }else{
+            $this->error('您已点击过');
+        }
     }
 
 }

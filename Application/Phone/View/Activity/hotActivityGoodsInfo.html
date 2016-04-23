@@ -1,6 +1,6 @@
 <extend name="template/temp" />
 <block name="content">
-    <div class="page" id="activityInfo">
+    <div class="page" id="hotActivityGoodsInfo">
         <div class="content native-scroll pull-to-refresh-content">
             <div class="pull-to-refresh-layer">
                 <div class="preloader"></div>
@@ -18,25 +18,11 @@
                     <div class="activity-box">
                         <div class="activity-title-box">
                             <h3>{$info['name']}</h3>
-                            <div class="chashi">——{$info['shopname']}</div>
-                        </div>
-                        <div class="activity-lefttime-box">
-                            <if condition="$info['status'] == 1">
-                                <span class="label">剩余时间:</span>
-                                <span class="countdownbox">{$info['lefttime']}小时</span>
-                            </if>
-                            <if condition="$info['status'] == 2">
-                                <span class="label">即将开始:</span>
-                                <span class="countdownbox">{$info['stime'] | formatDate}</span>
-                            </if>
-                            <if condition="$info['status'] == 0">
-                                <span class="label">活动已结束</span>
-                            </if>
-
+                            <div class="chashi">——{$info['shopName']}</div>
                         </div>
 
                         <div class="activity-descBox">
-                            12313123123123123132123132132
+                            {$info['intro']}
                         </div>
 
                         <div class="row activity-btngroup">

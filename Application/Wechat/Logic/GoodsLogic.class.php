@@ -337,6 +337,15 @@ class GoodsLogic
       return $list;
     }
 
+    /**
+     * @param $id
+     * @return array
+     * 获得商品所有的图片地址
+     */
+    public static function getGoodsAllImgUrl($id)
+    {
+        return logic\MediaLogic::getEntityAllImgUrl($id,C('EntityType_Goods'));
+    }
 
 
 }

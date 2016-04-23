@@ -407,6 +407,60 @@ var activityList = {
 createPageHandler(activityList);
 
 
+var hotActivityGoodsList = {
+    pageId:"#hotActivityGoodsList",
+    handler: function (e, pageId, $page) {
+        like('/index.php/Phone/Activity/zanGoods');
+        $('.showMenu').click(function () {
+            var buttons1 = [
+                {
+                    text: '关注我们',
+                    onClick: function() {
+                        $.router.load(domain+"/index.php/Phone/Public/showMa", true);
+                    }
+                }
+            ];
+            var buttons2 = [
+                {
+                    text: '取消',
+                    bg: 'danger'
+                }
+            ];
+            var groups = [buttons1, buttons2];
+            $.actions(groups);
+        });
+    }
+};
+createPageHandler(hotActivityGoodsList);
+
+
+var hotActivityGoodsInfo = {
+    pageId:"#hotActivityGoodsInfo",
+    handler: function (e, pageId, $page) {
+        like('/index.php/Phone/Activity/zanGoods');
+        $('.showMenu').click(function () {
+            var buttons1 = [
+                {
+                    text: '关注我们',
+                    onClick: function() {
+                        $.router.load(domain+"/index.php/Phone/Public/showMa", true);
+                    }
+                }
+            ];
+            var buttons2 = [
+                {
+                    text: '取消',
+                    bg: 'danger'
+                }
+            ];
+            var groups = [buttons1, buttons2];
+            $.actions(groups);
+        });
+    }
+};
+createPageHandler(hotActivityGoodsInfo);
+
+
 var activityInfo = {
     pageId:"#activityInfo",
     handler: function (e, pageId, $page) {

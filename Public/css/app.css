@@ -180,8 +180,10 @@ a.activity-goods-box{color: #333333;}
 .hot-item-text{text-align: center;font-size: 16px;}
 .activity-intro{background: #fff;padding: 10px;}
 
-.activity-goods-btn{background: orange;padding: 10px;text-align: center;color: #fff;}
+.activity-goods-btn{background: orange;text-align: center;color: #fff;}
 .activity-shopname{}
+
+.new-activity-title-box{height: 50px;}
 
 .article .hd{padding: 2em 0;}
 .article .page_title {

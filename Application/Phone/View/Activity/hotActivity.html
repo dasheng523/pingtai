@@ -17,7 +17,7 @@
 
                 <div class="activity-content row">
                     <volist name="list" id="info">
-                        <a class="hot-item col-50" href="{:UC('Activity/hotActivityGoodsList',array('id'=>$id))}">
+                        <a class="hot-item col-50" href="{:UC('Activity/hotActivityGoodsList',array('id'=>$info['id']))}">
                             <img src="{$info['imglist']}" class="hot-item-img">
                             <div class="hot-item-text">
                                 {$info['name']}
