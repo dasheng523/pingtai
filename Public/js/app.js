@@ -452,7 +452,7 @@ var hotActivityGoodsList = {
         }
         //var data = {id:"1155",name:"测试测试",original_price:"50元/斤",price:"20元/斤",shopName:"皆用店多多",likecount:50,imgUrl:5656};
 
-        if($('.no-goods')){
+        if($('.no-goods').html()){
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').remove();
         }
