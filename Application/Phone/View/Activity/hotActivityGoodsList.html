@@ -10,7 +10,7 @@
                 <p class="gray-text1 text-center">{$pageTitle}</p>
 
                 <empty name="list">
-                    <div class="text-center margin-top30 gray-text">这个板块目前还没有商品哦，赶紧上架抢在最前面！</div>
+                    <div class="text-center margin-top30 gray-text no-goods">这个板块目前还没有商品哦，赶紧上架抢在最前面！</div>
                     <else/>
                     <volist name="list" id="info">
                         <if condition="$info['imgUrl']">

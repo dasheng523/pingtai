@@ -115,8 +115,8 @@ a.yspanel,.yspanel > a{color: #333333;}
 .yspanel-bigimage-textbox{position: relative;display: block;}
 .yspanel-image-countbox{position: absolute;top: 15px;right: 15px;color: #fff;}
 
-.activity-goods-box-nopic{padding: 10px;border-bottom: 1px solid #dddddd;}
-.activity-goods-box-nopic a{background: #fff;display: block;color: #333333;}
+.activity-goods-box-nopic{padding: 10px;border-bottom: 1px solid #dddddd;background: #fff;}
+.activity-goods-box-nopic a{display: block;color: #333333;}
 .activity-goods-price{margin: 0;}
 
 
@@ -163,10 +163,10 @@ a.btnitem{display: block;}
 
 .activity-intro{margin-top: 15px;color: #666666;padding: 10px 0;}
 .activity-goodslist-box{margin-top: 15px;}
-.activity-goods-box{border-bottom: 1px solid #dddddd;padding: 10px 0;}
+.activity-goods-box{border-bottom: 1px solid #dddddd;padding: 10px 0;background: #fff;}
 a.activity-goods-box{color: #333333;}
 .activity-goods-img{width: 120px;height:150px;margin-right: 10px;}
-.activity-goods-infobox .price{background: #eee;padding: 10px;margin-top: 5px;}
+.activity-goods-infobox .price{padding: 10px;margin-top: 5px;}
 .activity-goods-infobox .price .price-value{color: #990073;}
 .activity-goods-infobox .intro{margin-top: 5px;}
 .activity-box .address-box{background: #eee;padding: 10px;}
