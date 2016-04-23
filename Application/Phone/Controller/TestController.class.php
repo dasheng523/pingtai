@@ -8,6 +8,7 @@
 namespace Phone\Controller;
 use Think\Controller;
 use Common\Lib\Curl;
+use \Wechat\Logic as logic;
 class TestController extends Controller {
 
     protected $dfsdfs = __ROOT__;
@@ -118,6 +119,38 @@ class TestController extends Controller {
             $file['url'] = $uss[0];
             $file['path'] = '';
             D('media')->data($file)->add();
+        }
+    }
+
+
+    public function testUploadGoods(){
+        $goods = D('tempdata')
+            ->field('name,original_price,price,unit,type')
+            ->where('type=1')
+            ->select();
+
+        foreach($goods as &$info){
+            $info['intro'] = '佳用超市五一副食大特惠';
+
+            $info['original_price'] = $info['original_price'] . '/' . $info['unit'];
+            $info['price'] = $info['price'] . '元/' . $info['unit'];
+            $info['ctime'] = time();
+            $info['mtime'] = time();
+            $info['shop_id'] = 183;
+            $id = D('Goods')->data($info)->add();
+
+            $media['name'] = 'b';
+            $media['url'] = 'http://media.dianduoduo.top/chaoshi/'.$info['img'];
+            $media['path'] = '';
+            $media['media_type'] = 1;
+            $media['entity_id'] = $id;
+            $media['entity_type'] = 2;
+            //D('Media')->data($media)->add();
+
+            $info2['activity_id'] = 9;
+            $info2['goods_id'] = $id;
+            $info2['ctime'] = time();
+            echo D('activity_goods')->data($info2)->add();
         }
     }
 

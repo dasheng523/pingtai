@@ -153,20 +153,28 @@ class ActivityController extends Controller {
 
     public function hotActivityGoodsList(){
         $id = I('get.id');
+        $page = I('get.page');
+        if(!$page){
+            $page = 1;
+        }
         $idSql = D('activity')->field('id')->where(array('coll_id'=>$id))->select(false);
         $goodsIdSql = D('activity_goods')->where("activity_id in ($idSql)")->field('goods_id')->select(false);
-        $list = D('goods')->where("id in ($goodsIdSql)")->order('id asc')->select();
+        $list = D('goods')->where("id in ($goodsIdSql)")->page($page,10)->order('id asc')->select();
         $pageTitle = D('Collection')->where(array('id'=>$id))->getField('name');
-
         foreach($list as &$info){
             $info['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info['id']);
             $info['shopName'] = logic\ShopLogic::getShopNameById($info['shop_id']);
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Goods'));
         }
+        if($page!=1){
+            echo json_encode($list);
+            return;
+        }
         $this->assign('pageTitle',$pageTitle);
         $this->assign('list',$list);
         $this->display();
     }
+
 
     public function hotActivityGoodsInfo(){
         $id = I('get.id');

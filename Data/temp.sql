@@ -1,0 +1,42 @@
+$goods = array(
+    array(
+        'name'=>'1.25L厨邦金品生抽',
+        'unit' =>'瓶',
+        'intro'=>'4月30-5月2日版头惊爆价',
+        'original_price' => '15',
+        'price' => '9.9',
+        'img'=>'DSC_0090.JPG',
+    ),
+    array(
+        'name'=>'400g宝力杀杀虫剂(白色)',
+        'unit' =>'瓶',
+        'intro'=>'4月30-5月2日版头惊爆价',
+        'original_price' => '18.8',
+        'price' => '16.9',
+        'img'=>'DSC_0091.JPG',
+    ),
+    array(
+        'name'=>'400ml宝力杀杀虫剂(黑色)',
+        'unit' =>'瓶',
+        'intro'=>'4月30-5月2日版头惊爆价',
+        'original_price' => '19',
+        'price' => '16.9',
+        'img'=>'DSC_0091.JPG',
+    ),
+    array(
+        'name'=>'清风B20AT6卷筒卫生纸',
+        'unit' =>'提',
+        'intro'=>'4月30-5月2日版头惊爆价',
+        'original_price' => '30.8',
+        'price' => '18.9',
+        'img'=>'DSC_0080.JPG',
+    ),
+    array(
+        'name'=>'多功能储物箱2688',
+        'unit' =>'个',
+        'intro'=>'4月30-5月2日版头惊爆价',
+        'original_price' => '35',
+        'price' => '29.9',
+        'img'=>'fdg56897fg.jpg',
+    ),
+);

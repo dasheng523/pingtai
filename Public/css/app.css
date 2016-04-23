@@ -33,6 +33,7 @@ body{background: #eee;font-size: 14px;}
 .gray-text{color: #cccccc;}
 .red-text{color: red;}
 .black-text{color: #333333;}
+.remove-text{color: #CCCCCC;text-decoration:line-through;}
 
 .iconfont{font-family:"iconfont";font-style:normal;}
 @font-face {
@@ -114,6 +115,10 @@ a.yspanel,.yspanel > a{color: #333333;}
 .yspanel-bigimage-textbox{position: relative;display: block;}
 .yspanel-image-countbox{position: absolute;top: 15px;right: 15px;color: #fff;}
 
+.activity-goods-box-nopic{padding: 10px;border-bottom: 1px solid #dddddd;}
+.activity-goods-box-nopic a{background: #fff;display: block;color: #333333;}
+.activity-goods-price{margin: 0;}
+
 
 .left-time-box{background: #eee;padding: 10px;text-align: center;}
 .left-time-box .label{color: #aaa;position: absolute;margin-left: -80px;}
@@ -184,6 +189,8 @@ a.activity-goods-box{color: #333333;}
 .activity-shopname{}
 
 .new-activity-title-box{height: 50px;}
+
+.goods-title{font-size: 18px;line-height: 50px;}
 
 .article .hd{padding: 2em 0;}
 .article .page_title {
