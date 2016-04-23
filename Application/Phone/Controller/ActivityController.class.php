@@ -155,7 +155,7 @@ class ActivityController extends Controller {
         $id = I('get.id');
         $idSql = D('activity')->field('id')->where(array('coll_id'=>$id))->select(false);
         $goodsIdSql = D('activity_goods')->where("activity_id in ($idSql)")->field('goods_id')->select(false);
-        $list = D('goods')->where("id in ($goodsIdSql)")->select();
+        $list = D('goods')->where("id in ($goodsIdSql)")->order('id asc')->select();
         $pageTitle = D('Collection')->where(array('id'=>$id))->getField('name');
 
         foreach($list as &$info){
