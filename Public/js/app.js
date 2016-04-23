@@ -459,14 +459,15 @@ var hotActivityGoodsList = {
             $.get(current,{"page":page},function(res){
                 page = page + 1;
                 loading = false;
-                var i = 0;
-                for(i=0;i<res.length;i++){
-                    var data = res[i];
-                    addItems(data);
-                }
-                if(res.length==0){
+                if(res.length<=0){
                     $.detachInfiniteScroll($('.infinite-scroll'));
                     $('.infinite-scroll-preloader').remove();
+                }else{
+                    var i = 0;
+                    for(i=0;i<res.length;i++){
+                        var data = res[i];
+                        addItems(data);
+                    }
                 }
                 $.refreshScroller();
             },'json');
