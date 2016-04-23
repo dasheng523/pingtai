@@ -14,7 +14,7 @@
                          alt="" style="width: 100%">
 
                 </div>
-                <div class="yspanel-content-box">
+                <div class="yspanel-content-box" style="padding-bottom: 30px;">
                     <div class="activity-box">
                         <div class="activity-title-box">
                             <h3>{$info['name']}</h3>
@@ -42,17 +42,15 @@
                                 </if>
                             </div>
                         </div>
-                        <div class="activity-intro">
-                            {$info['intro']}
-                        </div>
-                        <div class="address-box">
+
+                        <div class="address-box" style="margin-top: 10px;">
                             地址：{$info['address']}
                             <if condition="$info['lat'] and $info['lng']">
                                 <a href="javascript:;"
                                    class="pull-right lookmap"
                                    data-lat="{$info['lat']}"
                                    data-lng="{$info['lng']}"
-                                   data-name="{$info['name']}"
+                                   data-name="{$info['shopName']}"
                                    data-address="{$info['address']}">
                                     查看地图
                                 </a>
