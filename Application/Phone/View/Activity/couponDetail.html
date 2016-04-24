@@ -1,0 +1,62 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="couponDetail">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="hot-activity-box">
+                <div class="activity-banner">
+                    <div class="activity-coupon-head">
+                        <div class="activity-coupon-head-value">
+                            {$info['amount']}
+                        </div>
+                        <div class="activity-coupon-head-title">
+                            {$info['name']}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-intro">
+                    {$info['intro']}<br>
+                    <p style="text-align: center;">
+                        疯抢时间<br>
+                        {$info['stime'] | date="m月d日 H:i",###}
+                        至
+                        {$info['etime'] | date="m月d日 H:i",###}<br>
+                        关注<a href="#">店多多</a>，有更多惊喜。
+                    </p>
+                </div>
+
+                <div class="button-box">
+                    <switch name="info.time_status" >
+                        <case value="0" break="1">
+                            <a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_default">亲，还没开始哦</a>
+                            <input id="coupon_begin" type="hidden" value="{$info['leftTime']}">
+                        </case>
+                        <case value="1">
+                            <if condition="$info['isGetCoupon'] eq 1">
+                                <a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_default">您已领取过优惠券</a>
+                                <else/>
+                                <a href="javascript:;" class="weui_btn weui_btn_primary" id="coupon_action" data-id="{$info['id']}">立即开抢</a>
+                            </if>
+                        </case>
+                        <case value="2">
+                            <a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_default">很遗憾，活动已结束</a>
+                        </case>
+                    </switch>
+
+                </div>
+
+            </div>
+
+            <p class="gray-text1 text-center small-text margin-top30">
+                商务合作：<a href="tel:18176621816">18176621816</a>
+            </p>
+        </div>
+        <div class="fixbtnbox">
+            <a class="fixbtn showMenu" href="#"><i class="iconfont">&#xe602;</i></a>
+        </div>
+    </div>
+</block>

@@ -407,6 +407,38 @@ var activityList = {
 createPageHandler(activityList);
 
 
+
+var couponDetail = {
+    pageId:"#couponDetail",
+    handler: function (e, pageId, $page) {
+        var lefttime = $('#coupon_begin').val();
+        if(lefttime){
+            setInterval(function(){
+                lefttime = lefttime - 1;
+                if(lefttime<=0){
+                    refreshPage();
+                }
+            },5000);
+        }
+
+        $('#coupon_action').click(function () {
+            var id = $(this).data('id');
+            $.post(domain+"/index.php/Phone/Activity/receiveCoupon",{id:id},function(res){
+                if(res.status==1){
+                    $.toast(res.info);
+                    setTimeout(function(){
+                        $.router.load(domain+"/index.php/Phone/Activity/couponUser", true);
+                    },2000);
+                }else{
+                    $.toast(res.info);
+                }
+            });
+        });
+    }
+};
+createPageHandler(couponDetail);
+
+
 var hotActivityGoodsList = {
     pageId:"#hotActivityGoodsList",
     handler: function (e, pageId, $page) {

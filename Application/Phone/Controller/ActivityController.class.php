@@ -206,4 +206,111 @@ class ActivityController extends Controller {
         }
     }
 
+    /**
+     * 我的优惠券
+     */
+    public function couponUser(){
+        $uid = getUserId();
+        $list = D('coupon_user')->where(array('user_id'=>$uid))->select();
+        foreach($list as &$info){
+            $coupon = D('coupon')->where(array('id'=>$info['coupon_id']))->find();
+            $info['name'] = $coupon['name'];
+            $info['amount'] = $coupon['amount'];
+        }
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function couponUserDetail(){
+        $id = I('get.id');
+        $cu = D('coupon_user')->where(array('id'=>$id))->find();
+        $coupon = D('coupon')->where(array('id'=>$cu['coupon_id']))->find();
+        $shopInfo = D('Shop')->where(array('id'=>$coupon['shop_id']))->find();
+
+        $url = UC('Activity/useCoupon',array('id'=>$id));
+
+        $this->assign('url',urlencode($url));
+        $this->assign('cu',$cu);
+        $this->assign('coupon',$coupon);
+        $this->assign('shopInfo',$shopInfo);
+        $this->display();
+    }
+
+    /**
+     * 优惠券列表
+     */
+    public function couponList(){
+        $list = D('coupon')->where(array('status'=>1))->select();
+        foreach($list as &$info){
+            $info['readyCount'] = D('coupon_user')->where(array('coupon_id'=>$info['id']))->count(1);
+            $info['leftCount'] = $info['max_limit'] - $info['readyCount'];
+        }
+
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function couponDetail(){
+        $id = I('get.id');
+        $info = D('coupon')->where(array('id'=>$id))->find();
+        $now = time();
+        if($now<$info['stime']){
+            $info['time_status'] = 0;
+            $info['leftTime'] = $info['stime'] - $now;
+        }else if($now>$info['stime'] && $now<$info['etime']){
+            $info['time_status'] = 1;
+        }else{
+            $info['time_status'] = 2;
+        }
+        $info['isGetCoupon'] = $this->isGetCoupon(getUserId(),$info['id']);
+
+
+        $this->assign('info',$info);
+        $this->display();
+    }
+
+    /**
+     * 领取优惠券
+     */
+    public function receiveCoupon(){
+        $id = I('post.id');
+        $uid = getUserId();
+        $isget = $this->isGetCoupon($uid,$id);
+        if($isget){
+            $this->error('您已领取该优惠券，不能重复领取');
+        }else{
+            $info = D('coupon')->where(array('id'=>$id))->find();
+            $info['readyCount'] = D('coupon_user')->where(array('coupon_id'=>$id))->count(1);
+            $leftCount = $info['max_limit'] - $info['readyCount'];
+            if($leftCount>0){
+                $data['coupon_id'] = $id;
+                $data['user_id'] = $uid;
+                $data['stime'] = $info['stime'];
+                $data['etime'] = $info['etime'];
+                $data['ctime'] = $info['ctime'];
+                $data['status'] = 0;
+                D('coupon_user')->data($data)->add();
+                $this->success('恭喜您领取成功');
+            }else{
+                $this->error('本期优惠券已经被领完，欢迎下次再来');
+            }
+        }
+    }
+
+    /**
+     * 使用优惠券
+     */
+    public function useCoupon(){
+
+        $this->display();
+    }
+
+    private function isGetCoupon($uid,$coupon_id){
+        $cu = D('coupon_user')->where(array('coupon_id'=>$coupon_id,'user_id'=>$uid))->find();
+        if($cu){
+            return true;
+        }
+        return false;
+    }
+
 }

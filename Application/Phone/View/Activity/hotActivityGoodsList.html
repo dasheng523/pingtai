@@ -1,7 +1,7 @@
 <extend name="template/temp" />
 <block name="content">
-    <div class="page" id="hotActivityGoodsList">
-        <div class="content native-scroll pull-to-refresh-content infinite-scroll">
+    <div class="page" id="couponList">
+        <div class="content native-scroll pull-to-refresh-content infinite-scroll" data-distance="150">
             <div class="pull-to-refresh-layer">
                 <div class="preloader"></div>
                 <div class="pull-to-refresh-arrow"></div>
@@ -67,7 +67,7 @@
             </div>
 
             <p class="gray-text1 text-center small-text margin-top30">
-                如果您的店铺也想参与店铺，就点击<a href="{:UC('Shop/index')}" external>立即开店</a>吧。
+                如果您的店铺也想参与活动，就点击<a href="{:UC('Shop/index')}" external>编辑活动</a>吧。
             </p>
         </div>
         <div class="fixbtnbox">

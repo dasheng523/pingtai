@@ -1,0 +1,46 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="hotActivityGoodsList">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="hot-activity-box">
+                <div class="activity-banner">
+                    <img src="__PUBLIC__/images/banner.png">
+                </div>
+
+                <div class="activity-intro">
+                    各商家劲爆优惠券出炉啦，五一优惠券大放送，赶紧叫上亲朋好友，拿起手机开抢吧。<br>
+                    点击<a href="#">店多多</a>，有更多惊喜。
+                </div>
+
+                <div class="activity-content row" style="margin-top: 15px;padding: 0 5px;">
+                    <volist name="list" id="info">
+                        <a class="coupon-item col-50" href="{:UC('Activity/couponDetail',array('id'=>$info['id']))}">
+                            <div class="coupon-price">{$info['amount']}</div>
+                            <p class="coupon-title">
+                                {$info['name']}
+                                <br>
+                                点击进入领取
+                            </p>
+                            <div class="coupon-moreInfo">
+                                已抢：{$info['readyCount']}，剩余：<span class="red-text">{$info['leftCount']}</span>
+                            </div>
+                        </a>
+                    </volist>
+
+                </div>
+
+            </div>
+
+            <p class="gray-text1 text-center small-text margin-top30">
+                商务合作：<a href="tel:18176621816">18176621816</a>
+            </p>
+        </div>
+        <div class="fixbtnbox">
+            <a class="fixbtn showMenu" href="#"><i class="iconfont">&#xe602;</i></a>
+        </div>
+    </div>
+</block>

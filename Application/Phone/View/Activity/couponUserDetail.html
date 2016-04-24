@@ -1,0 +1,32 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="couponDetail">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="coupon-qcode-box">
+                <if condition="$cu['status'] eq 1">
+                    <p class="coupon-qcode-status gray-text">已失效</p>
+                    <else/>
+                    <p class="coupon-qcode-status green-text">可有效使用</p>
+                </if>
+                <p>到达店铺之后，出示二维码即可获得优惠</p>
+
+
+                <div class="qcode-box">
+                    <div>券号：<span class="green-text">{$cu['id']}</span></div>
+                    <img src="http://qr.liantu.com/api.php?text={$url}">
+                </div>
+
+                <div class="coupon-shop-info">
+                    店名：{$shopInfo['name']}<br>
+                    地址：{$shopInfo['address']}<br>
+                    电话：{$shopInfo['phone']}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</block>

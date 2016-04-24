@@ -1,0 +1,41 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="hotActivityGoodsList">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="text-center margin-top30 gray-text">
+                <empty name="list">
+                    您还没有领取优惠券哦，赶快去<a href="{:UC('Activity/couponList')}" class="external">抢优惠券</a>吧
+                    <else/>
+                    可别浪费自己的优惠券哦，您可以点击<a href="{:UC('Activity/hotActivity')}">这里看看</a>更多的优惠信息。
+                </empty>
+            </div>
+            <div class="coupon-myList-box">
+                <volist name="list" id="info">
+                    <a href="{:UC('Activity/couponUserDetail',array('id'=>$info['id']))}" class="coupon-myList-item">
+                        <div class="flex">
+                            <div class="coupon-name">{$info['amount']}<br>{$info['name']}</div>
+                            <div class="flex-1 coupon-det" style="padding: 10px;">
+                                <div class="coupon">有效期<br>{$info['stime']|date='Y-m-d',###} 至 {$info['etime']|date='Y-m-d',###}</div>
+                                <if condition="$info['status'] eq 0">
+                                    <div class="green-text coupon-status">可使用</div>
+                                    <else/>
+                                    <div class="gray-text coupon-status">已失效</div>
+                                </if>
+
+                            </div>
+                        </div>
+                        <div class="coupon-myList-footer">
+                            点击可查看二维码>>
+                        </div>
+                    </a>
+                </volist>
+
+            </div>
+
+        </div>
+    </div>
+</block>

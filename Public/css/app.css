@@ -184,6 +184,7 @@ a.activity-goods-box{color: #333333;}
 .hot-item-img{width: 100%;}
 .hot-item-text{text-align: center;font-size: 16px;}
 .activity-intro{background: #fff;padding: 10px;}
+.button-box{margin-top: 30px;padding: 0 10px;}
 
 .activity-goods-btn{background: orange;text-align: center;color: #fff;}
 .activity-shopname{}
@@ -191,6 +192,29 @@ a.activity-goods-box{color: #333333;}
 .new-activity-title-box{height: 50px;}
 
 .goods-title{font-size: 18px;line-height: 50px;}
+
+.coupon-item{color: #333333;display: block;text-align: center;background: #fff; margin-top: 15px;}
+.coupon-title{margin: 10px;}
+.coupon-price{width: 100%;background: orange;color: #fff;padding: 15px 0;}
+.coupon-price h3{display: inline-block;}
+.coupon-moreInfo{font-size: 12px;background: #dddddd;padding: 5px;}
+
+.activity-coupon-head{background: orange;color: #fff;padding: 70px 0;text-align: center;}
+.activity-coupon-head-value{font-size: 50px;}
+
+.coupon-myList-item{display: block;color: #333333;background: #fff;margin-top: 10px;}
+.coupon-myList-item .coupon-name{width: 150px;background: orange;color: #fff;text-align: center;height: 80px;padding-top: 18px;}
+.coupon-myList-item .coupon-status{font-size: 16px;}
+.coupon-det{height: 80px;}
+.coupon-myList-footer{padding: 5px;text-align: center;color: deepskyblue;}
+.coupon-item-bottom-border{border-bottom: solid 1px #CCCCCC;}
+
+.coupon-qcode-box{padding: 5px; text-align: center;}
+.coupon-qcode-box > h3{padding: 30px;}
+.coupon-qcode-status{font-size: 16px;}
+.coupon-qcode-box .qcode-box{width: 90%;background: #fff;padding: 20px;margin: 30px auto 0 auto;}
+.coupon-qcode-box .qcode-box > img{width: 100%;margin-top: 10px;}
+.coupon-shop-info{padding: 10px;text-align: left;width: 80%;margin: 0 auto;}
 
 .article .hd{padding: 2em 0;}
 .article .page_title {
