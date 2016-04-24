@@ -181,7 +181,7 @@ a.activity-goods-box{color: #333333;}
 .hot-activity-box{padding-bottom: 100px;}
 .activity-banner img{width: 100%;}
 .hot-item{background: #fff;display: block; margin-top: 15px;}
-.hot-item-img{width: 100%;}
+.hot-item-img{width: 100%;height: 120px;}
 .hot-item-text{text-align: center;font-size: 16px;}
 .activity-intro{background: #fff;padding: 10px;}
 .button-box{margin-top: 30px;padding: 0 10px;}
