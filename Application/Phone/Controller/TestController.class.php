@@ -132,7 +132,7 @@ class TestController extends Controller {
         foreach($goods as &$info){
             $info['intro'] = '佳用超市五一副食大特惠';
 
-            $info['original_price'] = $info['original_price'] . '/' . $info['unit'];
+            $info['original_price'] = $info['original_price'] . '元/' . $info['unit'];
             $info['price'] = $info['price'] . '元/' . $info['unit'];
             $info['ctime'] = time();
             $info['mtime'] = time();
@@ -153,5 +153,6 @@ class TestController extends Controller {
             echo D('activity_goods')->data($info2)->add();
         }
     }
+
 
 }

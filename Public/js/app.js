@@ -318,7 +318,7 @@ function like(url){
     if(!url){
         url = "/index.php/Phone/Miaoji/like";
     }
-    $('.likebtn').click(function(){
+    $(document).on("click", '.likebtn', function(){
         if($(this).hasClass('hover')){
             return;
         }
