@@ -146,7 +146,9 @@ class ActivityController extends Controller {
     }
 
     public function hotActivity(){
-        $list = D('Collection')->where(array('parent_id'=>25))->order('ctime desc')->select();
+        $shopIdList = D('goods')->group('shop_id')->field('shop_id')->select(false);
+        $rs = D('shop')->where("id in ($shopIdList)")->group('coll_id')->field('coll_id')->select(false);
+        $list = D('Collection')->where("id in ($rs)")->order('ctime desc')->select();
         $this->assign('list',$list);
         $this->display();
     }
@@ -157,9 +159,13 @@ class ActivityController extends Controller {
         if(!$page){
             $page = 1;
         }
-        $idSql = D('activity')->field('id')->where(array('coll_id'=>$id))->select(false);
-        $goodsIdSql = D('activity_goods')->where("activity_id in ($idSql)")->field('goods_id')->select(false);
-        $list = D('goods')->where("id in ($goodsIdSql)")->page($page,10)->order('id asc')->select();
+
+        $shopSql = D('shop')->where(array('coll_id'=>$id))->field('id')->select(false);
+        $list = D('goods')->where("shop_id in ($shopSql)")->page($page,10)->order('id asc')->select();
+
+        //$idSql = D('activity')->field('id')->where(array('coll_id'=>$id))->select(false);
+        //$goodsIdSql = D('activity_goods')->where("activity_id in ($idSql)")->field('goods_id')->select(false);
+        //$list = D('goods')->where("id in ($goodsIdSql)")->page($page,10)->order('id asc')->select();
         $pageTitle = D('Collection')->where(array('id'=>$id))->getField('name');
         foreach($list as &$info){
             $info['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info['id']);
