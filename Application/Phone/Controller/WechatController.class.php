@@ -87,6 +87,7 @@ class WechatController extends Controller {
                 array('type'=>'view','name'=>'便民店铺','url'=>UC('Miaoji/shopCate')),
             )),
             array('name'=>"店多多",'sub_button'=>array(
+                array('type'=>'view','name'=>'我的优惠券','url'=>UC('Activity/couponUser')),
                 array('type'=>'view','name'=>'商家入口','url'=>UC('shop/index')),
                 array('type'=>'view','name'=>'意见反馈','url'=>UC('User/objection')),
             ))
