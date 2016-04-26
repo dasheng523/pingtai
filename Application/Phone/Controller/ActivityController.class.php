@@ -160,12 +160,23 @@ class ActivityController extends Controller {
             $page = 1;
         }
 
-        $shopSql = D('shop')->where(array('coll_id'=>$id))->field('id')->select(false);
-        $list = D('goods')->where("shop_id in ($shopSql)")->page($page,10)->order('id asc')->select();
+        $entyp = C('EntityType_Goods');
+        $useType = C('UseType_Like');
 
-        //$idSql = D('activity')->field('id')->where(array('coll_id'=>$id))->select(false);
-        //$goodsIdSql = D('activity_goods')->where("activity_id in ($idSql)")->field('goods_id')->select(false);
-        //$list = D('goods')->where("id in ($goodsIdSql)")->page($page,10)->order('id asc')->select();
+        $shopSql = D('shop')->where(array('coll_id'=>$id))->field('id')->select(false);
+        $likeSql = D('user_use_entity')
+            ->where(array("entity_type=$entyp and use_type=$useType"))
+            ->group("entity_id")
+            ->field("entity_id,count(1) as likea")
+            ->select(false);
+        $list = D('goods')
+            ->join("left join($likeSql) likeCount on (likeCount.entity_id=goods.id)")
+            ->where("shop_id in ($shopSql)")
+            ->page($page,10)
+            ->order('likeCount.likea desc')
+            ->select();
+
+
         $pageTitle = D('Collection')->where(array('id'=>$id))->getField('name');
         foreach($list as &$info){
             $info['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info['id']);
