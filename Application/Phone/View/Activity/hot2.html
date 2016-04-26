@@ -1,6 +1,6 @@
 <extend name="template/temp" />
 <block name="content">
-    <div class="page" id="hotActivityGoodsList">
+    <div class="page" id="hotActivityGoodsList2">
         <div class="content native-scroll pull-to-refresh-content infinite-scroll" data-distance="450">
             <div class="pull-to-refresh-layer">
                 <div class="preloader"></div>
@@ -16,7 +16,7 @@
                         <volist name="list" id="info">
                             <div class="activity-panel goods-item glist">
                                 <a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}" class="lk activity-content">
-                                    <img class="activity-goods-img im" src="{$info['imgUrl']}" />
+                                    <img class="activity-goods-img2 im" src="{$info['imgUrl']}" />
                                     <h3 class="activity-panel-title text-line2 nn">{$info['name']}</h3>
                                     <div class="activity-panel-price">
                                         特价:<span class="pp red-text">{$info['price']}</span>

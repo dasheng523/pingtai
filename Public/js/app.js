@@ -441,9 +441,82 @@ var couponDetail = {
 };
 createPageHandler(couponDetail);
 
-
 var hotActivityGoodsList = {
     pageId:"#hotActivityGoodsList",
+    handler: function (e, pageId, $page) {
+        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsList .likebtn');
+        $('.showMenu').click(function () {
+            var buttons1 = [
+                {
+                    text: '关注我们',
+                    onClick: function() {
+                        $.router.load(domain+"/index.php/Phone/Public/showMa", true);
+                    }
+                }
+            ];
+            var buttons2 = [
+                {
+                    text: '取消',
+                    bg: 'danger'
+                }
+            ];
+            var groups = [buttons1, buttons2];
+            $.actions(groups);
+        });
+        if($('.no-goods').html()){
+            $.detachInfiniteScroll($('.infinite-scroll'));
+            $('.infinite-scroll-preloader').remove();
+        }
+
+        var loading = false;
+        // 最多可加载的条目
+        var page = 2;
+        function addItems(data) {
+            var node ;
+            if(data.imgUrl){
+                node = $('.glistImg').last().clone();
+                node.find('.im').attr('src',data.imgUrl);
+            }else{
+                node = $('.glist').last().clone();
+            }
+            var url = node.find('.lk').first().attr('href').split("?")[0];
+            node.find('.lk').attr('href',url+"?id="+data.id);
+            node.find('.nn').html(data.name);
+            node.find('.pp').html(data.price);
+            node.find('.op').html(data.original_price);
+            node.find('.sn').html(data.shopName);
+            node.find('.lb').attr('data-id',data.id);
+            node.find('.lb span').html(data.likecount);
+            $('.infinite-scroll .hot-activity-box').append(node);
+        }
+        //var data = {id:"1155",name:"测试测试",original_price:"50元/斤",price:"20元/斤",shopName:"皆用店多多",likecount:50,imgUrl:5656};
+
+        $(document).on('infinite', '.infinite-scroll',function() {
+            if (loading) return;
+            loading = true;
+            var current = window.location.href;
+            $.get(current,{"page":page},function(res){
+                page = page + 1;
+                loading = false;
+                if(res.length<=0){
+                    $.detachInfiniteScroll($('.infinite-scroll'));
+                    $('.infinite-scroll-preloader').remove();
+                }else{
+                    var i = 0;
+                    for(i=0;i<res.length;i++){
+                        var data = res[i];
+                        addItems(data);
+                    }
+                }
+                $.refreshScroller();
+            },'json');
+        });
+    }
+};
+createPageHandler(hotActivityGoodsList);
+
+var hotActivityGoodsList2 = {
+    pageId:"#hotActivityGoodsList2",
     handler: function (e, pageId, $page) {
         like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsList .likebtn');
         $('.showMenu').click(function () {
@@ -513,7 +586,7 @@ var hotActivityGoodsList = {
         });
     }
 };
-createPageHandler(hotActivityGoodsList);
+createPageHandler(hotActivityGoodsList2);
 
 
 var hotActivityGoodsInfo = {

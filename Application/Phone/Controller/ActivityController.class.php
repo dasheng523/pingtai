@@ -143,6 +143,10 @@ class ActivityController extends Controller {
         $this->display();
     }
 
+    public function hot2(){
+        $this->hotActivityGoodsList();
+    }
+
 
     public function hotActivityGoodsInfo(){
         $id = I('get.id');
