@@ -473,12 +473,11 @@ var hotActivityGoodsList = {
         // 最多可加载的条目
         var page = 2;
         function addItems(data) {
-            var node ;
+            var node = $('.glist').last().clone();
             if(data.imgUrl){
-                node = $('.glistImg').last().clone();
                 node.find('.im').attr('src',data.imgUrl);
             }else{
-                node = $('.glist').last().clone();
+                node.find('.im').remove();
             }
             var url = node.find('.lk').first().attr('href').split("?")[0];
             node.find('.lk').attr('href',url+"?id="+data.id);
@@ -488,7 +487,7 @@ var hotActivityGoodsList = {
             node.find('.sn').html(data.shopName);
             node.find('.lb').attr('data-id',data.id);
             node.find('.lb span').html(data.likecount);
-            $('.infinite-scroll .hot-activity-box').append(node);
+            $('.infinite-scroll .activity-goods-list').append(node);
         }
         //var data = {id:"1155",name:"测试测试",original_price:"50元/斤",price:"20元/斤",shopName:"皆用店多多",likecount:50,imgUrl:5656};
 
