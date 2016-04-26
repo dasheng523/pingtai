@@ -311,14 +311,18 @@ function share(title,desc,link,imgUrl,type,dataUrl,success,cancel){
 }
 
 /**
- *
+ * 喜欢按钮
  * @param url
+ * @param btn
  */
-function like(url){
+function like(url,btn){
     if(!url){
         url = "/index.php/Phone/Miaoji/like";
     }
-    $(document).on("click", '.likebtn', function(){
+    if(!btn){
+        btn = '.likebtn';
+    }
+    $(document).on("click", btn, function(){
         if($(this).hasClass('hover')){
             return;
         }
