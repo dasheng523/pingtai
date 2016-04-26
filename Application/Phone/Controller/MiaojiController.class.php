@@ -97,11 +97,11 @@ class MiaojiController extends Controller {
     public function like(){
         $id = I('post.id');
         $uid = getUserId();
-        $rs = logic\UserUseEntityLogic::like($uid,$id,C('EntityType_Park'));
+        $rs = logic\UserUseEntityLogic::like($uid,$id,C('EntityType_Shop'));
         if($rs){
             $this->success('ok');
         }else{
-            $this->error('error');
+            $this->error('您已点赞过了');
         }
     }
 

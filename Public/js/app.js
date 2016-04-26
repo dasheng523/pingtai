@@ -377,7 +377,7 @@ var detail = {
             $.actions(groups);
         });
 
-        like();
+        like(null,'#detail .likebtn');
     },
     wechatReady : function(){
 
@@ -388,7 +388,7 @@ createPageHandler(detail);
 var showcaseDetail = {
     pageId:"#showcaseDetail",
     handler: function (e, pageId, $page) {
-        like();
+        like(null,"#showcaseDetail .likebtn");
     }
 };
 createPageHandler(showcaseDetail);
@@ -446,7 +446,7 @@ createPageHandler(couponDetail);
 var hotActivityGoodsList = {
     pageId:"#hotActivityGoodsList",
     handler: function (e, pageId, $page) {
-        like('/index.php/Phone/Activity/zanGoods');
+        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsList .likebtn');
         $('.showMenu').click(function () {
             var buttons1 = [
                 {
@@ -521,7 +521,7 @@ createPageHandler(hotActivityGoodsList);
 var hotActivityGoodsInfo = {
     pageId:"#hotActivityGoodsInfo",
     handler: function (e, pageId, $page) {
-        like('/index.php/Phone/Activity/zanGoods');
+        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsInfo .likebtn');
         $('.showMenu').click(function () {
             var buttons1 = [
                 {
