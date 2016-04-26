@@ -22,6 +22,12 @@ class AdminController extends Controller {
         $this->display();
     }
 
+    public function shopAdd(){
+        $realUser = logic\RequestLogic::getRealUserId();
+        logic\RequestLogic::cancelAsUser($realUser);
+        $this->display('Shop/openShop');
+    }
+
     public function operateDetail(){
         $shopId = I('get.id');
         $realUser = logic\RequestLogic::getRealUserId();

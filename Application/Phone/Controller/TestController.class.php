@@ -122,6 +122,156 @@ class TestController extends Controller {
         }
     }
 
+    public function testHaojue(){
+        $goods = array(
+            array(
+                "name" => "悦星HJ125T-9C/9D（手刹）",
+                "original_price" => 5980,
+                "price" => 5680,
+                "unit" => "架",
+                "img" => "2.png",
+            ),
+            array(
+                "name" => "喜之星HJ100T-7M（手刹/无尾箱护杠）",
+                "original_price" => 5980,
+                "price" => 5680,
+                "unit" => "架",
+                "img" => "3.png",
+            ),
+            array(
+                "name" => "锐爽EN125-2F（园灯/运动版）",
+                "original_price" => 7280,
+                "price" => 6780,
+                "unit" => "架",
+                "img" => "10.png",
+            ),
+            array(
+                "name" => "钻豹HJ125K-2A（鼓刹/电启）",
+                "original_price" => 6780,
+                "price" => 5980,
+                "unit" => "架",
+                "img" => "4.png",
+            ),
+            array(
+                "name" => "银豹HJ125-7M/7D/7E（鼓刹/小货架）",
+                "original_price" => 5280,
+                "price" => 4980,
+                "unit" => "架",
+                "img" => "5.png",
+            ),
+            array(
+                "name" => "HJ125-8M（双启/货架）",
+                "original_price" => 5280,
+                "price" => 4980,
+                "unit" => "架",
+                "img" => "6.png",
+            ),
+            array(
+                "name" => "喜运HJ110-2C（压轮/鼓刹）",
+                "original_price" => 5580,
+                "price" => 5180,
+                "unit" => "架",
+                "img" => "7.png",
+            ),
+            array(
+                "name" => "HJ110-A/E（条轮）",
+                "original_price" => 4580,
+                "price" => 3980,
+                "unit" => "架",
+                "img" => "8.png",
+            ),
+        );
+
+        foreach($goods as &$info){
+            $info['intro'] = '豪爵摩托五一特惠';
+            $info['original_price'] = $info['original_price'] . '元/' . $info['unit'];
+            $info['price'] = $info['price'] . '元/' . $info['unit'];
+            $info['ctime'] = time();
+            $info['mtime'] = time();
+            $info['shop_id'] = 223;
+            $id = D('Goods')->data($info)->add();
+
+
+            $media['name'] = 'c';
+            $media['url'] = 'http://media.dianduoduo.top/haojue/'.$info['img'];
+            $media['path'] = '';
+            $media['media_type'] = 1;
+            $media['entity_id'] = $id;
+            $media['entity_type'] = 2;
+            D('Media')->data($media)->add();
+
+        }
+
+        print_r($goods);
+    }
+
+
+    public function testAiYing(){
+        $goods = D('tempdata')
+            ->field('name,original_price,price,unit,type,img')
+            ->where('type=2')
+            ->select();
+
+        foreach($goods as &$info){
+            $info['intro'] = '爱婴超市五一特惠';
+            $info['original_price'] = $info['original_price'] . '元/' . $info['unit'];
+            $info['price'] = $info['price'] . '元/' . $info['unit'];
+            $info['ctime'] = time();
+            $info['mtime'] = time();
+            $info['shop_id'] = 219;
+            $id = D('Goods')->data($info)->add();
+
+
+            $media['name'] = 'c';
+            $media['url'] = 'http://media.dianduoduo.top/aiying/'.$info['img'];
+            $media['path'] = '';
+            $media['media_type'] = 1;
+            $media['entity_id'] = $id;
+            $media['entity_type'] = 2;
+            D('Media')->data($media)->add();
+
+        }
+
+        print_r($goods);
+    }
+
+
+    public function testbaihui(){
+        $goods = D('tempdata')
+            ->field('name,original_price,price,unit,type,img')
+            ->where('type=3')
+            ->select();
+
+        foreach($goods as &$info){
+            $info['intro'] = '百汇超市五一大特惠';
+
+            if($info['original_price']){
+                $info['original_price'] = $info['original_price'] . '元/' . $info['unit'];
+            }else{
+                $info['original_price'] = '';
+            }
+
+            $info['price'] = $info['price'] . '元/' . $info['unit'];
+            $info['ctime'] = time();
+            $info['mtime'] = time();
+            $info['shop_id'] = 224;
+            $id = D('Goods')->data($info)->add();
+
+            $media['name'] = 'b';
+            $media['url'] = 'http://media.dianduoduo.top/baihui/'.$info['img'];
+            $media['path'] = '';
+            $media['media_type'] = 1;
+            $media['entity_id'] = $id;
+            $media['entity_type'] = 2;
+            D('Media')->data($media)->add();
+
+            $info2['activity_id'] = 9;
+            $info2['goods_id'] = $id;
+            $info2['ctime'] = time();
+            //echo D('activity_goods')->data($info2)->add();
+        }
+    }
+
 
     public function testUploadGoods(){
         $goods = D('tempdata')
