@@ -405,7 +405,6 @@ createPageHandler(showcase);
 var activityList = {
     pageId:"#activityList",
     handler: function (e, pageId, $page) {
-        like('/index.php/Phone/Activity/zanActivity');
     }
 };
 createPageHandler(activityList);
@@ -543,46 +542,6 @@ var hotActivityGoodsInfo = {
     }
 };
 createPageHandler(hotActivityGoodsInfo);
-
-
-var activityInfo = {
-    pageId:"#activityInfo",
-    handler: function (e, pageId, $page) {
-        like('/index.php/Phone/Activity/zanActivity');
-        $('#shareBtn').click(function () {
-            $('.mask').removeClass('hide');
-        });
-        $('.mask').click(function(){
-            $(this).addClass('hide');
-        });
-
-        $('.showMenu').click(function () {
-            var buttons1 = [
-                {
-                    text: '返回首页',
-                    onClick: function() {
-                        $.router.load(domain+"/index.php/Phone/Miaoji/showcase", true);
-                    }
-                },
-                {
-                    text: '关注我们',
-                    onClick: function() {
-                        $.router.load(domain+"/index.php/Phone/Public/showMa", true);
-                    }
-                }
-            ];
-            var buttons2 = [
-                {
-                    text: '取消',
-                    bg: 'danger'
-                }
-            ];
-            var groups = [buttons1, buttons2];
-            $.actions(groups);
-        });
-    }
-};
-createPageHandler(activityInfo);
 
 
 var wechatOpen = {
