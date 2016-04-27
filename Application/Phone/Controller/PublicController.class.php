@@ -49,6 +49,6 @@ class PublicController extends Controller {
     }
 
     public function h5show(){
-        header("Location: http://q.eqxiu.com/s/EMGG01gO?eqrcode=1");
+        header("Location: http://h5.eqxiu.com/s/p9hascla");
     }
 }
