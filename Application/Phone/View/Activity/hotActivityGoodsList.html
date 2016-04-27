@@ -23,8 +23,8 @@
                                         <h3 class="text-line2 new-activity-title-box nn">{$info['name']}</h3>
                                     </a>
                                     <div class="price" style="margin-top: -5px;">
-                                        特价：<span class="price-value pp">{$info['price']}</span>
-                                        <span class="price-value remove-text op">{$info['original_price']}</span>
+                                        特价：<span class="pp main-price">{$info['price']}</span>
+                                        <div class="price-value remove-text op">{$info['original_price']}</div>
                                     </div>
                                     <div class="activity-goods-btns">
                                         <div class="activity-goods-btn">
@@ -44,8 +44,8 @@
                                 <div class="activity-goods-infobox flex">
                                     <a class="activity-goods-contentBox flex-1 lk" href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}">
                                         <p class="activity-goods-price">
-                                            特价：<span class="price-value red-text pp">{$info['price']}</span>
-                                            <span class="price-value remove-text op">{$info['original_price']}</span>
+                                            特价：<span class="pp main-price">{$info['price']}</span>
+                                            <div class="price-value remove-text op">{$info['original_price']}</div>
                                         </p>
                                         <div class="activity-shopname gray-text">来自：<span class="orange-text sn">{$info['shopName']}</span></div>
                                     </a>
