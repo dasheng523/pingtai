@@ -67,6 +67,20 @@ class GoodsLogic
         return $list;
     }
 
+
+    public static function getPublicGoodsListByShopId($shopId,$page=1,$size=0)
+    {
+        if($size==0){
+            $size = getSysConfig('PageSize');
+        }
+        $list = D('goods')
+            ->where("shop_id=$shopId and is_hide<>1")
+            ->page($page,$size)
+            ->order('mtime desc')
+            ->select();
+        return $list;
+    }
+
     /**
      * @param $gid
      * @return mixed
@@ -346,6 +360,7 @@ class GoodsLogic
     {
         return logic\MediaLogic::getEntityAllImgUrl($id,C('EntityType_Goods'));
     }
+
 
 
 }

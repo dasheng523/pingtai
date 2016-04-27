@@ -175,6 +175,7 @@ class ShopController extends Controller {
     $info['name'] = I('post.name');
     $info['price'] = I('post.price');
     $info['intro'] = I('post.intro');
+    $info['is_hide'] = I('post.is_hide');
     $info['original_price'] = I('post.original_price');
     $shop = logic\ShopLogic::getShopInfoByUserId(getUserId());
     if($id){
@@ -258,7 +259,7 @@ class ShopController extends Controller {
     $this->assign('collections',$collections);
 
     $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
-    $goodsList = logic\GoodsLogic::getGoodsListByShopId($shopId);
+    $goodsList = logic\GoodsLogic::getPublicGoodsListByShopId($shopId);
     $this->assign('goodslist',$goodsList);
     $this->display();
   }

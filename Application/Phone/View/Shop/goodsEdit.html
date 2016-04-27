@@ -58,6 +58,18 @@
                 </div>
             </div>
 
+            <div class="weui_cells_title">是否马上发布</div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell weui_cell_select">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" name="is_hide">
+                            <option value="0" <if condition="$goodsDetail['is_hide'] eq 0">selected="selected"</if>>我要马上发布</option>
+                            <option value="1" <if condition="$goodsDetail['is_hide'] eq 1">selected="selected"</if>>我完善后发布</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="weui_cells_title">商品照片</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
@@ -85,7 +97,7 @@
             <input type="hidden" name="id" value="{$_GET['id']}">
             <div class="weui_btn_area">
                 <button type="submit" class="weui_btn weui_btn_primary" id="showTooltips">
-                    <if condition="$_GET['id']">重新发布<else/>发布</if>
+                    提交
                 </button>
             </div>
 
