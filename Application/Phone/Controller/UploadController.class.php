@@ -30,7 +30,7 @@ class UploadController extends Controller {
         foreach($files as &$file){
             $file['media_type'] = $mediaType;
             $file['entity_type'] = $entityType;
-            //生成缩略图
+            //缩略图规格
             $suolveMap = array(
                 C('EntityType_Activity') => array('width'=>350,'height'=>200),
                 C('EntityType_Goods') => array('width'=>300,'height'=>400),

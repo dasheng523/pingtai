@@ -172,7 +172,11 @@ class MediaLogic
             $info['fileName'] = ysuuid().'.png';
             $info['path'] = "Public/upload/".$info['fileName'];
             $info['url'] = __ROOT__ .'/' .$info['path'];
+            $info['real_path'] = "Public/upload_real/".$info['fileName'];
             if(!@move_uploaded_file($upload['tmp_name'],$info['path'])){
+                echo "error move file";
+            }
+            if(!@move_uploaded_file($upload['tmp_name'],$info['real_path'])){
                 echo "error move file";
             }
             $rs[] = $info;
@@ -191,7 +195,16 @@ class MediaLogic
         }
         try{
             $image = new \Imagick($inFile);
-            $image->thumbnailImage($width, $height);
+            $srcWH = $image->getImageGeometry(); //获取源图片宽和高
+            if($srcWH['width']>$width){
+                $srcW['width'] = $width;
+                $srcH['height'] = $srcW['width']/$srcWH['width']*$srcWH['height'];
+            }else{
+                $srcW['width'] = $srcWH['width'];
+                $srcH['height'] = $srcWH['height'];
+            }
+
+            $image->thumbnailImage($srcW['width'], $srcH['height']);
             $image->writeImage($outFile);
         } catch(Exception $e){
             \Think\Log::write('缩略图生成失败','ERR');

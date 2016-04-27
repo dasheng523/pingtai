@@ -165,8 +165,8 @@ a.btnitem{display: block;}
 .activity-goodslist-box{margin-top: 15px;}
 .activity-goods-box{border-bottom: 1px solid #dddddd;padding: 10px 0;background: #fff;}
 a.activity-goods-box{color: #333333;}
-.activity-goods-img{width: 120px;height:150px;margin-right: 10px;}
-.activity-goods-infobox .price{padding: 10px;margin-top: 5px;}
+.activity-goods-img{width: 120px;max-height:150px;margin-right: 10px;}
+.activity-goods-infobox .price{padding: 10px 0;margin-top: 5px;}
 .activity-goods-infobox .price .price-value{color: #990073;}
 .activity-goods-infobox .intro{margin-top: 5px;}
 .activity-box .address-box{background: #eee;padding: 10px;}
@@ -187,7 +187,7 @@ a.activity-goods-box{color: #333333;}
 .button-box{margin-top: 30px;padding: 0 10px;}
 
 
-.new-activity-title-box{height: 50px;}
+.new-activity-title-box{}
 
 .goods-title{font-size: 18px;line-height: 50px;}
 

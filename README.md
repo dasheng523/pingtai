@@ -23,9 +23,5 @@ require './ThinkPHP/ThinkPHP.php';
 
 ````
 3. 修改`Application/Common/Conf/local.php`，将数据库连接信息配置好。
-5. 新建Public/upload目录，并设置可写权限。
+5. 新建Public/upload,Public/upload_real目录，并设置可读写权限。
 4. 启动服务器。
-
-## 商业友好的开源协议
-
-pingtai遵循Apache2开源协议发布。Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，鼓励代码共享和尊重原作者的著作权，同样允许代码修改，再作为开源或商业软件发布。
