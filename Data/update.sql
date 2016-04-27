@@ -7,3 +7,6 @@ ADD COLUMN `real_path`  varchar(255) NULL AFTER `path`;
 
 ALTER TABLE `goods`
 ADD COLUMN `is_hide`  smallint NULL AFTER `tags`;
+
+ALTER TABLE `activity`
+ADD COLUMN `sort`  int NULL COMMENT '排序，数字越大，越前面' AFTER `ctime`;

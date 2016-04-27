@@ -31,6 +31,7 @@ class ActivityController extends Controller {
         $list = D('activity')
             ->join("shop on shop.id=activity.shop_id")
             ->field('activity.*, shop.name as shopname, shop.address, shop.phone')
+            ->order('sort desc')
             ->where("activity.etime>$now")
             ->select();
 
