@@ -29,5 +29,5 @@ return array(
 	'SESSION_OPTIONS'=> array(
 		'expire'=>24*3600*15,
 	),
-	'Version' => 115,
+	'Version' => 116,
 );

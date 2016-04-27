@@ -57,6 +57,39 @@ class ActivityController extends Controller {
         $this->display();
     }
 
+    //活动详情
+    public function activityInfo(){
+        $id = I('get.id');
+        $info = D('activity')
+            ->join("shop on shop.id=activity.shop_id")
+            ->field('activity.*, shop.name as shopname, shop.address, shop.phone, shop.lat, shop.lng')
+            ->where("activity.id=$id")
+            ->find();
+        $info['piclist'] = logic\ActivityLogic::getActivityAllImgUrl($id);
+        if($info['stime'] < time() && $info['etime'] > time()){
+            $info['status'] = 1;    //已经开始
+            $info['status_msg'] = "已经开始";
+            $info['lefttime'] =  floor(($info['etime']-time())/3600);
+        }
+        else if($info['stime'] > time()){
+            $info['status'] = 2;    //即将开始
+            $info['status_msg'] = "即将开始";
+        }
+        else{
+            $info['status'] = 0;    //已结束
+            $info['status_msg'] = "已结束";
+        }
+        $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
+        $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
+        $goodsList = logic\ActivityLogic::getActivityGoodsList($id);
+        $share['title'] = "北流重大特惠：".$info['shopname'];
+        $share['intro'] = mb_substr($info['intro'], 0, 100,'utf-8');
+        $this->assign('share',$share);
+        $this->assign('info',$info);
+        $this->assign('goodsList',$goodsList);
+        $this->display();
+    }
+
 
     //显示某集合下的活动
     public function showCateActivity(){
@@ -92,6 +125,18 @@ class ActivityController extends Controller {
         $this->assign('list',$list);
         $this->assign('pageTitle',"北流".$cateInfo['name']);
         $this->display('showAllActivity');
+    }
+
+    //赞活动
+    public function zanActivity(){
+        $id = I('post.id');
+        $uid = getUserId();
+        $rs = logic\UserUseEntityLogic::like($uid,$id,C('EntityType_Activity'));
+        if($rs){
+            $this->success('ok');
+        }else{
+            $this->error('您已点击过');
+        }
     }
 
 

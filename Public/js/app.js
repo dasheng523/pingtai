@@ -313,16 +313,16 @@ function share(title,desc,link,imgUrl,type,dataUrl,success,cancel){
 /**
  * 喜欢按钮
  * @param url
- * @param btn
+ * @param page
  */
-function like(url,btn){
+function like(url,page){
     if(!url){
         url = "/index.php/Phone/Miaoji/like";
     }
-    if(!btn){
-        btn = '.likebtn';
+    if(!page){
+        page = document;
     }
-    $(document).on("click", btn, function(){
+    $(page).on("click", ".likebtn", function(){
         if($(this).hasClass('hover')){
             return;
         }
@@ -377,7 +377,7 @@ var detail = {
             $.actions(groups);
         });
 
-        like(null,'#detail .likebtn');
+        like(null,'#detail');
     },
     wechatReady : function(){
 
@@ -388,7 +388,7 @@ createPageHandler(detail);
 var showcaseDetail = {
     pageId:"#showcaseDetail",
     handler: function (e, pageId, $page) {
-        like(null,"#showcaseDetail .likebtn");
+        like(null,"#showcaseDetail");
     }
 };
 createPageHandler(showcaseDetail);
@@ -405,6 +405,7 @@ createPageHandler(showcase);
 var activityList = {
     pageId:"#activityList",
     handler: function (e, pageId, $page) {
+        like('/index.php/Phone/Activity/zanActivity','#activityList');
     }
 };
 createPageHandler(activityList);
@@ -444,7 +445,7 @@ createPageHandler(couponDetail);
 var hotActivityGoodsList = {
     pageId:"#hotActivityGoodsList",
     handler: function (e, pageId, $page) {
-        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsList .likebtn');
+        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsList');
         $('.showMenu').click(function () {
             var buttons1 = [
                 {
@@ -518,7 +519,7 @@ createPageHandler(hotActivityGoodsList);
 var hotActivityGoodsList2 = {
     pageId:"#hotActivityGoodsList2",
     handler: function (e, pageId, $page) {
-        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsList .likebtn');
+        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsList');
         $('.showMenu').click(function () {
             var buttons1 = [
                 {
@@ -592,7 +593,7 @@ createPageHandler(hotActivityGoodsList2);
 var hotActivityGoodsInfo = {
     pageId:"#hotActivityGoodsInfo",
     handler: function (e, pageId, $page) {
-        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsInfo .likebtn');
+        like('/index.php/Phone/Activity/zanGoods','#hotActivityGoodsInfo');
         $('.showMenu').click(function () {
             var buttons1 = [
                 {

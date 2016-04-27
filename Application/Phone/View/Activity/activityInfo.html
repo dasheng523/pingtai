@@ -1,0 +1,120 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="activityInfo">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="">
+                <if condition="$info['piclist'][0]">
+                    <div class="banner-header-imgbox">
+                        <img data-original="{$info['piclist'][0]}"
+                             class="lazy showimglist"
+                             data-imglist="<?php echo implode(',',$info['piclist']);?>"
+                             alt="" style="width: 100%">
+
+                    </div>
+                </if>
+
+                <div class="activity-title-box ">
+                    <h3>{$info['name']}</h3>
+                    <div class="chashi">——{$info['shopname']}</div>
+                </div>
+
+                <div class="activity-intro activity-info-panel">
+                    {$info['intro']}
+                </div>
+
+                <div class="activity-info-panel margin-top">
+
+                    <div class="activity-lefttime-box">
+                        <if condition="$info['status'] == 1">
+                            <span class="label">剩余时间:</span>
+                            <span class="countdownbox">{$info['lefttime']}小时</span>
+                        </if>
+                        <if condition="$info['status'] == 2">
+                            <span class="label">即将开始:</span>
+                            <span class="countdownbox">{$info['stime'] | formatDate}</span>
+                        </if>
+                        <if condition="$info['status'] == 0">
+                            <span class="label">活动已结束</span>
+                        </if>
+
+                    </div>
+
+                    <div class="row activity-btngroup">
+                        <div class="col-50">
+                            <a class="activity-btn weui_btn_primary" href="tel:{$info['phone']}"><i class="iconfont">&#xe606;</i>电话</a>
+                        </div>
+                        <div class="col-50">
+                            <if condition="$info['isLike']">
+                                <a class="activity-btn like" href="javascript:;" data-id="{$info['id']}">
+                                    <i class="iconfont">&#xe60c;</i>喜欢
+                                    <span>({$info['likecount']})</span>
+                                </a>
+                                <else/>
+                                <a class="activity-btn like likebtn" href="javascript:;" data-id="{$info['id']}">
+                                    <i class="iconfont">&#xe608;</i>喜欢(<span>{$info['likecount']}</span>)
+                                </a>
+                            </if>
+                        </div>
+                    </div>
+                    <div class="address-box flex flex-align-center">
+                        <div class="flex-1">
+                            地址：{$info['address']}
+                        </div>
+                        <if condition="$info['lat'] and $info['lng']">
+                            <a href="javascript:;"
+                               class="mapbtn lookmap"
+                               data-lat="{$info['lat']}"
+                               data-lng="{$info['lng']}"
+                               data-name="{$info['name']}"
+                               data-address="{$info['address']}">
+                                查看地图
+                            </a>
+                        </if>
+                    </div>
+                </div>
+
+                <div class="yspanel-content-box">
+
+                    <div class="activity-goodslist-box">
+                        <h6 class="gray-text1">活动特惠商品</h6>
+                        <empty name="goodsList">
+                            <div class="text-center margin-top30 gray-text">没有活动商品</div>
+                            <else/>
+                            <volist name="goodsList" id="goodsinfo">
+                                <div class="activity-goods-box flex">
+                                    <img class="activity-goods-img" src="{$goodsinfo['imgurl']}" />
+                                    <div class="activity-goods-infobox flex-1">
+                                        <h3>{$goodsinfo['name']}</h3>
+                                        <div class="price">价格：<span class="price-value">{$goodsinfo['price']}</span></div>
+                                        <div class="gray-text text-line3 intro">{$goodsinfo['intro']}</div>
+                                    </div>
+                                </div>
+                            </volist>
+                        </empty>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <script>
+                var shareIntro = "{$share.intro}";
+                var shareTitle = "{$share.title}";
+            </script>
+
+
+            <p class="gray-text1 text-center small-text margin-top30">
+                <a href="{:UC('Public/showMa')}" id="telmebtn">关注我们</a>将获得北流更多优惠信息
+            </p>
+        </div>
+
+        <div class="fixbtnbox">
+            <a class="fixbtn showMenu" href="#"><i class="iconfont">&#xe602;</i></a>
+        </div>
+    </div>
+</block>

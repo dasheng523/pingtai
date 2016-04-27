@@ -12,7 +12,7 @@
                     <a href="{:UC('Activity/activityInfo',array('id'=>$info['id']))}">
                         <div class="yspanel-titlebox flex">
                             <div class="flex-1">
-                                {$info['shopname']}
+                                {$info['name']}
                                 <span class="pull-right small-text
                                 <?php if($info['status'] == 1){
                                     echo 'orange-text';
@@ -24,15 +24,13 @@
                             </div>
                         </div>
                         <div class="yspanel-image-box">
-                            <div class="yspanel-image-textbox">- <span class="text">{$info['name']}</span> -</div>
                             <if condition="$info['piclist']">
                                 <img class="lazy yspanel-image-image" data-original="{$info['piclist']}">
-                                <else/>
-                                <img class="yspanel-image-image" src="__PUBLIC__/upload/abd2ac815505109fc8102326b7677037.png">
                             </if>
                         </div>
                         <div class="yspanel-content-box text-line3">
-                            {$info['intro']|strip_tags}
+                            <h3>{$info['shopname']}</h3>
+                            <span>{$info['intro']|strip_tags}</span>
                         </div>
                     </a>
                     <div class="yspanel-content-box2">

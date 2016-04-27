@@ -150,6 +150,8 @@ a.btnitem{display: block;}
 .gs-content-wrap{background: #ec4949;}
 .gs-content-wrap .db-logo{font-size: 36px;text-align: center;padding: 40px 0;color: #fff;}
 
+.activity-title-box{padding: 30px 10px;background: #fff;}
+.activity-title-box > h3{text-align: center;padding: 10px 0;}
 .activity-title-box .chashi{text-align: right;}
 
 .activity-lefttime-box{margin-top: 15px;text-align: center;font-size: 16px;font-weight: bolder;}
@@ -186,6 +188,7 @@ a.activity-goods-box{color: #333333;}
 .activity-intro{background: #fff;padding: 10px;}
 .button-box{margin-top: 30px;padding: 0 10px;}
 
+.mapbtn{width: 60px;}
 
 .new-activity-title-box{}
 
@@ -214,6 +217,8 @@ a.activity-goods-box{color: #333333;}
 .coupon-qcode-box .qcode-box > img{width: 100%;margin-top: 10px;}
 .coupon-shop-info{padding: 10px;text-align: left;width: 80%;margin: 0 auto;}
 
+.activity-info-panel{background: #fff;padding: 20px 15px;}
+.activity-info-panel .address-box{padding: 15px 10px;}
 
 .activity-goods-list{-webkit-column-count: 2;column-count: 2;-webkit-column-gap: 20px;}
 .activity-panel{background: #fff;margin-top: 20px;}
