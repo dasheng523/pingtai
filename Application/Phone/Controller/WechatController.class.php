@@ -84,6 +84,7 @@ class WechatController extends Controller {
             array('type'=>'view','name'=>'五一约惠','url'=>UC('Activity/hotActivity')),
             array('name'=>"北流生活",'sub_button'=>array(
                 array('type'=>'view','name'=>'领取优惠券','url'=>UC('Activity/couponList')),
+                array('type'=>'view','name'=>'商家活动','url'=>UC('Activity/showAllActivity')),
                 array('type'=>'view','name'=>'便民店铺','url'=>UC('Miaoji/shopCate')),
             )),
             array('name'=>"店多多",'sub_button'=>array(
