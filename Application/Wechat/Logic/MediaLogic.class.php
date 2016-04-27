@@ -173,8 +173,8 @@ class MediaLogic
             $info['path'] = "Public/upload/".$info['fileName'];
             $info['url'] = __ROOT__ .'/' .$info['path'];
             $info['real_path'] = "Public/upload_real/".$info['fileName'];
-            if(!@move_uploaded_file($upload['tmp_name'],$info['path'])){
-                echo "error move file";
+            if (!copy($upload['tmp_name'], $info['path'])) {
+                echo "failed to copy ... ";
             }
             if(!@move_uploaded_file($upload['tmp_name'],$info['real_path'])){
                 echo "error move file";
