@@ -269,7 +269,7 @@ class ShopController extends Controller {
     $info['name'] = I('post.name');
     $info['stime'] = I('post.stime');
     $info['duration'] = I('post.duration');
-    $info['coll_id'] = I('post.coll_id');
+    $info['coll_id'] = 0; //目前用不到这个字段
     $info['intro'] = I('post.intro');
     $goodslistids = I('post.goodslistids');
     $info['shop_id'] = logic\ShopLogic::getShopIdByUserId(getUserId());

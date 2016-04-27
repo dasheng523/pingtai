@@ -82,18 +82,6 @@
                     </div>
                 </div>
 
-                <div class="weui_cells_title">活动分类</div>
-                <div class="weui_cells weui_cells_form">
-                    <div class="weui_cell weui_cell_select">
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <select class="weui_select" name="coll_id">
-                                <volist name="collections" id="collInfo">
-                                    <option value="{$collInfo['id']}" <if condition="$collInfo['id'] eq $info['coll_id']">selected=seleced</if>>{$collInfo['name']}</option>
-                                </volist>
-                            </select>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="weui_cells_title">活动封面（建议上传横图片）</div>
                 <div class="weui_cells weui_cells_form">
