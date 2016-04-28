@@ -170,7 +170,7 @@ class ActivityController extends Controller {
             ->join("left join($likeSql) likeCount on (likeCount.entity_id=goods.id)")
             ->where("shop_id in ($shopSql) and (isnull(is_hide) or is_hide=0)")
             ->page($page,10)
-            ->order('likeCount.likea desc')
+            ->order('likeCount.likea desc,id desc')
             ->select();
 
 
