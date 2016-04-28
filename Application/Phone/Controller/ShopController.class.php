@@ -148,7 +148,7 @@ class ShopController extends Controller {
    * 商品列表页
    */
   public function goods(){
-    $goodsList = logic\GoodsLogic::getShopGoodsListByShoper(getUserId());
+    $goodsList = logic\GoodsLogic::getShopGoodsListByShoper(getUserId(),1,200);
     $this->assign('list',$goodsList);
     $this->display();
   }
@@ -259,7 +259,7 @@ class ShopController extends Controller {
     $this->assign('collections',$collections);
 
     $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
-    $goodsList = logic\GoodsLogic::getPublicNotKnowGoodsListByShopId($shopId);
+    $goodsList = logic\GoodsLogic::getPublicNotKnowGoodsListByShopId($shopId,1,200);
     $this->assign('goodslist',$goodsList);
     $this->display();
   }
