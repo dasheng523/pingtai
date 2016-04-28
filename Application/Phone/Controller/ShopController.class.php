@@ -196,7 +196,7 @@ class ShopController extends Controller {
    * 商品删除页
    */
   public function goodsDel(){
-    $goodsList = logic\GoodsLogic::getShopGoodsListByShoper(getUserId());
+    $goodsList = logic\GoodsLogic::getShopGoodsListByShoper(getUserId(),1,200);
     $this->assign('list',$goodsList);
     $this->display();
   }
