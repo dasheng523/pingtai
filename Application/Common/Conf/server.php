@@ -8,5 +8,5 @@ return array(
     'DB_PWD'    => 'pingtai@5235013',          // 密码
     'DB_PORT'   => '3306',      // 端口
     'DB_PREFIX' => '',          // 数据库表前缀
-    'DB_CHARSET'=>'utf8' ,    //数据库编码
+    'DB_CHARSET'=>'utf8mb4' ,    //数据库编码
 );
