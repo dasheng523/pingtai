@@ -17,7 +17,7 @@ class AdminController extends Controller {
 
     //商店列表
     public function shopList(){
-        $list = D('shop')->order('ctime desc')->select();
+        $list = D('shop')->where('user_id<>1')->order('ctime desc')->select();
         $this->assign('list',$list);
         $this->display();
     }
