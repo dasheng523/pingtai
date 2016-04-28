@@ -84,7 +84,7 @@ class MiaojiController extends Controller {
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Shop'));
         $this->assign('info',$info);
 
-        $share['title'] = "大家快来看看我的店铺#".$info['shopname'] . "# ---店多多广告平台";
+        $share['title'] = "大家快来看看我的店铺".$info['shopname'] . "---店多多";
         $share['intro'] = mb_substr($info['intro'], 0, 500,'utf-8');
         $this->assign('share',$share);
 

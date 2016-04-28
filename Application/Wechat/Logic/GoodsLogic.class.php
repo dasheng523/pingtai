@@ -68,6 +68,13 @@ class GoodsLogic
     }
 
 
+    /**
+     * @param $shopId
+     * @param int $page
+     * @param int $size
+     * @return mixed
+     * 获得发布的商品
+     */
     public static function getPublicGoodsListByShopId($shopId,$page=1,$size=0)
     {
         if($size==0){
@@ -75,6 +82,26 @@ class GoodsLogic
         }
         $list = D('goods')
             ->where("shop_id=$shopId and (isnull(is_hide) or is_hide=0)")
+            ->page($page,$size)
+            ->order('mtime desc')
+            ->select();
+        return $list;
+    }
+
+    /**
+     * @param $shopId
+     * @param int $page
+     * @param int $size
+     * @return mixed
+     * 获取发布和未知的商品
+     */
+    public static function getPublicNotKnowGoodsListByShopId($shopId,$page=1,$size=0)
+    {
+        if($size==0){
+            $size = getSysConfig('PageSize');
+        }
+        $list = D('goods')
+            ->where("shop_id=$shopId and (isnull(is_hide) or is_hide=0 or is_hide=2)")
             ->page($page,$size)
             ->order('mtime desc')
             ->select();

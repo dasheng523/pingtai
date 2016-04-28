@@ -259,7 +259,7 @@ class ShopController extends Controller {
     $this->assign('collections',$collections);
 
     $shopId = logic\ShopLogic::getShopIdByUserId(getUserId());
-    $goodsList = logic\GoodsLogic::getPublicGoodsListByShopId($shopId);
+    $goodsList = logic\GoodsLogic::getPublicNotKnowGoodsListByShopId($shopId);
     $this->assign('goodslist',$goodsList);
     $this->display();
   }
