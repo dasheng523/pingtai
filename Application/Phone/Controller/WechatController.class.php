@@ -108,4 +108,8 @@ class WechatController extends Controller {
         ));
         echo $weobj->createMenu($menu);
     }
+
+    public function sendMsg(){
+
+    }
 }

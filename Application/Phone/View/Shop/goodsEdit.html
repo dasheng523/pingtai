@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="weui_cells_title">商品折扣价</div>
+            <div class="weui_cells_title">商品折后价/现价</div>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_bd weui_cell_primary">
@@ -42,8 +42,7 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <input class="weui_input" type="text"
                                placeholder="格式如： 5元/斤，2元/个，3元/张 等"
-                               name="original_price" value="{$goodsDetail['original_price']}"
-                               required>
+                               name="original_price" value="{$goodsDetail['original_price']}">
                     </div>
                 </div>
             </div>
@@ -65,6 +64,7 @@
                         <select class="weui_select" name="is_hide">
                             <option value="0" <if condition="$goodsDetail['is_hide'] eq 0">selected="selected"</if>>我要马上发布</option>
                             <option value="1" <if condition="$goodsDetail['is_hide'] eq 1">selected="selected"</if>>我完善后发布</option>
+                            <option value="2" <if condition="$goodsDetail['is_hide'] eq 1">selected="selected"</if>>其他</option>
                         </select>
                     </div>
                 </div>
