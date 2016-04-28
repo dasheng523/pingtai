@@ -114,7 +114,7 @@ class WechatController extends Controller {
         $welcomeMsg = array(
             array(
                 'Title'=>'店多多正式上线啦！',
-                'Description'=>'我们为您准备了几张优惠券，让您在五一玩得开心。',
+                'Description'=>'我们为您准备了几张优惠券，让您在五一购物享受折上折大优惠。',
                 'PicUrl'=>'http://media.dianduoduo.top/collect/p1.png',
                 'Url'=>UC('Activity/couponList')
             ),
