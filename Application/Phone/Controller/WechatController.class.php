@@ -43,11 +43,23 @@ class WechatController extends Controller {
                     else if($event['event'] == Wechat::EVENT_SUBSCRIBE){
                         $welcomeMsg = array(
                             array(
-                                'Title'=>'终于等到您来啦！',
-                                'Description'=>'五一即将来临，众多店铺正在火热备战五一，这注定是一场狂欢之夜，你准备好了吗？',
-                                'PicUrl'=>'http://media.dianduoduo.top/collect/6355.jpg_wh300.jpg',
-                                'Url'=>UC('Miaoji/showcaseDispatch')
-                            )
+                                'Title'=>'店多多正式上线啦！',
+                                'Description'=>'我们为您准备了几张优惠券，让您在五一玩得开心。',
+                                'PicUrl'=>'http://media.dianduoduo.top/collect/p1.jpg',
+                                'Url'=>UC('Activity/couponList')
+                            ),
+                            array(
+                                'Title'=>'各大商家齐让利，优惠不断，点击来看吧！',
+                                'Description'=>'赶快点击进入看看，不容错过哦。',
+                                'PicUrl'=>'http://media.dianduoduo.top/collect/p3.jpg',
+                                'Url'=>UC('Activity/hotActivity')
+                            ),
+                            array(
+                                'Title'=>'点击这里，再也不会错过超市每日特价了',
+                                'Description'=>'赶快点击进入看看，不容错过哦。',
+                                'PicUrl'=>'http://media.dianduoduo.top/collect/p2.jpg',
+                                'Url'=>UC('Activity/showAllActivity')
+                            ),
                         );
                         $weobj->news($welcomeMsg)->reply();
                         //如果不存在，就保存用户数据
