@@ -55,6 +55,11 @@ class ActivityController extends Controller {
         }
         $this->assign('list',$list);
         $this->assign('pageTitle',"北流特惠活动");
+
+        $share['title'] = "北流特惠活动";
+        $share['intro'] = mb_substr("店多多为您收集大量街上的优惠活动信息，为您上街购物更容易找到“着数”。", 0, 500,'utf-8');
+        $this->assign('share',$share);
+
         $this->display();
     }
 
@@ -147,6 +152,11 @@ class ActivityController extends Controller {
         $rs = D('shop')->where("id in ($shopIdList)")->group('coll_id')->field('coll_id')->select(false);
         $list = D('Collection')->where("id in ($rs)")->order('ctime desc')->select();
         $this->assign('list',$list);
+
+        $share['title'] = "北流商家优惠券";
+        $share['intro'] = mb_substr("点击这里，您可以领取到北流各类商家的优惠券，先到先得，别错过。", 0, 500,'utf-8');
+        $this->assign('share',$share);
+
         $this->display();
     }
 
