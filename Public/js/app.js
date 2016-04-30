@@ -60,7 +60,7 @@ function createPageHandler(handleObj){
             if(typeof(shareIntro)=="undefined" || !shareIntro){
                 shareIntro = "这里汇聚了北流丰富的特价活动，优惠信息，想便宜买好货就赶紧过来吧～";
             }
-            share(shareTitle,shareIntro,window.location.href,domain+"/Public/images/logo.png");
+            share(shareTitle,shareIntro,window.location.href,domain+"/Public/images/logo.jpg");
             if(handleObj.wechatReady){
                 handleObj.wechatReady();
             }
