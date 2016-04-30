@@ -153,8 +153,8 @@ class ActivityController extends Controller {
         $list = D('Collection')->where("id in ($rs)")->order('ctime desc')->select();
         $this->assign('list',$list);
 
-        $share['title'] = "北流商家优惠券";
-        $share['intro'] = mb_substr("点击这里，您可以领取到北流各类商家的优惠券，先到先得，别错过。", 0, 500,'utf-8');
+        $share['title'] = "北流店铺";
+        $share['intro'] = mb_substr("店多多为您更方便找到需要的店铺", 0, 500,'utf-8');
         $this->assign('share',$share);
 
         $this->display();
@@ -278,6 +278,10 @@ class ActivityController extends Controller {
             $info['readyCount'] = D('coupon_user')->where(array('coupon_id'=>$info['id']))->count(1);
             $info['leftCount'] = $info['max_limit'] - $info['readyCount'];
         }
+        $share['title'] = "北流商家优惠券";
+        $share['intro'] = mb_substr("点击这里，您可以领取到北流各类商家的优惠券，先到先得，别错过。", 0, 500,'utf-8');
+        $this->assign('share',$share);
+
 
         $this->assign('list',$list);
         $this->display();
