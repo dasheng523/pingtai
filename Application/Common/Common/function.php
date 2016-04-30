@@ -128,6 +128,15 @@ function formatDate($time){
     return $str;
 }
 
+/**
+ * @param $str
+ * @return mixed
+ * 替换换行符为<br>
+ */
+function replaceLine($str){
+    return str_replace('\n','<br>',$str);
+}
+
 
 /**
  * array_column

@@ -217,6 +217,7 @@ class ActivityController extends Controller {
         $info['lng'] = $shopInfo['lng'];
         $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Goods'));
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Activity'));
+        $info['intro'] = replaceLine($info['intro']);
 
         $info['piclist'] = $piclist;
         $this->assign('info',$info);
