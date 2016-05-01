@@ -108,7 +108,6 @@ class WechatController extends Controller {
                 array('type'=>'view','name'=>'商家入口','url'=>UC('shop/index')),
                 array('type'=>'view','name'=>'意见反馈','url'=>UC('User/objection')),
                 array('type'=>'view','name'=>'关于我们','url'=>UC('Public/h5show')),
-                array('type'=>'view','name'=>'商户群','url'=>"http://mp.weixin.qq.com/s?__biz=MzA4NDYyMDQ1Ng==&mid=2247483667&idx=3&sn=ceb002a7a65e38df80227b6a6324d441&scene=0#wechat_redirect"),
             ))
         ));
         echo $weobj->createMenu($menu);
