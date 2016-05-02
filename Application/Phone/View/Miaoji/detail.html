@@ -73,6 +73,53 @@
                     </div>
                 </div>
 
+                <volist name="list" id="info">
+                    <if condition="$info['imgUrl']">
+                        <div class="activity-goods-box flex flex-align-center glistImg" style="padding: 10px;">
+                            <a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}" class="lk">
+                                <img class="activity-goods-img im" src="{$info['imgUrl']}" />
+                            </a>
+                            <div class="activity-goods-infobox flex-1">
+                                <a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']) )}" class="black-text lk">
+                                    <h3 class="text-line2 new-activity-title-box nn">{$info['name']}</h3>
+                                </a>
+                                <div class="price" style="margin-top: -5px;">
+                                    特价：<span class="pp main-price">{$info['price']}</span>
+                                    <div class="price-value remove-text op">{$info['original_price']}</div>
+                                </div>
+                                <div class="activity-goods-btns">
+                                    <div class="activity-goods-btn">
+                                        <a class="activity-btn like likebtn lb" href="javascript:;" data-id="{$info['id']}">
+                                            <i class="iconfont">&#xe608;</i>喜欢(<span>{$info['likecount']}</span>)
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="activity-shopname gray-text2">来自：<span class="red-text sn">{$info['shopName']}</span></div>
+                            </div>
+                        </div>
+                        <else/>
+                        <div class="activity-goods-box-nopic glist">
+                            <a class="text-line2 goods-title lk nn" href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}?dd=1">
+                                {$info['name']}
+                            </a>
+                            <div class="activity-goods-infobox flex">
+                                <a class="activity-goods-contentBox flex-1 lk" href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}">
+                                    <p class="activity-goods-price">
+                                        特价：<span class="pp main-price">{$info['price']}</span>
+                                    <div class="price-value remove-text op">{$info['original_price']}</div>
+                                    </p>
+                                    <div class="activity-shopname gray-text">来自：<span class="orange-text sn">{$info['shopName']}</span></div>
+                                </a>
+                                <div class="like-box">
+                                    <div class="activity-btn like likebtn lb" data-id="{$info['id']}">
+                                        <i class="iconfont">&#xe608;</i>喜欢(<span>{$info['likecount']}</span>)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </if>
+                </volist>
+
             </div>
 
 
