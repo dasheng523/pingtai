@@ -184,7 +184,6 @@ class ActivityController extends Controller {
             ->select();
 
 
-        $pageTitle = D('Collection')->where(array('id'=>$id))->getField('name');
         foreach($list as &$info){
             $info['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info['id']);
             $info['shopName'] = logic\ShopLogic::getShopNameById($info['shop_id']);
@@ -194,6 +193,7 @@ class ActivityController extends Controller {
             echo json_encode($list);
             return;
         }
+        $pageTitle = D('Collection')->where(array('id'=>$id))->getField('name');
         $this->assign('pageTitle',$pageTitle);
         $this->assign('list',$list);
         $this->display();

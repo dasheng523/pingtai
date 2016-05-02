@@ -84,7 +84,15 @@ class MiaojiController extends Controller {
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Shop'));
         $this->assign('info',$info);
 
-        $list = logic\GoodsLogic::getShopGoodsListByShopId($id);
+        $list = D('goods')
+            ->where("shop_id = $id")
+            ->select();
+
+        foreach($list as &$info2){
+            $info2['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info2['id']);
+            $info2['shopName'] = logic\ShopLogic::getShopNameById($info2['shop_id']);
+            $info2['likecount'] = logic\UserUseEntityLogic::getLikeCount($info2['id'],C('EntityType_Goods'));
+        }
         $this->assign('list',$list);
 
         $share['title'] = "大家快来看看我的店铺".$info['shopname'] . "---店多多";
