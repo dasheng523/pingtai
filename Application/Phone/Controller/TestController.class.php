@@ -305,4 +305,33 @@ class TestController extends Controller {
     }
 
 
+    public function testAddTongzhouwangData(){
+        $list = D('tongzhouwangdian')->select();
+        foreach($list as &$info){
+            $data['user_id'] = -1;
+            $data['name'] = $info['name'];
+            $data['intro'] = $info['intro'];
+            $data['phone'] = $info['phone'];
+            $data['address'] = $info['address'];
+            $data['ctime'] = time();
+
+            $id = D('Shop')->data($data)->add();
+            $imgList = explode(',',$info['img']);
+            foreach($imgList as $imgUrl){
+                if($imgUrl && $imgUrl!=''){
+                    $media['name'] = 'g';
+                    $media['url'] = 'http://media.dianduoduo.top/'. $imgUrl;
+                    $media['path'] = '';
+                    $media['media_type'] = 1;
+                    $media['entity_id'] = $id;
+                    $media['entity_type'] = 2;
+                    D('Media')->data($media)->add();
+                }
+            }
+
+        }
+        print_r($list);
+    }
+
+
 }
