@@ -89,7 +89,7 @@ class ActivityController extends Controller {
         $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
         $goodsList = logic\ActivityLogic::getActivityGoodsList($id);
         $share['title'] = "北流重大特惠：".$info['shopname'];
-        $share['intro'] = mb_substr($info['intro'], 0, 100,'utf-8');
+        $share['intro'] = delLine(mb_substr($info['intro'], 0, 100,'utf-8'));
         $this->assign('share',$share);
         $this->assign('info',$info);
         $this->assign('goodsList',$goodsList);
@@ -223,7 +223,7 @@ class ActivityController extends Controller {
         $this->assign('info',$info);
 
         $share['title'] = "特惠来咯：".$info['name']."---".$shopInfo;
-        $share['intro'] = mb_substr($info['intro'], 0, 500,'utf-8');
+        $share['intro'] = delLine(mb_substr($info['intro'], 0, 500,'utf-8'));
         $this->assign('share',$share);
 
         $this->display();

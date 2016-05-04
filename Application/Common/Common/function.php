@@ -144,6 +144,10 @@ function replaceLine($str){
     return str_replace("\n",'<br>',$str);
 }
 
+function delLine($str){
+    return str_replace("\n",'',$str);
+}
+
 
 /**
  * array_column
