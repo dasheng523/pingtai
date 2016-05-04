@@ -104,7 +104,7 @@ class MiaojiController extends Controller {
         $this->assign('list',$list);
 
         $share['title'] = "大家快来看看我的店铺".$info['shopname'] . "---店多多";
-        $share['intro'] = mb_substr($info['intro'], 0, 500,'utf-8');
+        $share['intro'] = replaceLine(mb_substr($info['intro'], 0, 500,'utf-8'));
         $this->assign('share',$share);
 
         $this->display();
