@@ -66,7 +66,15 @@ class MiaojiController extends Controller {
             $info['imglist'] = logic\ShopLogic::getShopFirstImgUrl($info['id']);
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Shop'));
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Shop'));
+            $info['goodsCount'] = 0+logic\GoodsLogic::getShopGoodsCountByShopId($info['id']);
         }
+
+        usort($list,function($a,$b){
+            $ac = $a['goodsCount'];
+            $bc = $b['goodsCount'];
+            if ($ac==$bc) return 0;
+            return ($ac<$bc)?1:-1;
+        });
 
         $this->assign('list',$list);
         $this->display();

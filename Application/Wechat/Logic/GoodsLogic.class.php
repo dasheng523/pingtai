@@ -47,6 +47,13 @@ class GoodsLogic
         return $goodsList;
     }
 
+    public static function getShopGoodsCountByShopId($shopId){
+        $count = D('goods')
+            ->where(array('shop_id'=>$shopId))
+            ->count(1);
+        return $count;
+    }
+
 
     /**
      * @param $shopId
