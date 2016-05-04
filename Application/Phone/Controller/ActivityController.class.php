@@ -88,7 +88,7 @@ class ActivityController extends Controller {
         $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Activity'));
         $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Activity'));
         $goodsList = logic\ActivityLogic::getActivityGoodsList($id);
-        $share['title'] = "北流重大特惠：".$info['shopname'];
+        $share['title'] = "北流特惠：".$info['shopname'];
         $share['intro'] = delLine(mb_substr($info['intro'], 0, 100,'utf-8'));
         $this->assign('share',$share);
         $this->assign('info',$info);

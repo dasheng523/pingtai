@@ -67,11 +67,17 @@ class MiaojiController extends Controller {
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Shop'));
             $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$info['id'],C('EntityType_Shop'));
             $info['goodsCount'] = 0+logic\GoodsLogic::getShopGoodsCountByShopId($info['id']);
+
+            $info['score'] = 0;
+            if($info['imglist']){
+                $info['score'] = 5;
+            }
+            $info['score'] += $info['likecount']*2 + $info['goodsCount'];
         }
 
         usort($list,function($a,$b){
-            $ac = $a['goodsCount'];
-            $bc = $b['goodsCount'];
+            $ac = $a['score'];
+            $bc = $b['score'];
             if ($ac==$bc) return 0;
             return ($ac<$bc)?1:-1;
         });
