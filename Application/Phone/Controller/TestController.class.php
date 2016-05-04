@@ -308,7 +308,7 @@ class TestController extends Controller {
     public function testAddTongzhouwangData(){
         $list = D('tongzhouwangdian')->select();
         foreach($list as &$info){
-            $data['user_id'] = -1;
+            $data['user_id'] = randomNum();
             $data['name'] = $info['name'];
             $data['intro'] = $info['intro'];
             $data['phone'] = $info['phone'];
@@ -324,13 +324,13 @@ class TestController extends Controller {
                     $media['path'] = '';
                     $media['media_type'] = 1;
                     $media['entity_id'] = $id;
-                    $media['entity_type'] = 2;
+                    $media['entity_type'] = 1;
                     D('Media')->data($media)->add();
                 }
             }
 
         }
-        print_r($list);
+        print_r('ok');
     }
 
 

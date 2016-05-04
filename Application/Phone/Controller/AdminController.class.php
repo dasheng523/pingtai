@@ -25,7 +25,7 @@ class AdminController extends Controller {
     public function shopAdd(){
         $realUser = logic\RequestLogic::getRealUserId();
         logic\RequestLogic::cancelAsUser($realUser);
-        logic\RequestLogic::asUser($realUser,(time().rand(5,888)) * -1 % 100000000);
+        logic\RequestLogic::asUser($realUser,randomNum());
         $this->display('Shop/openShop');
     }
 

@@ -55,7 +55,7 @@ class MiaojiController extends Controller {
     }
 
     /**
-     * 展示妙集里面的内容
+     * 展示妙集里面的店铺
      */
     public function showcaseDetail(){
         $id = I('get.id');

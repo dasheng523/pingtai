@@ -40,6 +40,13 @@ function weekarray($time){
     return "星期".$weekarray[date("w",$time)];
 }
 
+/**
+ * @return int
+ * 随机唯一数字
+ */
+function randomNum(){
+    return (time().rand(5,888)) * -1 % 100000000;
+}
 
 //调试日志
 function slog($content){
