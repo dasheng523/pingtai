@@ -333,5 +333,9 @@ class TestController extends Controller {
         print_r('ok');
     }
 
+    public function testReplaceLine(){
+     echo replaceLine("sdfsdf\ndfgdfhfghgh");
+    }
+
 
 }

@@ -141,7 +141,7 @@ function formatDate($time){
  * 替换换行符为<br>
  */
 function replaceLine($str){
-    return str_replace('\n','<br>',$str);
+    return str_replace("\n",'<br>',$str);
 }
 
 
