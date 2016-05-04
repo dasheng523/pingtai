@@ -100,6 +100,7 @@ class MiaojiController extends Controller {
             $info2['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info2['id']);
             $info2['shopName'] = logic\ShopLogic::getShopNameById($info2['shop_id']);
             $info2['likecount'] = logic\UserUseEntityLogic::getLikeCount($info2['id'],C('EntityType_Goods'));
+            $info2['intro'] = replaceLine($info2['intro']);
         }
         $this->assign('list',$list);
 
