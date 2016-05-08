@@ -126,14 +126,14 @@ class UserController extends Controller {
     public function bingShop(){
         $shopId = I('get.shop_id');
         if(!$shopId){
-            $this->error('您的店铺不存在');
+            $this->error('店铺不存在');
             return;
         }
         $userId = getUserId();
         D('shop')->where(array('id'=>$shopId))->save(array('user_id'=>$userId));
         $shopName = D('shop')->where(array('id'=>$shopId))->getField('name');
         $this->assign('shopName',$shopName);
-        $this->success('恭喜您绑定成功，店铺：'.$shopName);
+        $this->redirect('Shop/index', array('cate_id' => 2), 1, '操作成功，页面跳转中...');
     }
 
 }
