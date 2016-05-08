@@ -122,4 +122,18 @@ class UserController extends Controller {
         $this->display();
     }
 
+
+    public function bingShop(){
+        $shopId = I('post.shop_id');
+        if(!$shopId){
+            $this->error('您的店铺不存在');
+            return;
+        }
+        $userId = getUserId();
+        D('shop')->where(array('id'=>$shopId))->save(array('user_id'=>$userId));
+        $shopName = D('shop')->where(array('id'=>$shopId))->getField('name');
+        $this->assign('shopName',$shopName);
+        $this->success('恭喜您绑定成功，店铺：'.$shopName);
+    }
+
 }

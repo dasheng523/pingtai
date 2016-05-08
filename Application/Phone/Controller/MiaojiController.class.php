@@ -18,6 +18,7 @@ class MiaojiController extends Controller {
         $this->assign('rannum',$rannum);
     }
 
+    
     /**
      * 罗列所有叶子妙集
      */
