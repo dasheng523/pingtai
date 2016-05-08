@@ -124,7 +124,7 @@ class UserController extends Controller {
 
 
     public function bingShop(){
-        $shopId = I('post.shop_id');
+        $shopId = I('get.shop_id');
         if(!$shopId){
             $this->error('您的店铺不存在');
             return;
