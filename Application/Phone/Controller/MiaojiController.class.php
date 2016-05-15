@@ -91,16 +91,14 @@ class MiaojiController extends Controller {
      * 更里面的内容
      */
     public function detail(){
-        $id = I('get.id');
+        $shopId = I('get.id');
 
-        $info = D('Shop')->where(array('id'=>$id))->find();
-        $info['imglist'] = logic\ShopLogic::getShopAllImgUrl($id);
-        $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($id,C('EntityType_Shop'));
-        $info['isLike'] = logic\UserUseEntityLogic::isLike(getUserId(),$id,C('EntityType_Shop'));
-        $this->assign('info',$info);
+        $shopInfo = logic\ShopLogic::getShopInfoById($shopId);
+        $shopInfo['imglist'] = logic\ShopLogic::getShopAllImgUrl($shopId);
+        $this->assign('info',$shopInfo);
 
         $list = D('goods')
-            ->where("shop_id = $id")
+            ->where("shop_id = $shopId")
             ->select();
 
         foreach($list as &$info2){
@@ -109,6 +107,14 @@ class MiaojiController extends Controller {
             $info2['likecount'] = logic\UserUseEntityLogic::getLikeCount($info2['id'],C('EntityType_Goods'));
             $info2['intro'] = replaceLine($info2['intro']);
         }
+
+        $couponList = D('coupon')->where(array('status'=>1,'shop_id'=>$shopId))->select();
+        foreach($couponList as &$info){
+            $info['readyCount'] = D('coupon_user')->where(array('coupon_id'=>$info['id']))->count(1);
+            $info['leftCount'] = $info['max_limit'] - $info['readyCount'];
+        }
+
+        $this->assign('couponList',$couponList);
         $this->assign('list',$list);
 
         $share['title'] = "大家快来看看我的店铺".$info['shopname'] . "---店多多";
