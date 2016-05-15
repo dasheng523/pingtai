@@ -62,7 +62,11 @@ function createPageHandler(handleObj){
             if(typeof(shareImg)=="undefined" || !shareImg){
                 shareImg = domain+"/Public/images/logo.jpg";
             }
-            share(shareTitle,shareIntro,window.location.href,shareImg);
+            if(typeof(shareUrl)=="undefined" || !shareUrl){
+                shareUrl = window.location.href;
+            }
+
+            share(shareTitle,shareIntro,shareUrl,shareImg);
             if(handleObj.wechatReady){
                 handleObj.wechatReady();
             }
