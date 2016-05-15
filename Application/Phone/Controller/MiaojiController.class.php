@@ -117,7 +117,7 @@ class MiaojiController extends Controller {
         $this->assign('couponList',$couponList);
         $this->assign('list',$list);
 
-        $share['title'] = $shopInfo['shopname'];
+        $share['title'] = $shopInfo['name'];
         $share['intro'] = delLine(mb_substr($shopInfo['intro'], 0, 100,'utf-8'));
         $this->assign('share',$share);
 
