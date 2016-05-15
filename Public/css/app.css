@@ -25,6 +25,7 @@ body{background: #eee;font-size: 14px;}
 
 
 
+
 .gray-text1{color:#aaa;}
 .small-text{font-size: 12px;}
 
@@ -114,6 +115,7 @@ a.yspanel,.yspanel > a{color: #333333;}
 .yspanel-footer{border-top: solid 1px #dddddd;padding: 10px;}
 .yspanel-bigimage-textbox{position: relative;display: block;}
 .yspanel-image-countbox{position: absolute;top: 15px;right: 15px;color: #fff;}
+.yspanel-line{padding: 10px;border-bottom: 1px #CCCCCC solid;border-top: 1px #CCCCCC solid;margin-top: -1px;}
 
 .activity-goods-box-nopic{padding: 10px;border-bottom: 1px solid #dddddd;background: #fff;}
 .activity-goods-box-nopic a{display: block;color: #333333;}

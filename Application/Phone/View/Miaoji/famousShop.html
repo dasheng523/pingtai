@@ -1,0 +1,119 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="detail">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="yspanel">
+                <div class="banner-header-imgbox">
+                    <if condition="($info['imglist']) AND ($info['imglist'][0])">
+                        <img data-original="{$info['imglist'][0]}"
+                             class="lazy showimglist"
+                             data-imglist="<?php echo implode(',',$info['imglist']);?>"
+                             alt="" style="width: 100%">
+                    </if>
+                </div>
+
+                <div class="yspanel-line">
+                    <h3 class="text-center flex-1">{$info['name']}</h3>
+                </div>
+
+                <div class="yspanel-line">
+                    <div class="flex flex-align-center">
+                        <a href="javascript:;"
+                           class="flex-1 lookmap"
+                           style="display: block;"
+                           data-lat="{$info['lat']}"
+                           data-lng="{$info['lng']}"
+                           data-name="{$info['name']}"
+                           data-address="{$info['address']}">
+                            {$info['address']}
+                        </a>
+                        <a href="tel:{$info['phone']}" class="ysbtn hover">拨打电话</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="yspanel margin-top30">
+                <div class="yspanel-line">
+                    <h3 class="gray-text1 small-text">商家介绍</h3>
+                </div>
+                <div class="yspanel-line">
+                    {$info['intro']}<br>
+                    联系我时，请说是在店多多看到的，谢谢！<br>
+                    好店铺别忘了分享给朋友，点击右上角菜单，选择“分享到朋友圈”，或者“分享给朋友”。
+                </div>
+            </div>
+
+            <div class="yspanel">
+                <div class="hot-activity-box">
+                    <volist name="list" id="info">
+                        <if condition="$info['imgUrl']">
+                            <div class="activity-goods-box flex flex-align-center glistImg" style="padding: 10px;">
+                                <a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}" class="lk">
+                                    <img class="activity-goods-img im" src="{$info['imgUrl']}" />
+                                </a>
+                                <div class="activity-goods-infobox flex-1">
+                                    <a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']) )}" class="black-text lk">
+                                        <h3 class="text-line2 new-activity-title-box nn">{$info['name']}</h3>
+                                    </a>
+                                    <div class="price" style="margin-top: -5px;">
+                                        特价：<span class="pp main-price">{$info['price']}</span>
+                                        <div class="price-value remove-text op">{$info['original_price']}</div>
+                                    </div>
+                                    <div class="activity-goods-btns">
+                                        <div class="activity-goods-btn">
+                                            <a class="activity-btn like likebtn lb" href="javascript:;" data-id="{$info['id']}">
+                                                <i class="iconfont">&#xe608;</i>喜欢(<span>{$info['likecount']}</span>)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="activity-shopname gray-text2">来自：<span class="red-text sn">{$info['shopName']}</span></div>
+                                </div>
+                            </div>
+                            <else/>
+                            <div class="activity-goods-box-nopic glist">
+                                <a class="text-line2 goods-title lk nn" href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}?dd=1">
+                                    {$info['name']}
+                                </a>
+                                <div class="activity-goods-infobox flex">
+                                    <a class="activity-goods-contentBox flex-1 lk" href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}">
+                                        <p class="activity-goods-price">
+                                            特价：<span class="pp main-price">{$info['price']}</span>
+                                        <div class="price-value remove-text op">{$info['original_price']}</div>
+                                        </p>
+                                        <div class="activity-shopname gray-text">来自：<span class="orange-text sn">{$info['shopName']}</span></div>
+                                    </a>
+                                    <div class="like-box">
+                                        <div class="activity-btn like likebtn lb" data-id="{$info['id']}">
+                                            <i class="iconfont">&#xe608;</i>喜欢(<span>{$info['likecount']}</span>)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </if>
+                    </volist>
+
+
+                </div>
+            </div>
+
+
+
+
+            <p class="gray-text1 text-center small-text margin-top30">
+                如果你也想上传您的店铺，那就点击<a href="{:UC('Shop/openShop')}" external>立即开店</a>吧
+            </p>
+        </div>
+
+        <div class="fixbtnbox">
+            <a class="fixbtn showMenu" href="#"><i class="iconfont">&#xe602;</i></a>
+        </div>
+    </div>
+    <script>
+        var shareIntro = "{$share.intro}";
+        var shareTitle = "{$share.title}";
+    </script>
+</block>

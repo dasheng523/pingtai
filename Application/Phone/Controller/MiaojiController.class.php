@@ -208,6 +208,30 @@ class MiaojiController extends Controller {
         }
     }
 
+    /**
+     * 明星店
+     */
+    public function famousShop(){
+        $shopId = D('famous_shop')->where('id=1')->getField('shop_id');
+        $shopInfo = logic\ShopLogic::getShopInfoById($shopId);
+        $shopInfo['imglist'] = logic\ShopLogic::getShopAllImgUrl($shopId);
+        $this->assign('info',$shopInfo);
+
+        $list = D('goods')
+            ->where("shop_id = $shopId")
+            ->select();
+
+        foreach($list as &$info2){
+            $info2['imgUrl'] = logic\GoodsLogic::getGoodsFirstImgUrl($info2['id']);
+            $info2['shopName'] = logic\ShopLogic::getShopNameById($info2['shop_id']);
+            $info2['likecount'] = logic\UserUseEntityLogic::getLikeCount($info2['id'],C('EntityType_Goods'));
+            $info2['intro'] = replaceLine($info2['intro']);
+        }
+
+        $this->assign('list',$list);
+        $this->display();
+    }
+
 
     public function zhaoPin(){
         $this->display();
