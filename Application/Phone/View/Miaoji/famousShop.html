@@ -47,7 +47,31 @@
                 </div>
             </div>
 
-            <div class="yspanel">
+            <div class="yspanel margin-top30">
+                <div class="yspanel-line">
+                    <h3 class="gray-text1 small-text">代金券免费领</h3>
+                </div>
+                <div class="yspanel-line">
+                    <volist name="couponList" id="info">
+                        <a class="coupon-item col-50" href="{:UC('Activity/couponDetail',array('id'=>$info['id']))}">
+                            <div class="coupon-price">{$info['amount']}</div>
+                            <p class="coupon-title">
+                                {$info['name']}
+                                <br>
+                                点击进入领取
+                            </p>
+                            <div class="coupon-moreInfo">
+                                已抢：{$info['readyCount']}，剩余：<span class="red-text">{$info['leftCount']}</span>
+                            </div>
+                        </a>
+                    </volist>
+                </div>
+            </div>
+
+            <div class="yspanel margin-top30">
+                <div class="yspanel-line">
+                    <h3 class="gray-text1 small-text">特色商品</h3>
+                </div>
                 <div class="hot-activity-box">
                     <volist name="list" id="info">
                         <if condition="$info['imgUrl']">
@@ -80,10 +104,8 @@
                                 </a>
                                 <div class="activity-goods-infobox flex">
                                     <a class="activity-goods-contentBox flex-1 lk" href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}">
-                                        <p class="activity-goods-price">
-                                            特价：<span class="pp main-price">{$info['price']}</span>
+                                        特价：<span class="pp main-price">{$info['price']}</span>
                                         <div class="price-value remove-text op">{$info['original_price']}</div>
-                                        </p>
                                         <div class="activity-shopname gray-text">来自：<span class="orange-text sn">{$info['shopName']}</span></div>
                                     </a>
                                     <div class="like-box">
@@ -95,12 +117,8 @@
                             </div>
                         </if>
                     </volist>
-
-
                 </div>
             </div>
-
-
 
 
             <p class="gray-text1 text-center small-text margin-top30">

@@ -228,6 +228,13 @@ class MiaojiController extends Controller {
             $info2['intro'] = replaceLine($info2['intro']);
         }
 
+        $couponList = D('coupon')->where(array('status'=>1,'shop_id'=>$shopId))->select();
+        foreach($couponList as &$info){
+            $info['readyCount'] = D('coupon_user')->where(array('coupon_id'=>$info['id']))->count(1);
+            $info['leftCount'] = $info['max_limit'] - $info['readyCount'];
+        }
+
+        $this->assign('couponList',$couponList);
         $this->assign('list',$list);
         $this->display();
     }
