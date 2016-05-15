@@ -339,6 +339,18 @@ class TestController extends Controller {
 
 
     public function testShare(){
+        //调用微信JS的配置
+        $jsConfig = logic\WechatJsLogic::makeJSSignature(logic\WechatLogic::defaultWechatConfig());
+        $this->assign('jsConfig',$jsConfig);
+        //随机数
+        if(APP_STATUS == 'local'){
+            $rannum = generateCode();
+        }else{
+            $rannum = C('Version');
+        }
+        $this->assign('rannum',$rannum);
+
+
         $share['title'] = "邀请您入群的店多多";
         $share['intro'] = mb_substr("店多多客服邀请您加入本地优惠活动群，请查看，惊喜不断", 0, 500,'utf-8');
         $share['shareImg'] = "http://media.dianduoduo.top/UploadFile/jietu.png";
