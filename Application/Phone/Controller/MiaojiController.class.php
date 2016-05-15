@@ -209,6 +209,18 @@ class MiaojiController extends Controller {
     }
 
 
+    public function zhaoPin(){
+        $this->display();
+    }
+
+    public function zhuanRang(){
+
+    }
+
+    public function otherMsg(){
+
+    }
+
 
 
     private function getImgUrlList($ids){

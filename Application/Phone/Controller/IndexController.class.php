@@ -17,7 +17,6 @@ class IndexController extends Controller {
 
     /**
      * 首页
-     * @return [type] [description]
      */
     public function index(){
         $page = 1;

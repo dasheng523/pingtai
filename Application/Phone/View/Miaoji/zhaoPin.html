@@ -1,0 +1,56 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="showcase">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="block">
+                <p class="buttons-row">
+                    <a href="#" class="button active">招聘</a>
+                    <a href="#" class="button">转让</a>
+                    <a href="#" class="button">其他</a>
+                </p>
+            </div>
+
+            <div class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
+                <h3 class="text-center" style="padding: 20px 0;">招聘</h3>
+                <div class="yspanel-content-box2">
+                    本公司需要2名高级技术人员，从事网站开发，维护和测试工作，待遇5000元/月。
+                    <div class="text-center" style="padding: 30px 0;">
+                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe606;</i>电话联系</a>
+                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe608;</i>收藏信息</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
+                <h3 class="text-center" style="padding: 20px 0;">招聘</h3>
+                <div class="yspanel-content-box2">
+                    本公司需要2名高级技术人员，从事网站开发，维护和测试工作，待遇5000元/月。
+                    <div class="text-center" style="padding: 30px 0;">
+                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe606;</i>电话联系</a>
+                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe608;</i>收藏信息</a>
+                    </div>
+                </div>
+            </div>
+
+            <volist name="list" id="info">
+                <a class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
+                    <div class="yspanel-image-box">
+                        <div class="yspanel-image-textbox">- <span class="text">{$info['name']}</span> -</div>
+                        <img class="lazy yspanel-image-image" data-original="{$info['imglist']}">
+                    </div>
+                    <div class="yspanel-content-box2">
+                        {$info['intro']}
+                    </div>
+                </a>
+            </volist>
+
+            <p class="gray-text1 text-center small-text margin-top30">
+
+            </p>
+        </div>
+    </div>
+</block>

@@ -178,6 +178,29 @@ class AdminController extends Controller {
     }
 
 
+    public function bingShop(){
+        $shopId = I('get.shop_id');
+        $nickName = I('get.name');
+
+        $userlist = D('UserInfo')->where("nickname like '%$nickName%'")->select();
+        if(count($userlist)>1){
+            $this->error('存在多个用户');
+            return;
+        }
+
+        if(!$shopId){
+            $this->error('店铺不存在');
+            return;
+        }
+
+        $userId = $userlist[0]['user_id'];
+        D('shop')->where(array('id'=>$shopId))->save(array('user_id'=>$userId));
+        $shopName = D('shop')->where(array('id'=>$shopId))->getField('name');
+        $this->assign('shopName',$shopName);
+        $this->redirect('Shop/index', array('cate_id' => 2), 1, '操作成功，页面跳转中...');
+    }
+
+
     private static function changeImglist($imgstr){
         if(!$imgstr){
             return "";
