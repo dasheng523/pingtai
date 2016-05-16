@@ -222,10 +222,9 @@ class ActivityController extends Controller {
         $info['piclist'] = $piclist;
         $this->assign('info',$info);
 
-        $share['title'] = "特惠来咯：".$info['name']."---".$shopInfo;
+        $share['title'] = "特惠来咯：".$info['name'];
         $share['intro'] = delLine(mb_substr($info['intro'], 0, 500,'utf-8'));
         $this->assign('share',$share);
-
         $this->display();
     }
 
