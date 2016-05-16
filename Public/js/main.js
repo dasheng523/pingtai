@@ -432,6 +432,7 @@ var shopDetail = {
 
         $('#dignweiBtn').click(function () {
             wx.getLocation({
+                type: 'gcj02',
                 success: function (res) {
                     $('#lat').val(res.latitude);
                     $('#lng').val(res.longitude);

@@ -768,6 +768,7 @@ var uploadForm = {
     handler: function (e, pageId, $page) {
         $('#getLocationBtn').click(function(){
             wx.getLocation({
+                type: 'gcj02',
                 success: function (res) {
                     var val = res.latitude + ','+res.longitude;
                     $('#latlngInput').val(val);

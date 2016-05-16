@@ -71,7 +71,6 @@ class TestController extends Controller {
             }else{
                 print_r($info);
             }
-
         }
         //$data = baiduMapToSosoMap(22.6992070,110.3750580);
         echo "ok";
