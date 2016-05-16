@@ -23,7 +23,7 @@ body{background: #eee;font-size: 14px;}
 .text-line2{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 2;}
 .text-line{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 1;}
 
-
+.tip{color: #888888;display: block;text-align: center;font-size: 12px;padding: 10px 10px;}
 
 
 .gray-text1{color:#aaa;}
@@ -206,7 +206,7 @@ a.activity-goods-box{color: #333333;}
 .activity-coupon-head-value{font-size: 50px;}
 
 .coupon-myList-item{display: block;color: #333333;background: #fff;margin-top: 10px;}
-.coupon-myList-item .coupon-name{width: 150px;background: orange;color: #fff;text-align: center;height: 80px;padding-top: 18px;}
+.coupon-myList-item .coupon-name{width: 120px;background: orange;color: #fff;text-align: center;height: 80px;padding-top: 18px;}
 .coupon-myList-item .coupon-status{font-size: 16px;}
 .coupon-det{height: 80px;}
 .coupon-myList-footer{padding: 5px;text-align: center;color: deepskyblue;}

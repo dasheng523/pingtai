@@ -187,14 +187,29 @@ class UserUseEntityLogic
     /**
      * @param $userId
      * @return mixed
-     * 获取用户收藏商品
+     * 获取用户喜欢商品
      */
-    public static function getUserGoods($userId)
+    public static function getUserLikeGoods($userId)
     {
         return D('UserUseEntity')
             ->where(array("user_id=$userId",
                 'entity_type'=>C('EntityType_Goods'),
-                'use_type'=>C('UseType_Collection')))
+                'use_type'=>C('UseType_Like')))
+            ->order('id desc')
+            ->select();
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
+     * 获取用户喜欢的店铺
+     */
+    public static function getUserLikeShop($userId){
+        return D('UserUseEntity')
+            ->where(array("user_id=$userId",
+                'entity_type'=>C('EntityType_Shop'),
+                'use_type'=>C('UseType_Like')))
+            ->order('id desc')
             ->select();
     }
 
@@ -216,11 +231,11 @@ class UserUseEntityLogic
      * @param $userId
      * @param $goodsId
      * @return mixed
-     * 删除用户收藏的商品
+     * 删除用户喜欢的商品
      */
-    public static function delUserCollectionGoods($userId, $goodsId)
+    public static function delUserLikeGoods($userId, $goodsId)
     {
-        return self::delItem($userId,$goodsId,C('EntityType_Goods'),C('UseType_Collection'));
+        return self::delItem($userId,$goodsId,C('EntityType_Goods'),C('UseType_Like'));
     }
 
     /**

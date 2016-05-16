@@ -240,35 +240,6 @@ class ActivityController extends Controller {
         }
     }
 
-    /**
-     * 我的优惠券
-     */
-    public function couponUser(){
-        $uid = getUserId();
-        $list = D('coupon_user')->where(array('user_id'=>$uid))->select();
-        foreach($list as &$info){
-            $coupon = D('coupon')->where(array('id'=>$info['coupon_id']))->find();
-            $info['name'] = $coupon['name'];
-            $info['amount'] = $coupon['amount'];
-        }
-        $this->assign('list',$list);
-        $this->display();
-    }
-
-    public function couponUserDetail(){
-        $id = I('get.id');
-        $cu = D('coupon_user')->where(array('id'=>$id))->find();
-        $coupon = D('coupon')->where(array('id'=>$cu['coupon_id']))->find();
-        $shopInfo = D('Shop')->where(array('id'=>$coupon['shop_id']))->find();
-
-        $url = UC('Activity/useCoupon',array('id'=>$id));
-
-        $this->assign('url',urlencode($url));
-        $this->assign('cu',$cu);
-        $this->assign('coupon',$coupon);
-        $this->assign('shopInfo',$shopInfo);
-        $this->display();
-    }
 
     /**
      * 优惠券列表

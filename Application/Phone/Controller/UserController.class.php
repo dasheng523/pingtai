@@ -65,31 +65,108 @@ class UserController extends Controller {
         $this->display();
     }
 
+    /**
+     * 我的优惠券
+     */
+    public function couponUser(){
+        $uid = getUserId();
+        $list = D('coupon_user')->where(array('user_id'=>$uid))->select();
+        foreach($list as &$info){
+            $coupon = D('coupon')->where(array('id'=>$info['coupon_id']))->find();
+            $info['name'] = $coupon['name'];
+            $info['amount'] = $coupon['amount'];
+        }
+        $this->assign('list',$list);
+        $this->display();
+    }
 
     /**
-     * 我的收藏
+     * 优惠券详情
+     */
+    public function couponUserDetail(){
+        $id = I('get.id');
+        $cu = D('coupon_user')->where(array('id'=>$id))->find();
+        $coupon = D('coupon')->where(array('id'=>$cu['coupon_id']))->find();
+        $shopInfo = D('Shop')->where(array('id'=>$coupon['shop_id']))->find();
+
+        $url = UC('Activity/useCoupon',array('id'=>$id));
+
+        $this->assign('url',urlencode($url));
+        $this->assign('cu',$cu);
+        $this->assign('coupon',$coupon);
+        $this->assign('shopInfo',$shopInfo);
+        $this->display();
+    }
+
+
+    /**
+     * 我喜欢的商品
      */
     public function myGoods(){
-        $cll = logic\UserUseEntityLogic::getUserCollection(getUserId());
-        $this->assign('cll',$cll);
-
-        $goods = logic\UserUseEntityLogic::getUserGoods(getUserId());
+        $goods = logic\UserUseEntityLogic::getUserLikeGoods(getUserId());
+        foreach($goods as &$info){
+            $info['goodsInfo'] = logic\GoodsLogic::getGoodsDetail($info['entity_id']);
+            $info['goodsImg'] = logic\GoodsLogic::getGoodsFirstImgUrl($info['entity_id']);
+            $info['shopName'] = logic\ShopLogic::getShopNameById($info['goodsInfo']['shop_id']);
+            $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['entity_id'],C('EntityType_Goods'));
+        }
+        //print_r($goods);
         $this->assign('goods',$goods);
         $this->display();
     }
 
     /**
-     * 删除我收藏的商品
+     * 删除我喜欢的商品
      */
     public function delGoods(){
-        $goodsId = I('post.id');
-        $res = logic\UserUseEntityLogic::delUserCollectionGoods(getUserId(),$goodsId);
+        $goods = logic\UserUseEntityLogic::getUserLikeGoods(getUserId());
+        foreach($goods as &$info){
+            $info['goodsInfo'] = logic\GoodsLogic::getGoodsDetail($info['entity_id']);
+        }
+        $this->assign('goods',$goods);
+        $this->display();
+    }
+
+    /**
+     * 删除我喜欢的商品(执行)
+     */
+    public function delDoGoods(){
+        $goodsIds = I('post.ids');
+        $res = false;
+        foreach($goodsIds as $goodsId){
+            $res = logic\UserUseEntityLogic::delItemById($goodsId);
+        }
         if($res){
-            $this->success('操作成功');
+            $this->success('操作成功',UC('User/index'));
         }else{
             $this->error("操作失败");
         }
     }
+
+    public function myLikeShop(){
+        $shops = logic\UserUseEntityLogic::getUserLikeShop(getUserId());
+        foreach($shops as &$info){
+            $info['shopInfo'] = logic\ShopLogic::getShopInfoById($info['entity_id']);
+            $info['shopImg'] = logic\ShopLogic::getShopFirstImgUrl($info['entity_id']);
+            $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['entity_id'],C('EntityType_Shop'));
+            $info['isLike'] = 1;
+        }
+        print_r($shops);
+        $this->assign('shops',$shops);
+        $this->display();
+    }
+
+    public function unLike(){
+        $id = I('post.id');
+        $res = logic\UserUseEntityLogic::delItemById($id);
+        if($res){
+            $this->success('操作成功',UC('User/index'));
+        }else{
+            $this->error("操作失败");
+        }
+    }
+
+
 
     /**
      * 删除我收藏的妙集

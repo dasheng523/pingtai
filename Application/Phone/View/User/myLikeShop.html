@@ -1,0 +1,64 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="myLikeShop">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+
+            <notempty name="shops">
+                <div class="yspanel-line">
+                    <h3 class="gray-text1 small-text">我喜欢的店铺</h3>
+                </div>
+                <volist name="shops" id="info">
+                    <div class="yspanel margin-top30">
+                        <a href="{:UC('Miaoji/detail',array('id'=>$info['shopInfo']['id']))}">
+                            <div class="yspanel-titlebox flex">
+                                <div class="flex-1">
+                                    {$info['shopInfo']['name']}
+                                </div>
+                            </div>
+                            <div class="yspanel-image-box">
+                                <if condition="$info['shopImg']">
+                                    <img class="lazy yspanel-image-image" data-original="{$info['shopImg']}">
+                                </if>
+                            </div>
+                            <div class="yspanel-content-box text-line3">
+                                {$info['shopInfo']['intro']|strip_tags}
+                            </div>
+                        </a>
+                        <div class="yspanel-content-box">
+                            <div class="yspanel-ysbtnlist flex">
+                                <div class="flex-1">
+                                    <if condition="$info['isLike']">
+                                        <a class="ysbtn hover unLikeBtn" data-id="{$info['id']}"><i class="iconfont">&#xe608;</i> <span>{$info['likecount']}</span></a>
+                                        <else/>
+                                        <a class="ysbtn" data-id="{$info['id']}"><i class="iconfont">&#xe608;</i> <span>{$info['likecount']}</span></a>
+                                    </if>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yspanel-footer gray-text1 flex">
+                            <div class="flex-1">{$info['shopInfo']['address']}</div>
+                            <if condition="$info['shopInfo']['lat'] and $info['shopInfo']['lng']">
+                                <a class="lookmap" href="javascript:;"
+                                   data-lat="{$info['shopInfo']['lat']}"
+                                   data-lng="{$info['shopInfo']['lng']}"
+                                   data-name="{$info['shopInfo']['name']}"
+                                   data-address="{$info['shopInfo']['address']}">查看地图</a>
+                            </if>
+                        </div>
+                    </div>
+                </volist>
+                <else/>
+                <p class="gray-text1 text-center small-text margin-top30">
+                    您还没有喜欢店铺，点击<a href="{:UC('Miaoji/shopCate')}" external>便民店铺</a>逛逛吧
+                </p>
+            </notempty>
+
+        </div>
+
+    </div>
+</block>

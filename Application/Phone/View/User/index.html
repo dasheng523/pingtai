@@ -1,125 +1,40 @@
-<extend name="template/main" />
-
-<block name="css">
-</block>
-
+<extend name="template/temp" />
 <block name="content">
-    <div class="page page-current" id="IndexPublishNeed">
-        {$tplBar}
-        <div class="content">
-            <div class="userinfobox">
-                <img src="__PUBLIC__/images/head.jpg" class="userinfobox-img">
-                <div class="userinfobox-scorebox ">
-                    <h3>影响力:55664分</h3>
-                </div>
+    <div class="page" id="activityInfo">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
             </div>
-
-            <div class="content-block-title">每日影响力</div>
-            <div class="list-block inset" style="margin-bottom: 10px;">
-                <ul>
-                    <li class="item-content">
-                        <div class="item-media red-text">+  10</div>
-                        <div class="item-inner">
-                            <div class="item-title">
-                                每天访问 1/5
-                            </div>
-                            <span class="small-text green-text">未完成</span>
-                        </div>
-                    </li>
-                    <li class="item-content">
-                        <div class="item-media red-text">+20</div>
-                        <div class="item-inner">
-                            <div class="item-title">
-                                每天访问 1/5
-                            </div>
-                            <span class="small-text green-text">未完成</span>
-                        </div>
-                    </li>
-                    <li class="item-content">
-                        <div class="item-media red-text">+15</div>
-                        <div class="item-inner">
-                            <div class="item-title">
-                                每天访问 1/5
-                            </div>
-                            <span class="small-text green-text">未完成</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="list-block">
-                        <ul>
-                            <li>
-                                <a href="{:UC('Index/topbar')}" class="item-link item-content">
-                                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                                    <div class="item-inner">
-                                        <div class="item-title">影响力排行榜</div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
+            <div class="yspanel margin-top">
+                <div class="yspanel-line flex flex-align-center">
+                    <img src="__PUBLIC__/images/share2.jpg" style="width: 60px;">
+                    <div class="flex-1" style="margin-left: 15px;">
+                        <h3>夜声</h3>
+                        <div class="gray-text1">欢迎回到店多多</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-content">
-                    <div class="list-block">
-                        <ul>
-                            <li>
-                                <a href="{:UC('User/mycollection')}" class="item-link item-content">
-                                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                                    <div class="item-inner">
-                                        <div class="item-title">我的妙集</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{:UC('User/mylike')}" class="item-link item-content">
-                                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                                    <div class="item-inner">
-                                        <div class="item-title">喜欢的商品</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{:UC('User/mycomment')}" class="item-link item-content">
-                                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                                    <div class="item-inner">
-                                        <div class="item-title">我的评论</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{:UC('User/myinfo')}" class="item-link item-content">
-                                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                                    <div class="item-inner">
-                                        <div class="item-title">我的资料</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{:UC('Public/message')}" class="item-link item-content">
-                                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                                    <div class="item-inner">
-                                        <div class="item-title">攻略帮助</div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="yspanel margin-top">
+                <a class="yspanel-line block" href="{:UC('User/couponUser')}">
+                    我的优惠券
+                    <div style="float: right"> &gt </div>
+                </a>
+                <a class="yspanel-line block" href="{:UC('User/myGoods')}">
+                    我喜欢的商品
+                    <div style="float: right"> &gt </div>
+                </a>
+                <a class="yspanel-line block" href="{:UC('User/myLikeShop')}">
+                    我喜欢的店铺
+                    <div style="float: right"> &gt </div>
+                </a>
             </div>
 
-            <div class="bg-tip-text">
-                本公众号由北流市业翔技术开发部提供<br>
-                <a href="#">商务合作</a> | <a href="#">意见反馈</a>
-            </div>
-
-            <div style="height: 70px;width: 100%;"></div>
+            <p class="gray-text1 text-center small-text margin-top30">
+                店多多，汇聚您身边的优惠 | <a href="{:UC('User/objection')}" external>意见反馈</a>
+            </p>
         </div>
-    </div>
 
+    </div>
 </block>

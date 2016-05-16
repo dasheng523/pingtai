@@ -70,6 +70,11 @@ function createPageHandler(handleObj){
             if(handleObj.wechatReady){
                 handleObj.wechatReady();
             }
+
+            shareTitle = null;
+            shareIntro = null;
+            shareImg = null;
+            shareUrl = null;
         });
 
         //下拉刷新
@@ -332,13 +337,13 @@ function like(url,page){
         if($(this).hasClass('hover')){
             return;
         }
-        $count = $(this).find('span').html();
+        var count = $(this).find('span').html();
         var id = $(this).data('id');
         var context = this;
         $.post(domain+url,{id:id},function(rs){
             if(rs.status){
-                $count ++;
-                $(context).find('span').html($count);
+                count ++;
+                $(context).find('span').html(count);
                 $(context).addClass('hover');
             }else{
                 $.toast(rs.info);
@@ -346,6 +351,35 @@ function like(url,page){
         });
     });
 }
+
+function unLike(url,page){
+    if(!url){
+        url = "/index.php/Phone/User/unLike";
+    }
+    if(!page){
+        page = document;
+    }
+    $(page).on("click", ".unLikeBtn", function(){
+        if(!$(this).hasClass('hover')){
+            return;
+        }
+        var count = $(this).find('span').html();
+        var id = $(this).data('id');
+        var context = this;
+        $.post(domain+url,{id:id},function(rs){
+            if(rs.status){
+                count --;
+                $(context).find('span').html(count);
+                $(context).removeClass('hover');
+            }else{
+                $.toast(rs.info);
+            }
+        });
+    });
+}
+
+
+
 
 /*************** Bussiness *******************/
 var detail = {
@@ -647,6 +681,64 @@ var hotActivityGoodsInfo = {
     }
 };
 createPageHandler(hotActivityGoodsInfo);
+
+
+var myGoods = {
+    pageId:"#myGoods",
+    handler: function (e, pageId, $page) {
+
+        $('.showMenu').click(function () {
+            var buttons1 = [
+                {
+                    text: '移除喜欢的商品',
+                    onClick: function() {
+                        $.router.load(domain+"/index.php/Phone/User/delGoods", true);
+                    }
+                }
+            ];
+            var buttons2 = [
+                {
+                    text: '关注我们',
+                    onClick: function() {
+                        $.router.load(domain+"/index.php/Phone/Public/showMa", true);
+                    }
+                }
+            ];
+            var buttons3 = [
+                {
+                    text: '取消',
+                    bg: 'danger'
+                }
+            ];
+            var groups = [buttons1, buttons2,buttons3];
+            $.actions(groups);
+        });
+    }
+};
+createPageHandler(myGoods);
+
+
+
+var myGoodsDel = {
+    pageId:"#myGoodsDel",
+    handler: function (e, pageId, $page) {
+        $('#userLikeBack').click(function(){
+            backLoadPage(domain+"/index.php/Phone/User/myGoods.html");
+        });
+    }
+};
+createPageHandler(myGoodsDel);
+
+
+var myLikeShop = {
+    pageId:"#myLikeShop",
+    handler: function (e, pageId, $page) {
+        unLike(null,"#myLikeShop");
+    }
+};
+createPageHandler(myLikeShop);
+
+
 
 var testShare = {
     pageId:"#testShare",

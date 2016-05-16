@@ -1,0 +1,35 @@
+<extend name="template/temp" />
+
+<block name="content">
+    <div class="page page-current" id="myGoodsDel">
+        <div class="content">
+            <div style="margin-top: 10px">
+                <a class="ysbtn" id="userLikeBack">返回</a>
+            </div>
+
+            <form action="{:UC('User/delDoGoods')}" method="post">
+                <empty name="goods">
+                    <span class="tip">您还没有发布商品呢</span>
+                    <else/>
+                    <div class="weui_cells weui_cells_checkbox">
+                        <volist name="goods" id="info">
+                            <label class="weui_cell weui_check_label" for="s_{$info['id']}">
+                                <div class="weui_cell_hd">
+                                    <input type="checkbox" class="weui_check" name="ids[]" id="s_{$info['id']}" value="{$info['id']}">
+                                    <i class="weui_icon_checked"></i>
+                                </div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <p>{$info['goodsInfo']['name']}</p>
+                                </div>
+                            </label>
+                        </volist>
+                    </div>
+                </empty>
+
+                <div class="weui_btn_area">
+                    <button class="weui_btn weui_btn_warn" id="goodsDelBtn" type="submit">确认删除</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
