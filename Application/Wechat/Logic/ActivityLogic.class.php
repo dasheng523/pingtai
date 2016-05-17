@@ -90,7 +90,7 @@ class ActivityLogic
     public static function getActivityGoodsList($id)
     {
         $list = D('activity_goods')->where(array('activity_id'=>$id))->field('goods_id')->select();
-        $goodsList = array();
+        $goodsList = null;
         foreach($list as $info){
             $goodsInfo = GoodsLogic::getGoodsDetail($info['goods_id']);
             $imgurl = GoodsLogic::getGoodsFirstImgUrl($goodsInfo['id']);

@@ -27,6 +27,29 @@ function domainurl(){
     return 'http://'.$_SERVER['HTTP_HOST'].'/pingtai';
 }
 
+//判断字符串是否以某某开始
+function startsWith($haystack, $needle) {
+    return $needle === "" || strpos($haystack, $needle) === 0;
+}
+
+
+//获取远程图片
+function getImage($url = '', $fileName = '')
+{
+    $ch = curl_init();
+    $fp = fopen($fileName, 'wb');
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FILE, $fp);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+
+    curl_exec($ch);
+    curl_close($ch);
+    fclose($fp);
+}
+
 
 //获取数据库中sysconfig的配置值
 function getSysConfig($key){

@@ -58,6 +58,12 @@ class TestController extends Controller {
     }
 
     public function test(){
-        print_r(getUserId());
+        getImage("http://www.sijiaomao.com/imgs/sjmedu.jpg","./Public/sdfsdf.jpg");
+    }
+
+    public function testAutoReply(){
+        $reply = new \Wechat\Logic\AutoReplyLogic();
+        $rs = $reply->handle(array('content'=>"A"));
+        print_r($rs);
     }
 }
