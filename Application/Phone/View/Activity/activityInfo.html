@@ -84,7 +84,7 @@
                             <div class="text-center margin-top30 gray-text">没有活动商品</div>
                             <else/>
                             <volist name="goodsList" id="goodsinfo">
-                                <a class="activity-goods-box flex flex-align-center">
+                                <a class="activity-goods-box flex flex-align-center" href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$goodsinfo['id']))}">
                                     <img class="activity-goods-img" src="{$goodsinfo['imgurl']}" />
                                     <div class="activity-goods-infobox flex-1">
                                         <h3>{$goodsinfo['name']}</h3>
