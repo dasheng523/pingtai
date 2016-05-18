@@ -420,7 +420,7 @@ class OpenShopState{
                     setCurrentHandler($userKey,null);
 
                     $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
-                    return makeText('开店成功,点击<a href="'.$shopUrl.'">查看店铺</a>'."\n".'将您的店铺分享到朋友圈，可以快速提高人气。');
+                    return makeText('开店成功,点击<a href="'.$shopUrl.'">查看店铺</a>'."\n".'将您的店铺分享到朋友圈，可以快速提高人气。'."\n".'回复 92 ，可免费发布商品。');
                 }
             }
 
@@ -588,7 +588,7 @@ class PublishGoodsState{
                     setCurrentHandler($userKey,null);
 
                     $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
-                    return makeText('发布成功!点击<a href="'.$shopUrl.'">查看店铺</a>'."\n".'将您的店铺分享到朋友圈，可以快速提高人气。\n如需修改，可点击微信菜单中的“店多多”->"商家入口"进行管理。');
+                    return makeText('发布成功!点击<a href="'.$shopUrl.'">查看商品</a>'."\n".'将您的商品分享到朋友圈，可以快速提高人气。\n如需修改，可点击微信菜单中的“店多多”->"商家入口"进行管理。');
                 }
             }
 
