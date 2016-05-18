@@ -72,7 +72,8 @@ class TestController extends Controller {
         $weobj->valid();
         $msg = $weobj->getRev();
 
-        $picUrl = $msg->getRevPic();
+        $picMsg = $msg->getRevPic();
+        $picUrl = $picMsg['picurl'];
         $pathUrl = "/Public/upload/".ysuuid().".jpg";
         $state = 0;
         if(startsWith($picUrl,"http://") || startsWith($picUrl,"https://")){
