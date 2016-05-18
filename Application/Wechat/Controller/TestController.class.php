@@ -66,4 +66,21 @@ class TestController extends Controller {
         $rs = $reply->handle(array('pic'=>"https://mp.weixin.qq.com/misc/getheadimg?fakeid=oqJLbt4_RQYlkGuGOVS8PRHJXv4o&token=1282952168&lang=zh_CN",'type'=>'image'));
         print_r($rs);
     }
+
+    public function testImgGet(){
+        $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
+        $weobj->valid();
+        $msg = $weobj->getRev();
+
+        $picUrl = $msg->getRevPic();
+        $pathUrl = "/Public/upload/".ysuuid().".jpg";
+        $state = 0;
+        if(startsWith($picUrl,"http://") || startsWith($picUrl,"https://")){
+            getImage($picUrl,'.'.$pathUrl);
+            $state = 55;
+        }
+
+        $weobj->text($picUrl . $state)->reply();
+
+    }
 }

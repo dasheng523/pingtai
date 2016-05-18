@@ -266,8 +266,6 @@ class OpenShopState{
             return makeText('点击<a href="'. $pad .'">商家入口</a>'."\n".'即可管理您的店铺');
         }
 
-        //setCurrentHandler($userKey,null);
-        //$this->resetStep($userKey); return;
         $steps = $this->step();
         $currentStep = $this->currentStep($userKey);
         return $steps[$currentStep]($msg);
@@ -376,7 +374,7 @@ class OpenShopState{
                     $this->setInput($userKey,'intro',$text);
 
                     $this->nextStep($userKey);
-                    return makeText("请发送您一张店铺图片：");
+                    return makeText("请发送您一张店铺图片，建议横图片");
                 }
             },
             7 => function($msg){
@@ -413,9 +411,8 @@ class OpenShopState{
 
                     $this->resetStep($userKey);
 
-
                     $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
-                    return makeText('开店成功,点击<a href="'.$shopUrl.'">查看店铺</a>，即可看到您的店铺，将您的店铺分享到朋友圈，可以快速提高人气。');
+                    return makeText('开店成功,点击<a href="'.$shopUrl.'">查看店铺</a>'."\n".'将您的店铺分享到朋友圈，可以快速提高人气。');
                 }
             }
 
