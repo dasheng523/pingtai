@@ -420,7 +420,7 @@ class OpenShopState{
                     setCurrentHandler($userKey,null);
 
                     $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
-                    return makeText('开店成功,点击<a href="'.$shopUrl.'">查看店铺</a>'."\n".'将您的店铺分享到朋友圈，可以快速提高人气。'."\n".'回复 92 ，可免费发布商品。');
+                    return makeText('开店成功'."\n\n".'点击<a href="'.$shopUrl.'">查看店铺</a>'."\n\n".'将您的店铺分享到朋友圈，可以快速提高人气。'."\n".'回复 92 ，可免费发布商品。');
                 }
             }
 
@@ -479,7 +479,7 @@ class PublishGoodsState{
         if(!$shopId){
             setCurrentHandler($userKey,null);
             $pad = UC('Phone/Shop/index');
-            return makeText('您还未开店。您可以：'."\n".'1. 点击<a href="'. $pad .'">立即开店</a>进入页面开店'."\n".'2. 回复 A 直接申请开店');
+            return makeText('您还未开店。您可以：'."\n\n".'1. 点击<a href="'. $pad .'">立即开店</a>进入页面开店'."\n".'2. 回复 A 直接申请开店');
         }
 
         $steps = $this->step();
@@ -492,7 +492,7 @@ class PublishGoodsState{
             0 => function($msg){
                 $userKey = getUserKey($msg);
                 $this->nextStep($userKey);
-                return makeText("您准备好一个商品的信息了吗？\n准备好了，请回复 1\n待会再来，请回复 0");
+                return makeText("\ue327您准备好一个商品的信息了吗？\n\n准备好了，请回复 1\n待会再来，请回复 0");
             },
             1 => function ($msg){
                 $text = getMsgContent($msg);
@@ -588,7 +588,7 @@ class PublishGoodsState{
                     setCurrentHandler($userKey,null);
 
                     $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
-                    return makeText('发布成功!点击<a href="'.$shopUrl.'">查看商品</a>即可看到您的商品。'."\n\n".'将您的商品分享到朋友圈，可以快速提高人气。'."\n\n".'如需修改，可点击微信菜单中的“店多多”->"商家入口"进行管理。');
+                    return makeText('发布成功!'."\n\n".'点击<a href="'.$shopUrl.'">查看商品</a>即可看到您的商品。'."\n\n".'将您的商品分享到朋友圈，可以快速提高人气。'."\n\n".'如需修改，可点击微信菜单中的“店多多”->"商家入口"进行管理。');
                 }
             }
 
