@@ -598,30 +598,30 @@ class PublishGoodsState{
 
 
     private function setInput($userKey,$key,$value){
-        $input = S('OpenShop_'.$userKey);
+        $input = S('PublicGoods_'.$userKey);
         $input[$key] = $value;
-        S('OpenShop_'.$userKey,$input,1800);
+        S('PublicGoods_'.$userKey,$input,1800);
     }
 
     private function getInput($userKey){
-        return S('OpenShop_'.$userKey);
+        return S('PublicGoods_'.$userKey);
     }
 
     private function nextStep($userKey){
-        $step = S('OpenShopStep_'.$userKey);
+        $step = S('PublicGoodsStep_'.$userKey);
         if(!$step){
             $step = 0;
         }
         $step ++ ;
-        S('OpenShopStep_'.$userKey,$step,1800);
+        S('PublicGoodsStep_'.$userKey,$step,1800);
     }
 
     private function resetStep($userKey){
-        S('OpenShopStep_'.$userKey,null);
+        S('PublicGoodsStep_'.$userKey,null);
     }
 
     private function currentStep($userKey){
-        $step = S('OpenShopStep_'.$userKey);
+        $step = S('PublicGoodsStep_'.$userKey);
         if(!$step){
             $step = 0;
         }
