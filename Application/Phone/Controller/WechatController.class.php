@@ -10,7 +10,7 @@ class WechatController extends Controller {
         if($notContinue){
             return;
         }
-        //$this->autoReplyHandle($weobj);
+        $this->autoReplyHandle($weobj);
     }
 
     public function autoReplyHandle($weobj){
@@ -92,7 +92,6 @@ class WechatController extends Controller {
                             ),
                         );
                         $weobj->news($welcomeMsg)->reply();
-                        return 1;
                     }
                     else if($event['event'] == Wechat::EVENT_UNSUBSCRIBE){
                         \Think\Log::write('取消关注','DEBUG');
@@ -102,7 +101,7 @@ class WechatController extends Controller {
                     else{
                         $weobj->text(getSysConfig('wechat_welcome'))->reply();
                     }
-                    break;
+                    return 1;
                 case Wechat::MSGTYPE_IMAGE:
                     \Think\Log::write('图片消息','DEBUG');
                     break;
