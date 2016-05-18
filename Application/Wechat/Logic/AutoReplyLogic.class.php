@@ -21,23 +21,23 @@ function makeNews($news){
 
 //获取消息的用户ID
 function getUserKey($msg){
-    //return $msg->getRevFrom();
-    return 1;
+    return $msg->getRevFrom();
+    //return 1;
 }
 
 function getMsgContent($msg){
-    //return $msg->getRevContent();
-    return $msg['content'];
+    return $msg->getRevContent();
+    //return $msg['content'];
 }
 
 function getMsgType($msg){
-    //return $msg->getRevType();
-    return $msg['type'];
+    return $msg->getRevType();
+    //return $msg['type'];
 }
 
 function getMsgPic($msg){
-    //return $msg->getRevPic();
-    return $msg['pic'];
+    return $msg->getRevPic();
+    //return $msg['pic'];
 }
 
 
@@ -72,6 +72,11 @@ class AutoReplyLogic
         $openId = getUserKey($msg) ;
         if(!$openId){
             return makeText("非法请求");
+        }
+
+        $type = getMsgType($msg);
+        switch($type) {
+
         }
 
         //获得当前处理器，如果没有处理器，就初始化一个默认处理器
@@ -233,18 +238,16 @@ class MainState{
         //获取对应的菜单,暂不考虑子菜单
         $menuInfo = $this->findItem($menuKey);
         if(!$menuInfo){
-            return makeText("请按提示回复数字哦~");
+            $menuInfo = $this->findItem('M');
+        }
+        //先看是否有处理器，如果有就使用处理器处理数据，如果没有就直接返回resp数据
+        $menuHandler = $menuInfo['handler'];
+        if($menuHandler){
+            setCurrentHandler($userKey,$menuHandler);
+            return $menuHandler->handle($msg);
         }
         else{
-            //先看是否有处理器，如果有就使用处理器处理数据，如果没有就直接返回resp数据
-            $menuHandler = $menuInfo['handler'];
-            if($menuHandler){
-                setCurrentHandler($userKey,$menuHandler);
-                return $menuHandler->handle($msg);
-            }
-            else{
-                return $menuInfo['resp'];
-            }
+            return $menuInfo['resp'];
         }
 
     }
@@ -262,151 +265,177 @@ class MainState{
 
 class OpenShopState{
     public function handle($msg){
-        return "openShop";
-    }
-
-    public function step1($msg){
         $userKey = getUserKey($msg);
-        $this->nextStep($userKey);
-        return "
-            店多多服务号免费开店，您准备好开店了吗？（开店过程中，如果超30分钟不回复，需要回复 A 才能继续开店）\n
-            准备好了，请回复 1\n
-            待会再来，请回复 0
-        ";
+
+        $userId = D('wechat_user')->where(array('open_id'=>$userKey))->getField('user_id');
+        if(!$userId){
+            return makeText('数据异常，需要您重新关注店多多');
+        }
+        $shopId = D('shop')->where(array('user_id'=>$userId))->getField('id');
+        if($shopId){
+            $pad = UC('Phone/Shop/index');
+            return makeText('您已经开过店了，点击<a href="'. $pad .'">商家入口</a>即可管理您的店铺');
+        }
+
+        //setCurrentHandler($userKey,null);
+        //$this->resetStep($userKey); return;
+        $steps = $this->step();
+        $currentStep = $this->currentStep($userKey);
+        return $steps[$currentStep]($msg);
     }
 
-    public function step2($msg){
-        $text = getMsgContent($msg);
-        $userKey = getUserKey($msg);
-        if($text == 1){
-            $this->nextStep($userKey);
-            return makeText("请回复您的店铺名称：");
-        }else if($text == 0){
-            setCurrentHandler($userKey,null);
-            return makeText("如您准备好了，请回复 A 继续开店");
-        }
-        else{
-            return makeText("请按提示回复数字~");
-        }
-    }
-
-    public function step3($msg){
-        $type = getMsgType($msg);
-        if($type != "text"){
-            return makeText("请按提示回复文字");
-        }
-        else{
-            $text = getMsgContent($msg);
-            $userKey = getUserKey($msg);
-            $this->setInput($userKey,'name',$text);
-
-            $this->nextStep($userKey);
-            return makeText("请回复您的店铺手机号码：");
-        }
-    }
-
-    public function step4($msg){
-        $type = getMsgType($msg);
-        if($type != "text"){
-            return makeText("请按提示回复文字");
-        }
-        else{
-            $text = getMsgContent($msg);
-            $userKey = getUserKey($msg);
-            $this->setInput($userKey,'phone',$text);
-
-            $this->nextStep($userKey);
-            return makeText("请回复您的店铺地址：");
-        }
-    }
-
-    public function step5($msg){
-        $type = getMsgType($msg);
-        if($type != "text"){
-            return makeText("请按提示回复文字");
-        }
-        else{
-            $text = getMsgContent($msg);
-            $userKey = getUserKey($msg);
-            $this->setInput($userKey,'address',$text);
-
-            //获取分类
-            $coid = getLeafCollectionId(C('ShopCateId'));
-            $list = D('collection')->where(array('id'=>array('in',$coid)))->select();
-            $replyText = "";
-            foreach($list as $info){
-                $replyText .= $info['name'] . " 请回复 " .$info['id'] . "\n";
-            }
-
-            $this->nextStep($userKey);
-            return makeText("请回复您的店铺分类：\n" .$replyText);
-        }
-    }
-
-    public function step6($msg){
-        $type = getMsgType($msg);
-        if($type != "text"){
-            return makeText("请按提示回复文字");
-        }
-        else{
-            $text = getMsgContent($msg);
-            $userKey = getUserKey($msg);
-            $is = D('collection')->where(array('id'=>$text))->find();
-            if(!$is){
-                return makeText("该店铺分类不存在，请重新输入");
-            }
-            else{
-                $this->setInput($userKey,'coll_id',$text);
+    public function step(){
+        $steps = array(
+            0 => function($msg){
+                $userKey = getUserKey($msg);
                 $this->nextStep($userKey);
-                return makeText("请回复您的店铺介绍：");
+                return makeText("
+                    店多多服务号免费开店，您准备好开店了吗？（开店过程中，如果超30分钟不回复，需要回复 A 才能继续开店）\n
+                    准备好了，请回复 1\n
+                    待会再来，请回复 0
+                ");
+            },
+            1 => function ($msg){
+                $text = getMsgContent($msg);
+                $userKey = getUserKey($msg);
+                if($text == 1){
+                    $this->nextStep($userKey);
+                    return makeText("请回复您的店铺名称：");
+                }else if($text == 0){
+                    setCurrentHandler($userKey,null);
+                    $this->resetStep($userKey);
+                    return makeText("如您准备好了，请回复 A 继续开店");
+                }
+                else{
+                    return makeText("请按提示回复数字~");
+                }
+            },
+            2 => function ($msg){
+                $type = getMsgType($msg);
+                if($type != "text"){
+                    return makeText("请按提示回复文字");
+                }
+                else{
+                    $text = getMsgContent($msg);
+                    $userKey = getUserKey($msg);
+                    $this->setInput($userKey,'name',$text);
+
+                    $this->nextStep($userKey);
+                    return makeText("请回复您的店铺手机号码：");
+                }
+            },
+            3 => function($msg){
+                $type = getMsgType($msg);
+                if($type != "text"){
+                    return makeText("请按提示回复文字");
+                }
+                else{
+                    $text = getMsgContent($msg);
+                    $userKey = getUserKey($msg);
+                    $this->setInput($userKey,'phone',$text);
+
+                    $this->nextStep($userKey);
+                    return makeText("请回复您的店铺地址：");
+                }
+            },
+            4 => function($msg){
+                $type = getMsgType($msg);
+                if($type != "text"){
+                    return makeText("请按提示回复文字");
+                }
+                else{
+                    $text = getMsgContent($msg);
+                    $userKey = getUserKey($msg);
+                    $this->setInput($userKey,'address',$text);
+
+                    //获取分类
+                    $coid = getLeafCollectionId(C('ShopCateId'));
+                    $list = D('collection')->where(array('id'=>array('in',$coid)))->select();
+                    $replyText = "";
+                    foreach($list as $info){
+                        $replyText .= $info['name'] . " 请回复 " .$info['id'] . "\n";
+                    }
+
+                    $this->nextStep($userKey);
+                    return makeText("请回复您的店铺分类：\n" .$replyText);
+                }
+            },
+            5 => function($msg){
+                $type = getMsgType($msg);
+                if($type != "text"){
+                    return makeText("请按提示回复文字");
+                }
+                else{
+                    $text = getMsgContent($msg);
+                    $userKey = getUserKey($msg);
+                    $is = D('collection')->where(array('id'=>$text))->find();
+                    if(!$is){
+                        return makeText("该店铺分类不存在，请重新输入");
+                    }
+                    else{
+                        $this->setInput($userKey,'coll_id',$text);
+                        $this->nextStep($userKey);
+                        return makeText("请回复您的店铺介绍：");
+                    }
+                }
+            },
+            6 => function($msg){
+                $type = getMsgType($msg);
+                if($type != "text"){
+                    return makeText("请按提示回复文字");
+                }
+                else{
+                    $text = getMsgContent($msg);
+                    $userKey = getUserKey($msg);
+
+                    $this->setInput($userKey,'intro',$text);
+
+                    $this->nextStep($userKey);
+                    return makeText("请发送您一张店铺图片：");
+                }
+            },
+            7 => function($msg){
+                $type = getMsgType($msg);
+                if($type != "image"){
+                    return makeText("请按提示回复店铺图片");
+                }
+                else{
+                    $userKey = getUserKey($msg);
+                    $picUrl = getMsgPic($msg);
+                    $pathUrl = "/Public/upload/".ysuuid().".jpg";
+                    if(startsWith($picUrl,"http://") || startsWith($picUrl,"https://")){
+                        getImage($picUrl,'.'.$pathUrl);
+                        $this->setInput($userKey,'path',$pathUrl);
+                    }
+
+                    $data = $this->getInput($userKey);
+                    $shopInfo['user_id'] = D('wechat_user')->where(array('open_id'=>$userKey))->getField('user_id');
+                    $shopInfo['name'] = $data['name'];
+                    $shopInfo['address'] = $data['address'];
+                    $shopInfo['phone'] = $data['phone'];
+                    $shopInfo['coll_id'] = $data['coll_id'];
+                    $shopInfo['intro'] = $data['intro'];
+                    $shopInfo['ctime'] = time();
+                    $id = ShopLogic::createShop($shopInfo);
+
+                    $media['name'] = 's';
+                    $media['path'] = $data['path'];
+                    $media['url'] = __ROOT__ . $data['path'];
+                    $media['media_type'] = C('MediaType_Image');
+                    $media['entity_id'] = $id;
+                    $media['entity_type'] = C('EntityType_Shop');
+                    MediaLogic::addMediaInfo($media);
+
+                    $this->resetStep($userKey);
+
+
+                    $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
+                    return makeText('开店成功,点击<a href="'.$shopUrl.'">查看店铺</a>，即可看到您的店铺，将您的店铺分享到朋友圈，可以快速提高人气。');
+                }
             }
-        }
-    }
 
-    public function step7($msg){
-        $type = getMsgType($msg);
-        if($type != "text"){
-            return makeText("请按提示回复文字");
-        }
-        else{
-            $text = getMsgContent($msg);
-            $userKey = getUserKey($msg);
-
-            $this->setInput($userKey,'intro',$text);
-
-            $this->nextStep($userKey);
-            return makeText("请发送您一张店铺图片：");
-        }
-    }
-
-    public function step8($msg){
-        $type = getMsgType($msg);
-        if($type != "image"){
-            return makeText("请按提示回复店铺图片");
-        }
-        else{
-            $picUrl = getMsgPic($msg);
-            $pathUrl = "/Public/upload/".ysuuid().".jpg";
-            if(startsWith($picUrl,"http://")){
-                getImage($picUrl,'.'.$pathUrl);
-            }
-            $userKey = getUserKey($msg);
-            $this->setInput($userKey,'path',$pathUrl);
-
-            $data = $this->getInput($userKey);
-            $shopInfo['user_id'] = D('wechat_user')->where(array('open_id'=>$userKey))->getField('user_id');
-            $shopInfo['name'] = $data['name'];
-            $shopInfo['address'] = $data['address'];
-            $shopInfo['phone'] = $data['phone'];
-            $shopInfo['coll_id'] = $data['coll_id'];
-            $shopInfo['ctime'] = time();
-            $id = ShopLogic::createShop($shopInfo);
-
-            $this->nextStep($userKey);
-
-            $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
-            return makeText('开店成功,点击<a href="'.$shopUrl.'">查看店铺</a>，即可看到您的店铺，将您的店铺分享到朋友圈，可以快速提高人气。');
-        }
+        );
+        return $steps;
     }
 
 
@@ -427,6 +456,10 @@ class OpenShopState{
         }
         $step ++ ;
         S('OpenShopStep_'.$userKey,$step,1800);
+    }
+
+    private function resetStep($userKey){
+        S('OpenShopStep_'.$userKey,null);
     }
 
     private function currentStep($userKey){

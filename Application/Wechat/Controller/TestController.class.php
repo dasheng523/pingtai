@@ -63,7 +63,7 @@ class TestController extends Controller {
 
     public function testAutoReply(){
         $reply = new \Wechat\Logic\AutoReplyLogic();
-        $rs = $reply->handle(array('content'=>"A"));
+        $rs = $reply->handle(array('pic'=>"https://mp.weixin.qq.com/misc/getheadimg?fakeid=oqJLbt4_RQYlkGuGOVS8PRHJXv4o&token=1282952168&lang=zh_CN",'type'=>'image'));
         print_r($rs);
     }
 }

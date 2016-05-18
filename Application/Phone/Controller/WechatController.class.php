@@ -6,13 +6,29 @@ use Common\Lib\Wechat;
 class WechatController extends Controller {
     public function index(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
+        $this->defaultHandle($weobj);
+        $this->autoReplyHandle($weobj);
+
+    }
+
+    public function autoReplyHandle($weobj){
+        $reply = new \Wechat\Logic\AutoReplyLogic();
+        $rs = $reply->handle($weobj);
+        if($rs['type'] == 'text'){
+            $weobj->text($rs['content'])->reply();
+        }else if($rs['type'] == 'news'){
+            $weobj->news($rs['content'])->reply();
+        }
+    }
+
+    public function defaultHandle($weobj){
         //验证微信请求
         $weobj->valid();
 
         if(IS_POST){
             \Think\Log::write('微信客户端请求：','DEBUG');
             \Think\Log::write(json_encode($weobj->getRev()->getRevData(),true),'DEBUG');
-            
+
             $type = $weobj->getRev()->getRevType();
             switch($type) {
                 case Wechat::MSGTYPE_TEXT:

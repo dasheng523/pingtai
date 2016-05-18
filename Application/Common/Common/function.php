@@ -22,10 +22,6 @@ function currentUrl(){
     }
     return 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$query;
 }
-//获得项目根路径
-function domainurl(){
-    return 'http://'.$_SERVER['HTTP_HOST'].'/pingtai';
-}
 
 //判断字符串是否以某某开始
 function startsWith($haystack, $needle) {
@@ -169,6 +165,25 @@ function replaceLine($str){
 
 function delLine($str){
     return str_replace("\n",'',$str);
+}
+
+
+/**
+ * 获取叶子妙集
+ */
+function getLeafCollectionId($rootId){
+    $rs = array();
+    $list = D('collection')->field('id')->where(array('parent_id'=>$rootId))->select();
+    if($list){
+        foreach($list as $info){
+            $leafs = getLeafCollectionId($info['id']);
+            $rs = array_merge($rs,$leafs);
+        }
+    }
+    else{
+        $rs[] = $rootId;
+    }
+    return $rs;
 }
 
 
