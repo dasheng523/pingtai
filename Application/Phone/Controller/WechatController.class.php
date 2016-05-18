@@ -6,9 +6,11 @@ use Common\Lib\Wechat;
 class WechatController extends Controller {
     public function index(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
-        $this->defaultHandle($weobj);
+        $notContinue = $this->defaultHandle($weobj);
+        if($notContinue){
+            return;
+        }
         $this->autoReplyHandle($weobj);
-
     }
 
     public function autoReplyHandle($weobj){
@@ -90,6 +92,7 @@ class WechatController extends Controller {
                             ),
                         );
                         $weobj->news($welcomeMsg)->reply();
+                        return 1;
                     }
                     else if($event['event'] == Wechat::EVENT_UNSUBSCRIBE){
                         \Think\Log::write('取消关注','DEBUG');
