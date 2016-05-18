@@ -263,7 +263,7 @@ class OpenShopState{
         $shopId = D('shop')->where(array('user_id'=>$userId))->getField('id');
         if($shopId){
             $pad = UC('Phone/Shop/index');
-            return makeText('您已经开过店了，点击<a href="'. $pad .'">商家入口</a>即可管理您的店铺');
+            return makeText('点击<a href="'. $pad .'">商家入口</a>'."\n".'即可管理您的店铺');
         }
 
         //setCurrentHandler($userKey,null);
@@ -289,16 +289,16 @@ class OpenShopState{
                 }else if($text == 0){
                     setCurrentHandler($userKey,null);
                     $this->resetStep($userKey);
-                    return makeText("如您准备好了，请回复 A 继续开店");
+                    return makeText("已成功取消开店！如果您准备好了，回复 A 即可继续开店");
                 }
                 else{
-                    return makeText("请按提示回复数字~");
+                    return makeText("请按照提示回复 1 或 0");
                 }
             },
             2 => function ($msg){
                 $type = getMsgType($msg);
                 if($type != "text"){
-                    return makeText("请按提示回复文字");
+                    return makeText("请按提示回复输入您的店铺名称");
                 }
                 else{
                     $text = getMsgContent($msg);
@@ -312,7 +312,7 @@ class OpenShopState{
             3 => function($msg){
                 $type = getMsgType($msg);
                 if($type != "text"){
-                    return makeText("请按提示回复文字");
+                    return makeText("请按提示回复输入您的店铺手机号码");
                 }
                 else{
                     $text = getMsgContent($msg);
@@ -326,7 +326,7 @@ class OpenShopState{
             4 => function($msg){
                 $type = getMsgType($msg);
                 if($type != "text"){
-                    return makeText("请按提示回复文字");
+                    return makeText("请按提示回复输入您的店铺地址");
                 }
                 else{
                     $text = getMsgContent($msg);
@@ -348,7 +348,7 @@ class OpenShopState{
             5 => function($msg){
                 $type = getMsgType($msg);
                 if($type != "text"){
-                    return makeText("请按提示回复文字");
+                    return makeText("请按提示回复数字");
                 }
                 else{
                     $text = getMsgContent($msg);
@@ -367,7 +367,7 @@ class OpenShopState{
             6 => function($msg){
                 $type = getMsgType($msg);
                 if($type != "text"){
-                    return makeText("请按提示回复文字");
+                    return makeText("请按提示回复您的店铺介绍");
                 }
                 else{
                     $text = getMsgContent($msg);
