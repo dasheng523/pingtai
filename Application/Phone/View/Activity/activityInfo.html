@@ -84,17 +84,16 @@
                             <div class="text-center margin-top30 gray-text">没有活动商品</div>
                             <else/>
                             <volist name="goodsList" id="goodsinfo">
-                                <div class="activity-goods-box flex flex-align-center">
+                                <a class="activity-goods-box flex flex-align-center">
                                     <img class="activity-goods-img" src="{$goodsinfo['imgurl']}" />
                                     <div class="activity-goods-infobox flex-1">
                                         <h3>{$goodsinfo['name']}</h3>
                                         <div class="price">价格：<span class="price-value">{$goodsinfo['price']}</span></div>
                                         <div class="gray-text text-line3 intro">{$goodsinfo['intro']}</div>
                                     </div>
-                                </div>
+                                </a>
                             </volist>
                         </empty>
-
                     </div>
 
                 </div>
