@@ -185,7 +185,7 @@ class MainState{
             //商家菜单
             array(
                 "key" => array("9","商家"),
-                "resp" => makeText(" 回复 91：进入商家入口\n 回复 92：发布特色商品\n 回复 93：发布促销活动\n 回复 94：修改门面图片"),
+                "resp" => makeText(" 回复 91：进入商家入口\n 回复 92：发布特色商品\n 回复 93：修改门面图片"),
             ),
             //商家入口
             array(
@@ -204,15 +204,10 @@ class MainState{
                 "key" => array("92"),
                 "handler" => new PublishGoodsState(),
             ),
-            //发布促销活动
-            array(
-                "key" => array("93"),
-                "handler" => new OpenShopState(),
-            ),
             //修改门面图片
             array(
-                "key" => array("94"),
-                "handler" => new OpenShopState(),
+                "key" => array("93"),
+                "handler" => new ShopBannerState(),
             ),
         );
 
@@ -493,7 +488,7 @@ class PublishGoodsState{
             0 => function($msg){
                 $userKey = getUserKey($msg);
                 $this->nextStep($userKey);
-                return makeText("\ue327您准备好一个商品的信息了吗？\n\n准备好了，请回复 1\n待会再来，请回复 0");
+                return makeText("您准备好一个商品的信息了吗？\n\n准备好了，请回复 1\n待会再来，请回复 0");
             },
             1 => function ($msg){
                 $text = getMsgContent($msg);
@@ -630,4 +625,95 @@ class PublishGoodsState{
     }
 }
 
+/**
+ * Class ShopBannerState
+ * @package Wechat\Logic
+ * 修改店铺门面流程
+ */
+class ShopBannerState{
+    public function handle($msg){
+        $userKey = getUserKey($msg);
+
+        $userId = D('wechat_user')->where(array('open_id'=>$userKey))->getField('user_id');
+        if(!$userId){
+            return makeText('数据异常，需要您重新关注店多多');
+        }
+        $shopId = D('shop')->where(array('user_id'=>$userId))->getField('id');
+        if(!$shopId){
+            setCurrentHandler($userKey,null);
+            $pad = UC('Phone/Shop/index');
+            return makeText('您还未开店。您可以：'."\n\n".'1. 点击<a href="'. $pad .'">立即开店</a>进入页面开店'."\n".'2. 回复 A 直接申请开店');
+        }
+
+        $steps = $this->step();
+        $currentStep = $this->currentStep($userKey);
+        return $steps[$currentStep]($msg);
+    }
+
+    public function step(){
+        $steps = array(
+            0 => function($msg){
+                $userKey = getUserKey($msg);
+                $this->nextStep($userKey);
+                return makeText("请发送店铺图片给我们，推荐是横图片。目前暂不支持小视频。");
+            },
+            1 => function($msg){
+                $type = getMsgType($msg);
+                if($type != "image"){
+                    return makeText("请按提示回复商品图片，目前还不支持小视频哦");
+                }
+                else{
+                    $userKey = getUserKey($msg);
+                    $picUrl = getMsgPic($msg);
+                    $pathUrl = "/Public/upload/".ysuuid().".jpg";
+                    if(startsWith($picUrl,"http://") || startsWith($picUrl,"https://")){
+                        getImage($picUrl,'.'.$pathUrl);
+                    }
+
+                    $userId = D('wechat_user')->where(array('open_id'=>$userKey))->getField('user_id');
+                    $shop = ShopLogic::getShopInfoByUserId($userId);
+
+                    $media['name'] = 's';
+                    $media['path'] = $pathUrl;
+                    $media['url'] = __ROOT__ . $pathUrl;
+                    $media['media_type'] = C('MediaType_Image');
+                    $media['entity_id'] = $shop['id'];
+                    $media['entity_type'] = C('EntityType_Shop');
+                    MediaLogic::addMediaInfo($media);
+
+                    $this->resetStep($userKey);
+                    setCurrentHandler($userKey,null);
+
+                    $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$shop['id']));
+                    return makeText('发布成功!'."\n\n".'点击<a href="'.$shopUrl.'">查看店铺</a>即可看到您的店铺图片。'."\n\n".'将您的商品分享到朋友圈，可以快速提高人气。');
+                }
+            }
+
+        );
+        return $steps;
+    }
+
+
+
+    private function nextStep($userKey){
+        $step = S('ShopBannerStep_'.$userKey);
+        if(!$step){
+            $step = 0;
+        }
+        $step ++ ;
+        S('ShopBannerStep_'.$userKey,$step,1800);
+    }
+
+    private function resetStep($userKey){
+        S('ShopBannerStep_'.$userKey,null);
+    }
+
+    private function currentStep($userKey){
+        $step = S('ShopBannerStep_'.$userKey);
+        if(!$step){
+            $step = 0;
+        }
+        return $step;
+    }
+}
 

@@ -46,13 +46,6 @@ function getImage($url = '', $fileName = '')
     fclose($fp);
 }
 
-//转码函数用来恢复emoji表情的
-function unicode2utf8($str) { // unicode编码转化，用于显示emoji表情
-    $str = '{"result_str":"' . $str . '"}'; // 组合成json格式
-    $strarray = json_decode ( $str, true ); // json转换为数组，利用 JSON 对 \uXXXX 的支持来把转义符恢复为 Unicode 字符
-    return $strarray ['result_str'];
-}
-
 
 //获取数据库中sysconfig的配置值
 function getSysConfig($key){

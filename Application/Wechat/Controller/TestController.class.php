@@ -84,4 +84,9 @@ class TestController extends Controller {
         $weobj->text(print_r($picUrl,true))->reply();
 
     }
+
+    public function testmoji(){
+        echo "\ue327您准备好一个商品的信息了吗？\n\n准备好了，请回复 1\n待会再来，请回复 0";
+        echo unicode2utf8("\ue327您准备好一个商品的信息了吗？\n\n准备好了，请回复 1\n待会再来，请回复 0");
+    }
 }
