@@ -36,7 +36,9 @@ function getMsgType($msg){
 }
 
 function getMsgPic($msg){
-    return $msg->getRevPic();
+    $picMsg = $msg->getRevPic();
+    $picUrl = $picMsg['picurl'];
+    return $picUrl;
     //return $msg['pic'];
 }
 
