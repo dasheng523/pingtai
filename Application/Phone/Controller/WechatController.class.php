@@ -10,7 +10,7 @@ class WechatController extends Controller {
         if($notContinue){
             return;
         }
-        $this->autoReplyHandle($weobj);
+        //$this->autoReplyHandle($weobj);
     }
 
     public function autoReplyHandle($weobj){
