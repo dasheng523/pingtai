@@ -80,7 +80,7 @@ class TestController extends Controller {
             $state = 55;
         }
 
-        $weobj->text($picUrl . $state)->reply();
+        $weobj->text($state)->reply();
 
     }
 }
