@@ -62,36 +62,12 @@ class WechatController extends Controller {
                         //如果不存在，就保存用户数据
                         $isExist = \Wechat\Logic\WechatUserLogic::isExistOpenId($openId);
                         if(!$isExist){
-                            $title = '店多多正式上线啦！';
                             $wechatUserInfo = $weobj->getUserInfo($openId);
                             if($wechatUserInfo){
                                 \Wechat\Logic\WechatUserLogic::createWechatUser($wechatUserInfo);
                             }
-                        }else{
-                            $title = '店多多正式上线啦';
                         }
-
-                        $welcomeMsg = array(
-                            array(
-                                'Title'=>$title,
-                                'Description'=>'我们为您准备了几张优惠券，让您在五一玩得开心。',
-                                'PicUrl'=>'http://media.dianduoduo.top/collect/p1.png',
-                                'Url'=>UC('Activity/couponList')
-                            ),
-                            array(
-                                'Title'=>'各大商家齐让利，优惠不断，点击来看吧！',
-                                'Description'=>'赶快点击进入看看，不容错过哦。',
-                                'PicUrl'=>'http://media.dianduoduo.top/collect/p3.png',
-                                'Url'=>UC('Activity/hotActivity')
-                            ),
-                            array(
-                                'Title'=>'点击这里，再也不会错过超市每日特价了',
-                                'Description'=>'赶快点击进入看看，不容错过哦。',
-                                'PicUrl'=>'http://media.dianduoduo.top/collect/p2.png',
-                                'Url'=>UC('Activity/showAllActivity')
-                            ),
-                        );
-                        $weobj->news($welcomeMsg)->reply();
+                        return 0;
                     }
                     else if($event['event'] == Wechat::EVENT_UNSUBSCRIBE){
                         \Think\Log::write('取消关注','DEBUG');
