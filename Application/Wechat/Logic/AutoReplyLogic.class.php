@@ -11,6 +11,7 @@ namespace Wechat\Logic;
 
 //制造一个文本回复
 function makeText($text){
+    $text = unicode2utf8($text);
     return array('type'=>'text','content'=>$text);
 }
 
