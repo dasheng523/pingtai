@@ -127,7 +127,7 @@ class MainState{
             //主菜单
             array(
                 "key" => array("M","菜单","帮助"),
-                "resp" => makeText("欢迎访问店多多，店多多汇聚您身边的优惠！请问您需要什么帮助？\n 回复 1：免费领优惠券\n 回复 2：查看热门活动\n 回复 3：看看优惠商品\n 回复 4：随便逛逛商店\n\n 免费开店，请回复 A\n 商家入口，请回复 9\n\n 回复 M 可重现本菜单"),
+                "resp" => makeText("欢迎访问店多多，店多多汇聚您身边的优惠！请问您需要什么帮助？\n 回复 1：免费领优惠券\n 回复 2：查看热门活动\n 回复 3：看看优惠商品\n 回复 4：随便逛逛商店\n\n 免费开店，请回复 A\n 店铺管理，请回复 9\n\n 回复 M 可重现本菜单"),
             ),
             //免费领优惠券
             array(
@@ -136,7 +136,7 @@ class MainState{
                     array(
                         'Title'=>'免费领取优惠券',
                         'Description'=>'店多多联合商家推出众多优惠券，大家千万不要错过。',
-                        'PicUrl'=>'http://www.domain.com/1.jpg',
+                        'PicUrl'=>'http://media.dianduoduo.top/UploadFile/89s58PICjAk_1024.jpg',
                         'Url'=>UC('Phone/Activity/couponList'),
                     ),
                 )),
@@ -148,7 +148,7 @@ class MainState{
                     array(
                         'Title'=>'查看热门活动',
                         'Description'=>'北流街的热门活动，省钱必备，赶快过来看看。',
-                        'PicUrl'=>'http://www.domain.com/1.jpg',
+                        'PicUrl'=>'http://media.dianduoduo.top/UploadFile/dfsdfghhhh.jpg',
                         'Url'=>UC('Phone/Activity/showAllActivity'),
                     ),
                 )),
@@ -160,7 +160,7 @@ class MainState{
                     array(
                         'Title'=>'看看优惠商品',
                         'Description'=>'众多优惠商品齐聚店多多，包你有着数。',
-                        'PicUrl'=>'http://www.domain.com/1.jpg',
+                        'PicUrl'=>'http://media.dianduoduo.top/UploadFile/b08269f1197cacb3.jpg',
                         'Url'=>UC('Phone/Activity/hotActivity'),
                     ),
                 )),
@@ -172,7 +172,7 @@ class MainState{
                     array(
                         'Title'=>'随便逛逛商店',
                         'Description'=>'随便逛逛商店，万一发现什么好东西呢。',
-                        'PicUrl'=>'http://www.domain.com/1.jpg',
+                        'PicUrl'=>'http://media.dianduoduo.top/UploadFile/55684512.png',
                         'Url'=>UC('Phone/Miaoji/shopCate'),
                     ),
                 )),
@@ -192,9 +192,9 @@ class MainState{
                 "key" => array("91"),
                 "resp" => makeNews(array(
                     array(
-                        'Title'=>'商家入口',
+                        'Title'=>'商家管理',
                         'Description'=>'点击进入，可以管理自己店铺的信息。',
-                        'PicUrl'=>'http://www.domain.com/1.jpg',
+                        'PicUrl'=>'http://media.dianduoduo.top/UploadFile/b5dff962eec0.jpg',
                         'Url'=>UC('Phone/Shop/index'),
                     ),
                 )),
