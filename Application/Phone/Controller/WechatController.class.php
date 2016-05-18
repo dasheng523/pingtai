@@ -99,7 +99,7 @@ class WechatController extends Controller {
                     }
                     //其他内容
                     else{
-                        $weobj->text(getSysConfig('wechat_welcome'))->reply();
+                        return 0;
                     }
                     return 1;
                 case Wechat::MSGTYPE_IMAGE:
