@@ -1,0 +1,74 @@
+body{background: #F0E7E4;padding-bottom: 10px;}
+*{color: #666;font-size: 14px;font-family: "微软雅黑";}
+
+.margin-top{margin-top: 10px;}
+.margin-top30{margin-top: 30px;}
+
+
+.main-size{font-size: 16px;}
+.small-text{font-size: 12px;}
+
+.text-center{text-align: center;}
+.text-right{text-align: right;}
+
+.orange-text{color: orange;}
+.blank-text{color: #000000;}
+.main-color{color:#AF9083;}
+
+.panel{background: #FFFFFF;}
+
+.box{padding: 10px;}
+.inline-box{width: 90%;margin: 0 auto;}
+
+.main-btn{width: 100%;background: #AF9083;color: #fff;border: none;text-align: center;padding: 10px;}
+
+.total-price-box{text-align: right;margin: 10px;}
+.bottom-tip{margin-top: 30px; font-size: 12px;color: #666666;text-align: center;}
+
+.respImg{width: 100%;max-height: 180px;}
+
+.countBox{vertical-align: middle;}
+.countBox span{display: inline-block;background: #AF9083;color: #fff;width: 45px;line-height:40px;text-align: center;font-size: 18px;vertical-align: middle;}
+
+.flex{
+    /* 设置弹性布局 */
+    display:-webkit-box;/* android 2.1-3.0, ios 3.2-4.3 */
+    display:-webkit-flex;/* Chrome 21+ */
+    display:-ms-flexbox;/* WP IE 10 */
+    display:flex;/* android 4.4 */
+}
+.flex-direction-column{
+    /* 设置弹性布局的方向，子元素按照在源文档中声明的顺序从上到下显示 */
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.flex-1{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    -ms-flex:1;
+    flex:1;
+}
+.flex-pack-center{
+    /* 水平布局下的子元素 水平居中 */
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.flex-align-center{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.flex-pack-justify{
+    /* 水平布局下的子元素 2端对齐 */
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
