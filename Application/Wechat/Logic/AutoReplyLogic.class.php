@@ -343,7 +343,7 @@ class OpenShopState{
                     }
 
                     $this->nextStep($userKey);
-                    return makeText("请回复您的店铺分类：\n" .$replyText);
+                    return makeText("请回复您的店铺分类（要回复前面的数字哦）：\n\n" .$replyText);
                 }
             },
             5 => function($msg){
@@ -356,7 +356,7 @@ class OpenShopState{
                     $userKey = getUserKey($msg);
                     $is = D('collection')->where(array('id'=>$text))->find();
                     if(!$is){
-                        return makeText("该店铺分类不存在，请重新输入");
+                        return makeText("该店铺分类不存在，请重新输入（要回复前面的数字哦）");
                     }
                     else{
                         $this->setInput($userKey,'coll_id',$text);
