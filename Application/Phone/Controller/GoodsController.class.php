@@ -32,6 +32,18 @@ class GoodsController extends Controller {
         $this->display();
     }
 
+    public function saveAddress(){
+        $data = I('post.');
+        $data['user_id'] = getUserId();
+        $is = D('UserAddress')->where(array('user_id'=>$data['user_id']))->find();
+        if($is){
+            D('UserAddress')->where(array('user_id'=>$data['user_id']))->save($data);
+        }else{
+            D('UserAddress')->data($data)->add();
+        }
+        $this->success('ok');
+    }
+
     //下单
     public function markOrder(){
         $id = I('post.id');
@@ -57,6 +69,7 @@ class GoodsController extends Controller {
         }
     }
 
+    //确认下单
     public function sureOrder(){
         $uid = getUserId();
         $id = I('get.orderid');
