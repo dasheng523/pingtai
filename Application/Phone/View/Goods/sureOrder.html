@@ -55,6 +55,13 @@
         $('#payBtn').click(function(){
             var orderId = $('#order_id').val();
             $.post("{:UC('Goods/prePay')}",{orderId:orderId},function(res){
+                WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest', res,
+                    function(payRes){
+                        JSON.stringify(payRes);
+                    }
+                );
+
                 res.success = function(payRes){
                     alert(JSON.stringify(payRes));
                     alert('支付成功');
