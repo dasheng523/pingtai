@@ -90,7 +90,7 @@ class GoodsController extends Controller {
     }
 
     public function prePay(){
-        $orderId = I('post.orderid');
+        $orderId = I('post.orderId');
         if(!$orderId){
             echo "404商品不存在";
             return;
