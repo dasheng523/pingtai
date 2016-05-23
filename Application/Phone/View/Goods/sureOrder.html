@@ -8,12 +8,19 @@
 
         <if condition="$no_phone">
             <div class="panel box margin-top">
-                <input class="input-box" type="tel" placeholder="为了方便配送，请填写手机号码">
+                <input class="input-box" type="tel" placeholder="为了方便配送，请填写手机号码" id="phonebox">
             </div>
         </if>
 
-        <div class="panel box margin-top flex" id="selectAddress">
-            <div class="flex-1">点击选择配送地址</div>
+        <div class="panel box margin-top flex flex-align-center" id="selectAddress">
+            <!--
+            <div class="flex-1">点击选择配送地址<span class="small-text">（仅限北流市区）</span></div>
+            <div><i class="iconfont">&#xe60e;</i></div>
+            -->
+            <div class="flex-1">
+                收货人：黄业生<br>
+                地址：城北路花果山0241号
+            </div>
             <div><i class="iconfont">&#xe60e;</i></div>
         </div>
 
@@ -50,10 +57,15 @@
 
 <block name="script">
     <script>
+        $(function(){
+            $('#phonebox').focus();
+        });
+
         wx.config(jsConfig);
         $('#selectAddress').click(function(){
             wx.openAddress({
                 success : function(res){
+                    alert(JSON.stringify(res));
                     console.log(res);
                 },
                 cancel :function(res){

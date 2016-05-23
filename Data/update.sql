@@ -19,3 +19,7 @@ CREATE TABLE `famous_shop` (
   `shop_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+ALTER TABLE `user_info`
+ADD COLUMN `address`  varchar(255) NULL AFTER `province`;
