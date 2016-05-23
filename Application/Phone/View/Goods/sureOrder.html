@@ -49,7 +49,11 @@
                         payConfig,
                 function(res){
                     WeixinJSBridge.log(res.err_msg);
-                    alert(res.err_code+res.err_desc+res.err_msg);
+                    //alert(res.err_code+res.err_desc+res.err_msg);
+                    alert('支付成功');
+                    setTimeout(function(){
+                        window.location.href = "{:UC('Goods/orderList')}";
+                    },2000);
                 }
             );
             }

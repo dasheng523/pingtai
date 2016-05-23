@@ -144,6 +144,10 @@ class GoodsController extends Controller {
 
     }
 
+    public function orderList(){
+
+    }
+
 
     private function sign($arrdata,$paykey){
         ksort($arrdata);
