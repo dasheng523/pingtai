@@ -583,7 +583,7 @@ class PublishGoodsState{
                     $this->resetStep($userKey);
                     setCurrentHandler($userKey,null);
 
-                    $shopUrl = UC('Phone/Miaoji/detail',array('id'=>$id));
+                    $shopUrl = UC('Phone/Activity/hotActivityGoodsInfo',array('id'=>$id));
                     return makeText('发布成功!'."\n\n".'点击<a href="'.$shopUrl.'">查看商品</a>即可看到您的商品。'."\n\n".'将您的商品分享到朋友圈，可以快速提高人气。'."\n\n".'如需修改，可点击微信菜单中的“店多多”->"商家入口"进行管理。');
                 }
             }
