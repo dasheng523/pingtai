@@ -15,30 +15,22 @@
 
         <div class="panel box margin-top">
             <div class="list">
-                <div class="item flex">
-                    <div class="flex-1">糖纸米李 × 1 份</div>
-                    <div class="">￥10</div>
-                </div>
-                <div class="item flex">
-                    <div class="flex-1">糖腌杨梅 × 1 份</div>
-                    <div class="">￥10</div>
-                </div>
-                <div class="item flex">
-                    <div class="flex-1">薏米糖水 × 1 份</div>
-                    <div class="">￥10</div>
-                </div>
-                <div class="item flex">
-                    <div class="flex-1">优惠券</div>
-                    <div class="red-text">- ￥10</div>
-                </div>
+                <volist name="order_goods" id="info">
+                    <div class="item flex">
+                        <div class="flex-1">{$info['goods_name']} × {$info['order_amount']} 瓶</div>
+                        <div class="">￥{$info['price'] * $info['order_amount']}</div>
+                    </div>
+                </volist>
             </div>
             <div class="text-right" style="margin: 10px 0;">
-                总计：￥20
+                总计：￥{$info['price'] * $info['order_amount']}
             </div>
         </div>
 
+        <input id="order_id" value="{$order_id}" name="order_id" type="hidden">
+
         <div class="margin-top30">
-            <a class="btn main-btn" href="myorderlist.html">立即支付</a>
+            <a class="btn main-btn" href="javascript:;" id="payBtn">立即支付</a>
         </div>
     </div>
 
@@ -58,6 +50,17 @@
                     console.log(res);
                 }
             });
+        });
+
+        $('#payBtn').click(function(){
+            var orderId = $('#order_id').val();
+            $.post("{:UC('Goods/prePay')}",{orderId:orderId},function(res){
+                res.success = function(payRes){
+                    alert('支付成功');
+                    window.location.href = "{:UC('Goods/orderList')}";
+                };
+                wx.chooseWXPay(res);
+            },'json');
         });
     </script>
 </block>

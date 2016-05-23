@@ -54,6 +54,7 @@ class GoodsController extends Controller {
             $order['order_id'] = randomNum();
             $order['order_time'] = time();
             $order['total_fee'] = $goods['price']*$count;
+            $order['title'] = $goods['name'] . "×" . $count;
             $orderId = D('order')->data($order)->add();
 
             $orderGoods['order_id'] = $orderId;
@@ -73,12 +74,82 @@ class GoodsController extends Controller {
     public function sureOrder(){
         $uid = getUserId();
         $id = I('get.orderid');
+
+
         $userInfo = D('UserInfo')->where(array('user_id'=>$uid))->find();
         if(!$userInfo['phone']){
             $this->assign('no_phone',true);
         }
         $orderGoods = D('order_goods')->where(array('order_id'=>$id))->select();
+        foreach($orderGoods as &$goods){
+            $goods['price'] = D('mygoods')->where(array('id'=>$goods['goods_id']))->getField('price');
+        }
         $this->assign('order_goods',$orderGoods);
+        $this->assign('order_id',$id);
         $this->display();
+    }
+
+    public function prePay(){
+        $orderId = 14;
+
+        $order = D('order')->where(array('id'=>$orderId))->find();
+
+        $wechatConfig = logic\WechatLogic::defaultWechatConfig();
+        $wechat = logic\WechatLogic::initDefaultWechat();
+        $data['appid'] = $wechatConfig['appid'];
+        $data['mch_id'] = $wechatConfig['mchid'];
+        $data['nonce_str'] = $wechat->generateNonceStr();
+        $data['body'] = $order['title'];
+        $data['out_trade_no'] = $order['order_id'];
+        $data['total_fee'] = $order['total_fee']*100;
+        $data['spbill_create_ip'] = get_client_ip();
+        $data['notify_url'] = UC('Goods/notifyPay');
+        $data['trade_type'] = "JSAPI";
+        $data['openid'] = D('WechatUser')->where(array('user_id'=>getUserId()))->getField('open_id');
+        //print_r($data);
+
+        $stringA = $this->sign($data,$wechatConfig['paykey']);
+        $data['sign'] = $stringA;
+
+
+        $dataXml = '<xml>'.$wechat->data_to_xml($data).'</xml>';
+
+        $rs = httpPost("https://api.mch.weixin.qq.com/pay/unifiedorder",$dataXml);
+        $rsData = (array)simplexml_load_string($rs, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $serverSign = $rsData['sign'];
+        unset($rsData['sign']);
+        $sign = $this->sign($rsData,$wechatConfig['paykey']);
+        if($serverSign != $sign){
+            echo "非法签名";
+            return;
+        }
+
+        //生成支付配置
+        $payConfig['timestamp'] = time();
+        $payConfig['nonceStr'] = $wechat->generateNonceStr();
+        $payConfig['package'] = "prepay_id=".$rsData['prepay_id'];
+        $payConfig['signType'] = 'SHA1';
+        $payConfig['paySign'] = $this->sign($payConfig,$wechatConfig['paykey']);
+
+        echo json_encode($payConfig);
+    }
+
+    public function notifyPay(){
+
+    }
+
+
+    private function sign($arrdata,$paykey){
+        ksort($arrdata);
+        $paramstring = "";
+        foreach($arrdata as $key => $value)
+        {
+            if(strlen($paramstring) == 0)
+                $paramstring .= $key . "=" . $value;
+            else
+                $paramstring .= "&" . $key . "=" . $value;
+        }
+        $stringSignTemp="$paramstring&key=$paykey";
+        return strtoupper(md5($stringSignTemp));
     }
 }

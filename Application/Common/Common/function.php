@@ -67,6 +67,8 @@ function randomNum(){
     return (time().rand(5,888)) * -1 % 100000000;
 }
 
+
+
 //调试日志
 function slog($content){
     file_put_contents("./test.log",$content,FILE_APPEND);
