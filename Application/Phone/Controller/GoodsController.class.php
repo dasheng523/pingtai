@@ -90,9 +90,10 @@ class GoodsController extends Controller {
     }
 
     public function prePay(){
-        $orderId = I('get.orderid');
+        $orderId = I('post.orderid');
         if(!$orderId){
             echo "404商品不存在";
+            return;
         }
 
         $order = D('order')->where(array('id'=>$orderId))->find();
