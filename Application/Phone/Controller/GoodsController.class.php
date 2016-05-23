@@ -125,10 +125,11 @@ class GoodsController extends Controller {
         }
 
         //生成支付配置
-        $payConfig['timestamp'] = time();
+        $payConfig['appId'] = $wechatConfig['appid'];
+        $payConfig['timeStamp'] = time();
         $payConfig['nonceStr'] = $wechat->generateNonceStr();
         $payConfig['package'] = "prepay_id=".$rsData['prepay_id'];
-        $payConfig['signType'] = 'SHA1';
+        $payConfig['signType'] = 'MD5';
         $payConfig['paySign'] = $this->sign($payConfig,$wechatConfig['paykey']);
 
         echo json_encode($payConfig);
