@@ -100,6 +100,7 @@ class GoodsController extends Controller {
         $data['mch_id'] = $wechatConfig['mchid'];
         $data['nonce_str'] = $wechat->generateNonceStr();
         $data['body'] = $order['title'];
+        $data['detail'] = $order['title'];
         $data['out_trade_no'] = $order['order_id'];
         $data['total_fee'] = $order['total_fee']*100;
         $data['spbill_create_ip'] = get_client_ip();
