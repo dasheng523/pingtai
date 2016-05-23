@@ -50,6 +50,7 @@
 
 <block name="script">
     <script>
+        wx.config(jsConfig);
         $('#selectAddress').click(function(){
             wx.openAddress({
                 success : function(res){
