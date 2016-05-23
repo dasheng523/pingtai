@@ -37,6 +37,41 @@
 </block>
 
 <block name="script">
+    <script type="text/javascript">
+        //调用微信JS api 支付
+        function wechatPay(payConfig){
+            function jsApiCall()
+            {
+                WeixinJSBridge.invoke(
+                        'getBrandWCPayRequest',
+                        payConfig,
+                function(res){
+                    WeixinJSBridge.log(res.err_msg);
+                    alert(res.err_code+res.err_desc+res.err_msg);
+                }
+            );
+            }
+
+            function callpay()
+            {
+                if (typeof WeixinJSBridge == "undefined"){
+                    if( document.addEventListener ){
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    }else if (document.attachEvent){
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+                }else{
+                    jsApiCall();
+                }
+            }
+
+            callpay();
+        }
+
+    </script>
+
+
     <script>
         wx.config(jsConfig);
         $('#selectAddress').click(function(){
@@ -55,19 +90,15 @@
         $('#payBtn').click(function(){
             var orderId = $('#order_id').val();
             $.post("{:UC('Goods/prePay')}",{orderId:orderId},function(res){
-                WeixinJSBridge.invoke(
-                    'getBrandWCPayRequest', res,
-                    function(payRes){
-                        JSON.stringify(payRes);
-                    }
-                );
-
+                wechatPay(res);
+                /*
                 res.success = function(payRes){
                     alert(JSON.stringify(payRes));
                     alert('支付成功');
                     window.location.href = "{:UC('Goods/orderList')}";
                 };
                 wx.chooseWXPay(res);
+                */
             },'json');
         });
     </script>
