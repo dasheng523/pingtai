@@ -1,8 +1,8 @@
 <?php
 
 function UC($url='',$vars=''){
-    //return __ROOT__ . U($path);
-    return U($url,$vars,true,true);
+    return __ROOT__ . U($url,$vars);
+    //return U($url,$vars,true,true);
 }
 
 function wechatInstance(){

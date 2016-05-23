@@ -9,7 +9,7 @@ body{background: #F0E7E4;padding-bottom: 10px;}
 .col-50{display: inline-block;width: 48%;}
 
 .main-size{font-size: 16px;}
-.small-text{font-size: 12px;}
+.small-text,.small-text *{font-size: 13px;}
 
 .text-center{text-align: center;}
 .text-right{text-align: right;}
@@ -27,19 +27,22 @@ body{background: #F0E7E4;padding-bottom: 10px;}
 .border-bottom{border-bottom: solid 1px #AF9083;}
 
 .box{padding: 10px;}
+.margin-box{padding: 10px 0;}
 .inline-box{width: 90%;margin: 0 auto;}
 
-.main-btn{display: block;background: #AF9083;color: #fff;border: none;text-align: center;padding: 10px;font-size: 16px;text-decoration: none;}
+.btn{display: block;color: #fff;border: none;text-align: center;padding: 10px;font-size: 16px;text-decoration: none;border-radius: 5px;}
+.main-btn{background: #AF9083;}
 .main-btn.disable{background: #a0a0a0;color: #e1e1e1;}
-.orange-btn{display: block;background: orange;color: #fff;border: none;text-align: center;padding: 10px;font-size: 16px;text-decoration: none;}
+.orange-btn{background: orange;}
+.green-btn{background: #09BB07;}
 
 .total-price-box{text-align: right;margin: 10px;}
 .bottom-tip{margin-top: 30px; font-size: 12px;color: #666666;text-align: center;}
 
-.select-box{width: 100%;border: none;padding: 10px;}
+.select-box{width: 100%;border: none;padding: 10px;background: #FFFFFF;}
 .input-box{width: 100%;border: none;}
 
-.respImg{width: 100%;max-height: 180px;}
+.respImg{width: 100%;max-height: 350px;}
 
 .list{}
 .list .item{padding: 10px 0;border-bottom: solid 1px #AF9083;}
@@ -55,6 +58,74 @@ body{background: #F0E7E4;padding-bottom: 10px;}
 .order-item-goodsList > span{display: inline-block;color: #AF9083;}
 
 .order-flow-box{border-bottom: solid 1px #CCCCCC;padding: 10px 0;}
+
+.sizeBox{background: #fff;margin: 5px 0;padding: 8px;text-decoration: none;border: solid 1px #e1e1e1;display: inline-block;}
+.sizeBox.current{border: solid 1px #AF9083;}
+
+.swiper-container{
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: transform;
+    box-sizing: content-box;
+}
+.swiper-slide {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-flex-shrink: 0;
+    -ms-flex: 0 0 auto;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    width: 100%;
+    position: relative;
+}
+.swiper-slide img {
+    display: block;
+}
+.swiper-container-horizontal > .swiper-pagination {
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
+.swiper-pagination {
+    position: absolute;
+    text-align: center;
+    -webkit-transition: 300ms;
+    transition: 300ms;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    z-index: 10;
+}
+.swiper-container-horizontal > .swiper-pagination .swiper-pagination-bullet {
+    margin: 0 5px;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #007aff;
+}
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #000;
+    opacity: 0.2;
+}
 
 .flex{
     /* 设置弹性布局 */

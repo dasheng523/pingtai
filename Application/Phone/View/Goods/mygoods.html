@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>店多多</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link href="css/normalize.css" rel="stylesheet" type="text/css">
-    <link href="css/shop.css?v=28" rel="stylesheet" type="text/css">
+<extend name="Goods/template" />
 
-</head>
-<body>
+<block name="content">
     <div class="swiper-container" data-space-between='10'>
         <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -39,7 +28,7 @@
                 看电视，玩游戏的您，要是旁边有一杯香浓的<strong class="main-color">苹果醋</strong>，不仅能<strong class="main-color">消除一天的疲劳</strong>，还能<strong class="main-color">增强体质，养颜美容</strong>。<br>
                 别忘了苹果醋还能<strong class="main-color">解酒</strong>。<br>
                 我们为您精选了<strong class="main-color">优质</strong>的苹果醋品牌，下单后即刻送到您的家门。
-                <strong>仅派送北流市区</strong>
+                <strong>仅派送北流市区</strong>，电话:<a href="tel:18176621816">18176621816</a>
             </div>
             <p class="">
                 <span class="small-text"><i class="iconfont green-text">&#xe60d;</i> 企业认证</span>
@@ -52,8 +41,8 @@
     <div class="inline-box">
         <div class="main-color margin-top margin-box small-text">可选大小：</div>
         <div >
-            <a href="javascript:;" class="sizeBox current" data-price="18">750毫升</a>
-            <a href="javascript:;" class="sizeBox" data-price="16">650毫升</a>
+            <a href="javascript:;" class="sizeBox current" data-price="18" data-id="1">750毫升</a>
+            <a href="javascript:;" class="sizeBox" data-price="16" data-id="2">650毫升</a>
         </div>
         <div class="panel">
             <div class="flex flex-align-center">
@@ -61,8 +50,8 @@
                     苹果醋<span class="size">750毫升</span> × <span class="amount">2</span> 瓶
                 </div>
                 <div class="countBox">
-                    <span class="minus">-</span>
-                    <span class="plus">+</span>
+                    <span class="minus">减</span>
+                    <span class="plus">加</span>
                 </div>
             </div>
         </div>
@@ -72,7 +61,9 @@
             <div class="small-text">（含配送费）</div>
         </div>
         <div class="margin-top">
-            <a class="main-btn" href="javascript:void(0);" id="commitBtn">立即下单</a>
+            <a class="btn green-btn" href="javascript:void(0);" id="commitBtn">网上购买</a>
+            <br>
+            <a class="btn main-btn" href="tel:18176621816">电话购买</a>
         </div>
     </div>
 
@@ -85,21 +76,20 @@
         <img data-src="http://media.dianduoduo.top/collect/suoye3.jpg" width="100%" class="lazyload">
         <p>欢迎您品尝</p>
     </div>
+</block>
 
-    <div class="bottom-tip">店多多，汇聚您身边的精彩</div>
-
-    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='js/swiper.min.js' charset='utf-8'></script>
-    <script src="js/lazysizes.min.js" type="text/javascript"></script>
+<block name="script">
     <script>
         function goodsPrice(){
-            var cnum = 2;
+            var cnum = $('.amount').html();
             var cprice = 0;
             var total = 0;
             var size = 0;
+            var id = 0;
 
             function displayTotal(){
                 cprice = $('.sizeBox.current').data('price');
+                id = $('.sizeBox.current').data('id');
                 size = $('.sizeBox.current').html();
                 total = cprice * cnum;
                 $('.total_price').html(total.toFixed(2));
@@ -127,8 +117,12 @@
             });
 
             $('#commitBtn').click(function(){
-                $.post("{:UC('Goods/order')}",{"price":cprice,"cnum":cnum,"id":"1"},function(res){
-
+                $.post("{:UC('Goods/markOrder')}",{"id":id,"num":cnum},function(res){
+                    if(res.status){
+                        window.location.href = res.url;
+                    }else{
+                        alert(res.info);
+                    }
                 });
             });
 
@@ -146,5 +140,4 @@
             goodsPrice();
         });
     </script>
-</body>
-</html>
+</block>
