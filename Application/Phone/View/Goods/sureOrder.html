@@ -56,6 +56,7 @@
             var orderId = $('#order_id').val();
             $.post("{:UC('Goods/prePay')}",{orderId:orderId},function(res){
                 res.success = function(payRes){
+                    alert(JSON.stringify(payRes));
                     alert('支付成功');
                     window.location.href = "{:UC('Goods/orderList')}";
                 };
