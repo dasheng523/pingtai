@@ -63,7 +63,7 @@ class GoodsController extends Controller {
             $orderGoods['order_amount'] = $count;
             D('order_goods')->data($orderGoods)->add();
 
-            $this->success('ok',UC('Goods/sureOrder',array('orderid'=>$orderId)));
+            $this->success('ok',UC('Goods/sureOrder')."?orderid=$orderId");
 
         }else{
             $this->error('商品不存在');
