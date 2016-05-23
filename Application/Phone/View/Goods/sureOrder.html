@@ -34,6 +34,8 @@
         </div>
     </div>
 
+
+
 </block>
 
 <block name="script">
@@ -69,27 +71,41 @@
             callpay();
         }
 
+        function showLoading(){
+            var node = '<span class="loading"><img src="__PUBLIC__/images/loadding.gif"></span>';
+            $('body').append(node);
+        }
+
+        function hideLoading(){
+            $('.loading').remove();
+        }
+
     </script>
 
 
     <script>
         wx.config(jsConfig);
         $('#selectAddress').click(function(){
+            showLoading();
             wx.openAddress({
                 success : function(res){
                     $.post("{:UC('Goods/saveAddress')}",res);
                     var address = "姓名："+res.userName+"<br>电话："+res.telNumber+"<br>地址："+res.detailInfo;
                     $('#addressBox').html(address);
+                    hideLoading()
                 },
                 cancel :function(res){
                     console.log(res);
+                    hideLoading();
                 }
             });
         });
 
         $('#payBtn').click(function(){
             var orderId = $('#order_id').val();
+            showLoading();
             $.post("{:UC('Goods/prePay')}",{orderId:orderId},function(res){
+                hideLoading();
                 wechatPay(res);
             },'json');
         });
