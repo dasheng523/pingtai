@@ -45,6 +45,12 @@
                         <div class="main-color">配送完成</div>
                     </div>
                 </if>
+                <if condition="!$order['transport_time'] and $order['pay_time']">
+                    <div class="margin-top order-flow-box flex">
+                        <div class="flex-1">&nbsp;</div>
+                        <div class="main-color">正在为您配送，请耐心等待...</div>
+                    </div>
+                </if>
             </div>
         </div>
 
