@@ -115,7 +115,7 @@ class PublicController extends Controller {
         $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
         $orderInfo['address'] = $addressInfo['detailInfo'];
         $orderInfo['phone'] = $addressInfo['telNumber'];
-        \Think\Log::write(print_r($orderInfo,true),'DEBUG');
+        \Think\Log::write(print_r($orderInfo,false),'DEBUG');
         D('order')->where(array('id'=>$orderInfo['id']))->save($orderInfo);
         \Think\Log::write("支付成功",'DEBUG');
         $respData['return_code'] = 'SUCCESS';
