@@ -109,10 +109,10 @@ class GoodsController extends Controller {
         //$data['total_fee'] = $order['total_fee']*100;
         $data['total_fee'] = 1;
         $data['spbill_create_ip'] = get_client_ip();
-        $data['notify_url'] = UC('Goods/notifyPay');
+        $data['notify_url'] = UC('Public/notifyPay');
         $data['trade_type'] = "JSAPI";
         $data['openid'] = D('WechatUser')->where(array('user_id'=>getUserId()))->getField('open_id');
-        \Think\Log::write("支付通知地址：".UC('Goods/notifyPay'),'DEBUG');
+        \Think\Log::write("支付通知地址：".UC('Public/notifyPay'),'DEBUG');
 
         $stringA = $this->sign($data,$wechatConfig['paykey']);
         $data['sign'] = $stringA;
@@ -141,71 +141,6 @@ class GoodsController extends Controller {
         echo json_encode($payConfig);
     }
 
-    public function notifyPay(){
-        $postStr = file_get_contents("php://input");
-        $rsData = (array)simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $wechatConfig = logic\WechatLogic::defaultWechatConfig();
-        $wechat = logic\WechatLogic::initDefaultWechat();
-
-        if(!$rsData){
-            \Think\Log::write("请求空数据",'DEBUG');
-            $respData['return_code'] = 'FAIL';
-            $respData['return_msg'] = '没数据？？？';
-            echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
-            return;
-        }
-
-        $serverSign = $rsData['sign'];
-        unset($rsData['sign']);
-        $sign = $this->sign($rsData,$wechatConfig['paykey']);
-        if($sign != $serverSign){
-            \Think\Log::write("签名错误",'DEBUG');
-            $respData['return_code'] = 'FAIL';
-            $respData['return_msg'] = '签名错误';
-            echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
-            return;
-        }
-        if($rsData['return_code'] != 'SUCCESS'){
-            \Think\Log::write('返回错误：'.$rsData['return_msg'],'DEBUG');
-            $respData['return_code'] = 'SUCCESS';
-            echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
-            return;
-        }
-        if($rsData['result_code'] != 'SUCCESS'){
-            \Think\Log::write('支付异常:'.$rsData['err_code_des'],'DEBUG');
-            $errorData['order_id'] = $rsData['out_trade_no'];
-            $errorData['wechat_order'] = $rsData['transaction_id'];
-            $errorData['error_code'] = $rsData['err_code'];
-            $errorData['error_msg'] = $rsData['err_code_des'];
-            $errorData['time_end'] = $rsData['time_end'];
-            $errorData['open_id'] = $rsData['openid'];
-            $errorData['is_subscribe'] = $rsData['is_subscribe'];
-            D('order_error')->data($errorData)->add();
-
-            $respData['return_code'] = 'SUCCESS';
-            echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
-            return;
-        }
-
-        $orderId = $rsData['out_trade_no'];
-        $orderInfo = D('order')->where(array('order_id'=>$orderId))->find();
-        if(!$orderInfo){
-            \Think\Log::write("订单不存在",'DEBUG');
-            $respData['return_code'] = 'FAIL';
-            $respData['return_msg'] = '订单不存在';
-            echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
-            return;
-        }
-
-        $orderInfo['wechat_order'] = $rsData['transaction_id'];
-        $orderInfo['pay_time'] = $rsData['time_end'];
-        $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
-        D('order')->save($orderInfo);
-        \Think\Log::write("支付成功",'DEBUG');
-        $respData['return_code'] = 'SUCCESS';
-        echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
-
-    }
 
     public function orderList(){
 

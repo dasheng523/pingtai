@@ -105,6 +105,21 @@ function generateCode($length = 4) {
     return rand(pow(10,($length-1)), pow(10,$length)-1);
 }
 
+//生成支付相关的签名
+function sign($arrdata,$paykey){
+    ksort($arrdata);
+    $paramstring = "";
+    foreach($arrdata as $key => $value)
+    {
+        if(strlen($paramstring) == 0)
+            $paramstring .= $key . "=" . $value;
+        else
+            $paramstring .= "&" . $key . "=" . $value;
+    }
+    $stringSignTemp="$paramstring&key=$paykey";
+    return strtoupper(md5($stringSignTemp));
+}
+
 /**
  * 时间格式化
  */
