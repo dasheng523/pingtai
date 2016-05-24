@@ -110,6 +110,7 @@ class PublicController extends Controller {
         }
         $uid = $orderInfo['user_id'];
         $addressInfo = D('user_address')->where(array('user_id'=>$uid))->find();
+        \Think\Log::write(json_encode($addressInfo),'DEBUG');
         $orderInfo['wechat_order'] = $rsData['transaction_id'];
         $orderInfo['pay_time'] = time();
         $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
