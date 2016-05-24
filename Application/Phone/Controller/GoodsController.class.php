@@ -51,7 +51,7 @@ class GoodsController extends Controller {
         $goods = D('mygoods')->where(array('id'=>$id))->find();
         if($goods){
             $order['user_id'] = getUserId();
-            $order['order_id'] = randomNum();
+            $order['order_id'] = randomNum2();
             $order['order_time'] = time();
             $order['total_fee'] = $goods['price']*$count;
             $order['title'] = $goods['name'] . "×" . $count;
@@ -144,27 +144,35 @@ class GoodsController extends Controller {
     public function notifyPay(){
         $postStr = file_get_contents("php://input");
         $rsData = (array)simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-
         $wechatConfig = logic\WechatLogic::defaultWechatConfig();
         $wechat = logic\WechatLogic::initDefaultWechat();
+
+        if(!$rsData){
+            \Think\Log::write("请求空数据",'DEBUG');
+            $respData['return_code'] = 'FAIL';
+            $respData['return_msg'] = '没数据？？？';
+            echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
+            return;
+        }
+
         $serverSign = $rsData['sign'];
         unset($rsData['sign']);
         $sign = $this->sign($rsData,$wechatConfig['paykey']);
         if($sign != $serverSign){
-            \Think\Log::record("签名错误",'DEBUG');
+            \Think\Log::write("签名错误",'DEBUG');
             $respData['return_code'] = 'FAIL';
             $respData['return_msg'] = '签名错误';
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
         if($rsData['return_code'] != 'SUCCESS'){
-            \Think\Log::record($rsData['return_msg'],'DEBUG');
+            \Think\Log::write('返回错误：'.$rsData['return_msg'],'DEBUG');
             $respData['return_code'] = 'SUCCESS';
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
         if($rsData['result_code'] != 'SUCCESS'){
-            \Think\Log::record($rsData['return_msg'],'DEBUG');
+            \Think\Log::write('支付异常:'.$rsData['err_code_des'],'DEBUG');
             $errorData['order_id'] = $rsData['out_trade_no'];
             $errorData['wechat_order'] = $rsData['transaction_id'];
             $errorData['error_code'] = $rsData['err_code'];
@@ -182,7 +190,7 @@ class GoodsController extends Controller {
         $orderId = $rsData['out_trade_no'];
         $orderInfo = D('order')->where(array('order_id'=>$orderId))->find();
         if(!$orderInfo){
-            \Think\Log::record("订单不存在",'DEBUG');
+            \Think\Log::write("订单不存在",'DEBUG');
             $respData['return_code'] = 'FAIL';
             $respData['return_msg'] = '订单不存在';
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
@@ -193,7 +201,7 @@ class GoodsController extends Controller {
         $orderInfo['pay_time'] = $rsData['time_end'];
         $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
         D('order')->save($orderInfo);
-
+        \Think\Log::write("支付成功",'DEBUG');
         $respData['return_code'] = 'SUCCESS';
         echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
 

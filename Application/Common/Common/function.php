@@ -61,12 +61,15 @@ function weekarray($time){
 
 /**
  * @return int
- * 随机唯一数字
+ * 随机唯一数字 负数
  */
 function randomNum(){
     return (time().rand(5,888)) * -1 % 100000000;
 }
 
+function randomNum2(){
+    return date('YmdHis').rand(1001,9999);
+}
 
 
 //调试日志

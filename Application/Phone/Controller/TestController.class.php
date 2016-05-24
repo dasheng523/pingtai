@@ -358,5 +358,8 @@ class TestController extends Controller {
         $this->display();
     }
 
+    public function testRandom(){
+        echo randomNum2();
+    }
 
 }
