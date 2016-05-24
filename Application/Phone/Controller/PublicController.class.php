@@ -146,11 +146,11 @@ class PublicController extends Controller {
         $customer['touser'] = $rsData['openid'];
         $customer['msgtype'] = 'news';
         $customer['news'] = array(
-            array(
-                'Title' => '支付通知',
-                'Description' => '点击查看详情',
-                'PicUrl' => 'http://media.dianduoduo.top/peisong.png',
-                'Url' => UC('Goods/orderdetail',array('id'=>$orderId))
+            'articles' => array(
+                'title' => '支付通知',
+                'description' => '点击查看详情',
+                'picurl' => 'http://media.dianduoduo.top/peisong.png',
+                'url' => UC('Goods/orderdetail',array('id'=>$orderId))
             )
         );
         $wechat->sendCustomMessage($customer);
