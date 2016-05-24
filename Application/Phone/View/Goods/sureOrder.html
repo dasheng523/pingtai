@@ -13,7 +13,7 @@
                 电话：{$address['telnumber']}<br>
                 地址：{$address['detailinfo']}
                 <else/>
-                点击选择配送地址<span class="small-text" data-temp="1">（仅限北流市区）</span>
+                点击选择配送地址<span class="small-text" id="noload">（仅限北流市区）</span>
             </if>
             </div>
             <div><i class="iconfont">&#xe60e;</i></div>
@@ -96,8 +96,9 @@
         }
 
         function isLoadAddress(){
-            var is = $('#addressBox span');
-            if(is==null){
+            var is = $('#noload');
+            console.log(is.html());
+            if(is.html() == null){
                 return true;
             }
             return false;
