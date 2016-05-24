@@ -52,7 +52,7 @@
                     //alert(res.err_code+res.err_desc+res.err_msg);
                     alert('支付成功');
                     setTimeout(function(){
-                        window.location.href = "{:UC('Goods/orderdetail',array('id'=>$order_id']))}";
+                        window.location.href = "{:UC('Goods/orderdetail',array('id'=>$order_id))}";
                     },1000);
                 }
             );
