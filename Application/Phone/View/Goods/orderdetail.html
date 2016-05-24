@@ -1,0 +1,57 @@
+<extend name="Goods/template" />
+
+<block name="content">
+
+    <div class="inline-box">
+        <div class="panel margin-top">
+            <div class="box flex">
+                <div class="flex-1">订单号：<span class="main-color">14584545212</span></div>
+                <div class="green-text">已支付</div>
+            </div>
+        </div>
+        <div class="panel margin-top">
+            <div class="box">
+                <div class="flex flex-align-center">
+                    <h3 class="order-item-title flex-1">
+                        夏日清凉
+                    </h3>
+                    <a class="blue-text" href="{:UC('Goods/mygoods')}" style="text-decoration: none;">查看介绍</a>
+                </div>
+                <div class="order-item-goodsList">
+                    <volist name="goodsList" id="goods">
+                        <span>{$goods['name']} × {$goods['order_amount']}</span>
+                    </volist>
+                </div>
+            </div>
+        </div>
+        <div class="panel margin-top">
+            <div class="box">
+                <div class="gray-text small-text">流程</div>
+                <if condition="$order['order_time']">
+                    <div class="margin-top order-flow-box flex">
+                        <div class="flex-1">{$order['order_time']|date="H:i:s",###}</div>
+                        <div class="main-color">提交订单</div>
+                    </div>
+                </if>
+                <if condition="$order['pay_time']">
+                    <div class="margin-top order-flow-box flex">
+                        <div class="flex-1">{$order['pay_time']|date="H:i:s",###}</div>
+                        <div class="main-color">在线支付</div>
+                    </div>
+                </if>
+                <if condition="$order['transport_time']">
+                    <div class="margin-top order-flow-box flex">
+                        <div class="flex-1">{$order['transport_time']|date="H:i:s",###}</div>
+                        <div class="main-color">配送完成</div>
+                    </div>
+                </if>
+            </div>
+        </div>
+
+        <!--
+        <div class="row margin-top30">
+            <a class="btn orange-btn" href="#">评论</a>
+        </div>
+        -->
+    </div>
+</block>

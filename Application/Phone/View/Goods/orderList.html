@@ -20,7 +20,11 @@
                             <if condition="$info['transport_time']">
                                 <div class="gray-text">配送完成</div>
                                 <else/>
-                                <div class="green-text"><if condition="$info['pay_time']">已支付<else/>未支付</if></div>
+                                <if condition="$info['pay_time']">
+                                    <div class="green-text">已支付</div>
+                                    <else/>
+                                    <div class="orange-text">已支付</div>
+                                </if>
                             </if>
                         </if>
                     </div>

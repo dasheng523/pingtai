@@ -142,7 +142,7 @@ class GoodsController extends Controller {
     }
 
 
-    public function orderlist(){
+    public function orderList(){
         $uid = getUserId();
         $list = D('order')->where(array('user_id'=>$uid))->order('id desc')->select();
         foreach($list as &$info){
@@ -168,6 +168,20 @@ class GoodsController extends Controller {
         }
         //print_r($list);
         $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function orderdetail(){
+        $id = I('get.id');
+        $goodsList = D('order_goods')
+            ->join("mygoods on mygoods.id=order_goods.goods_id")
+            ->where(array('order_id'=>$id))
+            ->field('order_goods.id, order_goods.order_amount,mygoods.name')
+            ->select();
+        $order = D('order')->where(array('id'=>$id))->find();
+
+        $this->assign('order',$order);
+        $this->assign('goodsList',$goodsList);
         $this->display();
     }
 
