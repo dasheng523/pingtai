@@ -8,7 +8,13 @@
 
         <div class="panel box margin-top flex flex-align-center" id="selectAddress">
             <div class="flex-1" id="addressBox">
-                点击选择配送地址<span class="small-text">（仅限北流市区）</span>
+                <if condition="$address">
+                    姓名：{$address['userName']}<br>
+                    电话：{$address['telNumber']}<br>
+                    地址：{$address['detailInfo']}<br>
+                    <else/>
+                    点击选择配送地址<span class="small-text">（仅限北流市区）</span>
+                </if>
             </div>
             <div><i class="iconfont">&#xe60e;</i></div>
         </div>

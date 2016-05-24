@@ -84,7 +84,13 @@ class GoodsController extends Controller {
         foreach($orderGoods as &$goods){
             $goods['price'] = D('mygoods')->where(array('id'=>$goods['goods_id']))->getField('price');
         }
+
+        //获取收货地址
+        $address = D('user_address')->where(array('user_id'=>$uid))->find();
+
+
         $this->assign('order_goods',$orderGoods);
+        $this->assign('address',$address);
         $this->assign('order_id',$id);
         $this->display();
     }
