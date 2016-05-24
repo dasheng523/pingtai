@@ -1,0 +1,31 @@
+<extend name="template/shop_main" />
+
+<block name="css">
+</block>
+
+<block name="script">
+    <script>
+    </script>
+</block>
+
+<block name="content">
+    <div class="page page-current" id="AdminShopList">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <span class="tip">配送订单</span>
+            <volist name="list" id="info">
+                <div style="border: solid 1px #666;margin-top: 10px;">
+                    收货人：{$info['address']['username']}<br>
+                    电话：{$info['address']['telnumber']}<br>
+                    地址：{$info['address']['detailinfo']}<br>
+                    购买商品：{$info['title']}<br>
+                    下单时间：{$info['pay_time']|date="H:i:s",###}
+                </div>
+            </volist>
+
+        </div>
+    </div>
+</block>

@@ -157,6 +157,11 @@ class PublicController extends Controller {
         );
         $wechat->sendCustomMessage($customer);
 
+        $admin['touser'] = 'oqJLbt3QtHgzE7Thtrig8YNOhhVw';
+        $admin['msgtype'] = 'text';
+        $url = UC('Admin/payOrder');
+        $admin['text'] = array('content','有一位客人微信预定了商品<a href="'.$url.'">查看</a>');
+        $wechat->sendCustomMessage($admin);
 
     }
 }

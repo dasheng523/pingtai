@@ -200,6 +200,16 @@ class AdminController extends Controller {
         $this->redirect('Shop/index', array('cate_id' => 2), 1, '操作成功，页面跳转中...');
     }
 
+    public function payOrder(){
+        $list = D('order')->where("not isnull(pay_time)")->order('id asc')->select();
+        foreach($list as &$info){
+            $info['address'] = D('user_address')->where(array('user_id'=>$info['user_id']))->find();
+        }
+        //print_r($list);
+        $this->assign('list',$list);
+        $this->display();
+    }
+
 
     private static function changeImglist($imgstr){
         if(!$imgstr){
