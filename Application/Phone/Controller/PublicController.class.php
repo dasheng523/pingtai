@@ -151,7 +151,7 @@ class PublicController extends Controller {
                     'title' => '支付通知',
                     'description' => '点击查看详情',
                     'picurl' => 'http://media.dianduoduo.top/peisong.png',
-                    'url' => UC('Goods/orderdetail',array('id'=>$orderId))
+                    'url' => UC('Goods/orderdetail',array('id'=>$orderInfo['id']))
                 )
             )
         );
