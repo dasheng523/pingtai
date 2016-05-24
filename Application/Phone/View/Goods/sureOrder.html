@@ -11,7 +11,7 @@
                 <if condition="$address">
                     姓名：{$address['userName']}<br>
                     电话：{$address['telNumber']}<br>
-                    地址：{$address['detailInfo']}<br>
+                    地址：{$address['detailInfo']}
                     <else/>
                     点击选择配送地址<span class="small-text">（仅限北流市区）</span>
                 </if>
@@ -95,25 +95,40 @@
             $('.loading').remove();
         }
 
+        function isLoadAddress(){
+            var is = $('#addressBox span').html();
+            if(is){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
     </script>
 
 
     <script>
         wx.config(jsConfig);
         $('#selectAddress').click(function(){
-            showLoading();
-            wx.openAddress({
-                success : function(res){
-                    $.post("{:UC('Goods/saveAddress')}",res);
-                    var address = "姓名："+res.userName+"<br>电话："+res.telNumber+"<br>地址："+res.detailInfo;
-                    $('#addressBox').html(address);
-                    hideLoading()
-                },
-                cancel :function(res){
-                    console.log(res);
-                    hideLoading();
-                }
-            });
+            if(isLoadAddress()){
+                showLoading();
+                wx.openAddress({
+                    success : function(res){
+                        $.post("{:UC('Goods/saveAddress')}",res);
+                        var address = "姓名："+res.userName+"<br>电话："+res.telNumber+"<br>地址："+res.detailInfo;
+                        $('#addressBox').html(address);
+                        hideLoading()
+                    },
+                    cancel :function(res){
+                        console.log(res);
+                        hideLoading();
+                    }
+                });
+            }else{
+                alert("请先选择您的收货地址");
+            }
+
         });
 
         $('#payBtn').click(function(){
