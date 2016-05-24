@@ -55,15 +55,10 @@ class PublicController extends Controller {
 
 
     public function notifyPay(){
-        \Think\Log::write("1",'DEBUG');
         $postStr = file_get_contents("php://input");
-        \Think\Log::write("2",'DEBUG');
         $rsData = (array)simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-        \Think\Log::write("3",'DEBUG');
         $wechatConfig = logic\WechatLogic::defaultWechatConfig();
-        \Think\Log::write("4",'DEBUG');
         $wechat = logic\WechatLogic::initDefaultWechat();
-        \Think\Log::write("5",'DEBUG');
 
         if(!$rsData){
             \Think\Log::write("请求空数据",'DEBUG');
@@ -104,7 +99,7 @@ class PublicController extends Controller {
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
-
+        \Think\Log::write("test",'DEBUG');
         $orderId = $rsData['out_trade_no'];
         $orderInfo = D('order')->where(array('order_id'=>$orderId))->find();
         if(!$orderInfo){
