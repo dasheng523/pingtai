@@ -106,8 +106,8 @@ class GoodsController extends Controller {
         $data['body'] = $order['title'];
         $data['detail'] = $order['title'];
         $data['out_trade_no'] = $order['order_id'];
-        //$data['total_fee'] = $order['total_fee']*100;
-        $data['total_fee'] = 1;
+        $data['total_fee'] = $order['total_fee']*100;
+        //$data['total_fee'] = 1;
         $data['spbill_create_ip'] = get_client_ip();
         $data['notify_url'] = UC('Public/notifyPay');
         $data['trade_type'] = "JSAPI";
@@ -154,10 +154,9 @@ class GoodsController extends Controller {
                 if($info['pay_time']){
                     $info['url'] = UC('Goods/orderdetail',array('id'=>$info['id']));
                 }else{
-                    $info['url'] = UC('Goods/sureOrder',array('orderid'=>$info['id']));
+                    $info['url'] = UC('Goods/sureOrder').'?orderid='.$info['id'];
                 }
             }
-
 
             $goodsList = D('order_goods')
                 ->join("mygoods on mygoods.id=order_goods.goods_id")

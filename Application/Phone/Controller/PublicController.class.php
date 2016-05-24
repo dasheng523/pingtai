@@ -110,9 +110,11 @@ class PublicController extends Controller {
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
+
+        //修改订单状态
         $uid = $orderInfo['user_id'];
         $addressInfo = D('user_address')->where(array('user_id'=>$uid))->find();
-        \Think\Log::write(json_encode($addressInfo),'DEBUG');
+        //\Think\Log::write(json_encode($addressInfo),'DEBUG');
         $orderInfo['wechat_order'] = $rsData['transaction_id'];
         $orderInfo['pay_time'] = time();
         $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
@@ -120,9 +122,29 @@ class PublicController extends Controller {
         $orderInfo['phone'] = $addressInfo['telNumber'];
         \Think\Log::write(json_encode($orderInfo),'DEBUG');
         D('order')->where(array('id'=>$orderInfo['id']))->save($orderInfo);
+
+        //反馈给微信服务器
         \Think\Log::write("支付成功",'DEBUG');
         $respData['return_code'] = 'SUCCESS';
         $respData['return_msg'] = 'OK';
         echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
+
+        //通知客户
+        /*
+        $customer['touser'] = $rsData['openid'];
+        $customer['template_id'] = $rsData['openid'];
+        $customer['url'] = UC('Goods/orderdetail',array('id'=>$orderId));
+        $customer['topcolor'] = '#FF0000';
+        $customer['data'] = array(
+            "参数名1" => array(
+                "value" => "",
+                "color" => "",
+            ),
+        );
+        $wechat->sendTemplateMessage($customer);
+        */
+
+
+
     }
 }
