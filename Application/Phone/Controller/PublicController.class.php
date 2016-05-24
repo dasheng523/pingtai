@@ -124,6 +124,5 @@ class PublicController extends Controller {
         $respData['return_code'] = 'SUCCESS';
         $respData['return_msg'] = 'OK';
         echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
-
     }
 }

@@ -142,8 +142,33 @@ class GoodsController extends Controller {
     }
 
 
-    public function orderList(){
+    public function orderlist(){
+        $uid = getUserId();
+        $list = D('order')->where(array('user_id'=>$uid))->order('id desc')->select();
+        foreach($list as &$info){
+            if($info['order_time'] < time()-2*24*3600){
+                $info['timeout'] = true;
+                $info['url'] = "#";
+            }
+            else{
+                if($info['pay_time']){
+                    $info['url'] = UC('Goods/orderdetail',array('id'=>$info['id']));
+                }else{
+                    $info['url'] = UC('Goods/sureOrder',array('orderid'=>$info['id']));
+                }
+            }
 
+
+            $goodsList = D('order_goods')
+                ->join("mygoods on mygoods.id=order_goods.goods_id")
+                ->where(array('order_id'=>$info['id']))
+                ->field('order_goods.id, order_goods.order_amount,mygoods.name')
+                ->select();
+            $info['goodsList'] = $goodsList;
+        }
+        //print_r($list);
+        $this->assign('list',$list);
+        $this->display();
     }
 
 

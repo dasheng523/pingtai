@@ -1,0 +1,45 @@
+<extend name="Goods/template" />
+
+<block name="content">
+    <volist name="list" id="info">
+        <div class="panel margin-top">
+
+            <a class="order-item-box" href="{$info['url']}">
+                <div class="flex order-item-header">
+                    <div class="flex-1 small-text">{$info['order_time']|date='Y-m-d',###}</div>
+                    <div class="small-text">订单号：{$info['order_id']}</div>
+                </div>
+                <div class="box">
+                    <div class="flex">
+                        <h3 class="order-item-title flex-1">
+                            夏日清凉套餐
+                        </h3>
+                        <if condition="$info['timeout']">
+                            <div class="gray-text">已过期</div>
+                            <else/>
+                            <if condition="$info['transport_time']">
+                                <div class="gray-text">配送完成</div>
+                                <else/>
+                                <div class="green-text"><if condition="$info['pay_time']">已支付<else/>未支付</if></div>
+                            </if>
+                        </if>
+                    </div>
+
+                    <div class="order-item-goodsList">
+                        <volist name="info.goodsList" id="goodsInfo">
+                            <span>{$goodsInfo['name']} × {$goodsInfo['order_amount']}</span>
+                        </volist>
+                    </div>
+                </div>
+                <div class="order-item-footer small-text">
+                    <if condition="$info['pay_time']">
+                        点击可查看详情>>
+                        <else/>
+                        点击订单即可继续支付>>
+                    </if>
+                </div>
+            </a>
+        </div>
+    </volist>
+
+</block>
