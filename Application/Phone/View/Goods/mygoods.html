@@ -154,6 +154,18 @@
                     // 用户取消分享后执行的回调函数
                 }
             });
+            wx.onMenuShareAppMessage({
+                title: '夏日清凉-苹果醋',
+                desc: '“少盐多醋，长寿之道”,夏天是喝苹果醋最好的季节。北流市区下单后免费派送。', // 分享描述
+                link: window.location.href, // 分享链接
+                imgUrl: 'http://media.dianduoduo.top/pp.jpg', // 分享图标
+                success: function () {
+                    alert("分享成功");
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
         });
 
     </script>
