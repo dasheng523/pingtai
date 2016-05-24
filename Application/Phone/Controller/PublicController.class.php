@@ -108,17 +108,14 @@ class PublicController extends Controller {
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
-        \Think\Log::write("1",'DEBUG');
         $uid = logic\UserLogic::getUserIdByOpenId($rsData['openid']);
-        \Think\Log::write("2",'DEBUG');
         $addressInfo = D('user_address')->where(array('user_id'=>$uid))->find();
-        \Think\Log::write("3",'DEBUG');
         $orderInfo['wechat_order'] = $rsData['transaction_id'];
         $orderInfo['pay_time'] = $rsData['time_end'];
         $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
         $orderInfo['address'] = $addressInfo['detailInfo'];
         $orderInfo['phone'] = $addressInfo['telNumber'];
-        \Think\Log::write("4",'DEBUG');
+        \Think\Log::write(print_r($orderInfo,true),'DEBUG');
         D('order')->where(array('id'=>$orderInfo['id']))->save($orderInfo);
         \Think\Log::write("支付成功",'DEBUG');
         $respData['return_code'] = 'SUCCESS';
