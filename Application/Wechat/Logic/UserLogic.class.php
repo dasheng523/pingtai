@@ -20,6 +20,11 @@ class UserLogic{
         return D('UserInfo')->where(array('user_id'=>$userId))->find();
     }
 
+    //openId换取userId
+    public static function getUserIdByOpenId($openId){
+        return D('wechat_user')->where(array('open_id'=>$openId))->getField('user_id');
+    }
+
     /**
      * @return mixed
      * 创建一个普通用户,返回uid
