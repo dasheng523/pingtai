@@ -8,13 +8,13 @@
 
         <div class="panel box margin-top flex flex-align-center" id="selectAddress">
             <div class="flex-1" id="addressBox">
-                <if condition="$address">
-                    姓名：{$address['userName']}<br>
-                    电话：{$address['telNumber']}<br>
-                    地址：{$address['detailInfo']}
-                    <else/>
-                    点击选择配送地址<span class="small-text">（仅限北流市区）</span>
-                </if>
+            <if condition="$address">
+                姓名：{$address['userName']}<br>
+                电话：{$address['telNumber']}<br>
+                地址：{$address['detailInfo']}
+                <else/>
+                点击选择配送地址<span class="small-text" data-temp="1">（仅限北流市区）</span>
+            </if>
             </div>
             <div><i class="iconfont">&#xe60e;</i></div>
         </div>
@@ -96,13 +96,11 @@
         }
 
         function isLoadAddress(){
-            var is = $('#addressBox span').html();
-            if(is){
+            var is = $('#addressBox span');
+            if(is==null){
                 return true;
             }
-            else{
-                return false;
-            }
+            return false;
         }
 
     </script>
@@ -111,33 +109,35 @@
     <script>
         wx.config(jsConfig);
         $('#selectAddress').click(function(){
-            if(isLoadAddress()){
-                showLoading();
-                wx.openAddress({
-                    success : function(res){
-                        $.post("{:UC('Goods/saveAddress')}",res);
-                        var address = "姓名："+res.userName+"<br>电话："+res.telNumber+"<br>地址："+res.detailInfo;
-                        $('#addressBox').html(address);
-                        hideLoading()
-                    },
-                    cancel :function(res){
-                        console.log(res);
-                        hideLoading();
-                    }
-                });
-            }else{
-                alert("请先选择您的收货地址");
-            }
+
+            showLoading();
+            wx.openAddress({
+                success : function(res){
+                    $.post("{:UC('Goods/saveAddress')}",res);
+                    var address = "姓名："+res.userName+"<br>电话："+res.telNumber+"<br>地址："+res.detailInfo;
+                    $('#addressBox').html(address);
+                    hideLoading()
+                },
+                cancel :function(res){
+                    console.log(res);
+                    hideLoading();
+                }
+            });
 
         });
 
         $('#payBtn').click(function(){
-            var orderId = $('#order_id').val();
-            showLoading();
-            $.post("{:UC('Goods/prePay')}",{orderId:orderId},function(res){
-                hideLoading();
-                wechatPay(res);
-            },'json');
+            if(isLoadAddress()){
+                var orderId = $('#order_id').val();
+                showLoading();
+                $.post("{:UC('Goods/prePay')}",{orderId:orderId},function(res){
+                    hideLoading();
+                    wechatPay(res);
+                },'json');
+            }else{
+                alert("请先选择配送地址");
+            }
+
         });
     </script>
 </block>
