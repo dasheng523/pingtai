@@ -139,5 +139,22 @@
 
             goodsPrice();
         });
+
+
+        wx.config(jsConfig);
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: '夏日清凉-苹果醋',
+                link: window.location.href,
+                imgUrl: 'http://media.dianduoduo.top/pp.jpg',
+                success: function () {
+                    alert("分享成功");
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+
     </script>
 </block>
