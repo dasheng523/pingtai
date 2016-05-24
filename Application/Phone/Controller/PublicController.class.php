@@ -148,7 +148,7 @@ class PublicController extends Controller {
         $customer['news'] = array(
             'articles' => array(
                 array(
-                    'title' => '支付通知',
+                    'title' => '支付成功通知',
                     'description' => '点击查看详情',
                     'picurl' => 'http://media.dianduoduo.top/peisong.png',
                     'url' => UC('Goods/orderdetail',array('id'=>$orderInfo['id']))
