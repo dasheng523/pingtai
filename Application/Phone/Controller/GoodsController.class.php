@@ -113,8 +113,8 @@ class GoodsController extends Controller {
         $data['detail'] = $order['title'];
         $data['out_trade_no'] = $order['order_id'];
         $data['total_fee'] = $order['total_fee']*100;
-        //$data['total_fee'] = 1;
-        $data['spbill_create_ip'] = get_client_ip();
+        $data['total_fee'] = 1;
+        //$data['spbill_create_ip'] = get_client_ip();
         $data['notify_url'] = UC('Public/notifyPay');
         $data['trade_type'] = "JSAPI";
         $data['openid'] = D('WechatUser')->where(array('user_id'=>getUserId()))->getField('open_id');
