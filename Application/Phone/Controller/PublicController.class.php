@@ -108,7 +108,7 @@ class PublicController extends Controller {
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
-        $uid = logic\UserLogic::getUserIdByOpenId($rsData['openid']);
+        $uid = $orderInfo['user_id'];
         $addressInfo = D('user_address')->where(array('user_id'=>$uid))->find();
         $orderInfo['wechat_order'] = $rsData['transaction_id'];
         $orderInfo['pay_time'] = time();
