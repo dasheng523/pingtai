@@ -91,7 +91,10 @@ class WechatController extends Controller {
     public function createMenu(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
         $menu = array('button' => array(
-            array('type'=>'view','name'=>'特惠商品','url'=>UC('Activity/hotActivity')),
+            array('name'=>"找优惠",'sub_button'=>array(
+                array('type'=>'view','name'=>'苹果醋','url'=>UC('Goods/mygoods')),
+                array('type'=>'view','name'=>'特惠商品','url'=>UC('Activity/hotActivity')),
+            )),
             array('name'=>"北流生活",'sub_button'=>array(
                 array('type'=>'view','name'=>'领取优惠券','url'=>UC('Activity/couponList')),
                 array('type'=>'view','name'=>'商家活动','url'=>UC('Activity/showAllActivity')),
