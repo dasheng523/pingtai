@@ -118,8 +118,8 @@ class PublicController extends Controller {
         $orderInfo['wechat_order'] = $rsData['transaction_id'];
         $orderInfo['pay_time'] = time();
         $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
-        $orderInfo['address'] = $addressInfo['detailInfo'];
-        $orderInfo['phone'] = $addressInfo['telNumber'];
+        $orderInfo['address'] = $addressInfo['detailinfo'];
+        $orderInfo['phone'] = $addressInfo['telnumber'];
         \Think\Log::write(json_encode($orderInfo),'DEBUG');
         D('order')->where(array('id'=>$orderInfo['id']))->save($orderInfo);
 
