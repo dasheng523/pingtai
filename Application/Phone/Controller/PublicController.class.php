@@ -81,6 +81,7 @@ class PublicController extends Controller {
         if($rsData['return_code'] != 'SUCCESS'){
             \Think\Log::write('返回错误：'.$rsData['return_msg'],'DEBUG');
             $respData['return_code'] = 'SUCCESS';
+            $respData['return_msg'] = 'OK';
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
@@ -96,6 +97,7 @@ class PublicController extends Controller {
             D('order_error')->data($errorData)->add();
 
             $respData['return_code'] = 'SUCCESS';
+            $respData['return_msg'] = 'OK';
             echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
             return;
         }
@@ -120,6 +122,7 @@ class PublicController extends Controller {
         D('order')->where(array('id'=>$orderInfo['id']))->save($orderInfo);
         \Think\Log::write("支付成功",'DEBUG');
         $respData['return_code'] = 'SUCCESS';
+        $respData['return_msg'] = 'OK';
         echo '<xml>'.$wechat->data_to_xml($respData).'</xml>';
 
     }
