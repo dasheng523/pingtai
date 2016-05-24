@@ -111,11 +111,11 @@ class PublicController extends Controller {
         $uid = logic\UserLogic::getUserIdByOpenId($rsData['openid']);
         $addressInfo = D('user_address')->where(array('user_id'=>$uid))->find();
         $orderInfo['wechat_order'] = $rsData['transaction_id'];
-        $orderInfo['pay_time'] = $rsData['time_end'];
+        $orderInfo['pay_time'] = time();
         $orderInfo['real_fee'] = $rsData['cash_fee'] / 100;
         $orderInfo['address'] = $addressInfo['detailInfo'];
         $orderInfo['phone'] = $addressInfo['telNumber'];
-        \Think\Log::write(print_r($orderInfo,false),'DEBUG');
+        \Think\Log::write(json_encode($orderInfo),'DEBUG');
         D('order')->where(array('id'=>$orderInfo['id']))->save($orderInfo);
         \Think\Log::write("支付成功",'DEBUG');
         $respData['return_code'] = 'SUCCESS';
