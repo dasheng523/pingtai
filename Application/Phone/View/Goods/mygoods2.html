@@ -1,0 +1,166 @@
+<extend name="Goods/template" />
+
+<block name="content">
+    <div class="swiper-container" data-space-between='10'>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img data-src="http://media.dianduoduo.top/collect/hongzao1.jpg" class="swiper-lazy respImg">
+                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+            </div>
+            <div class="swiper-slide">
+                <img data-src="http://media.dianduoduo.top/collect/hongzao5.jpg" class="swiper-lazy respImg">
+                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="panel" style="border-bottom:1px solid #f00b0d">
+        <div class="box">
+            <h3 class="text-center orange-text main-size">夏日清凉-红枣醋</h3>
+            <div class="small-text">
+                夏天是喝红枣醋<strong class="main-color">最好的季节</strong>。<br>
+                古训：<strong>“少盐多醋，长寿之道”</strong>。
+                经过一天劳累的您，要是旁边有一杯香浓的<strong class="main-color">红枣醋</strong>，不仅能<strong class="main-color">消除一天的疲劳</strong>，还能<strong class="main-color">增强体质，养颜美容</strong>。<br>
+                别忘了红枣醋还能<strong class="main-color">解酒</strong>。<br>
+                我们为您精选了<strong class="main-color">优质</strong>的红枣醋品牌，下单后即刻送到您的家门。
+                <strong>仅派送北流市区</strong>，电话和微信:<a href="tel:18176621816" class="link">18176621816</a>
+            </div>
+            <p class="">
+                <span class="small-text"><i class="iconfont green-text">&#xe60d;</i> 企业认证</span>
+                <span class="small-text"><i class="iconfont green-text">&#xe60d;</i> 担保交易</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="inline-box">
+        <div class="main-color margin-top margin-box small-text">可选大小：</div>
+        <div >
+            <a href="javascript:;" class="sizeBox current" data-price="20" data-id="3">750毫升</a>
+            <a href="javascript:;" class="sizeBox" data-price="18" data-id="4">650毫升</a>
+        </div>
+        <div class="panel">
+            <div class="flex flex-align-center">
+                <div class="flex-1 box main-color">
+                    红枣醋<span class="size">750毫升</span> × <span class="amount">2</span> 瓶
+                </div>
+                <div class="countBox">
+                    <span class="minus">减</span>
+                    <span class="plus">加</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-right" style="margin: 15px 0;">
+            <div>总计：￥<span class="blank-text total_price"></span></div>
+            <div class="small-text">（免配送费）</div>
+        </div>
+        <div class="margin-top">
+            <a class="btn green-btn" href="javascript:void(0);" id="commitBtn">微信购买</a>
+            <br>
+            <a class="btn main-btn" href="tel:18176621816">电话购买</a>
+        </div>
+    </div>
+
+
+    <div class="panel text-center box margin-top30" style="border-top:1px solid #f00b0d">
+        <div class="main-color box small-text">详细说明</div>
+        <img data-src="http://media.dianduoduo.top/collect/hongzao2.jpg" width="100%" class="lazyload">
+        <img data-src="http://media.dianduoduo.top/collect/hongzao3.jpg" width="100%" class="lazyload">
+        <img data-src="http://media.dianduoduo.top/collect/hongzao4.jpg" width="100%" class="lazyload">
+        <p>欢迎您品尝</p>
+    </div>
+</block>
+
+<block name="script">
+    <script>
+        function goodsPrice(){
+            var cnum = $('.amount').html();
+            var cprice = 0;
+            var total = 0;
+            var size = 0;
+            var id = 0;
+
+            function displayTotal(){
+                cprice = $('.sizeBox.current').data('price');
+                id = $('.sizeBox.current').data('id');
+                size = $('.sizeBox.current').html();
+                total = cprice * cnum;
+                $('.total_price').html(total.toFixed(2));
+                $('.amount').html(cnum);
+                $('.size').html(size);
+            }
+
+            $('.sizeBox').click(function(){
+                $('.sizeBox').removeClass('current');
+                $(this).addClass('current');
+                displayTotal();
+            });
+
+            $('.minus').click(function(){
+                if(cnum<=1){
+                    return;
+                }
+                cnum --;
+                displayTotal();
+            });
+
+            $('.plus').click(function(){
+                cnum ++;
+                displayTotal();
+            });
+
+            $('#commitBtn').click(function(){
+                $.post("{:UC('Goods/markOrder')}",{"id":id,"num":cnum},function(res){
+                    if(res.status){
+                        window.location.href = res.url;
+                    }else{
+                        alert(res.info);
+                    }
+                });
+            });
+
+            displayTotal();
+        }
+
+        $(function() {
+            $(".swiper-container").swiper({
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                preloadImages: false,
+                lazyLoading: true
+            });
+
+            goodsPrice();
+        });
+
+
+        wx.config(jsConfig);
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: '夏日清凉-红枣醋',
+                link: window.location.href,
+                imgUrl: 'http://media.dianduoduo.top/pp.jpg',
+                success: function () {
+                    alert("分享成功");
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '夏日清凉-红枣醋',
+                desc: '“少盐多醋，长寿之道”,夏天是喝红枣醋最好的季节。北流市区下单后免费派送。', // 分享描述
+                link: window.location.href, // 分享链接
+                imgUrl: 'http://media.dianduoduo.top/pp.jpg', // 分享图标
+                success: function () {
+                    alert("分享成功");
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+
+    </script>
+</block>

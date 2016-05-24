@@ -32,6 +32,13 @@ class GoodsController extends Controller {
         $this->display();
     }
 
+    /**
+     * 红枣醋
+     */
+    public function mygoods2(){
+        $this->display();
+    }
+
     public function saveAddress(){
         $data = I('post.');
         $data['user_id'] = getUserId();
