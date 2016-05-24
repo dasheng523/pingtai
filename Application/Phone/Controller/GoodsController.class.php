@@ -112,7 +112,7 @@ class GoodsController extends Controller {
         $data['notify_url'] = UC('Goods/notifyPay');
         $data['trade_type'] = "JSAPI";
         $data['openid'] = D('WechatUser')->where(array('user_id'=>getUserId()))->getField('open_id');
-        //print_r($data);
+        \Think\Log::write("支付通知地址：".UC('Goods/notifyPay'),'DEBUG');
 
         $stringA = $this->sign($data,$wechatConfig['paykey']);
         $data['sign'] = $stringA;
