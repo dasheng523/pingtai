@@ -111,27 +111,4 @@ class WechatController extends Controller {
         echo $weobj->createMenu($menu);
     }
 
-    public function sendMsg(){
-        $welcomeMsg = array(
-            array(
-                'Title'=>'店多多正式上线啦！',
-                'Description'=>'我们为您准备了几张优惠券，让您在五一购物享受折上折大优惠。',
-                'PicUrl'=>'http://media.dianduoduo.top/collect/p1.png',
-                'Url'=>UC('Activity/couponList')
-            ),
-            array(
-                'Title'=>'各大商家齐让利，优惠不断，点击来看吧！',
-                'Description'=>'赶快点击进入看看，不容错过哦。',
-                'PicUrl'=>'http://media.dianduoduo.top/collect/p3.png',
-                'Url'=>UC('Activity/hotActivity')
-            ),
-            array(
-                'Title'=>'点击这里，再也不会错过超市每日特价了',
-                'Description'=>'赶快点击进入看看，不容错过哦。',
-                'PicUrl'=>'http://media.dianduoduo.top/collect/p2.png',
-                'Url'=>UC('Activity/showAllActivity')
-            ),
-        );
-
-    }
 }
