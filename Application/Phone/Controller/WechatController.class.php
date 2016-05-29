@@ -103,9 +103,9 @@ class WechatController extends Controller {
             )),
             array('name'=>"店多多",'sub_button'=>array(
                 array('type'=>'view','name'=>'领优惠券','url'=>UC('Activity/couponList')),
+                array('type'=>'click','name'=>'智能帮助','key'=>"M"),
                 array('type'=>'view','name'=>'个人中心','url'=>UC('User/index')),
                 array('type'=>'view','name'=>'商家入口','url'=>UC('shop/index')),
-                array('type'=>'click','name'=>'智能帮助','key'=>"M"),
                 array('type'=>'view','name'=>'关于我们','url'=>UC('Public/h5show')),
             ))
         ));
