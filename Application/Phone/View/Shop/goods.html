@@ -20,8 +20,8 @@
                     <span class="tip">您还没有发布商品呢</span>
                     <else/>
                     <volist name="list" id="info">
-                        <a class="card block" href="{:UC('Shop/goodsEdit',array('id'=>$info['id']))}" data-no-cache="true">
-                            <div class="card-content">
+                        <div class="card">
+                            <a class="card-content block" href="{:UC('Shop/goodsEdit',array('id'=>$info['id']))}" data-no-cache="true">
                                 <div class="list-block media-list">
                                     <ul>
                                         <li class="item-content">
@@ -38,12 +38,12 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </a>
                             <div class="card-footer">
                                 <div>{$info['commentnum']}评论 | {$info['likenum']}喜欢</div>
                                 <div><a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}">查看商品</a></div>
                             </div>
-                        </a>
+                        </div>
                     </volist>
                 </empty>
             </div>
