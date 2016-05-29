@@ -1,56 +1,66 @@
 <extend name="template/temp" />
 <block name="content">
-    <div class="page" id="showcase">
-        <div class="content native-scroll pull-to-refresh-content">
-            <div class="pull-to-refresh-layer">
+    <div class="page" id="zhaoPin">
+        <div class="content native-scroll infinite-scroll">
+            <div class="message-header flex">
+                <div class="item flex-1 <if condition="$_GET['type'] eq 1">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>1))}">看招聘</a></div>
+                <div class="item flex-1 <if condition="$_GET['type'] eq 2">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>2))}">看转让</a></div>
+                <div class="item flex-1 <if condition="$_GET['type'] eq 3">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>3))}">看租赁</a></div>
+                <div class="item flex-1 <if condition="$_GET['type'] eq 4">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>4))}">看其他</a></div>
+            </div>
+
+            <div style="margin-top: 60px;"></div>
+            <div id="msg_content" style="padding-bottom: 40px;">
+                <volist name="list" id="info">
+                    <div class="yspanel border margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
+                        <h3 class="text-center green-text" style="padding: 20px 0;">{$info['title']}</h3>
+                        <div class="yspanel-content-box2">
+                            {$info['mcontent']}
+                            <div class="text-center" style="padding: 30px 0;">
+                                <a class="ysbtn orange-btn" href="tel:{$info['phone']}"><i class="iconfont">&#xe606;</i>电话联系</a>
+                                <if condition="$info['isLike']">
+                                    <a class="ysbtn blue-btn" data-msgid="{$info['id']}" href="#">
+                                        已收藏
+                                    </a>
+                                    <else/>
+                                    <a class="ysbtn blue-btn collbtn" data-msgid="{$info['id']}" href="#">
+                                        <i class="iconfont">&#xe608;</i>收藏信息
+                                    </a>
+                                </if>
+
+                            </div>
+                            <div class="small-text gray-text text-center">电话联系时，请说明是店多多看到的。</div>
+                        </div>
+                    </div>
+                </volist>
+
+
+            </div>
+
+            <?php
+                 if(count($list)>=2){
+            ?>
+            <div class="infinite-scroll-preloader">
                 <div class="preloader"></div>
-                <div class="pull-to-refresh-arrow"></div>
             </div>
-            <div class="block">
-                <p class="buttons-row">
-                    <a href="#" class="button active">招聘</a>
-                    <a href="#" class="button">转让</a>
-                    <a href="#" class="button">其他</a>
-                </p>
-            </div>
+            <?php
+                }
+            ?>
 
-            <div class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
-                <h3 class="text-center" style="padding: 20px 0;">招聘</h3>
-                <div class="yspanel-content-box2">
-                    本公司需要2名高级技术人员，从事网站开发，维护和测试工作，待遇5000元/月。
-                    <div class="text-center" style="padding: 30px 0;">
-                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe606;</i>电话联系</a>
-                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe608;</i>收藏信息</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
-                <h3 class="text-center" style="padding: 20px 0;">招聘</h3>
-                <div class="yspanel-content-box2">
-                    本公司需要2名高级技术人员，从事网站开发，维护和测试工作，待遇5000元/月。
-                    <div class="text-center" style="padding: 30px 0;">
-                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe606;</i>电话联系</a>
-                        <a class="ysbtn" href="tel:18938657523"><i class="iconfont">&#xe608;</i>收藏信息</a>
-                    </div>
-                </div>
-            </div>
-
-            <volist name="list" id="info">
-                <a class="yspanel margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
-                    <div class="yspanel-image-box">
-                        <div class="yspanel-image-textbox">- <span class="text">{$info['name']}</span> -</div>
-                        <img class="lazy yspanel-image-image" data-original="{$info['imglist']}">
-                    </div>
-                    <div class="yspanel-content-box2">
-                        {$info['intro']}
-                    </div>
-                </a>
-            </volist>
-
-            <p class="gray-text1 text-center small-text margin-top30">
-
-            </p>
         </div>
     </div>
+
+    <script type="text/html" id="tpl_msgitem">
+        <div class="yspanel border margin-top30" href="#">
+            <h3 class="text-center green-text" style="padding: 20px 0;">${title}</h3>
+            <div class="yspanel-content-box2">
+                ${mcontent}
+                <div class="text-center" style="padding: 30px 0;">
+                    <a class="ysbtn orange-btn" href="tel:${phone}"><i class="iconfont">&#xe606;</i>电话联系</a>
+                    <a class="ysbtn blue-btn collbtn" data-msgid="${id}"><i class="iconfont">&#xe608;</i>收藏信息</a>
+                </div>
+                <div class="small-text gray-text text-center">电话联系时，请说明是店多多看到的。</div>
+            </div>
+        </div>
+    </script>
 </block>

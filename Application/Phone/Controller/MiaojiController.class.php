@@ -247,15 +247,45 @@ class MiaojiController extends Controller {
 
 
     public function zhaoPin(){
+        $page = I('get.page');
+        if(!$page){
+            $page = 1;
+        }
+        $type = I('get.type');
+        if(!$type){
+            $type = 1;
+        }
+        $list = D('ad_msg')->where(array('type'=>$type))->page($page,2)->select();
+        $uid = getUserId();
+        foreach($list as &$info){
+            $info['isLike'] = logic\UserUseEntityLogic::isLike($uid,$info['id'],C('EntityType_AdMsg'));
+        }
+
+        if($page!=1){
+            echo json_encode($list);
+            return;
+        }
+
+        $this->assign('list',$list);
         $this->display();
     }
 
     public function zhuanRang(){
-
+        $this->display();
     }
 
     public function otherMsg(){
+        $this->display();
+    }
 
+    public function zhaozu(){
+        $this->display();
+    }
+
+    public function collMsg(){
+        $id = I('post.id');
+        $uid = getUserId();
+        logic\UserUseEntityLogic::like($uid,$id,C('EntityType_AdMsg'));
     }
 
 

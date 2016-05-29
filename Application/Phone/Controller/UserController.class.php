@@ -19,13 +19,16 @@ class UserController extends Controller {
 
 
     protected function _initialize(){
-        //初始化菜单
-        $currentMenu = logic\PageMenuLogic::current();
-        if($currentMenu){
-            $this->assign('current',$currentMenu);
-            $tplBar = $this->fetch('Index:tplBar');
-            $this->assign('tplBar',$tplBar);
+        //调用微信JS的配置
+        $jsConfig = logic\WechatJsLogic::makeJSSignature(logic\WechatLogic::defaultWechatConfig());
+        $this->assign('jsConfig',$jsConfig);
+        //随机数
+        if(APP_STATUS == 'local'){
+            $rannum = generateCode();
+        }else{
+            $rannum = C('Version');
         }
+        $this->assign('rannum',$rannum);
     }
 
 
@@ -163,6 +166,83 @@ class UserController extends Controller {
             $this->success('操作成功',UC('User/index'));
         }else{
             $this->error("操作失败");
+        }
+    }
+
+    //我收藏的广告信息
+    public function myCollectAd(){
+        $uid = getUserId();
+        $sql = logic\UserUseEntityLogic::getSqlUserLike($uid,C('EntityType_AdMsg'));
+        $list = D('ad_msg')->where("id in ($sql)")->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function unCollectMsg(){
+        $id = I('post.id');
+        logic\UserUseEntityLogic::delItem(getUserId(),$id,C('EntityType_AdMsg'),C('UseType_Like'));
+        $this->success("操作成功");
+    }
+
+    //广告列表
+    public function publishAd(){
+        $uid = getUserId();
+        $list = D('ad_msg')->where(array('user_id'=>$uid))->order('mtime desc')->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    //发布广告页面
+    public function addAdMsg(){
+        if(IS_POST){
+            $id = I('post.id');
+            $data['phone'] = I('post.phone');
+            $data['mcontent'] = I('post.mcontent');
+            $data['type'] = I('post.type');
+            $data['title'] = $this->getAdMsgType($data['type']);
+            if($id){
+                $data['mtime'] = time();
+                D('ad_msg')->where(array('id'=>$id))->save($data);
+            }else{
+                $data['user_id'] = getUserId();
+                $data['ctime'] = time();
+                $data['mtime'] = time();
+                D('ad_msg')->data($data)->add();
+            }
+            $this->success('操作成功',UC('User/publishAd'));
+            return ;
+        }else{
+            $id = I('get.id');
+            if($id){
+                $info = D('ad_msg')->where(array('id'=>$id))->find();
+                $this->assign('info',$info);
+            }
+            $this->display();
+        }
+    }
+
+
+    /**
+     * 刷新广告页面
+     */
+    public function freshMsg(){
+        $id = I('post.id');
+        if($id){
+            D('ad_msg')->where(array('id'=>$id))->save(array('mtime'=>time()));
+            $this->success('操作成功');
+        }else{
+            $this->error('404商品找不到');
+        }
+    }
+
+
+    private function getAdMsgType($type){
+        switch($type){
+            case 1 : return '招聘';
+            case 2 : return '转让';
+            case 3 : return '租赁';
+            case 4 : return '其他';
+            default : return "其他";
         }
     }
 

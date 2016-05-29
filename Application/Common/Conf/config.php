@@ -19,6 +19,9 @@ return array(
 	'EntityType_Comment' => 3,
 	'EntityType_Collection' => 4,
 	'EntityType_User' => 5,
+	'EntityType_AdMsg' => 6,
+
+
 
 	//用途类型
 	'UseType_Comment' => 1,
@@ -29,5 +32,5 @@ return array(
 	'SESSION_OPTIONS'=> array(
 		'expire'=>24*3600*15,
 	),
-	'Version' => 126,
+	'Version' => 130,
 );

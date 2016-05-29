@@ -1,0 +1,53 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="addAdMsg">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="text-center margin-top30 gray-text">
+            </div>
+            <form method="post" action="">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">手机</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="number" name="phone" pattern="[0-9]*" placeholder="请输入联系手机号码" value="{$info['phone']}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="weui_cells_title">广告正文</div>
+                    <div class="weui_cells weui_cells_form">
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <textarea class="weui_textarea" placeholder="请输入广告正文，500字以内" rows="5" name="mcontent" required>{$info['mcontent']}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui_cells">
+                        <div class="weui_cell weui_cell_select">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <select name="type" class="weui_select" required>
+                                    <option value="4">请选择广告类型</option>
+                                    <option value="1" <if condition="$info['type'] eq 1">selected=selected</if>>招聘</option>
+                                    <option value="2" <if condition="$info['type'] eq 2">selected=selected</if>>转让</option>
+                                    <option value="3" <if condition="$info['type'] eq 3">selected=selected</if>>租赁</option>
+                                    <option value="4" <if condition="$info['type'] eq 4">selected=selected</if>>其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{$info['id']}">
+                <div class="content-block">
+                    <div class="row">
+                        <div class="col-100"><button type="submit" class="button button-big button-fill button-success" style="width: 100%;">提交</button></div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</block>

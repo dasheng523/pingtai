@@ -1,0 +1,36 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="myCollectAd">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="text-center margin-top gray-text">
+                您收藏的广告信息
+            </div>
+            <div class="coupon-myList-box">
+                <volist name="list" id="info">
+                    <div class="my-public-msg">
+                        <a class="block" href="#">
+                            <div class="flex my-public-msg-title-box">
+                                <div class="flex-1">{$info['title']}</div>
+                                <div class="small-text gray-text">2016-05-29 09:22</div>
+                            </div>
+                            <p style="padding: 0 10px;margin: 1.2rem 0" class="text-line3">{$info['mcontent']}</p>
+                        </a>
+                        <div class="my-public-footer flex">
+                            <div class="flex-1 text-center item">
+                                <a href="tel:{$info['phone']}" class="external">拨打电话</a>
+                            </div>
+                            <div class="flex-1 text-center item">
+                                <a href="#" data-id="{$info['id']}" class="unCollectMsgBtn">取消收藏</a>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+
+            </div>
+        </div>
+    </div>
+</block>

@@ -1,0 +1,43 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="publishAd">
+        <div class="content native-scroll pull-to-refresh-content">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div class="text-center margin-top30 gray-text">
+                <empty name="list">
+                    点击左下角的“+”按钮可以发信息
+                    <else/>
+                    温馨提示，点击“刷新信息”可以使您的信息排在前面。
+                </empty>
+            </div>
+            <div class="coupon-myList-box">
+                <volist name="list" id="info">
+                    <div class="my-public-msg">
+                        <a class="block" href="#">
+                            <div class="flex my-public-msg-title-box">
+                                <div class="flex-1">{$info['title']}</div>
+                                <div class="small-text gray-text">2016-05-29 09:22</div>
+                            </div>
+                            <p style="padding: 0 10px;margin: 1.2rem 0" class="text-line3">{$info['mcontent']}</p>
+                        </a>
+                        <div class="my-public-footer flex">
+                            <div class="flex-1 text-center item">
+                                <a href="{:UC('User/addAdMsg',array('id'=>$info['id']))}" class="external">修改信息</a>
+                            </div>
+                            <div class="flex-1 text-center item">
+                                <a href="#" data-id="$info['id']" class="freshMsgBtn">刷新信息</a>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+
+            </div>
+            <div class="fixbtnbox">
+                <a class="fixbtn" href="{:UC('User/addAdMsg')}"><i class="iconfont">&#xe60f;</i></a>
+            </div>
+        </div>
+    </div>
+</block>

@@ -202,6 +202,36 @@ class UserUseEntityLogic
     /**
      * @param $userId
      * @return mixed
+     * 获取用户喜欢的广告
+     */
+    public static function getUserLikeAdMsg($userId){
+        return D('UserUseEntity')
+            ->where(array("user_id=$userId",
+                'entity_type'=>C('EntityType_AdMsg'),
+                'use_type'=>C('UseType_Like')))
+            ->order('id desc')
+            ->select();
+    }
+
+    /**
+     * @param $userId
+     * @param $entityType
+     * @return mixed
+     * 获取用户喜欢的实体ID（SQL）
+     */
+    public static function getSqlUserLike($userId,$entityType){
+        return D('UserUseEntity')
+            ->where(array("user_id=$userId",
+                'entity_type'=>$entityType,
+                'use_type'=>C('UseType_Like')))
+            ->field('entity_id')
+            ->order('id desc')
+            ->select(false);
+    }
+
+    /**
+     * @param $userId
+     * @return mixed
      * 获取用户喜欢的店铺
      */
     public static function getUserLikeShop($userId){

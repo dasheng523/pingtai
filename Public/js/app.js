@@ -1,4 +1,17 @@
 /************************  core  ********************************/
+(function($){
+
+    $.fn.tmpl = function(d) {
+        var s = $(this[0]).html().trim();
+        if (d) {
+            for (k in d) {
+                s = s.replace(new RegExp('\\${' + k + '}', 'g'), d[k]);
+            }
+        }
+        return $(s);
+    };
+
+})(Zepto);
 
 //全局变量
 var pageInitEventHandles = [];
@@ -737,6 +750,93 @@ var myLikeShop = {
     }
 };
 createPageHandler(myLikeShop);
+
+
+var myCollectAd = {
+    pageId:"#myCollectAd",
+    handler: function (e, pageId, $page) {
+        $('.unCollectMsgBtn').on('click',function(){
+            if(confirm("确定要取消收藏吗？")){
+                var id = $(this).data('id');
+                var context = this;
+                $.post(domain+"/index.php/Phone/User/unCollectMsg",{"id":id}, function (res) {
+                    $(context).html("已移除");
+                    $(context).removeClass('unCollectMsgBtn');
+                    $(context).off('click');
+                });
+            }
+        });
+    }
+};
+createPageHandler(myCollectAd);
+
+
+
+var zhaoPin = {
+    pageId:"#zhaoPin",
+    handler: function (e, pageId, $page) {
+        var loading = false;
+        var page = 2;
+        $(document).on('infinite', '.infinite-scroll',function() {
+            if (loading) return;
+            loading = true;
+            var current = window.location.href;
+            $.get(current,{"page":page},function(res){
+                page = page + 1;
+                loading = false;
+                if(res.length<=0){
+                    $.detachInfiniteScroll($('.infinite-scroll'));
+                    $('.infinite-scroll-preloader').remove();
+                }else{
+                    var i;
+                    for(i=0;i<res.length;i++){
+                        var data = res[i];
+                        addItems(data);
+                    }
+                }
+                $.refreshScroller();
+            },'json');
+        });
+
+        function addItems(data){
+            $('#tpl_msgitem').tmpl(data).appendTo($("#msg_content"));
+        }
+
+
+        $('#zhaoPin').on('click','.collbtn',function(){
+            var id = $(this).data('msgid');
+            var context = this;
+            $.post(domain+"/index.php/Phone/Miaoji/collMsg",{"id":id},function(res){
+                $(context).html("已收藏");
+                $(context).removeClass('collbtn');
+                $(context).off('click');
+            });
+        });
+    }
+};
+createPageHandler(zhaoPin);
+
+
+var addAdMsg = {
+    pageId:"#addAdMsg",
+    handler: function (e, pageId, $page) {
+        FormUtils.initForm('form','forward');
+    }
+};
+createPageHandler(addAdMsg);
+
+var publishAd = {
+    pageId:"#publishAd",
+    handler: function (e, pageId, $page) {
+        $('.freshMsgBtn').click(function(){
+            var id = $(this).data('id');
+            $.post(domain+"/index.php/Phone/User/freshMsg",{"id":id},function(res){
+                $.toast(res.info);
+            });
+        });
+    }
+};
+createPageHandler(publishAd);
 
 
 
