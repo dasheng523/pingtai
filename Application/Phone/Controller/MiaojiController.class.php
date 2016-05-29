@@ -255,7 +255,7 @@ class MiaojiController extends Controller {
         if(!$type){
             $type = 1;
         }
-        $list = D('ad_msg')->where(array('type'=>$type))->page($page,2)->select();
+        $list = D('ad_msg')->where(array('type'=>$type))->page($page,20)->select();
         $uid = getUserId();
         foreach($list as &$info){
             $info['isLike'] = logic\UserUseEntityLogic::isLike($uid,$info['id'],C('EntityType_AdMsg'));

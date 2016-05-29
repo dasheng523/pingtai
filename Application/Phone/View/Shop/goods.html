@@ -41,7 +41,7 @@
                             </div>
                             <div class="card-footer">
                                 <div>{$info['commentnum']}评论 | {$info['likenum']}喜欢</div>
-                                <div>{$info.mtime|formatDate=###}</div>
+                                <div><a href="{:UC('Activity/hotActivityGoodsInfo',array('id'=>$info['id']))}">查看商品</a></div>
                             </div>
                         </a>
                     </volist>
