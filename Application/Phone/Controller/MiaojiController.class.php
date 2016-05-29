@@ -270,22 +270,17 @@ class MiaojiController extends Controller {
         $this->display();
     }
 
-    public function zhuanRang(){
-        $this->display();
-    }
-
-    public function otherMsg(){
-        $this->display();
-    }
-
-    public function zhaozu(){
-        $this->display();
-    }
 
     public function collMsg(){
         $id = I('post.id');
         $uid = getUserId();
         logic\UserUseEntityLogic::like($uid,$id,C('EntityType_AdMsg'));
+    }
+
+
+    //自营商品
+    public function popularGoods(){
+        $this->display();
     }
 
 

@@ -91,17 +91,18 @@ class WechatController extends Controller {
     public function createMenu(){
         $weobj = \Wechat\Logic\WechatLogic::initDefaultWechat();
         $menu = array('button' => array(
-            array('name'=>"找优惠",'sub_button'=>array(
-                array('type'=>'view','name'=>'苹果醋','url'=>UC('Goods/mygoods')),
-                array('type'=>'view','name'=>'红枣醋','url'=>UC('Goods/mygoods2')),
-                array('type'=>'view','name'=>'特惠商品','url'=>UC('Activity/hotActivity')),
+            array('name'=>"特色",'sub_button'=>array(
+                array('type'=>'view','name'=>'明星好店','url'=>UC('Miaoji/famousShop')),
+                array('type'=>'view','name'=>'特色商品','url'=>UC('Miaoji/popularGoods')),
             )),
-            array('name'=>"北流生活",'sub_button'=>array(
-                array('type'=>'view','name'=>'领取优惠券','url'=>UC('Activity/couponList')),
+            array('name'=>"优质生活",'sub_button'=>array(
+                array('type'=>'view','name'=>'北流信息','url'=>UC('Miaoji/zhaoPin')),
                 array('type'=>'view','name'=>'商家活动','url'=>UC('Activity/showAllActivity')),
-                array('type'=>'view','name'=>'便民店铺','url'=>UC('Miaoji/shopCate')),
+                array('type'=>'view','name'=>'北流店铺','url'=>UC('Miaoji/shopCate')),
+                array('type'=>'view','name'=>'店铺商品','url'=>UC('Activity/hotActivity')),
             )),
             array('name'=>"店多多",'sub_button'=>array(
+                array('type'=>'view','name'=>'领优惠券','url'=>UC('Activity/couponList')),
                 array('type'=>'view','name'=>'个人中心','url'=>UC('User/index')),
                 array('type'=>'view','name'=>'商家入口','url'=>UC('shop/index')),
                 array('type'=>'click','name'=>'智能帮助','key'=>"M"),
