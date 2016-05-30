@@ -199,7 +199,7 @@ class UserController extends Controller {
             $data['phone'] = I('post.phone');
             $data['mcontent'] = I('post.mcontent');
             $data['type'] = I('post.type');
-            $data['title'] = $this->getAdMsgType($data['type']);
+            $data['title'] = I('post.title');
             if($id){
                 $data['mtime'] = time();
                 D('ad_msg')->where(array('id'=>$id))->save($data);
