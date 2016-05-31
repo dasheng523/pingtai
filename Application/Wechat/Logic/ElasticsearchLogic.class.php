@@ -10,7 +10,7 @@ use \Wechat\Logic as logic;
  */
 class ElasticsearchLogic
 {
-    const PATH = "http://localhost:9200";
+    const PATH = "http://search.dianduoduo.top/";
     const INDEX = "app";
 
     public static function getDoc($type,$id){
