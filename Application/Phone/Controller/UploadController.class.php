@@ -35,6 +35,7 @@ class UploadController extends Controller {
                 C('EntityType_Activity') => array('width'=>350,'height'=>200),
                 C('EntityType_Goods') => array('width'=>300,'height'=>400),
                 C('EntityType_Shop') => array('width'=>350,'height'=>200),
+                C('EntityType_AdMsg') => array('width'=>350,'height'=>200),
             );
 
             if($mediaType == C('MediaType_Image')){
