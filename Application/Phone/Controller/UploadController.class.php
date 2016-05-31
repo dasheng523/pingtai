@@ -40,6 +40,7 @@ class UploadController extends Controller {
             if($mediaType == C('MediaType_Image')){
                 $kuai = $suolveMap[$entityType];
                 //生成缩略图
+                print_r($files);print_r($kuai);
                 logic\MediaLogic::resizePic($file['path'],$file['path'],$kuai['width'],$kuai['height']);
             }
             $file['name'] = 's';
