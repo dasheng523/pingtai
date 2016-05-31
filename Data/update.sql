@@ -23,3 +23,9 @@ CREATE TABLE `famous_shop` (
 
 ALTER TABLE `user_info`
 ADD COLUMN `address`  varchar(255) NULL AFTER `province`;
+
+ALTER TABLE `media`
+MODIFY COLUMN `entity_id`  varchar(255) NULL DEFAULT NULL COMMENT '实体ID' AFTER `media_type`;
+
+ALTER TABLE `user_use_entity`
+MODIFY COLUMN `entity_id`  varchar(255) NOT NULL AFTER `user_id`;

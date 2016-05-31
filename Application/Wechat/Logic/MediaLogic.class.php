@@ -176,9 +176,14 @@ class MediaLogic
             if (!copy($upload['tmp_name'], $info['path'])) {
                 echo "failed to copy ... ";
             }
+            if (!copy($upload['tmp_name'], $info['real_path'])) {
+                echo "failed to copy ... ";
+            }
+            /*
             if(!@move_uploaded_file($upload['tmp_name'],$info['real_path'])){
                 echo "error move file";
             }
+            */
             $rs[] = $info;
         }
         return $rs;

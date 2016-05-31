@@ -362,4 +362,39 @@ class TestController extends Controller {
         echo randomNum2();
     }
 
+
+    public function testSearchAdd(){
+        $rs = httpPost("http://localhost:9200/mytest/employee/",json_encode(array(
+            "name" => "刘吕群",
+            "about" => "只会语言",
+            "job" => "PHP C#"
+        )));
+        print_r($rs);
+    }
+
+    public function testSearchGet(){
+        $rs = httpGet("http://localhost:9200/mytest/employee/_search",json_encode(array(
+            "query" => array(
+                "match" => array(
+                    "_all" => "群"
+                )
+            )
+        )));
+        print_r(json_decode($rs,true));
+    }
+
+    public function testSearchDel(){
+        $rs = httpDel("http://localhost:9200/mytest/employee/AVUBnXpZT2LDaY3Xyv3C");
+        print_r(json_decode($rs,true));
+    }
+
+    public function testSearchUpdate(){
+        $rs = httpPut("http://localhost:9200/mytest/employee/AVUBnYFjT2LDaY3Xyv3D",json_encode(array(
+            "name" => "夜声",
+            "about" => "会所有编程语言",
+            "job" => "高级工程师"
+        )));
+        print_r($rs);
+    }
+
 }

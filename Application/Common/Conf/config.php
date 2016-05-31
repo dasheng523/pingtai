@@ -21,16 +21,20 @@ return array(
 	'EntityType_User' => 5,
 	'EntityType_AdMsg' => 6,
 
-
-
 	//用途类型
 	'UseType_Comment' => 1,
 	'UseType_Like' => 2,
 	'UseType_Collection' => 3,  //收藏
 	'UseType_Visit' => 4,  //访问
 
+	'PageSize' => 10,
+
+	//实体
+	'AdMsg' => 'AdMsg',//广告
+
+
 	'SESSION_OPTIONS'=> array(
 		'expire'=>24*3600*15,
 	),
-	'Version' => 130,
+	'Version' => 131,
 );

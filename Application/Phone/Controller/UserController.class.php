@@ -187,7 +187,11 @@ class UserController extends Controller {
     //广告列表
     public function publishAd(){
         $uid = getUserId();
-        $list = D('ad_msg')->where(array('user_id'=>$uid))->order('mtime desc')->select();
+        $data1 = array(
+            "filter" => array("term" => array("user_id" => $uid)),
+            "sort" => array("mtime" => array('order'=>'desc'))
+        );
+        $list = logic\ElasticsearchLogic::searchDoc(C('AdMsg'),$data1,array('size'=>100));
         $this->assign('list',$list);
         $this->display();
     }
@@ -198,24 +202,29 @@ class UserController extends Controller {
             $id = I('post.id');
             $data['phone'] = I('post.phone');
             $data['mcontent'] = I('post.mcontent');
-            $data['type'] = I('post.type');
             $data['title'] = I('post.title');
             if($id){
                 $data['mtime'] = time();
-                D('ad_msg')->where(array('id'=>$id))->save($data);
+                logic\ElasticsearchLogic::updateDoc(C('AdMsg'),$id,$data);
             }else{
                 $data['user_id'] = getUserId();
                 $data['ctime'] = time();
                 $data['mtime'] = time();
-                D('ad_msg')->data($data)->add();
+                $id = logic\ElasticsearchLogic::addDoc(C('AdMsg'),$data);
+            }
+            $mediaIds = I('post.media_ids');
+            foreach($mediaIds as $mediaId){
+                logic\MediaLogic::setEntityId($mediaId,$id);
             }
             $this->success('操作成功',UC('User/publishAd'));
             return ;
         }else{
             $id = I('get.id');
             if($id){
-                $info = D('ad_msg')->where(array('id'=>$id))->find();
+                $info = logic\ElasticsearchLogic::getDocSource(C('AdMsg'),$id);
                 $this->assign('info',$info);
+                $goodsImgInfos = logic\MediaLogic::getEntityAllMedia($id,C('EntityType_AdMsg'),C('MediaType_Image'));
+                $this->assign('goodsImgInfos',$goodsImgInfos);
             }
             $this->display();
         }
@@ -228,24 +237,13 @@ class UserController extends Controller {
     public function freshMsg(){
         $id = I('post.id');
         if($id){
-            D('ad_msg')->where(array('id'=>$id))->save(array('mtime'=>time()));
+            $data['mtime'] = time();
+            logic\ElasticsearchLogic::updateDoc(C('AdMsg'),$id,$data);
             $this->success('操作成功');
         }else{
             $this->error('404商品找不到');
         }
     }
-
-
-    private function getAdMsgType($type){
-        switch($type){
-            case 1 : return '招聘';
-            case 2 : return '转让';
-            case 3 : return '租赁';
-            case 4 : return '其他';
-            default : return "其他";
-        }
-    }
-
 
 
     /**

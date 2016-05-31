@@ -28,16 +28,16 @@
                                 <a href="{:UC('User/addAdMsg',array('id'=>$info['id']))}" class="external">修改信息</a>
                             </div>
                             <div class="flex-1 text-center item">
-                                <a href="#" data-id="$info['id']" class="freshMsgBtn">刷新信息</a>
+                                <a href="#" data-id="{$info['id']}" class="freshMsgBtn">刷新信息</a>
                             </div>
                         </div>
                     </div>
                 </volist>
 
             </div>
-            <div class="fixbtnbox">
-                <a class="fixbtn" href="{:UC('User/addAdMsg')}"><i class="iconfont">&#xe60f;</i></a>
-            </div>
+        </div>
+        <div class="fixbtnbox">
+            <a class="fixbtn external" href="{:UC('User/addAdMsg')}"><i class="iconfont">&#xe60f;</i></a>
         </div>
     </div>
 </block>

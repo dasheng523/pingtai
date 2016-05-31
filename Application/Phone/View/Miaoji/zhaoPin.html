@@ -2,20 +2,25 @@
 <block name="content">
     <div class="page" id="zhaoPin">
         <div class="content native-scroll infinite-scroll">
-            <div class="message-header flex">
-                <div class="item flex-1 <if condition="$_GET['type'] eq 1">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>1))}">看招聘</a></div>
-                <div class="item flex-1 <if condition="$_GET['type'] eq 2">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>2))}">看转让</a></div>
-                <div class="item flex-1 <if condition="$_GET['type'] eq 3">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>3))}">看租赁</a></div>
-                <div class="item flex-1 <if condition="$_GET['type'] eq 4">hover</if>"><a href="{:UC('Miaoji/zhaoPin',array('type'=>4))}">看其他</a></div>
+            <div class="message-header">
+                <a class="searchBar" href="{:UC('Miaoji/adMsgSearch')}">
+                    <i class="iconfont">&#xe612;</i>搜索
+                </a>
             </div>
 
             <div style="margin-top: 60px;"></div>
             <div id="msg_content" style="padding-bottom: 40px;">
                 <volist name="list" id="info">
-                    <div class="yspanel border margin-top30" href="{:UC('Miaoji/showcaseDispatch',array('id'=>$info['id']))}">
+                    <div class="yspanel border margin-top30">
                         <h3 class="text-center green-text" style="padding: 20px 0;">{$info['title']}</h3>
                         <div class="yspanel-content-box2">
-                            {$info['mcontent']}
+                            <div class="mcontent text-line3">{$info['mcontent']}</div>
+                            <a href="javascript:;" class="morebtn"><i class="iconfont">&#xe610;</i>查看全文</a>
+                            <div class="piclistbox">
+                                <volist name="info.pics" id="url">
+                                    <div class="item" style="background-image:url('{$url}')"></div>
+                                </volist>
+                            </div>
                             <div class="text-center" style="padding: 30px 0;">
                                 <a class="ysbtn orange-btn" href="tel:{$info['phone']}"><i class="iconfont">&#xe606;</i>电话联系</a>
                                 <if condition="$info['isLike']">
@@ -27,18 +32,15 @@
                                         <i class="iconfont">&#xe608;</i>收藏信息
                                     </a>
                                 </if>
-
                             </div>
                             <div class="small-text gray-text text-center">电话联系时，请说明是店多多看到的。</div>
                         </div>
                     </div>
                 </volist>
-
-
             </div>
 
             <?php
-                 if(count($list)>=20){
+                 if(count($list)>=C('PageSize')){
             ?>
             <div class="infinite-scroll-preloader">
                 <div class="preloader"></div>
@@ -50,17 +52,29 @@
         </div>
     </div>
 
-    <script type="text/html" id="tpl_msgitem">
-        <div class="yspanel border margin-top30" href="#">
-            <h3 class="text-center green-text" style="padding: 20px 0;">${title}</h3>
+    <script type="text/html" id="tpl_msgitem2">
+        {{each data as value i}}
+        <div class="yspanel border margin-top30">
+            <h3 class="text-center green-text" style="padding: 20px 0;">{{value.title}}</h3>
             <div class="yspanel-content-box2">
-                ${mcontent}
+                <div class="text-line3 mcontent">
+                    {{value.mcontent}}
+                </div>
+                <a href="javascript:;" class="morebtn"><i class="iconfont">&#xe610;</i>查看全文</a>
+                <div class="piclistbox">
+                    {{each value.pics as url i}}
+                    <div class="item" style="background-image:url('{{url}}')"></div>
+                    {{/each}}
+                </div>
                 <div class="text-center" style="padding: 30px 0;">
-                    <a class="ysbtn orange-btn" href="tel:${phone}"><i class="iconfont">&#xe606;</i>电话联系</a>
-                    <a class="ysbtn blue-btn collbtn" data-msgid="${id}"><i class="iconfont">&#xe608;</i>收藏信息</a>
+                    <a class="ysbtn orange-btn" href="tel:{{value.phone}}"><i class="iconfont">&#xe606;</i>电话联系</a>
+                    <a class="ysbtn blue-btn collbtn" data-msgid="{{value.id}}"><i class="iconfont">&#xe608;</i>收藏信息</a>
                 </div>
                 <div class="small-text gray-text text-center">电话联系时，请说明是店多多看到的。</div>
             </div>
         </div>
+        {{/each}}
     </script>
+
+
 </block>

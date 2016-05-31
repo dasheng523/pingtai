@@ -298,12 +298,27 @@ function baiduMapToSosoMap($lat,$lng){
 }
 
 
-function httpGet($url){
+function httpGet($url,$data=null){
     $curl = new \Common\Lib\Curl();
-    return $curl->get($url);
+    return $curl->get($url,$data);
 }
 
 function httpPost($url, $data){
     $curl = new \Common\Lib\Curl();
     return $curl->post($url, $data);
+}
+
+function httpPut($url,$data){
+    $curl = new \Common\Lib\Curl();
+    return $curl->put($url, $data);
+}
+
+function httpDel($url,$data=null){
+    $curl = new \Common\Lib\Curl();
+    return $curl->del($url, $data);
+}
+
+function httpHead($url,$data=null){
+    $curl = new \Common\Lib\Curl();
+    return $curl->head($url, $data);
 }

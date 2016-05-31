@@ -251,14 +251,16 @@ class MiaojiController extends Controller {
         if(!$page){
             $page = 1;
         }
-        $type = I('get.type');
-        if(!$type){
-            $type = 1;
-        }
-        $list = D('ad_msg')->where(array('type'=>$type))->page($page,20)->select();
+        $from = ($page-1) * C('PageSize');
+        $data1 = array(
+            "sort" => array("mtime" => array('order'=>'desc'))
+        );
+        $list = logic\ElasticsearchLogic::searchDoc(C('AdMsg'),$data1,array('from'=>$from));
+
         $uid = getUserId();
         foreach($list as &$info){
             $info['isLike'] = logic\UserUseEntityLogic::isLike($uid,$info['id'],C('EntityType_AdMsg'));
+            $info['pics'] = logic\MediaLogic::getEntityAllImgUrl($info['id'],C('EntityType_AdMsg'));
         }
 
         if($page!=1){
@@ -268,6 +270,33 @@ class MiaojiController extends Controller {
 
         $this->assign('list',$list);
         $this->display();
+    }
+
+    public function adMsgSearch(){
+        $this->display();
+    }
+
+    public function adMsgSearchPost(){
+        $keyword = I('post.keyword');
+        $page = I('post.page');
+        if(!$page){
+            $page = 1;
+        }
+        $from = ($page-1) * C('PageSize');
+        $list = logic\ElasticsearchLogic::searchDoc(C('AdMsg'),array(
+            "query" => array(
+                "match" => array(
+                    "_all" => $keyword
+                )
+            )
+        ),array('from'=>$from));
+
+        $uid = getUserId();
+        foreach($list as &$info){
+            $info['isLike'] = logic\UserUseEntityLogic::isLike($uid,$info['id'],C('EntityType_AdMsg'));
+            $info['pics'] = logic\MediaLogic::getEntityAllImgUrl($info['id'],C('EntityType_AdMsg'));
+        }
+        echo json_encode($list);
     }
 
 

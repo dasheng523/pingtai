@@ -13,6 +13,10 @@
 
 })(Zepto);
 
+function replaceParams(str,k,v){
+    return str.replace(new RegExp('\\${' + k + '}', 'g'), v);
+}
+
 //全局变量
 var pageInitEventHandles = [];
 
@@ -201,6 +205,9 @@ var UploadUtils = function(fileId,limitCount){
         limitCount = 6;
     }
     var i = 1;
+    var mediaType = $(fileId).data('mediatype') ? $(fileId).data('mediatype') : 0;
+    var entityType = $(fileId).data('entitytype') ? $(fileId).data('entitytype') : 0;
+    var entityId = $(fileId).data('entityid') ? $(fileId).data('entityid') : 0;
     function createShowNode(){
         var id = "i"+(i++);
         return {
@@ -222,6 +229,9 @@ var UploadUtils = function(fileId,limitCount){
         var fileData = new FormData();
         var id = showNode.id;
         fileData.append('fileData', fileNode.files[0]);
+        fileData.append('mediaType',mediaType);
+        fileData.append('entityType',entityType);
+        fileData.append('entityId',entityId);
         $.ajax({
             url: domain+'/index.php/Phone/Upload/uploadFile.html',
             type: 'POST',
@@ -788,18 +798,32 @@ var zhaoPin = {
                     $.detachInfiniteScroll($('.infinite-scroll'));
                     $('.infinite-scroll-preloader').remove();
                 }else{
-                    var i;
-                    for(i=0;i<res.length;i++){
-                        var data = res[i];
-                        addItems(data);
-                    }
+                    var html = template('tpl_msgitem2', {data:res});
+                    $("#zhaoPin #msg_content").append(html);
                 }
                 $.refreshScroller();
             },'json');
         });
 
-        function addItems(data){
-            $('#tpl_msgitem').tmpl(data).appendTo($("#msg_content"));
+        $('#zhaoPin').on('click','.piclistbox > .item', function () {
+            var d = $(this).css('background-image');
+            var curl = getUrl(d);
+            var items = $(this).siblings('.item');
+            var urls = [];
+            items.forEach(function(obj){
+                var url = getUrl($(obj).css('background-image'));
+                urls.push(url);
+            });
+            wx.previewImage({
+                current: curl,
+                urls: urls
+            });
+        });
+
+        function getUrl(str){
+            var d = str.replace("url(",'');
+            d = d.replace(")",'');
+            return d;
         }
 
 
@@ -812,18 +836,161 @@ var zhaoPin = {
                 $(context).off('click');
             });
         });
+
+        $('#zhaoPin').on('click','.morebtn',function(){
+            var flag = $(this).data('flag');
+            if(!flag){
+                $(this).html('<i class="iconfont">&#xe611;</i>收起');
+                $(this).siblings('.mcontent').removeClass('text-line3');
+                $(this).data('flag',1);
+            }else{
+                $(this).html('<i class="iconfont">&#xe610;</i>查看全文');
+                $(this).siblings('.mcontent').addClass('text-line3');
+                $(this).data('flag',0);
+            }
+
+        });
+
+        function hideLongText(){
+            $('#zhaoPin #msg_content .mcontent').forEach(function(item){
+                var sh = $(item)[0].scrollHeight;
+                var ch = $(item)[0].clientHeight;
+                if(sh <= ch){
+                    var btn = $(item).siblings('.morebtn');
+                    btn.addClass('hide');
+                }
+
+            });
+        }
+
+        hideLongText();
     }
 };
 createPageHandler(zhaoPin);
 
 
+var adMsgSearch = {
+    pageId:"#adMsgSearch",
+    handler: function (e, pageId, $page) {
+
+        var ckey = "";
+        var page = 1;
+
+
+        $('.search-index-item').click(function(){
+            ckey = trimStr($(this).html());
+            page = 1;
+            $('#search').val(ckey);
+            handlerText();
+        });
+
+        function trimStr(str){return str.replace(/(^\s*)|(\s*$)/g,"");}
+
+
+        function handlerText(){
+            ckey = $("#search").val();
+            if(ckey && ckey != ""){
+                $('.search-index').addClass('hide');
+                page = 1;
+                $.post(domain+"/index.php/Phone/Miaoji/adMsgSearchPost",{keyword:ckey,page:page},function(res){
+                    var html = template('tpl_msgitem2', {data:res});
+                    $("#adMsgSearch #msg_content").html(html);
+                },'json');
+            }else{
+                $('.search-index').removeClass('hide');
+            }
+        }
+        $('#search').on('input',handlerText);
+
+        var loading = false;
+        $(document).on('infinite', '.infinite-scroll',function() {
+            if (loading) return;
+            loading = true;
+            page = page + 1;
+            $.post(domain+"/index.php/Phone/Miaoji/adMsgSearchPost",{keyword:ckey,page:page},function(res){
+                loading = false;
+                if(res.length<=0){
+                    $.detachInfiniteScroll($('.infinite-scroll'));
+                    $('.infinite-scroll-preloader').remove();
+                }else{
+                    var html = template('tpl_msgitem2', {data:res});
+                    $("#adMsgSearch #msg_content").append(html);
+                }
+                $.refreshScroller();
+            },'json');
+        });
+
+        $('#adMsgSearch').on('click','.piclistbox > .item', function () {
+            var d = $(this).css('background-image');
+            var curl = getUrl(d);
+            var items = $(this).siblings('.item');
+            var urls = [];
+            items.forEach(function(obj){
+                var url = getUrl($(obj).css('background-image'));
+                urls.push(url);
+            });
+            wx.previewImage({
+                current: curl,
+                urls: urls
+            });
+        });
+
+        function getUrl(str){
+            var d = str.replace("url(",'');
+            d = d.replace(")",'');
+            return d;
+        }
+
+
+        $('#adMsgSearch').on('click','.collbtn',function(){
+            var id = $(this).data('msgid');
+            var context = this;
+            $.post(domain+"/index.php/Phone/Miaoji/collMsg",{"id":id},function(res){
+                $(context).html("已收藏");
+                $(context).removeClass('collbtn');
+                $(context).off('click');
+            });
+        });
+
+        $('#adMsgSearch').on('click','.morebtn',function(){
+            var flag = $(this).data('flag');
+            if(!flag){
+                $(this).html('<i class="iconfont">&#xe611;</i>收起');
+                $(this).siblings('.mcontent').removeClass('text-line3');
+                $(this).data('flag',1);
+            }else{
+                $(this).html('<i class="iconfont">&#xe610;</i>查看全文');
+                $(this).siblings('.mcontent').addClass('text-line3');
+                $(this).data('flag',0);
+            }
+        });
+
+        function hideLongText(){
+            $('#adMsgSearch #msg_content .mcontent').forEach(function(item){
+                var sh = $(item)[0].scrollHeight;
+                var ch = $(item)[0].clientHeight;
+                if(sh <= ch){
+                    var btn = $(item).siblings('.morebtn');
+                    btn.addClass('hide');
+                }
+            });
+        }
+
+        hideLongText();
+    }
+};
+createPageHandler(adMsgSearch);
+
 var addAdMsg = {
     pageId:"#addAdMsg",
     handler: function (e, pageId, $page) {
         FormUtils.initForm('form','forward');
+        var ddd = UploadUtils('#uploadFile',6);
+        ddd.initUpload();
     }
 };
 createPageHandler(addAdMsg);
+
 
 var publishAd = {
     pageId:"#publishAd",

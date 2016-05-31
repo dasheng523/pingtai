@@ -1,0 +1,61 @@
+<extend name="template/temp" />
+<block name="content">
+    <div class="page" id="adMsgSearch">
+        <div class="content native-scroll infinite-scroll">
+            <div class="bar">
+                <div class="searchbar">
+                    <a class="searchbar-cancel">取消</a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='输入关键字...'/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-content-box">
+                <div class="search-index">
+                    <a class="search-index-item" href="javascript:;">
+                        找招聘
+                    </a>
+                    <a class="search-index-item" href="javascript:;">
+                        找二手
+                    </a>
+                    <a class="search-index-item" href="javascript:;">
+                        找商品
+                    </a>
+                    <a class="search-index-item" href="javascript:;">
+                        找租房
+                    </a>
+                    <a class="search-index-item" href="javascript:;">
+                        找转让
+                    </a>
+                </div>
+                <div id="msg_content">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="tpl_msgitem2">
+        {{each data as value i}}
+        <div class="yspanel border margin-top30">
+            <h3 class="text-center green-text" style="padding: 20px 0;">{{value.title}}</h3>
+            <div class="yspanel-content-box2">
+                <div class="text-line3 mcontent">
+                    {{value.mcontent}}
+                </div>
+                <a href="javascript:;" class="morebtn"><i class="iconfont">&#xe610;</i>查看全文</a>
+                <div class="piclistbox">
+                    {{each value.pics as url i}}
+                    <div class="item" style="background-image:url('{{url}}')"></div>
+                    {{/each}}
+                </div>
+                <div class="text-center" style="padding: 30px 0;">
+                    <a class="ysbtn orange-btn" href="tel:{{value.phone}}"><i class="iconfont">&#xe606;</i>电话联系</a>
+                    <a class="ysbtn blue-btn collbtn" data-msgid="{{value.id}}"><i class="iconfont">&#xe608;</i>收藏信息</a>
+                </div>
+                <div class="small-text gray-text text-center">电话联系时，请说明是店多多看到的。</div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+</block>
