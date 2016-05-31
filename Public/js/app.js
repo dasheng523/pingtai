@@ -808,7 +808,7 @@ var zhaoPin = {
         $('#zhaoPin').on('click','.piclistbox > .item', function () {
             var d = $(this).css('background-image');
             var curl = getUrl(d);
-            var items = $(this).siblings('.item');
+            var items = $(this).parent().children('.item');
             var urls = [];
             items.forEach(function(obj){
                 var url = getUrl($(obj).css('background-image'));
