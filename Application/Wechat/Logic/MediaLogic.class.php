@@ -185,7 +185,6 @@ class MediaLogic
             if(!@move_uploaded_file($upload['tmp_name'],$info['real_path'])){
                 echo "error move file";
             }
-            
             $rs[] = $info;
         }
         return $rs;
