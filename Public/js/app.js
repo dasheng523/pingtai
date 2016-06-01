@@ -825,11 +825,11 @@ var zhaoPin = {
             var flag = $(this).data('flag');
             if(!flag){
                 $(this).html('<i class="iconfont">&#xe611;</i>收起');
-                $(this).siblings('.mcontent').removeClass('text-line3');
+                $(this).siblings('.mcontent').removeClass('text-line5');
                 $(this).data('flag',1);
             }else{
                 $(this).html('<i class="iconfont">&#xe610;</i>查看全文');
-                $(this).siblings('.mcontent').addClass('text-line3');
+                $(this).siblings('.mcontent').addClass('text-line5');
                 $(this).data('flag',0);
             }
 
