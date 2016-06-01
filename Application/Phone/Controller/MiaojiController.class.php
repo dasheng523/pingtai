@@ -245,46 +245,7 @@ class MiaojiController extends Controller {
         $this->display();
     }
 
-
-    public function zhaoPin(){
-        $page = I('get.page');
-        if(!$page){
-            $page = 1;
-        }
-        $from = ($page-1) * C('PageSize');
-        $data1 = array(
-            "sort" => array("mtime" => array('order'=>'desc'))
-        );
-        $list = logic\ElasticsearchLogic::searchDoc(C('AdMsg'),$data1,array('from'=>$from));
-
-        $uid = getUserId();
-        foreach($list as &$info){
-            $info['isLike'] = logic\UserUseEntityLogic::isLike($uid,$info['id'],C('EntityType_AdMsg'));
-            $info['pics'] = logic\MediaLogic::getEntityAllImgUrl($info['id'],C('EntityType_AdMsg'));
-            $info['mcontent'] = replaceLine($info['mcontent']);
-        }
-
-        if($page!=1){
-            echo json_encode($list);
-            return;
-        }
-
-        $this->assign('list',$list);
-        $this->display();
-    }
-
-    public function adMsgSearch(){
-        $this->display();
-    }
-
-    public function adMsgSearchPost(){
-        $keyword = I('post.keyword');
-        $page = I('post.page');
-        if(!$page){
-            $page = 1;
-        }
-        $from = ($page-1) * C('PageSize');
-
+    private function search($keyword,$page){
         if($keyword){
             $dsl = array(
                 "query" => array(
@@ -299,6 +260,8 @@ class MiaojiController extends Controller {
             );
         }
 
+
+        $from = ($page-1) * C('PageSize');
         $list = logic\ElasticsearchLogic::searchDoc(C('AdMsg'),$dsl,array('from'=>$from));
 
         $uid = getUserId();
@@ -307,6 +270,38 @@ class MiaojiController extends Controller {
             $info['pics'] = logic\MediaLogic::getEntityAllImgUrl($info['id'],C('EntityType_AdMsg'));
             $info['mcontent'] = replaceLine($info['mcontent']);
         }
+        return $list;
+    }
+
+    public function zhaoPin(){
+        $page = I('get.page');
+        if(!$page){
+            $page = 1;
+        }
+        $keyword = I('get.keyword');
+        if(!$keyword){
+            $keyword = "";
+        }
+
+        $list = $this->search($keyword,$page);
+
+
+        if($page!=1){
+            echo json_encode($list);
+            return;
+        }
+
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    public function adMsgSearchPost(){
+        $keyword = I('post.keyword');
+        $page = I('post.page');
+        if(!$page){
+            $page = 1;
+        }
+        $list = $this->search($keyword,$page);
         echo json_encode($list);
     }
 

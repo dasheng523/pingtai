@@ -783,6 +783,7 @@ var zhaoPin = {
                     $('.infinite-scroll-preloader').remove();
                 }else{
                     var html = template('tpl_msgitem2', {data:res});
+                    html = html.replace(/&#60;br&#62;/g,"<br>");
                     $("#zhaoPin #msg_content").append(html);
                     hideLongText();
                 }
@@ -808,6 +809,7 @@ var zhaoPin = {
                 }
                 else{
                     var html = template('tpl_msgitem2', {data:res});
+                    html = html.replace(/&#60;br&#62;/g,"<br>");
                     $("#zhaoPin #msg_content").html(html);
                     hideLongText();
                 }
