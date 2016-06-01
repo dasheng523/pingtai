@@ -96,10 +96,10 @@ class WechatController extends Controller {
                 array('type'=>'view','name'=>'特色商品','url'=>UC('Miaoji/popularGoods')),
             )),
             array('name'=>"优质生活",'sub_button'=>array(
-                array('type'=>'view','name'=>'北流信息','url'=>UC('Miaoji/zhaoPin')),
+                array('type'=>'view','name'=>'便民信息','url'=>UC('Miaoji/zhaoPin')),
                 array('type'=>'view','name'=>'商家活动','url'=>UC('Activity/showAllActivity')),
-                array('type'=>'view','name'=>'北流店铺','url'=>UC('Miaoji/shopCate')),
-                array('type'=>'view','name'=>'店铺商品','url'=>UC('Activity/hotActivity')),
+                array('type'=>'view','name'=>'本地店铺','url'=>UC('Miaoji/shopCate')),
+                array('type'=>'view','name'=>'优惠商品','url'=>UC('Activity/hotActivity')),
             )),
             array('name'=>"店多多",'sub_button'=>array(
                 array('type'=>'view','name'=>'领优惠券','url'=>UC('Activity/couponList')),
