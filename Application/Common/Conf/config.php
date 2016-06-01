@@ -20,6 +20,7 @@ return array(
 	'EntityType_Collection' => 4,
 	'EntityType_User' => 5,
 	'EntityType_AdMsg' => 6,
+	'EntityType_Count' => 7,
 
 	//用途类型
 	'UseType_Comment' => 1,
@@ -31,6 +32,7 @@ return array(
 
 	//实体
 	'AdMsg' => 'AdMsg',//广告
+	'CountMsg' => 'CountMsg',//统计类型
 
 
 	'SESSION_OPTIONS'=> array(

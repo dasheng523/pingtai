@@ -18,6 +18,14 @@ class WController extends Controller {
             $rannum = C('Version');
         }
         $this->assign('rannum',$rannum);
+
+        //加入统计分析
+        logic\ElasticsearchLogic::addDoc(C("CountMsg"),array(
+            'user_id' => getUserId(),
+            'ctime' => time(),
+            'path' => __SELF__,
+            'param' => I('param.')
+        ));
     }
 
 }
