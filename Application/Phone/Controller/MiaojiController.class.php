@@ -261,6 +261,7 @@ class MiaojiController extends Controller {
         foreach($list as &$info){
             $info['isLike'] = logic\UserUseEntityLogic::isLike($uid,$info['id'],C('EntityType_AdMsg'));
             $info['pics'] = logic\MediaLogic::getEntityAllImgUrl($info['id'],C('EntityType_AdMsg'));
+            $info['mcontent'] = replaceLine($info['mcontent']);
         }
 
         if($page!=1){
@@ -295,6 +296,7 @@ class MiaojiController extends Controller {
         foreach($list as &$info){
             $info['isLike'] = logic\UserUseEntityLogic::isLike($uid,$info['id'],C('EntityType_AdMsg'));
             $info['pics'] = logic\MediaLogic::getEntityAllImgUrl($info['id'],C('EntityType_AdMsg'));
+            $info['mcontent'] = replaceLine($info['mcontent']);
         }
         echo json_encode($list);
     }

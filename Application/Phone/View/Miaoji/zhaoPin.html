@@ -1,4 +1,8 @@
 <extend name="template/temp" />
+<block name="css">
+    <link rel="stylesheet" href="__PUBLIC__/css/animate.min.css">
+</block>
+
 <block name="content">
     <div class="page" id="zhaoPin">
         <div class="content native-scroll infinite-scroll">
@@ -40,7 +44,7 @@
             </div>
 
             <div class="fixbtnbox">
-                <a class="rangBtn external" href="{:UC('User/addAdMsg')}">我要<br>发布</a>
+                <a class="rangBtn external animated infinite jello" href="{:UC('User/addAdMsg')}">发布<br>广告</a>
             </div>
 
 

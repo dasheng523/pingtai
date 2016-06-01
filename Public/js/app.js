@@ -1,22 +1,5 @@
 /************************  core  ********************************/
 $('#loadingBox').remove();
-(function($){
-
-    $.fn.tmpl = function(d) {
-        var s = $(this[0]).html().trim();
-        if (d) {
-            for (k in d) {
-                s = s.replace(new RegExp('\\${' + k + '}', 'g'), d[k]);
-            }
-        }
-        return $(s);
-    };
-
-})(Zepto);
-
-function replaceParams(str,k,v){
-    return str.replace(new RegExp('\\${' + k + '}', 'g'), v);
-}
 
 //全局变量
 var pageInitEventHandles = [];
