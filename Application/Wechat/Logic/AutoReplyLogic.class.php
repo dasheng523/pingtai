@@ -127,7 +127,7 @@ class MainState{
             //主菜单
             array(
                 "key" => array("M","菜单","帮助"),
-                "resp" => makeText("欢迎访问店多多，店多多汇聚您身边的优惠！请问您需要什么帮助？\n 回复 1：免费领优惠券\n 回复 2：查看热门活动\n 回复 3：看看优惠商品\n 回复 4：随便逛逛商店\n 回复 5：查看招聘转让租赁\n 回复 6：发布招聘转让租赁\n\n 免费开店，请回复 A\n 店铺管理，请回复 9\n\n 回复 M 可重现本菜单"),
+                "resp" => makeText("欢迎访问店多多，店多多汇聚您身边的优惠！请问您需要什么帮助？\n 回复 1：免费领优惠券\n 回复 2：查看热门活动\n 回复 3：看看优惠商品\n 回复 4：随便逛逛商店\n 回复 5：查看便民广告\n 回复 6：发布便民广告\n\n 免费开店，请回复 A\n 店铺管理，请回复 9\n\n 回复 M 可重现本菜单"),
             ),
             //免费领优惠券
             array(
@@ -182,8 +182,8 @@ class MainState{
                 "key" => array("5"),
                 "resp" => makeNews(array(
                     array(
-                        'Title'=>'查看招聘转让租赁信息',
-                        'Description'=>'查看招聘转让租赁信息，随时掌握北流最新数据。',
+                        'Title'=>'查看便民广告',
+                        'Description'=>'查看便民广告，随时掌握北流最新数据。',
                         'PicUrl'=>'http://media.dianduoduo.top/UploadFile/chak.png',
                         'Url'=>UC('Phone/Miaoji/zhaoPin'),
                     ),
@@ -194,8 +194,8 @@ class MainState{
                 "key" => array("6"),
                 "resp" => makeNews(array(
                     array(
-                        'Title'=>'发布招聘转让租赁信息',
-                        'Description'=>'发布招聘转让租赁信息，让您不再愁宣传问题',
+                        'Title'=>'发布便民广告',
+                        'Description'=>'发布便民广告，让您不再愁宣传问题',
                         'PicUrl'=>'http://media.dianduoduo.top/UploadFile/fabuw.png',
                         'Url'=>UC('Phone/User/publishAd'),
                     ),
