@@ -1,4 +1,5 @@
 /************************  core  ********************************/
+$('#loadingBox').remove();
 (function($){
 
     $.fn.tmpl = function(d) {

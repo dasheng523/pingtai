@@ -6,13 +6,10 @@
                 <div class="preloader"></div>
                 <div class="pull-to-refresh-arrow"></div>
             </div>
-            <div class="text-center margin-top30 gray-text">
-                <empty name="list">
-                    点击左下角的“+”按钮可以发信息
-                    <else/>
-                    温馨提示，点击“刷新信息”可以使您的信息排在前面。
-                </empty>
+            <div class="text-center margin-top">
+                <h3>信息发布管理页面</h3>
             </div>
+
             <div class="coupon-myList-box">
                 <volist name="list" id="info">
                     <div class="my-public-msg">
@@ -35,6 +32,16 @@
                 </volist>
 
             </div>
+            <p class="gray-text1 text-center small-text margin-top30">
+                温馨提示<br>
+                <empty name="list">
+                    点击左下角的“+”按钮可以发信息
+                    <else/>
+                    发布成功后，可点击<a href="{:UC('Miaoji/zhaoPin')}">查看效果</a>
+                    <br>
+                    点击“刷新信息”可以使您的旧信息排在前面。
+                </empty>
+            </p>
         </div>
         <div class="fixbtnbox">
             <a class="fixbtn external" href="{:UC('User/addAdMsg')}"><i class="iconfont">&#xe60f;</i></a>
