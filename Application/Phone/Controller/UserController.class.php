@@ -15,22 +15,7 @@ use \Wechat\Logic as logic;
  * @package Phone\Controller
  * 顾客模块
  */
-class UserController extends Controller {
-
-
-    protected function _initialize(){
-        //调用微信JS的配置
-        $jsConfig = logic\WechatJsLogic::makeJSSignature(logic\WechatLogic::defaultWechatConfig());
-        $this->assign('jsConfig',$jsConfig);
-        //随机数
-        if(APP_STATUS == 'local'){
-            $rannum = generateCode();
-        }else{
-            $rannum = C('Version');
-        }
-        $this->assign('rannum',$rannum);
-    }
-
+class UserController extends WController {
 
     /**
      * 意见反馈
