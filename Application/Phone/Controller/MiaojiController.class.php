@@ -284,13 +284,22 @@ class MiaojiController extends Controller {
             $page = 1;
         }
         $from = ($page-1) * C('PageSize');
-        $list = logic\ElasticsearchLogic::searchDoc(C('AdMsg'),array(
-            "query" => array(
-                "match" => array(
-                    "_all" => $keyword
+
+        if($keyword){
+            $dsl = array(
+                "query" => array(
+                    "match" => array(
+                        "_all" => $keyword
+                    )
                 )
-            )
-        ),array('from'=>$from));
+            );
+        }else{
+            $dsl = array(
+                "sort" => array("mtime" => array('order'=>'desc'))
+            );
+        }
+
+        $list = logic\ElasticsearchLogic::searchDoc(C('AdMsg'),$dsl,array('from'=>$from));
 
         $uid = getUserId();
         foreach($list as &$info){

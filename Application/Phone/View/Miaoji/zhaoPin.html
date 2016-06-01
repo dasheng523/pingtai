@@ -6,13 +6,42 @@
 <block name="content">
     <div class="page" id="zhaoPin">
         <div class="content native-scroll infinite-scroll">
-            <div class="message-header">
-                <a class="searchBar" href="{:UC('Miaoji/adMsgSearch')}">
-                    <i class="iconfont">&#xe612;</i>搜索
-                </a>
+            <div class="bar">
+                <div class="searchbar">
+                    <a class="searchbar-cancel">取消</a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='输入您想要找的关键词...'/>
+                    </div>
+                </div>
+            </div>
+            <div class="search-content-box">
+                <div class="swiper-container" data-space-between='10'>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="search-row flex">
+                                <div class="flex-1 item search-item">招聘</div>
+                                <div class="flex-1 item search-item">转让</div>
+                                <div class="flex-1 item search-item">美食</div>
+                            </div>
+                            <div class="search-row flex">
+                                <div class="flex-1 item search-item">衣服</div>
+                                <div class="flex-1 item search-item">打印</div>
+                                <div class="flex-1 item search-item">装修</div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="search-row flex">
+                                <div class="flex-1 item search-item">二手车房</div>
+                                <div class="flex-1 item search-item">租房</div>
+                                <div class="flex-1 item search-item">搬家</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
 
-            <div style="margin-top: 60px;"></div>
             <div id="msg_content" style="padding-bottom: 40px;">
                 <volist name="list" id="info">
                     <div class="yspanel border margin-top30">
@@ -66,7 +95,7 @@
         <div class="yspanel border margin-top30">
             <h3 class="text-center green-text" style="padding: 20px 0;">{{value.title}}</h3>
             <div class="yspanel-content-box2">
-                <div class="text-line3 mcontent">
+                <div class="text-line5 mcontent">
                     {{value.mcontent}}
                 </div>
                 <a href="javascript:;" class="morebtn"><i class="iconfont">&#xe610;</i>查看全文</a>
