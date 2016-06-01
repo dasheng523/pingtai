@@ -793,7 +793,7 @@ var zhaoPin = {
 
 
         $('.search-item').click(function(){
-            ckey = trimStr($(this).html());
+            ckey = trimStr($(this).data('key'));
             page = 1;
             $('#search').val(ckey);
             handlerText();
@@ -879,119 +879,6 @@ var zhaoPin = {
     }
 };
 createPageHandler(zhaoPin);
-
-
-var adMsgSearch = {
-    pageId:"#adMsgSearch",
-    handler: function (e, pageId, $page) {
-
-        var ckey = "";
-        var page = 1;
-
-
-        $('.search-index-item').click(function(){
-            ckey = trimStr($(this).html());
-            page = 1;
-            $('#search').val(ckey);
-            handlerText();
-        });
-
-        function trimStr(str){return str.replace(/(^\s*)|(\s*$)/g,"");}
-
-
-        function handlerText(){
-            ckey = $("#search").val();
-            if(ckey && ckey != ""){
-                $('.search-index').addClass('hide');
-                page = 1;
-                $.post(domain+"/index.php/Phone/Miaoji/adMsgSearchPost",{keyword:ckey,page:page},function(res){
-                    var html = template('tpl_msgitem2', {data:res});
-                    $("#adMsgSearch #msg_content").html(html);
-                },'json');
-            }else{
-                $('.search-index').removeClass('hide');
-            }
-        }
-        $('#search').on('input',handlerText);
-
-        var loading = false;
-        $(document).on('infinite', '.infinite-scroll',function() {
-            if (loading) return;
-            loading = true;
-            page = page + 1;
-            $.post(domain+"/index.php/Phone/Miaoji/adMsgSearchPost",{keyword:ckey,page:page},function(res){
-                loading = false;
-                if(res.length<=0){
-                    $.detachInfiniteScroll($('.infinite-scroll'));
-                    $('.infinite-scroll-preloader').remove();
-                }else{
-                    var html = template('tpl_msgitem2', {data:res});
-                    $("#adMsgSearch #msg_content").append(html);
-                }
-                $.refreshScroller();
-            },'json');
-        });
-
-        $('#adMsgSearch').on('click','.piclistbox > .item', function () {
-            var d = $(this).css('background-image');
-            var curl = getUrl(d);
-            var items = $(this).siblings('.item');
-            var urls = [];
-            items.forEach(function(obj){
-                var url = getUrl($(obj).css('background-image'));
-                urls.push(url);
-            });
-            wx.previewImage({
-                current: curl,
-                urls: urls
-            });
-        });
-
-        function getUrl(str){
-            var d = str.replace("url(",'');
-            d = d.replace(")",'');
-            return d;
-        }
-
-
-        $('#adMsgSearch').on('click','.collbtn',function(){
-            var id = $(this).data('msgid');
-            var context = this;
-            $.post(domain+"/index.php/Phone/Miaoji/collMsg",{"id":id},function(res){
-                $(context).html("已收藏");
-                $(context).removeClass('collbtn');
-                $(context).off('click');
-            });
-        });
-
-        $('#adMsgSearch').on('click','.morebtn',function(){
-            var flag = $(this).data('flag');
-            if(!flag){
-                $(this).html('<i class="iconfont">&#xe611;</i>收起');
-                $(this).siblings('.mcontent').removeClass('text-line5');
-                $(this).data('flag',1);
-            }else{
-                $(this).html('<i class="iconfont">&#xe610;</i>查看全文');
-                $(this).siblings('.mcontent').addClass('text-line5');
-                $(this).data('flag',0);
-            }
-        });
-
-        function hideLongText(){
-            $('#adMsgSearch #msg_content .mcontent').forEach(function(item){
-                var sh = $(item)[0].scrollHeight;
-                var ch = $(item)[0].clientHeight;
-                if(sh <= ch){
-                    var btn = $(item).siblings('.morebtn');
-                    btn.addClass('hide');
-                }
-            });
-        }
-
-        hideLongText();
-    }
-};
-createPageHandler(adMsgSearch);
 
 var addAdMsg = {
     pageId:"#addAdMsg",
