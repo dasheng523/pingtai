@@ -20,6 +20,7 @@ body{background: #eee;font-size: 14px;}
 .block{display: block;}
 .padding10{padding: 10px;}
 
+.text-line5{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 5;}
 .text-line3{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 3;}
 .text-line2{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 2;}
 .text-line{ overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-box-orient: vertical;  -webkit-line-clamp: 1;}
