@@ -23,6 +23,7 @@ class WController extends Controller {
         logic\ElasticsearchLogic::addDoc(C("CountMsg"),array(
             'user_id' => getUserId(),
             'ctime' => time(),
+            'date' => date('Y/m/d'),
             'path' => __SELF__,
             'param' => I('param.')
         ));
