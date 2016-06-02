@@ -39,6 +39,14 @@ class WechatController extends Controller {
                     if($msg == 'test'){
                         $weobj->text('test')->reply();
                     }
+                    else if($msg == 'Q' || $msg == 'q'){
+                        \Wechat\Logic\PushLogic::addNotPushOpenId($weobj->getRevFrom());
+                        $weobj->text('退订成功！如需继续订阅，请回复W。')->reply();
+                    }
+                    else if($msg == 'W' || $msg == 'w'){
+                        \Wechat\Logic\PushLogic::removeNotPushOpenId($weobj->getRevFrom());
+                        $weobj->text('重新订阅成功!')->reply();
+                    }
                     //转换URL
                     if(strstr($msg,'dianduoduo.top')){
                         $weobj->text('<a href="'.$msg.'">点击链接</a>')->reply();

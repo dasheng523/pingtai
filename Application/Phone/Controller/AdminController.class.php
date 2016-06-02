@@ -202,6 +202,48 @@ class AdminController extends WController {
     }
 
 
+    //推送消息
+    public function pushMsg(){
+        logic\PushLogic::push();
+    }
+
+    //统计今天的数据
+    public function countToday(){
+
+    }
+
+    //暂不可用
+    public function data(){
+        if(IS_POST){
+            $url = I('post.url');
+            $method = I('post.method');
+            $params = I('post.params');
+            print_r(json_decode($params));
+            print_r(json_last_error());
+            $params = json_encode(json_decode($params,true));
+            $url = $url."?pretty";
+            if($method == 'get'){
+                $rs = httpGet($url,$params);
+            }
+            else if($method == 'post'){
+                $rs = httpPost($url,$params);
+            }
+            else if($method == 'put'){
+                $rs = httpPut($url,$params);
+            }
+            else if($method == 'delete'){
+                $rs = httpDel($url,$params);
+            }
+            else{
+                $rs = 0;
+            }
+            print_r($rs);
+            return;
+        }
+        $this->display();
+    }
+
+
     private static function changeImglist($imgstr){
         if(!$imgstr){
             return "";

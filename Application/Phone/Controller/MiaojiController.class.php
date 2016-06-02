@@ -49,6 +49,30 @@ class MiaojiController extends WController {
         $list = D('Shop')
             ->where(array('coll_id'=>$id))
             ->select();
+
+        $list = $this->shopListFill($list);
+
+        $this->assign('list',$list);
+        $this->display();
+    }
+
+    /*
+     * 最新店铺
+     */
+    public function newShop(){
+        $list = D('Shop')
+            ->page(1,10)
+            ->order('id desc')
+            ->select();
+
+        $list = $this->shopListFill($list);
+
+        $this->assign('list',$list);
+        $this->display('showcaseDetail');
+    }
+
+
+    private function shopListFill($list){
         foreach($list as &$info){
             $info['imglist'] = logic\ShopLogic::getShopFirstImgUrl($info['id']);
             $info['likecount'] = logic\UserUseEntityLogic::getLikeCount($info['id'],C('EntityType_Shop'));
@@ -68,9 +92,7 @@ class MiaojiController extends WController {
             if ($ac==$bc) return 0;
             return ($ac<$bc)?1:-1;
         });
-
-        $this->assign('list',$list);
-        $this->display();
+        return $list;
     }
 
     /**

@@ -22,6 +22,7 @@ class TestController extends Controller {
 
 
     public function sdfsdf(){
+        echo date('Y/m/d');
         echo $this->dfsdfs;
     }
 
@@ -364,10 +365,12 @@ class TestController extends Controller {
 
 
     public function testSearchAdd(){
-        $rs = httpPost("http://localhost:9200/mytest/employee/",json_encode(array(
-            "name" => "刘吕群",
-            "about" => "只会语言",
-            "job" => "PHP C#"
+        $rs = httpPost("http://localhost:9200/app/NoticeMsg/",json_encode(array(
+            "title" => "测试公告",
+            "description" => "Is Really A Happy Day",
+            "url" => "http://www.baidu.com",
+            "picurl" => "http://media.dianduoduo.top/Public/images/caomei.jpg",
+            'date' => '2016/06/02'
         )));
         print_r($rs);
     }
@@ -395,6 +398,24 @@ class TestController extends Controller {
             "job" => "高级工程师"
         )));
         print_r($rs);
+    }
+
+    public function testgetNoticeMsg(){
+        logic\PushLogic::pushOne('oqJLbt3QtHgzE7Thtrig8YNOhhVw');
+        //print_r($rs);
+    }
+
+    public function testAddPushNot(){
+        logic\PushLogic::addNotPushOpenId("oqJLbtz9rrCqCj3tQR4rBxlfomuw");
+    }
+
+    public function testPushNot(){
+        $rs = logic\PushLogic::getAllPushOpenId();
+        print_r($rs);
+    }
+
+    public function testDelPushNot(){
+        logic\PushLogic::removeNotPushOpenId("oqJLbtz9rrCqCj3tQR4rBxlfomuw");
     }
 
 }

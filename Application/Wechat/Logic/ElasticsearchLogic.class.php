@@ -25,12 +25,22 @@ class ElasticsearchLogic
         return self::parseData($rs);
     }
 
-    public static function searchDoc($type,$data,$params=null){
+    public static function delDoc($type,$id){
+        $rs = httpDel(self::PATH."/".self::INDEX."/$type/".$id);
+        return $rs;
+    }
+
+    public static function searchDoc($type,$data=null,$params=null){
         $url = self::PATH."/".self::INDEX."/$type/_search";
         if($params){
             $url = $url . '?' .self::parseParams($params);
         }
-        $rs = httpGet($url,json_encode($data));
+        if($data){
+            $rs = httpGet($url,json_encode($data));
+        }else{
+            $rs = httpGet($url);
+        }
+        //print_r($rs);
         $rs = json_decode($rs,true);
         $hits = $rs['hits']['hits'];
         $list = array();
@@ -42,6 +52,12 @@ class ElasticsearchLogic
 
     public static function addDoc($type,$data){
         $rs = httpPost(self::PATH."/".self::INDEX."/$type/",json_encode($data));
+        $rs = json_decode($rs,true);
+        return $rs['_id'];
+    }
+
+    public static function addDocById($type,$id,$data){
+        $rs = httpPut(self::PATH."/".self::INDEX."/$type/$id",json_encode($data));
         $rs = json_decode($rs,true);
         return $rs['_id'];
     }

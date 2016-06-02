@@ -164,4 +164,7 @@ class PublicController extends Controller {
         $wechat->sendCustomMessage($admin);
 
     }
+
+
+
 }

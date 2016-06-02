@@ -231,6 +231,12 @@ class UserController extends WController {
     }
 
 
+    //帮助页面
+    public function help(){
+        $this->display();
+    }
+
+
     /**
      * 删除我收藏的妙集
      */

@@ -33,10 +33,12 @@ return array(
 	//实体
 	'AdMsg' => 'AdMsg',//广告
 	'CountMsg' => 'CountMsg',//统计类型
+	'NoticeMsg' => 'NoticeMsg',//统计类型
+	'NotPush' => 'NotPush',//不推送的列表
 
 
 	'SESSION_OPTIONS'=> array(
 		'expire'=>24*3600*15,
 	),
-	'Version' => 138,
+	'Version' => 139,
 );
