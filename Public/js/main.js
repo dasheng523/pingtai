@@ -300,22 +300,21 @@ var DefaultUploadUtils = function(fileId,limitCount){
     return {initUpload:initUpload};
 };
 
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 var UploadUtils = function(fileId,limitCount){
-    function tt(res) {
-        console.log(res);
-        var dd;
-        if(res.checkResult.chooseImage == true){
-            dd = WechatUploadUtils(fileId,limitCount);
-        }else{
-            dd = DefaultUploadUtils(fileId,limitCount);
-        }
-        dd.initUpload();
+    if(isWeiXin()){
+        return WechatUploadUtils(fileId,limitCount);
+    }else{
+        return DefaultUploadUtils(fileId,limitCount);
     }
-    wx.checkJsApi({
-        jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-        success: tt
-    });
 };
 
 var FormUtils = {
@@ -514,7 +513,8 @@ var goodsEdit = {
     pageId:"#goodsEdit",
     handler:function(e, pageId, $page){
         FormUtils.initForm('form','back');
-        UploadUtils('#uploadFile',5);
+        var ddd = UploadUtils('#uploadFile',5);
+        ddd.initUpload();
     }
 };
 createPageHandler(goodsEdit);
@@ -533,7 +533,8 @@ var shopDetail = {
     pageId:"#shopDetail",
     handler:function(e, pageId, $page){
         FormUtils.initForm('form');
-        UploadUtils('#uploadFile',5);
+        var ddd = UploadUtils('#uploadFile',5);
+        ddd.initUpload();
 
         $('#dignweiBtn').click(function () {
             wx.getLocation({
@@ -578,7 +579,8 @@ var activityEdit = {
     pageId:"#activityEdit",
     handler:function(e, pageId, $page){
         FormUtils.initForm('#mainform','back');
-        UploadUtils('#uploadFile',5);
+        var ddd = UploadUtils('#uploadFile',5);
+        ddd.initUpload();
 
         $('#showActivityGoodsBtn').click(function () {
             $.popup('.popup-goodsList');
@@ -684,7 +686,8 @@ var collectionEdit = {
     handler:function(e, pageId, $page){
         FormUtils.initForm('form','back');
 
-        UploadUtils('#uploadFile',5);
+        var ddd = UploadUtils('#uploadFile',5);
+        ddd.initUpload();
     }
 };
 createPageHandler(collectionEdit);
