@@ -113,7 +113,7 @@ function initWechatJs(){
     });
 }
 
-var UploadUtils = function(fileId,limitCount){
+var WechatUploadUtils = function(fileId,limitCount){
     if(limitCount === undefined){
         limitCount = 6;
     }
@@ -209,6 +209,110 @@ var UploadUtils = function(fileId,limitCount){
     return {initUpload:initUpload};
 };
 
+var DefaultUploadUtils = function(fileId,limitCount){
+    if(limitCount === undefined){
+        limitCount = 6;
+    }
+    var i = 1;
+    var mediaType = $(fileId).data('mediatype') ? $(fileId).data('mediatype') : 0;
+    var entityType = $(fileId).data('entitytype') ? $(fileId).data('entitytype') : 0;
+    var entityId = $(fileId).data('entityid') ? $(fileId).data('entityid') : 0;
+    function createShowNode(){
+        var id = "i"+(i++);
+        return {
+            id:id,
+            node:function($imgUrl){
+                return '<li id="'+id+'" class="weui_uploader_file weui_uploader_status" style="background-image:url('+$imgUrl+')"><div class="weui_uploader_status_content">0%</div></li>';
+            }
+        };
+    }
+    var showImg = function(fileNode,showNode){
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var node = showNode.node(e.target.result);
+            $('.weui_uploader_files').append(node);
+        };
+        reader.readAsDataURL(fileNode.files[0]);
+    };
+    var uploadFile = function(fileNode,showNode){
+        var fileData = new FormData();
+        var id = showNode.id;
+        fileData.append('fileData', fileNode.files[0]);
+        fileData.append('mediaType',mediaType);
+        fileData.append('entityType',entityType);
+        fileData.append('entityId',entityId);
+        $.ajax({
+            url: domain+'/index.php/Phone/Upload/uploadFile.html',
+            type: 'POST',
+            xhr: function() {
+                var xhr = $.ajaxSettings.xhr();
+                if (xhr.upload) {
+                    xhr.upload.addEventListener('progress', function(evt) {
+                        var process = Math.floor(evt.loaded / evt.total) * 100 + '%';
+                        $('#'+id+' .weui_uploader_status_content').html(process);
+                    }, false);
+                }
+                return xhr;
+            },
+            success: function(data) {
+                var tmp = $('#'+id);
+                tmp.removeClass('weui_uploader_status');
+                tmp.html('<input type="hidden" name="media_ids[]" value="'+data.info[0]+'">');
+            },
+            error: function(xhr,errorType, error) {
+                console.log(error);
+                console.log(errorType);
+                $.toast("上传图片似乎出现了问题");
+            },
+            data: fileData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+    };
+    var initUpload = function(){
+        $('.weui_uploader_files').on('click', '.weui_uploader_file', function(e){
+            var context = this;
+            $.confirm('确定要删除这个图片吗？', function () {
+                var id = $(context).find('input').val();
+                $.ajax({
+                    url:domain+'/index.php/Phone/Upload/delFile.html',
+                    data:{id:id},
+                    type:'POST',
+                    success:function(){
+                        $(context).remove();
+                    }
+                });
+            },'json');
+        });
+        $(fileId).change(function(){
+            var total = $('.weui_uploader_file').length + 1;
+            if(total == limitCount){
+                $('.weui_uploader_input_wrp').addClass('hide');
+            }
+            if (this.files && this.files[0]) {
+                var showNode = createShowNode();
+                showImg(this,showNode);
+                uploadFile(this,showNode);
+            }
+        });
+    };
+    return {initUpload:initUpload};
+};
+
+var UploadUtils = function(fileId,limitCount){
+    wx.checkJsApi({
+        jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+        success: function(res) {
+            // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+            if(res.checkResult.chooseImage == true){
+                return WechatUploadUtils(fileId,limitCount);
+            }else{
+                return DefaultUploadUtils(fileId,limitCount);
+            }
+        }
+    });
+};
 
 var FormUtils = {
     /**
