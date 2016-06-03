@@ -139,15 +139,15 @@ var UploadUtils = function(fileId,limitCount){
         };
         reader.readAsDataURL(fileNode.files[0]);
     };
-    var uploadFile = function(fileNode,showNode){
+    var uploadFile = function(serverId,showNode){
         var fileData = new FormData();
         var id = showNode.id;
-        fileData.append('fileData', fileNode.files[0]);
+        fileData.append('serverId', serverId);
         fileData.append('mediaType',mediaType);
         fileData.append('entityType',entityType);
         fileData.append('entityId',entityId);
         $.ajax({
-            url: domain+'/index.php/Phone/Upload/uploadFile.html',
+            url: domain+'/index.php/Phone/Upload/uploadWechatPic.html',
             type: 'POST',
             xhr: function() {
                 var xhr = $.ajaxSettings.xhr();
@@ -191,20 +191,34 @@ var UploadUtils = function(fileId,limitCount){
                 });
             },'json');
         });
-        $(fileId).change(function(){
+        $(fileId).click(function(){
             var total = $('.weui_uploader_file').length + 1;
-            if(total == limitCount){
-                $('.weui_uploader_input_wrp').addClass('hide');
-            }else if(total > limitCount){
+            if(total >= limitCount){
                 $.toast("活动封面只能上传一张");
                 $('.weui_uploader_input_wrp').addClass('hide');
-                return;
+                return false;
             }
-            if (this.files && this.files[0]) {
-                var showNode = createShowNode();
-                showImg(this,showNode);
-                uploadFile(this,showNode);
-            }
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'],
+                sourceType: ['album', 'camera'],
+                success: function (res) {
+                    var localIds = res.localIds;
+                    var showNode = createShowNode();
+                    showImg(localIds,showNode);
+
+                    wx.uploadImage({
+                        localId: localIds,
+                        isShowProgressTips: 1,
+                        success: function (res) {
+                            var serverId = res.serverId;
+                            uploadFile(serverId,showNode);
+                        }
+                    });
+                }
+            });
+
+            return false;
         });
     };
     return {initUpload:initUpload};
