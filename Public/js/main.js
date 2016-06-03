@@ -303,6 +303,7 @@ var DefaultUploadUtils = function(fileId,limitCount){
 
 var UploadUtils = function(fileId,limitCount){
     function tt(res) {
+        console.log(res);
         var dd;
         if(res.checkResult.chooseImage == true){
             dd = WechatUploadUtils(fileId,limitCount);
