@@ -184,7 +184,102 @@ var FormUtils = {
     }
 };
 
-var UploadUtils = function(fileId,limitCount){
+var WechatUploadUtils = function(fileId,limitCount){
+    if(limitCount === undefined){
+        limitCount = 6;
+    }
+    var i = 1;
+    var mediaType = $(fileId).data('mediatype') ? $(fileId).data('mediatype') : 0;
+    var entityType = $(fileId).data('entitytype') ? $(fileId).data('entitytype') : 0;
+    var entityId = $(fileId).data('entityid') ? $(fileId).data('entityid') : 0;
+
+    function createShowNode(){
+        var id = "i"+(i++);
+        return {
+            id:id,
+            node:function($imgUrl){
+                return '<li id="'+id+'" class="weui_uploader_file" style="background-image:url('+$imgUrl+')"></li>';
+            }
+        };
+    }
+    var showImg = function(fileUrl,showNode){
+        var node = showNode.node(fileUrl);
+        $('.weui_uploader_files').append(node);
+    };
+    var uploadFile = function(serverId,showNode){
+        var fileData = new FormData();
+        var id = showNode.id;
+        fileData.append('serverId', serverId);
+        fileData.append('mediaType',mediaType);
+        fileData.append('entityType',entityType);
+        fileData.append('entityId',entityId);
+        $.ajax({
+            url: domain+'/index.php/Phone/Upload/uploadWechatPic.html',
+            type: 'POST',
+            success: function(data) {
+                var tmp = $('#'+id);
+                tmp.html('<input type="hidden" name="media_ids[]" value="'+data.info[0]+'">');
+            },
+            error: function(xhr,errorType, error) {
+                alert(error);
+                alert(errorType);
+                $.toast("您的手机似乎不支持上传功能");
+            },
+            data: fileData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+    };
+    var initUpload = function(){
+        $('.weui_uploader_files').on('click', '.weui_uploader_file', function(e){
+            e.preventDefault();
+            var context = this;
+            $.confirm('确定要删除这个图片吗？', function () {
+                var id = $(context).find('input').val();
+                $.ajax({
+                    url:domain+'/index.php/Phone/Upload/delFile.html',
+                    data:{id:id},
+                    type:'POST',
+                    success:function(){
+                        $(context).remove();
+                    }
+                });
+            },'json');
+        });
+        $(fileId).click(function(){
+            var total = $('.weui_uploader_file').length + 1;
+            if(total >= limitCount){
+                $.toast("活动封面只能上传一张");
+                $('.weui_uploader_input_wrp').addClass('hide');
+                return false;
+            }
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'],
+                sourceType: ['album', 'camera'],
+                success: function (res) {
+                    var localIds = res.localIds;
+                    var showNode = createShowNode();
+                    showImg(localIds[0],showNode);
+                    wx.uploadImage({
+                        localId: localIds[0],
+                        isShowProgressTips: 1,
+                        success: function (res) {
+                            var serverId = res.serverId;
+                            uploadFile(serverId,showNode);
+                        }
+                    });
+                }
+            });
+
+            return false;
+        });
+    };
+    return {initUpload:initUpload};
+};
+
+var DefaultUploadUtils = function(fileId,limitCount){
     if(limitCount === undefined){
         limitCount = 6;
     }
@@ -275,6 +370,22 @@ var UploadUtils = function(fileId,limitCount){
     return {initUpload:initUpload};
 };
 
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+var UploadUtils = function(fileId,limitCount){
+    if(isWeiXin()){
+        return WechatUploadUtils(fileId,limitCount);
+    }else{
+        return DefaultUploadUtils(fileId,limitCount);
+    }
+};
 
 
 /**

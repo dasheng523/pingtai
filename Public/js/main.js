@@ -191,7 +191,6 @@ var WechatUploadUtils = function(fileId,limitCount){
                     var localIds = res.localIds;
                     var showNode = createShowNode();
                     showImg(localIds[0],showNode);
-                    alert(localIds[0]);
                     wx.uploadImage({
                         localId: localIds[0],
                         isShowProgressTips: 1,
