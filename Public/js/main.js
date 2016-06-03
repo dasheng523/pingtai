@@ -131,13 +131,9 @@ var UploadUtils = function(fileId,limitCount){
             }
         };
     }
-    var showImg = function(fileNode,showNode){
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var node = showNode.node(e.target.result);
-            $('.weui_uploader_files').append(node);
-        };
-        reader.readAsDataURL(fileNode.files[0]);
+    var showImg = function(fileUrl,showNode){
+        var node = showNode.node(fileUrl);
+        $('.weui_uploader_files').append(node);
     };
     var uploadFile = function(serverId,showNode){
         var fileData = new FormData();
