@@ -127,7 +127,7 @@ var UploadUtils = function(fileId,limitCount){
         return {
             id:id,
             node:function($imgUrl){
-                return '<li id="'+id+'" class="weui_uploader_file weui_uploader_status" style="background-image:url('+$imgUrl+')"><div class="weui_uploader_status_content">0%</div></li>';
+                return '<li id="'+id+'" class="weui_uploader_file" style="background-image:url('+$imgUrl+')"></li>';
             }
         };
     }
@@ -145,19 +145,8 @@ var UploadUtils = function(fileId,limitCount){
         $.ajax({
             url: domain+'/index.php/Phone/Upload/uploadWechatPic.html',
             type: 'POST',
-            xhr: function() {
-                var xhr = $.ajaxSettings.xhr();
-                if (xhr.upload) {
-                    xhr.upload.addEventListener('progress', function(evt) {
-                        var process = Math.floor(evt.loaded / evt.total) * 100 + '%';
-                        $('#'+id+' .weui_uploader_status_content').html(process);
-                    }, false);
-                }
-                return xhr;
-            },
             success: function(data) {
                 var tmp = $('#'+id);
-                tmp.removeClass('weui_uploader_status');
                 tmp.html('<input type="hidden" name="media_ids[]" value="'+data.info[0]+'">');
             },
             error: function(xhr,errorType, error) {
@@ -201,10 +190,10 @@ var UploadUtils = function(fileId,limitCount){
                 success: function (res) {
                     var localIds = res.localIds;
                     var showNode = createShowNode();
-                    showImg(localIds,showNode);
-
+                    showImg(localIds[0],showNode);
+                    alert(localIds[0]);
                     wx.uploadImage({
-                        localId: localIds,
+                        localId: localIds[0],
                         isShowProgressTips: 1,
                         success: function (res) {
                             var serverId = res.serverId;
