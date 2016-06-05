@@ -28,7 +28,6 @@ class ShopController extends Controller {
     if(!$isOpen && ACTION_NAME != 'openShop' && ACTION_NAME != 'openShopCommit'){
       redirect('openShop', 0, '页面跳转中...');
     }else{
-
       $domain = __ROOT__;
       $this->assign('domain',$domain);
       return;

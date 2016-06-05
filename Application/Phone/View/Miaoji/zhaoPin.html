@@ -76,11 +76,6 @@
                 </volist>
             </div>
 
-            <div class="fixbtnbox">
-                <a class="rangBtn external animated infinite jello" href="{:UC('User/addAdMsg')}">发布<br>广告</a>
-            </div>
-
-
             <?php
                 if(count($list)>=C('PageSize')){
             ?>
@@ -92,7 +87,16 @@
             ?>
 
         </div>
+
+        <div class="fixbtnbox">
+            <a class="rangBtn external animated infinite jello" href="{:UC('User/addAdMsg')}">发布<br>广告</a>
+        </div>
     </div>
+
+    <script>
+        var shareIntro = "{$share.intro}";
+        var shareTitle = "{$share.title}";
+    </script>
 
     <script type="text/html" id="tpl_msgitem2">
         {{each data as value i}}

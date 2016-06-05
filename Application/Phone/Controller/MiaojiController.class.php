@@ -298,7 +298,9 @@ class MiaojiController extends WController {
             echo json_encode($list);
             return;
         }
-
+        $share['title'] = "北流便民广告";
+        $share['intro'] = mb_substr("便民广告，不用看报，点击即可快速掌握北流最新最全的信息", 0, 500,'utf-8');
+        $this->assign('share',$share);
         $this->assign('list',$list);
         $this->display();
     }
