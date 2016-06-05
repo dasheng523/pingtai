@@ -211,6 +211,18 @@ class AdminController extends WController {
         logic\PushLogic::pushOne('oqJLbt3QtHgzE7Thtrig8YNOhhVw');
     }
 
+    public function addPushMsg(){
+        $data = array(
+            "title" => "",
+            "description" => '',
+            "url" => "",
+            "picurl" => "",
+            "date" => "",
+        );
+        $rs = logic\ElasticsearchLogic::addDoc(C('NoticeMsg'),$data);
+        print_r($rs);
+    }
+
     //统计今天的数据
     public function countToday(){
 

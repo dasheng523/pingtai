@@ -33,7 +33,7 @@ return array(
 	//实体
 	'AdMsg' => 'AdMsg',//广告
 	'CountMsg' => 'CountMsg',//统计类型
-	'NoticeMsg' => 'NoticeMsg',//统计类型
+	'NoticeMsg' => 'NoticeMsg',//推送类型
 	'NotPush' => 'NotPush',//不推送的列表
 
 
