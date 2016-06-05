@@ -207,6 +207,10 @@ class AdminController extends WController {
         logic\PushLogic::push();
     }
 
+    public function pushMeMsg(){
+        logic\PushLogic::pushOne('oqJLbt3QtHgzE7Thtrig8YNOhhVw');
+    }
+
     //统计今天的数据
     public function countToday(){
 
