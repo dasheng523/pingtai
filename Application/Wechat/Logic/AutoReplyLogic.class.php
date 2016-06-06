@@ -113,6 +113,8 @@ class AutoReplyLogic
         return $state;
     }
 
+
+
 }
 
 /**
@@ -241,7 +243,7 @@ class MainState{
     /**
      * @param $msg
      * @return null
-     * 处理消息，返回下一个状态；如果返回null，则结束。
+     * 处理消息，返回处理结果。
      */
     public function handle($msg){
         $menuKey = strtoupper(getMsgContent($msg));
@@ -260,7 +262,6 @@ class MainState{
         else{
             return $menuInfo['resp'];
         }
-
     }
 
     private function findItem($menuKey){
@@ -283,6 +284,11 @@ class OpenShopState{
     public function handle($msg){
         $userKey = getUserKey($msg);
 
+        if($msg == 0){
+            $this->resetStep($userKey);
+            return makeText("已取消开店\n如果您准备好了，回复 A 即可继续开店\n\n回复M 打开主菜单");
+        }
+
         $userId = D('wechat_user')->where(array('open_id'=>$userKey))->getField('user_id');
         if(!$userId){
             return makeText('数据异常，需要您重新关注店多多');
@@ -303,14 +309,14 @@ class OpenShopState{
             0 => function($msg){
                 $userKey = getUserKey($msg);
                 $this->nextStep($userKey);
-                return makeText("店多多服务号免费开店，您准备好开店了吗？（开店过程中，如果超30分钟不回复，需要回复 A 才能继续开店）\n准备好了，请回复 1\n待会再来，请回复 0");
+                return makeText("店多多服务号免费开店，您准备好了吗？\n准备好了，请回复 1\n开店过程中，如需取消开店，请回复0\n");
             },
             1 => function ($msg){
                 $text = getMsgContent($msg);
                 $userKey = getUserKey($msg);
                 if($text == 1){
                     $this->nextStep($userKey);
-                    return makeText("请回复您的店铺名称：");
+                    return makeText("您已进入开店流程，请回复您的店铺名称：");
                 }else if($text == 0){
                     setCurrentHandler($userKey,null);
                     $this->resetStep($userKey);
