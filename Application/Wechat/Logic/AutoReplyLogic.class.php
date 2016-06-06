@@ -284,7 +284,7 @@ class OpenShopState{
     public function handle($msg){
         $userKey = getUserKey($msg);
         $text = getMsgContent($msg);
-        if($text == 0){
+        if($text === '0'){
             $this->resetStep($userKey);
             return makeText("已取消开店\n如果您准备好了，回复 A 即可继续开店\n\n回复M 打开主菜单");
         }
