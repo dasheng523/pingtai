@@ -157,8 +157,15 @@ class UserController extends WController {
     //我收藏的广告信息
     public function myCollectAd(){
         $uid = getUserId();
-        $sql = logic\UserUseEntityLogic::getSqlUserLike($uid,C('EntityType_AdMsg'));
-        $list = D('ad_msg')->where("id in ($sql)")->select();
+        $adList = logic\UserUseEntityLogic::getUserLikeAdMsg($uid);
+
+        $list = array();
+        foreach($adList as $adInfo){
+            $eid = $adInfo['entity_id'];
+            $list[] = logic\ElasticsearchLogic::getDoc(C('AdMsg'),$eid);
+        }
+
+
         $this->assign('list',$list);
         $this->display();
     }
